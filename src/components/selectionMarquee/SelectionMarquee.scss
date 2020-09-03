@@ -1,0 +1,6 @@
+.dm-marquee {
+  position: absolute;
+  border: 1px dashed #99cbe4;
+  background: rgba(#99cbe4, 0.13);
+  transition: background-color .2s ease, border .2s ease;
+}

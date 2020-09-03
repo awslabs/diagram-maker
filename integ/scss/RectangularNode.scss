@@ -1,0 +1,17 @@
+@import './index.scss';
+
+.example-node {
+  &.rectangle {
+    border-radius: 3px;
+    &.potential-node {
+      width: 150px;
+      height: 50px;
+      margin: auto;
+      margin-top: 10px;
+    }
+
+    input, select {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@mixin dm-container-shadow {
+  box-shadow: 0 1px 1px 0 rgba(0, 28, 36, 0.3)
+  , 1px 1px 1px 0 rgba(0, 28, 36, 0.15)
+  , -1px 1px 1px 0 rgba(0, 28, 36, 0.15);
+  border-top: 1px solid #eaeded;
+  border-radius: 0;
+  box-sizing: border-box;
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    border: 1px solid #eaeded;
+  }
+}

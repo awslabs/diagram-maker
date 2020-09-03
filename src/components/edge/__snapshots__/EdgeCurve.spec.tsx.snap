@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCurve arrowhead marker renders when show arrowhead is passed 1`] = `
+preact-render-spy (1 nodes)
+-------
+<line
+  class="dm-path"
+  x1={0}
+  y1={100}
+  x2={100}
+  y2={0}
+  marker-end="url(#arrow)"
+>
+</line>
+
+`;
+
+exports[`getCurve left/right placement renders at given points with x1 < x2, y1 < y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 C50,0 50,100 100,100"
+>
+</path>
+
+`;
+
+exports[`getCurve left/right placement renders at given points with x1 < x2, y1 > y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,100 C50,100 50,0 100,0"
+>
+</path>
+
+`;
+
+exports[`getCurve left/right placement renders at given points with x1 = x2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 C0,0 0,100 0,100"
+>
+</path>
+
+`;
+
+exports[`getCurve left/right placement renders at given points with y1 = y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 C50,0 50,0 100,0"
+>
+</path>
+
+`;
+
+exports[`getCurve quadratic bezier renders at given points with x1 < x2, y1 < y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 Q100,0 100,100"
+>
+</path>
+
+`;
+
+exports[`getCurve quadratic bezier renders at given points with x1 < x2, y1 > y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,100 Q0,0 100,0"
+>
+</path>
+
+`;
+
+exports[`getCurve quadratic bezier renders at given points with x1 = x2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 Q50,50 0,100"
+>
+</path>
+
+`;
+
+exports[`getCurve quadratic bezier renders at given points with y1 = y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 Q50,-50 100,0"
+>
+</path>
+
+`;
+
+exports[`getCurve straight curve renders at given points 1`] = `
+preact-render-spy (1 nodes)
+-------
+<line
+  class="dm-path"
+  x1={0}
+  y1={100}
+  x2={100}
+  y2={0}
+>
+</line>
+
+`;
+
+exports[`getCurve top/bottom placement renders at given points with x1 < x2, y1 < y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 C0,50 100,50 100,100"
+>
+</path>
+
+`;
+
+exports[`getCurve top/bottom placement renders at given points with x1 < x2, y1 > y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,100 C0,150 100,-50 100,0"
+>
+</path>
+
+`;
+
+exports[`getCurve top/bottom placement renders at given points with x1 = x2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 C0,50 0,50 0,100"
+>
+</path>
+
+`;
+
+exports[`getCurve top/bottom placement renders at given points with y1 = y2 1`] = `
+preact-render-spy (1 nodes)
+-------
+<path
+  class="dm-path"
+  d="M0,0 C0,0 100,0 100,0"
+>
+</path>
+
+`;

@@ -1,0 +1,418 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>RenderCallbacks | diagram-maker</title>
+	<meta name="description" content="Documentation for diagram-maker">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">diagram-maker</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="rendercallbacks.html">RenderCallbacks</a>
+				</li>
+			</ul>
+			<h1>Interface RenderCallbacks&lt;NodeType, EdgeType&gt;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Object containing callbacks for rendering &amp; destroying various entities (like nodes, edges, panels, etc)</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>NodeType</h4>
+					</li>
+					<li>
+						<h4>EdgeType</h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">RenderCallbacks</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rendercallbacks.html#contextmenu" class="tsd-kind-icon">context<wbr>Menu</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rendercallbacks.html#destroy" class="tsd-kind-icon">destroy</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rendercallbacks.html#edge" class="tsd-kind-icon">edge</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rendercallbacks.html#node" class="tsd-kind-icon">node</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rendercallbacks.html#panels" class="tsd-kind-icon">panels</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="rendercallbacks.html#potentialnode" class="tsd-kind-icon">potential<wbr>Node</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="contextmenu" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> context<wbr>Menu</h3>
+					<div class="tsd-signature tsd-kind-icon">context<wbr>Menu<span class="tsd-signature-symbol">:</span> <a href="contextmenurendercallbacks.html" class="tsd-signature-type">ContextMenuRenderCallbacks</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/awslabs/diagram-maker/blob/667c8ab/src/service/ConfigService.ts#L203">src/service/ConfigService.ts:203</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Object containing render callbacks for context menus for various targets. Optional.
+								If provided, diagram maker will use these context menu render callbacks to show a context menu,
+							and suppress the browser rendered context menu.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="destroy" class="tsd-anchor"></a>
+					<h3>destroy</h3>
+					<div class="tsd-signature tsd-kind-icon">destroy<span class="tsd-signature-symbol">:</span> <a href="../globals.html#destroycallback" class="tsd-signature-type">DestroyCallback</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/awslabs/diagram-maker/blob/667c8ab/src/service/ConfigService.ts#L127">src/service/ConfigService.ts:127</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Callback to cleanup DOM rendered by the consumer properly
+								before diagram maker removes it.
+								In case, consumers are using React or any other rendering framework,
+								the framework attaches event handlers that if not removed correctly,
+							could cause a memory leak.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="edge" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> edge</h3>
+					<div class="tsd-signature tsd-kind-icon">edge<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>edge<span class="tsd-signature-symbol">: </span><a href="diagrammakeredge.html" class="tsd-signature-type">DiagramMakerEdge</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EdgeType</span><span class="tsd-signature-symbol">&gt;</span>, diagramMakerContainer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span>, consumerContainer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/awslabs/diagram-maker/blob/667c8ab/src/service/ConfigService.ts#L140">src/service/ConfigService.ts:140</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Callback to render a badge centered within the edge.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>The object representing the current state of the edge
+								for which the badge is being rendered.</p>
+							</dd>
+							<dt>param</dt>
+							<dd><p>Container managed by diagram maker to render content in
+								Could diff against content already present in the container using React, Preact or any other VDOM.</p>
+							</dd>
+							<dt>param</dt>
+							<dd><p>Container used by consumer to render. Optional.
+									Useful only when using Preact, since Preact appends by default
+								and needs an Element to diff against in the container.</p>
+							</dd>
+							<dt>returns</dt>
+							<dd><ul>
+									<li>Element rendered by consumer when using Preact,
+									or undefined or void everywhere else.</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="node" class="tsd-anchor"></a>
+					<h3>node</h3>
+					<div class="tsd-signature tsd-kind-icon">node<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="diagrammakernode.html" class="tsd-signature-type">DiagramMakerNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NodeType</span><span class="tsd-signature-symbol">&gt;</span>, diagramMakerContainer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span>, consumerContainer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/awslabs/diagram-maker/blob/667c8ab/src/service/ConfigService.ts#L156">src/service/ConfigService.ts:156</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Callback to render a node.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>The object representing the current state of the node being rendered.</p>
+							</dd>
+							<dt>param</dt>
+							<dd><p>Container managed by diagram maker to render content in
+								Could diff against content already present in the container using React, Preact or any other VDOM.</p>
+							</dd>
+							<dt>param</dt>
+							<dd><p>Container used by consumer to render. Optional.
+									Useful only when using Preact, since Preact appends by default
+								and needs an Element to diff against in the container.</p>
+							</dd>
+							<dt>returns</dt>
+							<dd><ul>
+									<li>Element rendered by consumer when using Preact,
+									or undefined or void everywhere else.</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="diagrammakernode.html" class="tsd-signature-type">DiagramMakerNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NodeType</span><span class="tsd-signature-symbol">&gt;</span>, diagramMakerContainer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span>, consumerContainer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>node: <a href="diagrammakernode.html" class="tsd-signature-type">DiagramMakerNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NodeType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											</li>
+											<li>
+												<h5>diagramMakerContainer: <span class="tsd-signature-type">HTMLElement</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> consumerContainer: <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="panels" class="tsd-anchor"></a>
+					<h3>panels</h3>
+					<div class="tsd-signature tsd-kind-icon">panels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/awslabs/diagram-maker/blob/667c8ab/src/service/ConfigService.ts#L179">src/service/ConfigService.ts:179</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Object containing render callbacks for several panels keyed on panel name</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>name: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-symbol">(</span>panel<span class="tsd-signature-symbol">: </span><a href="diagrammakerpanel.html" class="tsd-signature-type">DiagramMakerPanel</a>, state<span class="tsd-signature-symbol">: </span><a href="diagrammakerdata.html" class="tsd-signature-type">DiagramMakerData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NodeType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">EdgeType</span><span class="tsd-signature-symbol">&gt;</span>, diagramMakerContainer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span>, consumerContainer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<div class="lead">
+										<p>Callback to render a panel.</p>
+									</div>
+								</div>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>panel<span class="tsd-signature-symbol">: </span><a href="diagrammakerpanel.html" class="tsd-signature-type">DiagramMakerPanel</a>, state<span class="tsd-signature-symbol">: </span><a href="diagrammakerdata.html" class="tsd-signature-type">DiagramMakerData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NodeType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">EdgeType</span><span class="tsd-signature-symbol">&gt;</span>, diagramMakerContainer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span>, consumerContainer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>panel: <a href="diagrammakerpanel.html" class="tsd-signature-type">DiagramMakerPanel</a></h5>
+													</li>
+													<li>
+														<h5>state: <a href="diagrammakerdata.html" class="tsd-signature-type">DiagramMakerData</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NodeType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">EdgeType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+													</li>
+													<li>
+														<h5>diagramMakerContainer: <span class="tsd-signature-type">HTMLElement</span></h5>
+														<div class="tsd-comment tsd-typography">
+															<p>Container managed by diagram maker to render content in
+															Could diff against content already present in the container using React, Preact or any other VDOM.</p>
+														</div>
+													</li>
+													<li>
+														<h5><span class="tsd-flag ts-flagOptional">Optional</span> consumerContainer: <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></h5>
+														<div class="tsd-comment tsd-typography">
+															<p>Container used by consumer to render. Optional.
+																Useful only when using Preact, since Preact appends by default
+															and needs an Element to diff against in the container.</p>
+														</div>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="potentialnode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> potential<wbr>Node</h3>
+					<div class="tsd-signature tsd-kind-icon">potential<wbr>Node<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="diagrammakerpotentialnode.html" class="tsd-signature-type">DiagramMakerPotentialNode</a>, diagramMakerContainer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span>, consumerContainer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/awslabs/diagram-maker/blob/667c8ab/src/service/ConfigService.ts#L173">src/service/ConfigService.ts:173</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Callback to render a potential node. Optional. Only useful when user might be dragging new nodes out of a panel.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>The object representing the current state of the potential node
+								being rendered.</p>
+							</dd>
+							<dt>param</dt>
+							<dd><p>Container managed by diagram maker to render content in
+								Could diff against content already present in the container using React, Preact or any other VDOM.</p>
+							</dd>
+							<dt>param</dt>
+							<dd><p>Container used by consumer to render. Optional.
+									Useful only when using Preact, since Preact appends by default
+								and needs an Element to diff against in the container.</p>
+							</dd>
+							<dt>returns</dt>
+							<dd><ul>
+									<li>Element rendered by consumer when using Preact,
+									or undefined or void everywhere else.</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
+						<a href="rendercallbacks.html" class="tsd-kind-icon">Render<wbr>Callbacks</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="rendercallbacks.html#contextmenu" class="tsd-kind-icon">context<wbr>Menu</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="rendercallbacks.html#destroy" class="tsd-kind-icon">destroy</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="rendercallbacks.html#edge" class="tsd-kind-icon">edge</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="rendercallbacks.html#node" class="tsd-kind-icon">node</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="rendercallbacks.html#panels" class="tsd-kind-icon">panels</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="rendercallbacks.html#potentialnode" class="tsd-kind-icon">potential<wbr>Node</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "extends": ["tslint:recommended", "tslint-eslint-rules", "tslint-react", "tslint-config-airbnb"],
+  "rules": {
+    "array-type": [true, "array"],
+    "interface-name": [true, "never-prefix"],
+    "max-line-length": {
+      "options": [120]
+    },
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ],
+    "object-literal-sort-keys": [true, "ignore-case", "match-declaration-order"]
+  }
+}

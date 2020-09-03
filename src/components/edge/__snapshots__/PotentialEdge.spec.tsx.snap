@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PotentialEdge passes show arrowhead 1`] = `
+preact-render-spy (1 nodes)
+-------
+<g
+  class="dm-edge"
+  data-type="DiagramMaker.PotentialEdge"
+>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-inner"
+    showArrowhead={true}
+  >
+  </EdgeCurve>
+</g>
+
+`;
+
+exports[`PotentialEdge renders the paths using props 1`] = `
+preact-render-spy (1 nodes)
+-------
+<g
+  class="dm-edge"
+  data-type="DiagramMaker.PotentialEdge"
+>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-inner"
+  >
+  </EdgeCurve>
+</g>
+
+`;
