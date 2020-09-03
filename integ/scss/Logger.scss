@@ -1,0 +1,12 @@
+@import '~diagramMaker/styles/mixins';
+
+#diagramMakerLogger {
+  @include dm-container-shadow;
+  width: 50%;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  background-color: #ffffff;
+  padding: 20px;
+}

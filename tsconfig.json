@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "jsx": "react",
+    "jsxFactory": "Preact.h",
+    "lib": ["dom", "es5", "es6", "scripthost"],
+    "module": "es6",
+    "moduleResolution": "node",
+    "paths": {
+      "*": ["./src/typings/*"],
+      "diagramMaker/*": ["./src/*"]
+    },
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true
+  },
+  "include": [
+    "src/**/*",
+    "integ/**/*"
+  ],
+  "exclude": [
+    "**/node_modules/**"
+  ]
+}

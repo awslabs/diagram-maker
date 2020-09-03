@@ -1,0 +1,2802 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`View does not render edge when accomplying node(s) do not exist 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge & a new edge drawing renders a new edge with centered connector 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <PotentialEdge
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 0,
+              "y": 0
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </PotentialEdge>
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge & a new edge drawing renders a new edge with default connector 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <PotentialEdge
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 0,
+              "y": 0
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </PotentialEdge>
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge & a new edge drawing renders a new edge with left/right connector 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 100,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 100,
+              "y": 250
+            }
+          }
+          edgeStyle={0}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="LeftRight"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="LeftRight"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <PotentialEdge
+          src={
+            Object {
+              "x": 100,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 0,
+              "y": 0
+            }
+          }
+          edgeStyle={0}
+          showArrowhead={false}
+        >
+        </PotentialEdge>
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge & a new edge drawing renders a new edge with top/bottom connector 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 100
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 200
+            }
+          }
+          edgeStyle={1}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="TopBottom"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="TopBottom"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <PotentialEdge
+          src={
+            Object {
+              "x": 50,
+              "y": 100
+            }
+          }
+          dest={
+            Object {
+              "x": 0,
+              "y": 0
+            }
+          }
+          edgeStyle={1}
+          showArrowhead={false}
+        >
+        </PotentialEdge>
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge & a new node dragging doesnt render potential node with no render callback 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge & a new node dragging renders a potential node when render callback is provided 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+    <PotentialNode
+      typeId="node-type-1"
+      position={
+        Object {
+          "x": 0,
+          "y": 0
+        }
+      }
+      size={
+        Object {
+          "height": 100,
+          "width": 150
+        }
+      }
+      renderCallback={[Function bound mockConstructor]}
+      destroyCallback={[Function mockConstructor]}
+    >
+    </PotentialNode>
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge and context menu doesnt render if render context menu callbacks dont exist 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 100,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 100,
+              "y": 250
+            }
+          }
+          edgeStyle={0}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="LeftRight"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="LeftRight"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge and context menu renders context menu if render context menu callbacks do exist 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu">
+    <ContextMenu
+      position={
+        Object {
+          "x": 0,
+          "y": 0
+        }
+      }
+      renderCallback={[Function bound mockConstructor]}
+      destroyCallback={[Function mockConstructor]}
+    >
+    </ContextMenu>
+  </div>
+</div>
+
+`;
+
+exports[`View nodes with edge nodes with types with connector placement override renders the node passing the correct connector placement 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 100
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="TopBottom"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": "type-1"
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": "type-2"
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge nodes with types with shape & boundary defined defaults to center based edges if circles overlap each other perfectly 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Boundary"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": "type-1"
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Boundary"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": "type-1"
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge nodes with types with shape & boundary defined renders the edge from the boundary of the node 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 72.3606797749979,
+              "y": 94.72135954999581
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Boundary"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": "type-1"
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Boundary"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": "type-2"
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge nodes with types with visible connector types config renders the node passing the correct visible connector typess config 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": "type-1"
+          }
+        }
+        visibleConnectorTypes="Output"
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": "type-2"
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge renders at the given position and size with nodes and a single edge with arrowhead 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <marker
+            id="arrow"
+            markerWidth="5"
+            markerHeight="5"
+            orient="auto"
+            refY="2.5"
+            refX="5"
+            stroke="#879596"
+            fill="#879596"
+          >
+            <path d="M0,0 L5,2.5 0,5"></path>
+          </marker>
+        </defs>
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={true}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge renders at the given position and size with nodes and a single edge with centered connector 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge renders at the given position and size with nodes and a single edge with default connector 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge renders at the given position and size with nodes and a single edge with edge render callback 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <EdgeBadge
+        id="edge-1"
+        src={
+          Object {
+            "x": 50,
+            "y": 50
+          }
+        }
+        dest={
+          Object {
+            "x": 150,
+            "y": 250
+          }
+        }
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+      >
+      </EdgeBadge>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge renders at the given position and size with nodes and a single edge with left/right connector 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 100,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 100,
+              "y": 250
+            }
+          }
+          edgeStyle={0}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="LeftRight"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="LeftRight"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge renders at the given position and size with nodes and a single edge with top/bottom connector 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 100
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 200
+            }
+          }
+          edgeStyle={1}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="TopBottom"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="TopBottom"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with overlapping edges renders two curved lines when an overlapping edge exists 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-2"
+          src={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          dest={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          edgeStyle={3}
+          showArrowhead={false}
+        >
+        </Edge>
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 50,
+              "y": 50
+            }
+          }
+          dest={
+            Object {
+              "x": 150,
+              "y": 250
+            }
+          }
+          edgeStyle={3}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <EdgeBadge
+        id="edge-2"
+        src={
+          Object {
+            "x": 150,
+            "y": 250
+          }
+        }
+        dest={
+          Object {
+            "x": 50,
+            "y": 50
+          }
+        }
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        isPartOfEdgePair={true}
+      >
+      </EdgeBadge>
+      <EdgeBadge
+        id="edge-1"
+        src={
+          Object {
+            "x": 50,
+            "y": 50
+          }
+        }
+        dest={
+          Object {
+            "x": 150,
+            "y": 250
+          }
+        }
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        isPartOfEdgePair={true}
+      >
+      </EdgeBadge>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View renders selection marquee 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+    <SelectionMarquee
+      anchor={
+        Object {
+          "x": 500,
+          "y": 600
+        }
+      }
+      position={
+        Object {
+          "x": 510,
+          "y": 610
+        }
+      }
+    >
+    </SelectionMarquee>
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View renders two nodes without edges 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Centered"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 100,
+                "y": 200
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
+            "typeId": undefined
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View renders two panels without nodes or edges 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels">
+    <Panel
+      id="panel-1"
+      position={
+        Object {
+          "x": 0,
+          "y": 0
+        }
+      }
+      size={
+        Object {
+          "height": 300,
+          "width": 300
+        }
+      }
+      renderCallback={[Function bound mockConstructor]}
+      destroyCallback={[Function mockConstructor]}
+      viewContainerSize={
+        Object {
+          "height": 5,
+          "width": 5
+        }
+      }
+    >
+    </Panel>
+    <Panel
+      id="panel-2"
+      position={
+        Object {
+          "x": 800,
+          "y": 200
+        }
+      }
+      size={
+        Object {
+          "height": 300,
+          "width": 300
+        }
+      }
+      renderCallback={[Function bound mockConstructor]}
+      destroyCallback={[Function mockConstructor]}
+      viewContainerSize={
+        Object {
+          "height": 5,
+          "width": 5
+        }
+      }
+    >
+    </Panel>
+  </div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;

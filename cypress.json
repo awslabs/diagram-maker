@@ -1,0 +1,10 @@
+{
+  "integrationFolder": "cypress/tests",
+  "trashAssetsBeforeRuns": true,
+  "chromeWebSecurity": false,
+  "defaultCommandTimeout": 10000,
+  "videoUploadOnPasses": false,
+  "video": false,
+  "viewportHeight": 900,
+  "viewportWidth": 1200
+}

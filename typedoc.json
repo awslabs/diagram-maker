@@ -1,0 +1,10 @@
+{
+  "out": "docs/",
+  "mode": "file",
+  "theme": "default",
+  "ignoreCompilerErrors": true,
+  "includeDeclarations": true,
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeNotExported": true
+}

@@ -1,0 +1,46 @@
+.dm-edge {
+  fill: none;
+  cursor: pointer;
+
+  &.dm-selected {
+    .dm-path {
+      &.dm-path-outer {
+        opacity: 0.08;
+      }
+      &.dm-path-inner {
+        stroke: #0073bb;
+      }
+    }
+  }
+
+  .dm-path {
+    transition: opacity .25s ease, stroke .25s ease;
+    &.dm-path-inner {
+      stroke: #879596;
+      stroke-width: 2;
+      pointer-events: none;
+    }
+
+    &.dm-path-outer {
+      opacity: 0;
+      stroke: #879596;
+      stroke-width: 6;
+    }
+  }
+
+  &:hover {
+    .dm-path {
+      &.dm-path-inner {
+        stroke: #0073bb;
+      }
+    }
+  }
+}
+
+.dm-potential-edge {
+  .dm-edge {
+    .dm-path {
+      stroke-dasharray: 6 3;
+    }
+  }
+}

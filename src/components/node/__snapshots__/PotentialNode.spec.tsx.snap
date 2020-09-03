@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PotentialNode renders at the given position and size 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-potential-node"
+  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  data-id="mockPotentialNodeId"
+  data-type="DiagramMaker.PotentialNode"
+  data-event-target={true}
+>
+  <ComposeView
+    renderCallback={[Function mockConstructor]}
+    destroyCallback={[Function mockConstructor]}
+  >
+  </ComposeView>
+</div>
+
+`;

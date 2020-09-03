@@ -1,0 +1,33 @@
+.dm-view {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  .dm-panels, .dm-interim, .dm-menu, .dm-selection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8000;
+  }
+
+  .dm-elements {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 2;
+
+    .dm-edges, .dm-potential-edge {
+      position: absolute;
+      overflow: visible;
+      z-index: -1;
+    }
+  }
+}

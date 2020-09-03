@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EdgeBadge renders badge if passed 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-badge"
+  style="left: 0px; top: 0px; width: 100px; height: 100px;"
+>
+  <div
+    data-id="testBadge"
+    data-type="DiagramMaker.EdgeBadge"
+    data-event-target={true}
+    class="dm-badge-inner"
+  >
+    <ComposeView
+      renderCallback={[Function mockConstructor]}
+      destroyCallback={[Function mockConstructor]}
+    >
+    </ComposeView>
+  </div>
+</div>
+
+`;
+
+exports[`EdgeBadge renders badge when isPartOfEdgePair is true 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-badge"
+  style="left: -25px; top: -25px; width: 100px; height: 100px;"
+>
+  <div
+    data-id="overlappingBadge"
+    data-type="DiagramMaker.EdgeBadge"
+    data-event-target={true}
+    class="dm-badge-inner"
+  >
+    <ComposeView
+      renderCallback={[Function mockConstructor]}
+      destroyCallback={[Function mockConstructor]}
+    >
+    </ComposeView>
+  </div>
+</div>
+
+`;

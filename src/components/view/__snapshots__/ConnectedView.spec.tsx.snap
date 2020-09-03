@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConnectedView connects View component to redux store 1`] = `
+preact-render-spy (1 nodes)
+-------
+<Connect(View)
+  configService={
+    Object {
+      "mockConfigService": [Function mockConstructor]
+    }
+  }
+>
+</Connect(View)>
+
+`;

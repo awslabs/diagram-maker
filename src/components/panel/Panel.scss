@@ -1,0 +1,11 @@
+@import '~diagramMaker/styles/mixins';
+
+.dm-panel {
+  @include dm-container-shadow;
+  position: absolute;
+  background-color: white;
+  overflow: hidden;
+  .dm-content {
+    padding: 20px;
+  }
+}

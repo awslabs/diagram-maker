@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Workspace renders canvas given dot pattern 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-workspace workspace"
+  style="height: 400px; width: 800px; transform: translate3d(0px, 0px, 0) scale(1);"
+  data-type="DiagramMaker.Workspace"
+  data-event-target={true}
+  data-draggable={true}
+  data-dropzone={true}
+>
+  <Canvas>
+    <DotPattern
+      cellSize={10}
+      radius={1}
+    >
+    </DotPattern>
+  </Canvas>
+</div>
+
+`;
+
+exports[`Workspace renders canvas given grid pattern 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-workspace workspace"
+  style="height: 400px; width: 800px; transform: translate3d(0px, 0px, 0) scale(1);"
+  data-type="DiagramMaker.Workspace"
+  data-event-target={true}
+  data-draggable={true}
+  data-dropzone={true}
+>
+  <Canvas>
+    <GridPattern
+      cellSize={10}
+      patternSize={100}
+    >
+    </GridPattern>
+  </Canvas>
+</div>
+
+`;
+
+exports[`Workspace renders dot pattern as default 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-workspace workspace"
+  style="height: 400px; width: 800px; transform: translate3d(0px, 0px, 0) scale(1);"
+  data-type="DiagramMaker.Workspace"
+  data-event-target={true}
+  data-draggable={true}
+  data-dropzone={true}
+>
+  <Canvas>
+    <DotPattern
+      cellSize={10}
+      radius={1}
+    >
+    </DotPattern>
+  </Canvas>
+</div>
+
+`;

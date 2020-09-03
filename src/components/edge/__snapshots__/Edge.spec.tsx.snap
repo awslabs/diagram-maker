@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Edge passes show arrowhead 1`] = `
+preact-render-spy (1 nodes)
+-------
+<g
+  class="dm-edge"
+  data-id="myEdge"
+  data-type="DiagramMaker.Edge"
+  data-event-target={true}
+>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-inner"
+    showArrowhead={true}
+  >
+  </EdgeCurve>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-outer"
+    showArrowhead={true}
+  >
+  </EdgeCurve>
+</g>
+
+`;
+
+exports[`Edge renders selected class 1`] = `
+preact-render-spy (1 nodes)
+-------
+<g
+  class="dm-edge dm-selected"
+  data-id="myEdge"
+  data-type="DiagramMaker.Edge"
+  data-event-target={true}
+>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-inner"
+  >
+  </EdgeCurve>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-outer"
+  >
+  </EdgeCurve>
+</g>
+
+`;
+
+exports[`Edge renders the paths using props 1`] = `
+preact-render-spy (1 nodes)
+-------
+<g
+  class="dm-edge"
+  data-id="myEdge"
+  data-type="DiagramMaker.Edge"
+  data-event-target={true}
+>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-inner"
+  >
+  </EdgeCurve>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-outer"
+  >
+  </EdgeCurve>
+</g>
+
+`;

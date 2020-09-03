@@ -1,0 +1,54 @@
+@import '~diagramMaker/styles/mixins';
+
+html, body {
+  margin: 0;
+  height: 100%;
+  widows: 100%;
+}
+
+#diagramMakerContainer {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.library {
+  height: 560px;
+  overflow: auto;
+  .draggableElement {
+    height: 20px;
+    background: lightgray;
+  }
+}
+
+.example-node {
+  box-sizing: border-box;
+  border: 1px solid #545b64;
+  background: #ffffff;
+  padding: 10px;
+  height: 100%;
+  transition: all .2s ease;
+
+  &.odd {
+    border: 1px solid red;
+  }
+
+  &.even {
+    border: 1px solid blue;
+  }
+
+  &.selected {
+    border: 1px solid #0073bb;;
+  }
+}
+
+.testInput {
+  width: 100%;
+}
+
+.contextMenu {
+  @include dm-container-shadow;
+  background-color: #ffffff;
+  padding: 5px;
+}
