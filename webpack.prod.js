@@ -33,7 +33,7 @@ module.exports = merge(baseConfig, {
     }),
     new DeclarationBundlePlugin({
       name: 'diagramMaker.d.ts',
-      inlinedLibraries: ['redux']
+      inlinedLibraries: ['redux', 'symbol-observable']
     })
   ],
   stats: {
