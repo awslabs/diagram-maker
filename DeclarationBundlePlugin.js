@@ -15,9 +15,6 @@ class DeclarationBundlePlugin {
           filePath: entryModule.resource,
           libraries: {
             inlinedLibraries: this.options.inlinedLibraries
-          },
-          output: {
-            inlineDeclareGlobals: true
           }
         }
         const dts = generateDtsBundle([config])[0];
