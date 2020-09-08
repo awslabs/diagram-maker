@@ -28,7 +28,6 @@
     "istanbul-lib-coverage": "3.0.x",
     "jest": "26.4.x",
     "jest-snapshot": "26.4.x",
-    "loader-utils": "2.0.x",
     "lodash-es": "4.17.x",
     "mini-css-extract-plugin": "0.11.x",
     "node-sass": "^4.14.1",
@@ -59,8 +58,8 @@
   },
   "scripts": {
     "build": "webpack --config webpack.prod.js",
-    "clean": "rm -rf ./build && rm -rf ./node_modules && rm -rf ./dist",
-    "documentation": "typedoc src/",
+    "clean": "rm -rf ./build && rm -rf ./node_modules && rm -rf ./coverage && rm -rf ./dist",
+    "documentation": "typedoc src/ --gitRemote upstream",
     "start": "webpack-dev-server --config webpack.dev.js",
     "server": "npm run start",
     "server:remote": "REMOTE=true npm run start",
