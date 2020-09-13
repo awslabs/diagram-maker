@@ -1,10 +1,10 @@
-.nyc-output
+.nyc_output
 coverage
 cypress
 docs
 integ
 src
-.browserlistrc
+.browserslistrc
 .editorconfig
 .gitignore
 .npmignore
