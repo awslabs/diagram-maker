@@ -7,4 +7,3 @@ cypress/screenshots/*
 cypress/videos/*
 cypress/fixtures/*
 .nyc_output/
-typedoc/

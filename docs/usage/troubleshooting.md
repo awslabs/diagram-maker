@@ -48,3 +48,6 @@ module.exports = {
   ...
 };
 ```
+
+## Typedoc generated documentation
+You can use the [typedoc](http://typedoc.org/) generated documentation [here](/typedoc/globals.html) to find out more information about any of our exported symbols.

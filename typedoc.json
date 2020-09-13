@@ -1,5 +1,5 @@
 {
-  "out": "typedoc/",
+  "out": "docs/typedoc/",
   "mode": "file",
   "theme": "default",
   "ignoreCompilerErrors": true,

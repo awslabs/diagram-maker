@@ -33,3 +33,6 @@ Check out our usage guide [here](/usage/initialization.html).
 
 ## Architecture
 Read more about the architecture of diagram maker [here](/usage/architecture.html).
+
+## Typedoc generated documentation
+Check out the [typedoc](http://typedoc.org/) generated documentation [here](/typedoc/globals.html) to find out more information about any of our exported symbols.

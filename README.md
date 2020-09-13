@@ -37,6 +37,9 @@ Read more about the architecture of diagram maker [here](https://awslabs.github.
 ## Docs
 Check out our full documentation [here](https://awslabs.github.io/diagram-maker).
 
+## Typedoc generated documentation
+Check out the [typedoc](http://typedoc.org/) generated documentation [here](https://awslabs.github.io/diagram-maker/typedoc/globals.html) to find out more information about any of our exported symbols.
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
