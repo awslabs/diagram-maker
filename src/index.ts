@@ -12,3 +12,4 @@ export { PanelAction, PanelActions } from './state/panel/panelActions';
 export { WorkspaceAction, WorkspaceActions } from './state/workspace/workspaceActions';
 export { DiagramMakerAction, DiagramMakerActions } from './state/actions';
 export { EditorMode, PositionAnchor } from './state/types';
+export { sequenceReducers } from './state/common/sequenceReducers';

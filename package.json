@@ -1,5 +1,6 @@
 {
   "name": "diagram-maker",
+  "description": "A library to display an interactive editor for any graph-like data.",
   "version": "1.0.0",
   "main": "dist/diagramMaker.js",
   "types": "dist/diagramMaker.d.ts",
@@ -68,7 +69,8 @@
     "test": "tsc --noEmit -p . && jest --config jest.json",
     "test:dev": "tsc --noEmit -p . && jest --config jest.json --watch",
     "test:update": "tsc --noEmit -p . && jest --config jest.json --updateSnapshot",
-    "release": "npm run lint && npm run test && npm run documentation && npm run build && npm run release:integ",
+    "copy:demo": "cp -r dist/examples docs",
+    "release": "npm run lint && npm run test && npm run documentation && npm run build && npm run release:integ && npm run copy:demo",
     "build:integ": "webpack --config webpack.static.js",
     "lint:integ": "tslint --config tslint.json --project ./cypress/tsconfig.json -t stylish",
     "lint:integ:fix": "tslint --config tslint.json --project ./cypress/tsconfig.json -t stylish --fix",
