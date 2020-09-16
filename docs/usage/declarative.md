@@ -68,8 +68,8 @@ Similarly, for output connector:
 ```
 Please note that diagram maker will still render default connectors based on your chosen configuration. If you wish to suppress that, please use CSS overrides.
 
-## Allowing customers to drag the panels around
-Panels by default, stick to their position. However, if you want, you can easily allow your customers to drag the panels around to customize their editor experience. To do this simply create a drag handle, the DOM element that when clicked & dragged, the entire panel drags along with it. We cannot make the entire panel draggable because then the content within it, becomes uninteractable. After that, you only need to add a few data attributes to make diagram maker aware of this drag handle:
+## Allowing users to drag the panels around
+Panels by default, stick to their position. However, if you want, you can easily allow your users to drag the panels around to customize their editor experience. To do this simply create a drag handle, the DOM element that when clicked & dragged, the entire panel drags along with it. We cannot make the entire panel draggable because then the content within it, becomes uninteractable. After that, you only need to add a few data attributes to make diagram maker aware of this drag handle:
 ```jsx
 {/* Using JSX */}
 <div>
