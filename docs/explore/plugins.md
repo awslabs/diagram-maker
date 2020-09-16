@@ -11,7 +11,7 @@ This page lists all the known plugins for Diagram Maker.
 Plugins maintained by the Diagram Maker team.
 
 * **[Minimap]()**: This plugin can used to display a minimap within a panel.
-This is useful when customers have a large canvas with a large number of nodes such that it becomes the hard to navigate the canvas quickly.
+This is useful when a large canvas has a high number of nodes, such that it becomes the hard to navigate the canvas quickly.
 The minimap provides a quick and easy way to see the entire canvas at a glance and quickly jump to specific parts of the canvas.
 
 ## Community plugins
