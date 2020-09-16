@@ -6,7 +6,7 @@ sort: 7
 There are several ways of troubleshooting issues with diagram maker.
 
 ## Redux Devtools Extension
-This is the easiest and most effective ways to troubleshoot issues with diagram maker. This extension allows you to inspect the state of the redux store, the action objects with timestamps, and how they change the state over time. It even lets you modify the state and see the page content change with state. It even supports a time traveling debugger. To use this:
+Redux DevTools are the easiest and most effective way to troubleshoot issues with diagram maker. This extension allows you to inspect the state of the redux store, the action objects with timestamps, and how the state changes over time. It lets you modify the state and see the page content change with state, and supports a time traveling debugger. To use this:
 * Follow installation steps for your browser of choice here: http://extension.remotedev.io/
 * In your diagram maker instantiation, pass this in place of consumerEnhancer:
 
