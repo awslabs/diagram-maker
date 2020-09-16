@@ -4,7 +4,9 @@ sort: 4
 
 # State
 
-This is the interface for the diagram maker state object. The state of the entire editor is captured within this structure and hence can be used to rehydrate an editor with the same state as a previous session from a persisted state. Please note that Diagram Maker itself doesnt provide options to persist this state, it does provide consumers an API to fetch the state at any time apart from action interceptors that can provide the state before actions are dispatched onto the store and reducers that can be used to capture the state after an action has been processed by Diagram Maker. Consumers might need to transform their use case specific data structure into this state structure that diagram maker expects as the initialData configuration and might need reverse transformation to extract their use case specific data structures from diagram maker state after customers have modified the elements on the canvas.
+This is the interface for the Diagram Maker state object. The state of the entire editor is captured within this structure and can be used to rehydrate an editor with the same state as a previous session, from the persisted state. **Please note** that Diagram Maker itself doesnt provide solutions to persist this state. It provides consumers an API to fetch the graph state at any time. 
+
+Any custom data models for a consumer use case will need to be translated to the DiagramMakerData model for the graph to be re-hydrated. Likewise, the model fetched from Diagram Maker will be in the DiagramMakerData form.
 
 ## Structure of the state object
 Please note that this state object is for demonstration purposes only. The upto date state object can be found inside the bundled types after installing from NPM.
