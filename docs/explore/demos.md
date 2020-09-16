@@ -4,7 +4,7 @@ sort: 1
 
 # Demos
 
-We have a few demos with different configurations to showcase different use cases that diagram maker could be used for. Read more about diagram maker configurations [here](/usage/configuration.html).
+Here are a few demos with different configurations to showcase uses of diagram maker. Read more about diagram maker configurations [here](/usage/configuration.html).
 
 * **[Left Right Rectangular](/examples/LeftRightRectangular.html)** : Uses a LeftRight connector placement with rectangular shape nodes by default.
 * **[Top Bottom Rectangular](/examples/TopBottomRectangular.html)** : Uses a TopBottom connector placement with rectangular shape nodes by default.
