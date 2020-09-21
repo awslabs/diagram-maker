@@ -1,0 +1,1557 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>diagram-maker</title>
+	<meta name="description" content="Documentation for diagram-maker">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">diagram-maker</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>diagram-maker</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#diagram-maker" id="diagram-maker" style="color: inherit; text-decoration: none;">
+					<h1>Diagram Maker</h1>
+				</a>
+				<p><a href="https://travis-ci.com/awslabs/diagram-maker"><img src="https://travis-ci.com/awslabs/diagram-maker.svg?branch=master" alt="Build Status"></a></p>
+				<p><a href="https://awslabs.github.io/diagram-maker">Diagram Maker</a> is a library to display an interactive editor for any graph-like data.</p>
+				<p>Following is a screenshot from one of the consumers of this library, <a href="https://console.aws.amazon.com/iotevents/home?region=us-east-1#/create/detectormodel">AWS IoT Events Console</a> with Diagram Maker in action.
+				<img src="docs/assets/IoTEventsScreenshot.png" alt="IoT Events Screenshot"></p>
+				<p>Following is a screenshot from another one of the consumers of this library, <a href="https://console.aws.amazon.com/thingsgraph/home?region=us-east-1#/flows/create">AWS IoT Things Graph Console</a> with Diagram Maker in action.
+				<img src="docs/assets/IoTThingsGraphScreenshot.png" alt="IoT Things Graph Screenshot"></p>
+				<a href="#why-diagram-maker" id="why-diagram-maker" style="color: inherit; text-decoration: none;">
+					<h2>Why Diagram Maker?</h2>
+				</a>
+				<p>Diagram Maker is a framework &amp; data format agnostic library that is fully customizable in terms of look &amp; feel as well as behavior. It also exposes a declarative interface to reduce the code required to integrate the library in any application and comes with many interactive features built in. Read more about the features of the library <a href="https://awslabs.github.io/diagram-maker/why/features.html">here</a>.</p>
+				<a href="#explore" id="explore" style="color: inherit; text-decoration: none;">
+					<h2>Explore</h2>
+				</a>
+				<a href="#interactive-demo" id="interactive-demo" style="color: inherit; text-decoration: none;">
+					<h3>Interactive Demo</h3>
+				</a>
+				<p>Check out one of our interactive demos <a href="https://awslabs.github.io/diagram-maker/examples/LeftRightRectangular.html">here</a> or see the full list of interactive demos <a href="https://awslabs.github.io/diagram-maker/explore/demos.html">here</a>.</p>
+				<a href="#plugins" id="plugins" style="color: inherit; text-decoration: none;">
+					<h3>Plugins</h3>
+				</a>
+				<p>Check out the plugins that can be used alongside the library for additional functionality <a href="https://awslabs.github.io/diagram-maker/explore/plugins.html">here</a>.</p>
+				<a href="#showcase" id="showcase" style="color: inherit; text-decoration: none;">
+					<h3>Showcase</h3>
+				</a>
+				<p>Check out some of the consumers of this library <a href="https://awslabs.github.io/diagram-maker/explore/showcase.html">here</a>.</p>
+				<a href="#how-do-i-use-it" id="how-do-i-use-it" style="color: inherit; text-decoration: none;">
+					<h2>How do I use it?</h2>
+				</a>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h3>Installation</h3>
+				</a>
+				<p>Check out our installation guide <a href="https://awslabs.github.io/diagram-maker/getting-started/install.html">here</a>.</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h3>Usage</h3>
+				</a>
+				<p>Check out our usage guide <a href="https://awslabs.github.io/diagram-maker/usage/initialization.html">here</a>.</p>
+				<a href="#architecture" id="architecture" style="color: inherit; text-decoration: none;">
+					<h3>Architecture</h3>
+				</a>
+				<p>Read more about the architecture of diagram maker <a href="https://awslabs.github.io/diagram-maker/usage/architecture.html">here</a>.</p>
+				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
+					<h2>Docs</h2>
+				</a>
+				<p>Check out our full documentation <a href="https://awslabs.github.io/diagram-maker">here</a>.</p>
+				<a href="#typedoc-generated-documentation" id="typedoc-generated-documentation" style="color: inherit; text-decoration: none;">
+					<h2>Typedoc generated documentation</h2>
+				</a>
+				<p>Check out the <a href="http://typedoc.org/">typedoc</a> generated documentation <a href="https://awslabs.github.io/diagram-maker/typedoc/globals.html">here</a> to find out more information about any of our exported symbols.</p>
+				<a href="#security" id="security" style="color: inherit; text-decoration: none;">
+					<h2>Security</h2>
+				</a>
+				<p>See <a href="CONTRIBUTING.md#security-issue-notifications">CONTRIBUTING</a> for more information.</p>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p>This project is licensed under the Apache-2.0 License.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/actiontype.html" class="tsd-kind-icon">Action<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/connectorplacementtype.html" class="tsd-kind-icon">Connector<wbr>Placement<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/connectortype.html" class="tsd-kind-icon">Connector<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/containereventtype.html" class="tsd-kind-icon">Container<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/destroyeventtype.html" class="tsd-kind-icon">Destroy<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/diagrammakercomponentstype.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Components<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/drageventtype.html" class="tsd-kind-icon">Drag<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/dropeventtype.html" class="tsd-kind-icon">Drop<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/edgeactionstype.html" class="tsd-kind-icon">Edge<wbr>Actions<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/edgestyle.html" class="tsd-kind-icon">Edge<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/editoractionstype.html" class="tsd-kind-icon">Editor<wbr>Actions<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/editormodetype.html" class="tsd-kind-icon">Editor<wbr>Mode<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/eventattribute.html" class="tsd-kind-icon">Event<wbr>Attribute</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/globalactionstype.html" class="tsd-kind-icon">Global<wbr>Actions<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/keyboardcode.html" class="tsd-kind-icon">Keyboard<wbr>Code</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/keyboardeventtype.html" class="tsd-kind-icon">Keyboard<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/keyboardkey.html" class="tsd-kind-icon">Keyboard<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/layoutactionstype.html" class="tsd-kind-icon">Layout<wbr>Actions<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/layouttype.html" class="tsd-kind-icon">Layout<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/mousebutton.html" class="tsd-kind-icon">Mouse<wbr>Button</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/mouseclickeventtype.html" class="tsd-kind-icon">Mouse<wbr>Click<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/mousemoveeventtype.html" class="tsd-kind-icon">Mouse<wbr>Move<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/nodeactionstype.html" class="tsd-kind-icon">Node<wbr>Actions<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/panelactionstype.html" class="tsd-kind-icon">Panel<wbr>Actions<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/positionanchortype.html" class="tsd-kind-icon">Position<wbr>Anchor<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/shapetype.html" class="tsd-kind-icon">Shape<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/traversalstatus.html" class="tsd-kind-icon">Traversal<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/typeforvisibleconnectortypes.html" class="tsd-kind-icon">Type<wbr>For<wbr>Visible<wbr>Connector<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/wheeleventtype.html" class="tsd-kind-icon">Wheel<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/windoweventtype.html" class="tsd-kind-icon">Window<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/workflowlayoutdirectiontype.html" class="tsd-kind-icon">Workflow<wbr>Layout<wbr>Direction<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/workspaceactionstype.html" class="tsd-kind-icon">Workspace<wbr>Actions<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/actiondispatcher.html" class="tsd-kind-icon">Action<wbr>Dispatcher</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/composeview.html" class="tsd-kind-icon">Compose<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/configservice.html" class="tsd-kind-icon">Config<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/connector.html" class="tsd-kind-icon">Connector</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/contextmenu.html" class="tsd-kind-icon">Context<wbr>Menu</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/diagrammaker.html" class="tsd-kind-icon">Diagram<wbr>Maker</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/diagrammakerapi.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/edge.html" class="tsd-kind-icon">Edge</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/edgebadge.html" class="tsd-kind-icon">Edge<wbr>Badge</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/node.html" class="tsd-kind-icon">Node</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/observer.html" class="tsd-kind-icon">Observer</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/panel.html" class="tsd-kind-icon">Panel</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/potentialnode.html" class="tsd-kind-icon">Potential<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/provider.html" class="tsd-kind-icon">Provider</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/selectionmarquee.html" class="tsd-kind-icon">Selection<wbr>Marquee</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/uieventmanager.html" class="tsd-kind-icon">UIEvent<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/uieventnormalizer.html" class="tsd-kind-icon">UIEvent<wbr>Normalizer</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/uitargetnormalizer.html" class="tsd-kind-icon">UITarget<wbr>Normalizer</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/view.html" class="tsd-kind-icon">View</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/adjacencylist.html" class="tsd-kind-icon">Adjacency<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/advancedcomponentdecorator.html" class="tsd-kind-icon">Advanced<wbr>Component<wbr>Decorator</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/canvasprops.html" class="tsd-kind-icon">Canvas<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/composeviewprops.html" class="tsd-kind-icon">Compose<wbr>View<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/connectoptions.html" class="tsd-kind-icon">Connect<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/connectedviewownprops.html" class="tsd-kind-icon">Connected<wbr>View<wbr>Own<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/connectedviewstateprops.html" class="tsd-kind-icon">Connected<wbr>View<wbr>State<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/connectorprops.html" class="tsd-kind-icon">Connector<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contextmenuprops.html" class="tsd-kind-icon">Context<wbr>Menu<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/contextmenurendercallbacks.html" class="tsd-kind-icon">Context<wbr>Menu<wbr>Render<wbr>Callbacks</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/createedgeaction.html" class="tsd-kind-icon">Create<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/createitemsaction.html" class="tsd-kind-icon">Create<wbr>Items<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/createnodeaction.html" class="tsd-kind-icon">Create<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/deleteedgeaction.html" class="tsd-kind-icon">Delete<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/deleteitemsaction.html" class="tsd-kind-icon">Delete<wbr>Items<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/deletenodeaction.html" class="tsd-kind-icon">Delete<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/deselectaction.html" class="tsd-kind-icon">Deselect<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/diagrammakerconfig.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakercontextmenu.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Context<wbr>Menu</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/diagrammakerdata.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/diagrammakeredge.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Edge</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/diagrammakeredges.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Edges</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakereditor.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Editor</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/diagrammakernode.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakernodetypeconfiguration.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Node<wbr>Type<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/diagrammakernodes.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Nodes</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakerpanel.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Panel</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakerpanels.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Panels</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakerplugin.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Plugin</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakerplugins.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Plugins</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakerpotentialedge.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Potential<wbr>Edge</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakerpotentialnode.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Potential<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakerselectionmarquee.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Selection<wbr>Marquee</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/diagrammakerworkspace.html" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Workspace</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dispatchprop.html" class="tsd-kind-icon">Dispatch<wbr>Prop</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/dotpatternprops.html" class="tsd-kind-icon">Dot<wbr>Pattern<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragedgeaction.html" class="tsd-kind-icon">Drag<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragendedgeaction.html" class="tsd-kind-icon">Drag<wbr>End<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragendnodeaction.html" class="tsd-kind-icon">Drag<wbr>End<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragendpotentialnodeaction.html" class="tsd-kind-icon">Drag<wbr>End<wbr>Potential<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragnodeaction.html" class="tsd-kind-icon">Drag<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragpanelaction.html" class="tsd-kind-icon">Drag<wbr>Panel<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragpotentialnodeaction.html" class="tsd-kind-icon">Drag<wbr>Potential<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragstartedgeaction.html" class="tsd-kind-icon">Drag<wbr>Start<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragstartnodeaction.html" class="tsd-kind-icon">Drag<wbr>Start<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragstartpanelaction.html" class="tsd-kind-icon">Drag<wbr>Start<wbr>Panel<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragstartpotentialnodeaction.html" class="tsd-kind-icon">Drag<wbr>Start<wbr>Potential<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/dragworkspaceaction.html" class="tsd-kind-icon">Drag<wbr>Workspace<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/edgebadgeprops.html" class="tsd-kind-icon">Edge<wbr>Badge<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/edgecoordinatepair.html" class="tsd-kind-icon">Edge<wbr>Coordinate<wbr>Pair</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/edgecurveprops.html" class="tsd-kind-icon">Edge<wbr>Curve<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/edgeprops.html" class="tsd-kind-icon">Edge<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/eventlistenerref.html" class="tsd-kind-icon">Event<wbr>Listener<wbr>Ref</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/fitaction.html" class="tsd-kind-icon">Fit<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/focusnodeaction.html" class="tsd-kind-icon">Focus<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/graphnode.html" class="tsd-kind-icon">Graph<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/gridpatternprops.html" class="tsd-kind-icon">Grid<wbr>Pattern<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/hidecontextmenuaction.html" class="tsd-kind-icon">Hide<wbr>Context<wbr>Menu<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/hideselectionmarqueeaction.html" class="tsd-kind-icon">Hide<wbr>Selection<wbr>Marquee<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/hierarchicallayoutconfig.html" class="tsd-kind-icon">Hierarchical<wbr>Layout<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/inferablecomponentenhancerwithprops.html" class="tsd-kind-icon">Inferable<wbr>Component<wbr>Enhancer<wbr>With<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/layoutaction.html" class="tsd-kind-icon">Layout<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/mapdispatchtopropsfactory.html" class="tsd-kind-icon">Map<wbr>Dispatch<wbr>ToProps<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/mapdispatchtopropsfunction.html" class="tsd-kind-icon">Map<wbr>Dispatch<wbr>ToProps<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/mapstatetoprops.html" class="tsd-kind-icon">Map<wbr>State<wbr>ToProps</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/mapstatetopropsfactory.html" class="tsd-kind-icon">Map<wbr>State<wbr>ToProps<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/marqueedimensions.html" class="tsd-kind-icon">Marquee<wbr>Dimensions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/mergeprops.html" class="tsd-kind-icon">Merge<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/mockstore.html" class="tsd-kind-icon">Mock<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/nodedirection.html" class="tsd-kind-icon">Node<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/nodeprops.html" class="tsd-kind-icon">Node<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizedcontainerevent.html" class="tsd-kind-icon">Normalized<wbr>Container<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizeddragevent.html" class="tsd-kind-icon">Normalized<wbr>Drag<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizeddropevent.html" class="tsd-kind-icon">Normalized<wbr>Drop<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizedkeyboardevent.html" class="tsd-kind-icon">Normalized<wbr>Keyboard<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizedmouseclickevent.html" class="tsd-kind-icon">Normalized<wbr>Mouse<wbr>Click<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizedmousemoveevent.html" class="tsd-kind-icon">Normalized<wbr>Mouse<wbr>Move<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizedmousescrollevent.html" class="tsd-kind-icon">Normalized<wbr>Mouse<wbr>Scroll<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizedtarget.html" class="tsd-kind-icon">Normalized<wbr>Target</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normalizedwindowevent.html" class="tsd-kind-icon">Normalized<wbr>Window<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/numaction.html" class="tsd-kind-icon">Num<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/options.html" class="tsd-kind-icon">Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/panelprops.html" class="tsd-kind-icon">Panel<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/position.html" class="tsd-kind-icon">Position</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/potentialedgeprops.html" class="tsd-kind-icon">Potential<wbr>Edge<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/potentialnodeprops.html" class="tsd-kind-icon">Potential<wbr>Node<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/providerprops.html" class="tsd-kind-icon">Provider<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/rectangle.html" class="tsd-kind-icon">Rectangle</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/rendercallbacks.html" class="tsd-kind-icon">Render<wbr>Callbacks</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/resizepanelaction.html" class="tsd-kind-icon">Resize<wbr>Panel<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/resizeworkspaceaction.html" class="tsd-kind-icon">Resize<wbr>Workspace<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/resizeworkspacecanvasaction.html" class="tsd-kind-icon">Resize<wbr>Workspace<wbr>Canvas<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/revertingactionsobject.html" class="tsd-kind-icon">Reverting<wbr>Actions<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/selectallaction.html" class="tsd-kind-icon">Select<wbr>All<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/selectedgeaction.html" class="tsd-kind-icon">Select<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/selectnodeaction.html" class="tsd-kind-icon">Select<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/selectionmarqueeprops.html" class="tsd-kind-icon">Selection<wbr>Marquee<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/selector.html" class="tsd-kind-icon">Selector</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/selectorfactory.html" class="tsd-kind-icon">Selector<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/seteditormodeaction.html" class="tsd-kind-icon">Set<wbr>Editor<wbr>Mode<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/showcontextmenuaction.html" class="tsd-kind-icon">Show<wbr>Context<wbr>Menu<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/showselectionmarqueeaction.html" class="tsd-kind-icon">Show<wbr>Selection<wbr>Marquee<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/size.html" class="tsd-kind-icon">Size</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/state.html" class="tsd-kind-icon">State</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/straction.html" class="tsd-kind-icon">Str<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/undoactions.html" class="tsd-kind-icon">Undo<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/undohistorystate.html" class="tsd-kind-icon">Undo<wbr>History<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/undomiddlewareconfig.html" class="tsd-kind-icon">Undo<wbr>Middleware<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/updateselectionmarqueeaction.html" class="tsd-kind-icon">Update<wbr>Selection<wbr>Marquee<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/viewprops.html" class="tsd-kind-icon">View<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/workflowlayoutconfig.html" class="tsd-kind-icon">Workflow<wbr>Layout<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/workspaceprops.html" class="tsd-kind-icon">Workspace<wbr>Props</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/workspaceresetzoomaction.html" class="tsd-kind-icon">Workspace<wbr>Reset<wbr>Zoom<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/zoomworkspaceaction.html" class="tsd-kind-icon">Zoom<wbr>Workspace<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#action" class="tsd-kind-icon">Action</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#actioninterceptor" class="tsd-kind-icon">Action<wbr>Interceptor</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#actionsqueue" class="tsd-kind-icon">Actions<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#boundrendercallback" class="tsd-kind-icon">Bound<wbr>Render<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#contextmenurendercallback" class="tsd-kind-icon">Context<wbr>Menu<wbr>Render<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#contextmenurendercallbackwithid" class="tsd-kind-icon">Context<wbr>Menu<wbr>Render<wbr>Callback<wbr>With<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#destroycallback" class="tsd-kind-icon">Destroy<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#diagrammakeraction" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#edgeaction" class="tsd-kind-icon">Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#editoraction" class="tsd-kind-icon">Editor<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#eventlistener" class="tsd-kind-icon">Event<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#eventnormalizer" class="tsd-kind-icon">Event<wbr>Normalizer</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#eventtype" class="tsd-kind-icon">Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#globalaction" class="tsd-kind-icon">Global<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#inferablecomponentenhancer" class="tsd-kind-icon">Inferable<wbr>Component<wbr>Enhancer</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#layoutconfig" class="tsd-kind-icon">Layout<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#mapdispatchtoprops" class="tsd-kind-icon">Map<wbr>Dispatch<wbr>ToProps</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#mapdispatchtopropsparam" class="tsd-kind-icon">Map<wbr>Dispatch<wbr>ToProps<wbr>Param</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#mapstatetopropsparam" class="tsd-kind-icon">Map<wbr>State<wbr>ToProps<wbr>Param</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#nodeaction" class="tsd-kind-icon">Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#normalizedevent" class="tsd-kind-icon">Normalized<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#observercallback" class="tsd-kind-icon">Observer<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#omit" class="tsd-kind-icon">Omit</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#panelaction" class="tsd-kind-icon">Panel<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#revertingactions" class="tsd-kind-icon">Reverting<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#revertingactionsfunction" class="tsd-kind-icon">Reverting<wbr>Actions<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#showconnectorstype" class="tsd-kind-icon">Show<wbr>Connectors<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#workspaceaction" class="tsd-kind-icon">Workspace<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#anchor_distance" class="tsd-kind-icon">ANCHOR_<wbr>DISTANCE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#data_attr_type" class="tsd-kind-icon">DATA_<wbr>ATTR_<wbr>TYPE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#default_canvas_pattern" class="tsd-kind-icon">DEFAULT_<wbr>CANVAS_<wbr>PATTERN</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#default_zoom_delta" class="tsd-kind-icon">DEFAULT_<wbr>ZOOM_<wbr>DELTA</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#destroy" class="tsd-kind-icon">DESTROY</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#diagram_maker_container_update" class="tsd-kind-icon">DIAGRAM_<wbr>MAKER_<wbr>CONTAINER_<wbr>UPDATE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#drag" class="tsd-kind-icon">DRAG</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#drag_end" class="tsd-kind-icon">DRAG_<wbr>END</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#drag_enter" class="tsd-kind-icon">DRAG_<wbr>ENTER</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#drag_leave" class="tsd-kind-icon">DRAG_<wbr>LEAVE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#drag_over" class="tsd-kind-icon">DRAG_<wbr>OVER</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#drag_start" class="tsd-kind-icon">DRAG_<wbr>START</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#drop" class="tsd-kind-icon">DROP</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#dagre" class="tsd-kind-icon">Dagre</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#edge" class="tsd-kind-icon">EDGE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#edge_badge" class="tsd-kind-icon">EDGE_<wbr>BADGE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#fit_buffer" class="tsd-kind-icon">FIT_<wbr>BUFFER</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#is_mac" class="tsd-kind-icon">IS_<wbr>MAC</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#key_down" class="tsd-kind-icon">KEY_<wbr>DOWN</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#key_press" class="tsd-kind-icon">KEY_<wbr>PRESS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#key_up" class="tsd-kind-icon">KEY_<wbr>UP</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#left" class="tsd-kind-icon">LEFT</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#left_click" class="tsd-kind-icon">LEFT_<wbr>CLICK</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#margin_px" class="tsd-kind-icon">MARGIN_<wbr>PX</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#mouse_down" class="tsd-kind-icon">MOUSE_<wbr>DOWN</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#mouse_move" class="tsd-kind-icon">MOUSE_<wbr>MOVE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#mouse_up" class="tsd-kind-icon">MOUSE_<wbr>UP</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#mouse_wheel" class="tsd-kind-icon">MOUSE_<wbr>WHEEL</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#node" class="tsd-kind-icon">NODE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#node_connector" class="tsd-kind-icon">NODE_<wbr>CONNECTOR</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#panel_drag_handle" class="tsd-kind-icon">PANEL_<wbr>DRAG_<wbr>HANDLE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#potential_node" class="tsd-kind-icon">POTENTIAL_<wbr>NODE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#read_only" class="tsd-kind-icon">READ_<wbr>ONLY</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#resize" class="tsd-kind-icon">RESIZE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#right_click" class="tsd-kind-icon">RIGHT_<wbr>CLICK</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#true" class="tsd-kind-icon">TRUE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#workspace" class="tsd-kind-icon">WORKSPACE</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#actiondispatcher" class="tsd-kind-icon">action<wbr>Dispatcher</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#actioninterceptor" class="tsd-kind-icon">action<wbr>Interceptor</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#actions" class="tsd-kind-icon">actions</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#config" class="tsd-kind-icon">config</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#container" class="tsd-kind-icon">container</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#context" class="tsd-kind-icon">context</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#gettarget" class="tsd-kind-icon">get<wbr>Target</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#layout" class="tsd-kind-icon">layout</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#manager" class="tsd-kind-icon">manager</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#normalizetarget" class="tsd-kind-icon">normalize<wbr>Target</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#observer" class="tsd-kind-icon">observer</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#originaldocument" class="tsd-kind-icon">original<wbr>Document</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#originalelementsfrompointmethod" class="tsd-kind-icon">original<wbr>Elements<wbr>From<wbr>Point<wbr>Method</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#originalgetdropzonetargetmethod" class="tsd-kind-icon">original<wbr>Get<wbr>Drop<wbr>Zone<wbr>Target<wbr>Method</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#originalgetelementsfrompointmethod" class="tsd-kind-icon">original<wbr>Get<wbr>Elements<wbr>From<wbr>Point<wbr>Method</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#originalmselementsfrompointmethod" class="tsd-kind-icon">original<wbr>MsElements<wbr>From<wbr>Point<wbr>Method</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#originalpreact" class="tsd-kind-icon">original<wbr>Preact</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#rootreducer" class="tsd-kind-icon">root<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#sequencedreducer" class="tsd-kind-icon">sequenced<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#store" class="tsd-kind-icon">store</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#canvas" class="tsd-kind-icon">Canvas</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#dotpattern" class="tsd-kind-icon">Dot<wbr>Pattern</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#edgecurve" class="tsd-kind-icon">Edge<wbr>Curve</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#gridpattern" class="tsd-kind-icon">Grid<wbr>Pattern</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#potentialedge" class="tsd-kind-icon">Potential<wbr>Edge</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#workspace" class="tsd-kind-icon">Workspace</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#add" class="tsd-kind-icon">add</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#adjustworkspace" class="tsd-kind-icon">adjust<wbr>Workspace</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#anchorpanel" class="tsd-kind-icon">anchor<wbr>Panel</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#anglebetween" class="tsd-kind-icon">angle<wbr>Between</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#applyboundarycheck" class="tsd-kind-icon">apply<wbr>Boundary<wbr>Check</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#applygravity" class="tsd-kind-icon">apply<wbr>Gravity</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#arrangeevenly" class="tsd-kind-icon">arrange<wbr>Evenly</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#asmock" class="tsd-kind-icon">as<wbr>Mock</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#buildeditor" class="tsd-kind-icon">build<wbr>Editor</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#buildworkspace" class="tsd-kind-icon">build<wbr>Workspace</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#canvasresizereducer" class="tsd-kind-icon">canvas<wbr>Resize<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#clampposition" class="tsd-kind-icon">clamp<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#clampzoom" class="tsd-kind-icon">clamp<wbr>Zoom</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#connect" class="tsd-kind-icon">connect</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#connectadvanced" class="tsd-kind-icon">connect<wbr>Advanced</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#constrainrectanglewithinrectangle" class="tsd-kind-icon">constrain<wbr>Rectangle<wbr>Within<wbr>Rectangle</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdeleteitemsaction" class="tsd-kind-icon">create<wbr>Delete<wbr>Items<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdeselectaction" class="tsd-kind-icon">create<wbr>Deselect<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragedgeaction" class="tsd-kind-icon">create<wbr>Drag<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragendedgeaction" class="tsd-kind-icon">create<wbr>Drag<wbr>End<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragendnodeaction" class="tsd-kind-icon">create<wbr>Drag<wbr>End<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragnodeaction" class="tsd-kind-icon">create<wbr>Drag<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragpanelaction" class="tsd-kind-icon">create<wbr>Drag<wbr>Panel<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragpanelstartaction" class="tsd-kind-icon">create<wbr>Drag<wbr>Panel<wbr>Start<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragstartedgeaction" class="tsd-kind-icon">create<wbr>Drag<wbr>Start<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragstartnodeaction" class="tsd-kind-icon">create<wbr>Drag<wbr>Start<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createdragworkspaceaction" class="tsd-kind-icon">create<wbr>Drag<wbr>Workspace<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createfitaction" class="tsd-kind-icon">create<wbr>Fit<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createfocusnodeaction" class="tsd-kind-icon">create<wbr>Focus<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createhidecontextmenuaction" class="tsd-kind-icon">create<wbr>Hide<wbr>Context<wbr>Menu<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createhideselectionmarqueeaction" class="tsd-kind-icon">create<wbr>Hide<wbr>Selection<wbr>Marquee<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#createinterceptormiddleware" class="tsd-kind-icon">create<wbr>Interceptor<wbr>Middleware</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createlayoutaction" class="tsd-kind-icon">create<wbr>Layout<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#createnewedgeaction" class="tsd-kind-icon">create<wbr>New<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#createnewitemsaction" class="tsd-kind-icon">create<wbr>New<wbr>Items<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#createnewnodeaction" class="tsd-kind-icon">create<wbr>New<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createpotentialnodedragaction" class="tsd-kind-icon">create<wbr>Potential<wbr>Node<wbr>Drag<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createpotentialnodedragendaction" class="tsd-kind-icon">create<wbr>Potential<wbr>Node<wbr>Drag<wbr>End<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createpotentialnodedragstartaction" class="tsd-kind-icon">create<wbr>Potential<wbr>Node<wbr>Drag<wbr>Start<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createresizepanelaction" class="tsd-kind-icon">create<wbr>Resize<wbr>Panel<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createresizeworkspaceaction" class="tsd-kind-icon">create<wbr>Resize<wbr>Workspace<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createresizeworkspacecanvasaction" class="tsd-kind-icon">create<wbr>Resize<wbr>Workspace<wbr>Canvas<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createselectallaction" class="tsd-kind-icon">create<wbr>Select<wbr>All<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createselectedgeaction" class="tsd-kind-icon">create<wbr>Select<wbr>Edge<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createselectnodeaction" class="tsd-kind-icon">create<wbr>Select<wbr>Node<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createseteditormodeaction" class="tsd-kind-icon">create<wbr>Set<wbr>Editor<wbr>Mode<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createshowcontextmenuaction" class="tsd-kind-icon">create<wbr>Show<wbr>Context<wbr>Menu<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createshowselectionmarqueeaction" class="tsd-kind-icon">create<wbr>Show<wbr>Selection<wbr>Marquee<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#createstore" class="tsd-kind-icon">create<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#createundomiddleware" class="tsd-kind-icon">create<wbr>Undo<wbr>Middleware</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createupdateselectionmarqueeaction" class="tsd-kind-icon">create<wbr>Update<wbr>Selection<wbr>Marquee<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createworkspaceresetzoomaction" class="tsd-kind-icon">create<wbr>Workspace<wbr>Reset<wbr>Zoom<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createzoomworkspaceaction" class="tsd-kind-icon">create<wbr>Zoom<wbr>Workspace<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#destroy" class="tsd-kind-icon">destroy</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#dragreducer" class="tsd-kind-icon">drag<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#dragstartreducer" class="tsd-kind-icon">drag<wbr>Start<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#edgereducer" class="tsd-kind-icon">edge<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#editorreducer" class="tsd-kind-icon">editor<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#fitreducer" class="tsd-kind-icon">fit<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#focusreducer" class="tsd-kind-icon">focus<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#fromadjacencylist" class="tsd-kind-icon">from<wbr>Adjacency<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#fromcontainertopage" class="tsd-kind-icon">from<wbr>Container<wbr>ToPage</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#frompagetocontainer" class="tsd-kind-icon">from<wbr>Page<wbr>ToContainer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#frompagetoscreen" class="tsd-kind-icon">from<wbr>Page<wbr>ToScreen</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#fromscreentopage" class="tsd-kind-icon">from<wbr>Screen<wbr>ToPage</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getangle" class="tsd-kind-icon">get<wbr>Angle</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getboundarycoordinates" class="tsd-kind-icon">get<wbr>Boundary<wbr>Coordinates</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getboundarycoordinatesforcircle" class="tsd-kind-icon">get<wbr>Boundary<wbr>Coordinates<wbr>For<wbr>Circle</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getbrowserrectangle" class="tsd-kind-icon">get<wbr>Browser<wbr>Rectangle</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getbrowsersize" class="tsd-kind-icon">get<wbr>Browser<wbr>Size</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getcentercoordinateforcurve" class="tsd-kind-icon">get<wbr>Center<wbr>Coordinate<wbr>For<wbr>Curve</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getcenteredconnectorcoordinates" class="tsd-kind-icon">get<wbr>Centered<wbr>Connector<wbr>Coordinates</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getcenteredposition" class="tsd-kind-icon">get<wbr>Centered<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getconnectedview" class="tsd-kind-icon">get<wbr>Connected<wbr>View</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getconnectorplacementfornode" class="tsd-kind-icon">get<wbr>Connector<wbr>Placement<wbr>For<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getcurve" class="tsd-kind-icon">get<wbr>Curve</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getdefaultworkspacestate" class="tsd-kind-icon">get<wbr>Default<wbr>Workspace<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getdistance" class="tsd-kind-icon">get<wbr>Distance</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getdraggablepaneloffset" class="tsd-kind-icon">get<wbr>Draggable<wbr>Panel<wbr>Offset</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getdraggablepanelposition" class="tsd-kind-icon">get<wbr>Draggable<wbr>Panel<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getedgecoordinatedestination" class="tsd-kind-icon">get<wbr>Edge<wbr>Coordinate<wbr>Destination</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getedgecoordinatepair" class="tsd-kind-icon">get<wbr>Edge<wbr>Coordinate<wbr>Pair</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getedgecoordinatesource" class="tsd-kind-icon">get<wbr>Edge<wbr>Coordinate<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getedgestyle" class="tsd-kind-icon">get<wbr>Edge<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getinflectionpoint" class="tsd-kind-icon">get<wbr>Inflection<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getinitialstate" class="tsd-kind-icon">get<wbr>Initial<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getleftrightbezierpath" class="tsd-kind-icon">get<wbr>Left<wbr>Right<wbr>Bezier<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getleftrightconnectorcoordinatesdestination" class="tsd-kind-icon">get<wbr>Left<wbr>Right<wbr>Connector<wbr>Coordinates<wbr>Destination</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getleftrightconnectorcoordinatessource" class="tsd-kind-icon">get<wbr>Left<wbr>Right<wbr>Connector<wbr>Coordinates<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getmidpoint" class="tsd-kind-icon">get<wbr>Midpoint</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getmockstore" class="tsd-kind-icon">get<wbr>Mock<wbr>Store</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getnewdragposition" class="tsd-kind-icon">get<wbr>New<wbr>Drag<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getnewzoomlevel" class="tsd-kind-icon">get<wbr>New<wbr>Zoom<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getnewzoomposition" class="tsd-kind-icon">get<wbr>New<wbr>Zoom<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getpanelattributeasboolean" class="tsd-kind-icon">get<wbr>Panel<wbr>Attribute<wbr>AsBoolean</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getpanelelement" class="tsd-kind-icon">get<wbr>Panel<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getposition" class="tsd-kind-icon">get<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getquadraticbezierpath" class="tsd-kind-icon">get<wbr>Quadratic<wbr>Bezier<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getquartercirclepathdata" class="tsd-kind-icon">get<wbr>Quarter<wbr>Circle<wbr>Path<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getrequiredattribute" class="tsd-kind-icon">get<wbr>Required<wbr>Attribute</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getrootreducer" class="tsd-kind-icon">get<wbr>Root<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getscrollposition" class="tsd-kind-icon">get<wbr>Scroll<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getsizefromdataattrs" class="tsd-kind-icon">get<wbr>Size<wbr>From<wbr>Data<wbr>Attrs</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getstraightpath" class="tsd-kind-icon">get<wbr>Straight<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#gettopbottombezierpath" class="tsd-kind-icon">get<wbr>Top<wbr>Bottom<wbr>Bezier<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#gettopbottomconnectorcoordinatesdestination" class="tsd-kind-icon">get<wbr>Top<wbr>Bottom<wbr>Connector<wbr>Coordinates<wbr>Destination</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#gettopbottomconnectorcoordinatessource" class="tsd-kind-icon">get<wbr>Top<wbr>Bottom<wbr>Connector<wbr>Coordinates<wbr>Source</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getundomiddleware" class="tsd-kind-icon">get<wbr>Undo<wbr>Middleware</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handledeleteselecteditems" class="tsd-kind-icon">handle<wbr>Delete<wbr>Selected<wbr>Items</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleedgeclick" class="tsd-kind-icon">handle<wbr>Edge<wbr>Click</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleedgecreate" class="tsd-kind-icon">handle<wbr>Edge<wbr>Create</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleedgedrag" class="tsd-kind-icon">handle<wbr>Edge<wbr>Drag</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleedgedragend" class="tsd-kind-icon">handle<wbr>Edge<wbr>Drag<wbr>End</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleedgedragstart" class="tsd-kind-icon">handle<wbr>Edge<wbr>Drag<wbr>Start</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlehidecontextmenu" class="tsd-kind-icon">handle<wbr>Hide<wbr>Context<wbr>Menu</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlehideselectionmarquee" class="tsd-kind-icon">handle<wbr>Hide<wbr>Selection<wbr>Marquee</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlenodeclick" class="tsd-kind-icon">handle<wbr>Node<wbr>Click</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlenodecreate" class="tsd-kind-icon">handle<wbr>Node<wbr>Create</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlenodedrag" class="tsd-kind-icon">handle<wbr>Node<wbr>Drag</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlenodedragend" class="tsd-kind-icon">handle<wbr>Node<wbr>Drag<wbr>End</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlenodedragstart" class="tsd-kind-icon">handle<wbr>Node<wbr>Drag<wbr>Start</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlepaneldrag" class="tsd-kind-icon">handle<wbr>Panel<wbr>Drag</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlepaneldragstart" class="tsd-kind-icon">handle<wbr>Panel<wbr>Drag<wbr>Start</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlepanelresize" class="tsd-kind-icon">handle<wbr>Panel<wbr>Resize</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlepotentialnodedrag" class="tsd-kind-icon">handle<wbr>Potential<wbr>Node<wbr>Drag</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlepotentialnodedragend" class="tsd-kind-icon">handle<wbr>Potential<wbr>Node<wbr>Drag<wbr>End</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handlepotentialnodedragstart" class="tsd-kind-icon">handle<wbr>Potential<wbr>Node<wbr>Drag<wbr>Start</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleselectall" class="tsd-kind-icon">handle<wbr>Select<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleshowcontextmenu" class="tsd-kind-icon">handle<wbr>Show<wbr>Context<wbr>Menu</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleshowselectionmarquee" class="tsd-kind-icon">handle<wbr>Show<wbr>Selection<wbr>Marquee</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleupdateselectionmarquee" class="tsd-kind-icon">handle<wbr>Update<wbr>Selection<wbr>Marquee</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleworkspaceclick" class="tsd-kind-icon">handle<wbr>Workspace<wbr>Click</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleworkspacedrag" class="tsd-kind-icon">handle<wbr>Workspace<wbr>Drag</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleworkspaceresize" class="tsd-kind-icon">handle<wbr>Workspace<wbr>Resize</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#handleworkspacezoom" class="tsd-kind-icon">handle<wbr>Workspace<wbr>Zoom</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#hierarchicallayout" class="tsd-kind-icon">hierarchical<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#initialize" class="tsd-kind-icon">initialize</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isbetween" class="tsd-kind-icon">is<wbr>Between</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isinsideboundingbox" class="tsd-kind-icon">is<wbr>Inside<wbr>Bounding<wbr>Box</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isleftturn" class="tsd-kind-icon">is<wbr>Left<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#ispanelwithinanchorbounds" class="tsd-kind-icon">is<wbr>Panel<wbr>Within<wbr>Anchor<wbr>Bounds</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#ispositioninrectangle" class="tsd-kind-icon">is<wbr>Position<wbr>InRectangle</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#layoutreducer" class="tsd-kind-icon">layout<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#mapstatetoprops" class="tsd-kind-icon">map<wbr>State<wbr>ToProps</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#meanofangles" class="tsd-kind-icon">mean<wbr>OfAngles</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#mockelementsfrompoint" class="tsd-kind-icon">mock<wbr>Elements<wbr>From<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#mockgetdropzonetarget" class="tsd-kind-icon">mock<wbr>Get<wbr>Drop<wbr>Zone<wbr>Target</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#mockgetelementsfrompoint" class="tsd-kind-icon">mock<wbr>Get<wbr>Elements<wbr>From<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#mockmselementsfrompoint" class="tsd-kind-icon">mock<wbr>MsElements<wbr>From<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#nodereducer" class="tsd-kind-icon">node<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#normalizeangle" class="tsd-kind-icon">normalize<wbr>Angle</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#panelreducer" class="tsd-kind-icon">panel<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#pluginreducer" class="tsd-kind-icon">plugin<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#potentialedgereducer" class="tsd-kind-icon">potential<wbr>Edge<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#potentialnodereducer" class="tsd-kind-icon">potential<wbr>Node<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#pushtowardsangle" class="tsd-kind-icon">push<wbr>Towards<wbr>Angle</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#readonlyeventfilter" class="tsd-kind-icon">read<wbr>Only<wbr>Event<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#render" class="tsd-kind-icon">render</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#resetzoomreducer" class="tsd-kind-icon">reset<wbr>Zoom<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#resizereducer" class="tsd-kind-icon">resize<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#rooteventfilter" class="tsd-kind-icon">root<wbr>Event<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#sequencereducers" class="tsd-kind-icon">sequence<wbr>Reducers</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#sortnodedirections" class="tsd-kind-icon">sort<wbr>Node<wbr>Directions</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#subtract" class="tsd-kind-icon">subtract</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#undohistoryreducer" class="tsd-kind-icon">undo<wbr>History<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#unmockdocument" class="tsd-kind-icon">unmock<wbr>Document</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#unmockelementsfrompoint" class="tsd-kind-icon">unmock<wbr>Elements<wbr>From<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#unmockgetdropzonetarget" class="tsd-kind-icon">unmock<wbr>Get<wbr>Drop<wbr>Zone<wbr>Target</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#unmockgetelementsfrompoint" class="tsd-kind-icon">unmock<wbr>Get<wbr>Elements<wbr>From<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#unmockmselementsfrompoint" class="tsd-kind-icon">unmock<wbr>MsElements<wbr>From<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#workflowlayout" class="tsd-kind-icon">workflow<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#workspacereducer" class="tsd-kind-icon">workspace<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#zoomreducer" class="tsd-kind-icon">zoom<wbr>Reducer</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#connector_placement_to_edge_type" class="tsd-kind-icon">CONNECTOR_<wbr>PLACEMENT_<wbr>TO_<wbr>EDGE_<wbr>TYPE</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#connectorplacement" class="tsd-kind-icon">Connector<wbr>Placement</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#diagrammakeractions" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#diagrammakercomponents" class="tsd-kind-icon">Diagram<wbr>Maker<wbr>Components</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#dragevent" class="tsd-kind-icon">Drag<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#dropevent" class="tsd-kind-icon">Drop<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#edgeactions" class="tsd-kind-icon">Edge<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#editoractions" class="tsd-kind-icon">Editor<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#editormode" class="tsd-kind-icon">Editor<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#event" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#globalactions" class="tsd-kind-icon">Global<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#graphmock" class="tsd-kind-icon">Graph<wbr>Mock</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#keyboardevent" class="tsd-kind-icon">Keyboard<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#layout" class="tsd-kind-icon">Layout</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#layoutactions" class="tsd-kind-icon">Layout<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#mouseclickevent" class="tsd-kind-icon">Mouse<wbr>Click<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#mousemoveevent" class="tsd-kind-icon">Mouse<wbr>Move<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#nodeactions" class="tsd-kind-icon">Node<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#panelactions" class="tsd-kind-icon">Panel<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#positionanchor" class="tsd-kind-icon">Position<wbr>Anchor</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#shape" class="tsd-kind-icon">Shape</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#showconnectors" class="tsd-kind-icon">Show<wbr>Connectors</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#visibleconnectortypes" class="tsd-kind-icon">Visible<wbr>Connector<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#workflow_direction_to_dagre_map" class="tsd-kind-icon">WORKFLOW_<wbr>DIRECTION_<wbr>TO_<wbr>DAGRE_<wbr>MAP</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#wheelevent" class="tsd-kind-icon">Wheel<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#windowevent" class="tsd-kind-icon">Window<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#workflowlayoutdirection" class="tsd-kind-icon">Workflow<wbr>Layout<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#workspaceactions" class="tsd-kind-icon">Workspace<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#zoomdefaults" class="tsd-kind-icon">Zoom<wbr>Defaults</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#contextoffset" class="tsd-kind-icon">context<wbr>Offset</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#graphlib" class="tsd-kind-icon">graphlib</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#mockpreact" class="tsd-kind-icon">mock<wbr>Preact</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#position" class="tsd-kind-icon">position</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#size" class="tsd-kind-icon">size</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
