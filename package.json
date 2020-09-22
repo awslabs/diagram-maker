@@ -2,10 +2,36 @@
   "name": "diagram-maker",
   "description": "A library to display an interactive editor for any graph-like data.",
   "version": "1.0.0",
+  "author": {
+    "name": "Amazon Web Services",
+    "url": "https://aws.amazon.com/"
+  },
+  "homepage": "https://awslabs.github.io/diagram-maker",
+  "contributors": [
+    "Sameer Goyal <sameeg@amazon.com>",
+    "Matthew Oakes <mattoa@amazon.com>"
+  ],
+  "engines": {
+    "node": ">=8"
+  },
   "main": "dist/diagramMaker.js",
   "types": "dist/diagramMaker.d.ts",
   "typings": "dist/diagramMaker.d.ts",
   "license": "Apache-2.0",
+  "keywords": [
+    "aws",
+    "visualizaton",
+    "diagram",
+    "interactive",
+    "canvas",
+    "editor",
+    "drag",
+    "drop",
+    "workflow",
+    "state-machine",
+    "flowchart",
+    "diagram-maker"
+  ],
   "devDependencies": {
     "@cypress/code-coverage": "^3.8.1",
     "@types/classnames": "2.2.x",
@@ -76,7 +102,8 @@
     "lint:integ:fix": "tslint --config tslint.json --project ./cypress/tsconfig.json -t stylish --fix",
     "test:integ": "npm run build:integ && tsc --noEmit -p ./cypress && cypress run --env coverage=true",
     "test:integ:dev": "tsc --noEmit -p ./cypress && cypress open --config baseUrl=http://localhost:31213 --env coverage=true",
-    "release:integ": "npm run build:integ && npm run lint:integ && tsc --noEmit -p ./cypress && npm run test:integ"
+    "release:integ": "npm run build:integ && npm run lint:integ && tsc --noEmit -p ./cypress && npm run test:integ",
+    "prepublishOnly": "npm run clean && npm run release"
   },
   "repository": {
     "type": "git",
