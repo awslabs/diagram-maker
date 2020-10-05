@@ -6,7 +6,7 @@ sort: 1
 
 Before jumping to the section containing instructions, lets just quickly take a look at the high level architecture. This will help us in understanding where different parts of the public API fit in and how they work. You may choose to skip this section if you want to jump right into the instructions on how to integrate Diagram Maker into your application.
 
-![Architecture](/assets/Architecture.png)
+![Architecture]({{ '/assets/Architecture.png' | relative_url }})
 
 These are the major components within Diagram Maker:
 
