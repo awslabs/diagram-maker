@@ -15,7 +15,7 @@ Diagram Maker is a framework & data format agnostic library that is fully custom
 ## Explore
 
 ### Interactive Demo
-Check out one of our interactive demos [here](https://awslabs.github.io/diagram-maker/examples/LeftRightRectangular.html) or see the full list of interactive demos [here](https://awslabs.github.io/diagram-maker/explore/demos.html).
+Check out one of our interactive demos [here](https://awslabs.github.io/diagram-maker/examples/LeftRightRectangular.html) or see the full list of interactive demos [here](https://awslabs.github.io/diagram-maker/explore/demos.html). The code for these demos can be found [here](https://github.com/awslabs/diagram-maker/tree/master/integ).
 
 ### Plugins
 Check out the plugins that can be used alongside the library for additional functionality [here](https://awslabs.github.io/diagram-maker/explore/plugins.html).
