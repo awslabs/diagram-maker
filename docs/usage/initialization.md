@@ -6,7 +6,7 @@ sort: 2
 
 ```javascript
 
-import DiagramMaker from 'diagram-maker';
+import { DiagramMaker } from 'diagram-maker';
 
 const diagramMaker = new DiagramMaker(
   container,
