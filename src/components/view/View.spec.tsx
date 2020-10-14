@@ -57,7 +57,7 @@ describe('View', () => {
     return new ConfigService(config);
   };
 
-  const generateNode = (nodeKey: string, x: number = 0, y: number = 0, type?: string): DiagramMakerNodes<void> => ({
+  const generateNode = (nodeKey: string, x = 0, y = 0, type?: string): DiagramMakerNodes<void> => ({
     [nodeKey]: {
       id: nodeKey,
       typeId: type,
@@ -86,7 +86,7 @@ describe('View', () => {
     targetType
   });
 
-  const generatePotentialEdge = (edgeSrc: string, x: number = 0, y: number = 0) => ({
+  const generatePotentialEdge = (edgeSrc: string, x = 0, y = 0) => ({
     position: { x, y },
     src: edgeSrc
   });
@@ -97,7 +97,7 @@ describe('View', () => {
     typeId: id
   });
 
-  const generatePanel = (panelKey: string, x: number = 0, y: number = 0) => ({
+  const generatePanel = (panelKey: string, x = 0, y = 0) => ({
     [panelKey]: {
       id: panelKey,
       position: {
