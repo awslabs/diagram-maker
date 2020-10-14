@@ -227,6 +227,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
             this.getNormalizedPositionOffsetInWorkspace(position, workspaceState)
           );
         }
+        break;
       case DiagramMakerComponentsType.PANEL_DRAG_HANDLE:
         handlePanelDragStart(this.store, id);
         break;
