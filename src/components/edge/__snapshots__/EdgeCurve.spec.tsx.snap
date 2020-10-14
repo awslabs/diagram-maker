@@ -9,7 +9,7 @@ preact-render-spy (1 nodes)
   y1={100}
   x2={100}
   y2={0}
-  markerEnd="url(#arrow)"
+  marker-end="url(#arrow)"
 >
 </line>
 
