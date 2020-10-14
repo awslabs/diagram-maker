@@ -11,9 +11,10 @@ export default function readOnlyEventFilter(event: NormalizedEvent): boolean {
     case ContainerEventType.DIAGRAM_MAKER_CONTAINER_UPDATE:
     case WheelEventType.MOUSE_WHEEL:
       return true;
-    case DragEventType.DRAG:
+    case DragEventType.DRAG: {
       const { target } = event as NormalizedDragEvent;
       return target.type === WORKSPACE;
+    }
     default: return false;
   }
 }

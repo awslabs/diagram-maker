@@ -26,23 +26,27 @@ const getPosition = (
   viewContainerSize: Size
 ): Position => {
   switch (positionAnchor) {
-    case PositionAnchorType.TOP_LEFT:
+    case PositionAnchorType.TOP_LEFT: {
       return { x, y };
-    case PositionAnchorType.TOP_RIGHT:
+    }
+    case PositionAnchorType.TOP_RIGHT: {
       const topRightX = viewContainerSize.width - panelSize.width - x;
       const topRightY = y;
 
       return { x: topRightX, y: topRightY };
-    case PositionAnchorType.BOTTOM_LEFT:
+    }
+    case PositionAnchorType.BOTTOM_LEFT: {
       const bottomLeftX = x;
       const bottomLeftY = viewContainerSize.height - panelSize.height - y;
 
       return { x: bottomLeftX, y: bottomLeftY };
-    case PositionAnchorType.BOTTOM_RIGHT:
+    }
+    case PositionAnchorType.BOTTOM_RIGHT: {
       const bottomRightX = viewContainerSize.width - panelSize.width - x;
       const bottomRightY = viewContainerSize.height - panelSize.height - y;
 
       return { x: bottomRightX, y: bottomRightY };
+    }
   }
 };
 

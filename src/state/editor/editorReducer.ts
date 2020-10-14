@@ -38,8 +38,8 @@ export default function editorReducer<NodeType, EdgeType>(
         };
       });
     case EditorActionsType.UPDATE_SELECTION_MARQUEE:
-      const anchor = state.selectionMarquee && state.selectionMarquee.anchor || action.payload.position;
       return produce(state, (draftState) => {
+        const anchor = state.selectionMarquee && state.selectionMarquee.anchor || action.payload.position;
         draftState.selectionMarquee = {
           anchor,
           position: action.payload.position
