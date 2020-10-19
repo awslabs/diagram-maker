@@ -1166,6 +1166,8 @@ preact-render-spy (1 nodes)
               "y": 250
             }
           }
+          srcTypeId="type-1"
+          destTypeId="type-2"
           edgeStyle={2}
           showArrowhead={false}
         >
@@ -1282,6 +1284,8 @@ preact-render-spy (1 nodes)
               "y": 50
             }
           }
+          srcTypeId="type-1"
+          destTypeId="type-1"
           edgeStyle={2}
           showArrowhead={false}
         >
@@ -1398,6 +1402,8 @@ preact-render-spy (1 nodes)
               "y": 250
             }
           }
+          srcTypeId="type-1"
+          destTypeId="type-2"
           edgeStyle={2}
           showArrowhead={false}
         >
@@ -1514,6 +1520,8 @@ preact-render-spy (1 nodes)
               "y": 250
             }
           }
+          srcTypeId="type-1"
+          destTypeId="type-2"
           edgeStyle={2}
           showArrowhead={false}
         >

@@ -46,4 +46,19 @@ describe('Edge', () => {
     expect(edge).toMatchSnapshot();
   });
 
+  it('renders source & dest types', () => {
+    const edge = shallow(
+      <Edge
+        id="myEdge"
+        edgeStyle={EdgeStyle.LEFT_RIGHT_BEZIER}
+        src={{ x:0, y:100 }}
+        dest={{ x:100, y:0 }}
+        srcTypeId="sourceType"
+        destTypeId="destinationType"
+      />
+    );
+
+    expect(edge).toMatchSnapshot();
+  });
+
 });
