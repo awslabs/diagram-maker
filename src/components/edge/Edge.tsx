@@ -13,6 +13,8 @@ export interface EdgeProps {
   src: Position;
   dest: Position;
   edgeStyle: EdgeStyle;
+  srcTypeId?: string;
+  destTypeId?: string;
   selected?: boolean;
   className?: string | string[];
   showArrowhead?: boolean;
@@ -37,6 +39,8 @@ export default class Edge extends Preact.Component<EdgeProps> {
         data-id={id}
         data-type={DiagramMakerComponentsType.EDGE}
         data-event-target={true}
+        data-edge-source-type={this.props.srcTypeId}
+        data-edge-dest-type={this.props.destTypeId}
       >
         {curvePathInner}
         {curvePathOuter}

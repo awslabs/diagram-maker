@@ -96,6 +96,55 @@ preact-render-spy (1 nodes)
 
 `;
 
+exports[`Edge renders source & dest types 1`] = `
+preact-render-spy (1 nodes)
+-------
+<g
+  class="dm-edge"
+  data-id="myEdge"
+  data-type="DiagramMaker.Edge"
+  data-event-target={true}
+  data-edge-source-type="sourceType"
+  data-edge-dest-type="destinationType"
+>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-inner"
+  >
+  </EdgeCurve>
+  <EdgeCurve
+    src={
+      Object {
+        "x": 0,
+        "y": 100
+      }
+    }
+    dest={
+      Object {
+        "x": 100,
+        "y": 0
+      }
+    }
+    edgeStyle={0}
+    class="dm-path-outer"
+  >
+  </EdgeCurve>
+</g>
+
+`;
+
 exports[`Edge renders the paths using props 1`] = `
 preact-render-spy (1 nodes)
 -------
