@@ -1,5 +1,6 @@
-import { DiagramMaker, EditorMode, Event, WorkspaceActions } from 'diagramMaker/index';
-import { LayoutType, WorkflowLayoutDirection } from 'diagramMaker/state/layout';
+import {
+  DiagramMaker, EditorMode, Event,  Layout, WorkflowLayoutDirection, WorkspaceActions
+} from 'diagramMaker/index';
 import { DiagramMakerNode, DiagramMakerPotentialNode, Size } from 'diagramMaker/state/types';
 import { Action, AnyAction } from 'redux';
 
@@ -285,7 +286,7 @@ function createWorkflowLayoutButton(getDiagramMakerObj: () => DiagramMaker) {
     getDiagramMakerObj().api.layout({
       direction: WorkflowLayoutDirection.LEFT_RIGHT,
       distanceMin: 200,
-      layoutType: LayoutType.WORKFLOW
+      layoutType: Layout.WORKFLOW
     });
   });
 }
@@ -295,7 +296,7 @@ function createHierarchicalLayoutButton(getDiagramMakerObj: () => DiagramMaker) 
     getDiagramMakerObj().api.layout({
       distanceMin: 200,
       fixedNodeIds: ['node1'],
-      layoutType: LayoutType.HIERARCHICAL
+      layoutType: Layout.HIERARCHICAL
     });
   });
 }
