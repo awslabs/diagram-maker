@@ -50,7 +50,7 @@
     "es6-shim": "0.35.x",
     "fork-ts-checker-webpack-plugin": "5.1.x",
     "html-webpack-plugin": "4.3.x",
-    "immer": "7.0.x",
+    "immer": "8.0.x",
     "istanbul-instrumenter-loader": "3.0.x",
     "istanbul-lib-coverage": "3.0.x",
     "jest": "26.4.x",
