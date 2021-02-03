@@ -24,6 +24,53 @@ The parameters required for the constructing an instance of Diagram Maker are as
   * **Consumer Enhancer**: This is a [redux](https://redux.js.org/) style [enhancer](https://redux.js.org/advanced/middleware) that is applied to our underlying store. This is useful for enabling debugging tools like Redux dev tools extension, or used by plugins. In most cases, there should be no need for a consumer to write an enhancer by hand.
   * **Event Listener**: This is a listener that is invoked on all events flowing through the UI events stream. This is useful when you want to use the library's inbuilt UI events module to detect, normalize and fire UI events for DOM that was not rendered by diagram maker. This can be used to listen to events and then dispatch actions on the store. Useful for plugins.
 
+## Initialization for React/Preact
+For integrating diagram maker into your React/Preact application, consider creating a wrapper component that instantiates and contains the diagram maker instance.
+
+```javascript
+import { Component } from 'react';
+import { DiagramMaker, DiagramMakerConfig, DiagramMakerData } from 'diagram-maker';
+
+interface MyNodeType {
+  // Based on use case or leave empty
+  ...
+}
+
+interface MyEdgeType {
+  // Based on use case or leave empty
+  ...
+}
+
+interface DiagramMakerContainerProps {
+  config: DiagramMakerConfig<MyNodeType, MyEdgeType>;
+  initialData: DiagramMakerData<MyNodeType, MyEdgeType>
+}
+
+export class DiagramMakerContainer extends Component<DiagramMakerContainerProps> {
+  private diagramMaker: DiagramMaker<MyNodeType, MyEdgeType>;
+  private container: HTMLElement;
+
+  componentDidMount() {
+    this.diagramMaker = new DiagramMaker(
+      this.container,
+      this.props.config,
+      // { initialData, eventListener, consumerRootReducer, consumerEnhancer }
+      {
+        initialData: this.props.initialData
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.diagramMaker.destroy();
+  }
+
+  render() {
+    return <div ref={(element) => this.container = element} />;
+  }
+}
+```
+
 ## Importing Styles
 
 All the above steps help you integrate Diagram Maker into your application, but it doesnt render properly without the styles. For importing the styles add this to your application's entry point.
