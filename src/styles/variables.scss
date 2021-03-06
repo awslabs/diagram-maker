@@ -1,0 +1,33 @@
+:root {
+  --border-shadow-15-perc: rgba(0, 28, 36, 0.15);
+  --border-shadow-30-perc: rgba(0, 28, 36, 0.3);
+  --border-color: #eaeded;
+  --container-background-color: white;
+  --container_disabled-background-color: lightgray;
+  --canvas-background-color: #f2f3f3;
+  --canvas-dots-color: #d5dbdb;
+  --connector-color: #16191f;
+  --input-background-color: inherit;
+  --input-border: 1px solid #767676;
+  --line-color: #879596;
+  --placeholder-text-color: inherit;
+  --text-color: black;
+}
+
+:root {
+  .dm-dark-theme {
+    --border-shadow-15-perc: rgba(234, 237, 237, 0.15);
+    --border-shadow-30-perc: rgba(234, 237, 237, 0.3);
+    --border-color: #b7baba;
+    --container-background-color: #414750;
+    --container_disabled-background-color: #1a2029;
+    --canvas-background-color: #687078;
+    --canvas-dots-color: #a6a7a7;
+    --connector-color: lightgray;
+    --input-background-color: #1a2029;
+    --input-border: 1px solid #879596;
+    --line-color: #edfbfc;
+    --placeholder-text-color: #687078;
+    --text-color: #d5dbdb;
+  }
+}
