@@ -7,7 +7,7 @@ html, body {
 }
 
 #diagramMakerContainer {
-  color: var(--text-color);
+  color: var(--diagram-maker-text-color);
   height: 100%;
   width: 100%;
   position: relative;
@@ -19,14 +19,14 @@ html, body {
   overflow: auto;
   .draggableElement {
     height: 20px;
-    background: var(--container_disabled-background-color);
+    background: var(--diagram-maker-container_disabled-background-color);
   }
 }
 
 .example-node {
   box-sizing: border-box;
-  border: 1px solid var(--border-color);
-  background-color: var(--container-background-color);
+  border: 1px solid var(--diagram-maker-border-color);
+  background-color: var(--diagram-maker-container-background-color);
   padding: 10px;
   height: 100%;
   transition: all .2s ease;
@@ -44,21 +44,21 @@ html, body {
   }
 
   & input, & select {
-    background-color: var(--input-background-color);
-    border: var(--input-border);
-    color: var(--text-color);
+    background-color: var(--diagram-maker-input-background-color);
+    border: var(--diagram-maker-input-border);
+    color: var(--diagram-maker-text-color);
   }
 }
 
 .testInput {
-  background-color: var(--input-background-color);
-  border: var(--input-border);
-  color: var(--text-color);
+  background-color: var(--diagram-maker-input-background-color);
+  border: var(--diagram-maker-input-border);
+  color: var(--diagram-maker-text-color);
   width: 100%;
 }
 
 .contextMenu {
   @include dm-container-shadow;
-  background-color: var(--container-background-color);
+  background-color: var(--diagram-maker-container-background-color);
   padding: 5px;
 }

@@ -3,7 +3,7 @@
 .dm-panel {
   @include dm-container-shadow;
   position: absolute;
-  background-color: var(--container-background-color);
+  background-color: var(--diagram-maker-container-background-color);
   overflow: hidden;
   .dm-content {
     padding: 20px;
