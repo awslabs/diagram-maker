@@ -16,14 +16,14 @@
   .dm-path {
     transition: opacity .25s ease, stroke .25s ease;
     &.dm-path-inner {
-      stroke: #879596;
+      stroke: var(--line-color);
       stroke-width: 2;
       pointer-events: none;
     }
 
     &.dm-path-outer {
       opacity: 0;
-      stroke: #879596;
+      stroke: var(--line-color);
       stroke-width: 6;
     }
   }

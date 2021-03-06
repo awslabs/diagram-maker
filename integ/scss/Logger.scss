@@ -2,11 +2,12 @@
 
 #diagramMakerLogger {
   @include dm-container-shadow;
+  color: var(--text-color);
   width: 50%;
   height: 100px;
   position: absolute;
   bottom: 0;
   left: 25%;
-  background-color: #ffffff;
+  background-color: var(--container-background-color);
   padding: 20px;
 }

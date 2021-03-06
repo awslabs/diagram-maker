@@ -78,3 +78,13 @@ All the above steps help you integrate Diagram Maker into your application, but 
 ```javascript
 import 'diagram-maker/dist/diagramMaker.css';
 ```
+
+## Dark Theme
+
+Diagram maker also provide a Dark Theme in case your app needs a Dark Mode UI. To enable it just add a class `dm-dark-theme` to the root container or `body` HTML element.
+
+```html
+<div id="diagramMakerContainer" class="dm-dark-theme">
+```
+
+An example of Dark Theme can be found in **[Dark Theme]({{ '/examples/DarkTheme.html' | relative_url }})** demo.

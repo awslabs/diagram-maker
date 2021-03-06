@@ -17,7 +17,7 @@ $dotSize: 14px;
 
   .dm-handle {
     box-sizing: border-box;
-    background: #16191f;
+    background: var(--connector-color);
     transition: background-color .4s ease, border .4s ease, transform .25s ease;
     width: $dotSize;
     height: $dotSize;
