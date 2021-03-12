@@ -75,7 +75,7 @@
     "tslint-config-airbnb": "5.9.x",
     "tslint-eslint-rules": "5.3.x",
     "tslint-react": "3.6.x",
-    "typedoc": "^0.19.0",
+    "typedoc": "^0.20.0",
     "typescript": "4.x",
     "uuid": "8.x",
     "webpack": "^4.44.1",
