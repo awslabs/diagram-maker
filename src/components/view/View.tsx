@@ -156,6 +156,63 @@ const getBoundaryCoordinatesForCircle = (
   };
 };
 
+const getBoundaryCoordinatesForRectangle = (
+  sourcePosition: Position,
+  sourceSize: Size,
+  destinationPosition: Position
+): Position => {
+  // If the two points are orthogonal, the boundary is half the width or height of the rectangle.
+  if (sourcePosition.x === destinationPosition.x) {
+    return {
+      x: sourcePosition.x,
+      y: sourceSize.height / 2
+    };
+  }
+  if (sourcePosition.y === destinationPosition.y) {
+    return {
+      x: sourceSize.width / 2,
+      y: sourcePosition.y
+    };
+  }
+
+  // Otherwise - locate the boundary intersection point by calculating two right angle triangles.
+  // The first, bigger one, is created between the source and destination points.
+  // The second, smaller one, is created between the destination center and boundary intersection,
+  // with the rectangle. Use Pitagorean theorem for the calculations.
+  const adjacentSideBig = Math.abs(sourcePosition.x - destinationPosition.x);
+  const oppositeSideBig = Math.abs(sourcePosition.y - destinationPosition.y);
+  const angleT = Math.atan(oppositeSideBig / adjacentSideBig);
+
+  // Now we calculate the smaller triangle, inside the rectangle.
+  let adjacentSide;
+  let oppositeSide;
+  const diagonalAngle = Math.atan((sourceSize.width / 2) / sourceSize.height / 2);
+  if (angleT > diagonalAngle) {
+    // Intersection is on the top or bottom side
+    oppositeSide = sourceSize.height / 2;
+    adjacentSide = Math.abs(oppositeSide / Math.tan(angleT));
+  } else {
+    // Intersection is on the left or right side
+    adjacentSide = sourceSize.width / 2;
+    oppositeSide = Math.abs(adjacentSide * Math.tan(angleT));
+  }
+  let distanceX = adjacentSide;
+  let distanceY = oppositeSide;
+
+  // Calculate directions
+  if (destinationPosition.x < sourcePosition.x) {
+    distanceX = distanceX * -1;
+  }
+  if (destinationPosition.y < sourcePosition.y) {
+    distanceY = distanceY * -1;
+  }
+
+  return {
+    x: sourcePosition.x + distanceX,
+    y: sourcePosition.y + distanceY
+  };
+};
+
 const getBoundaryCoordinates = (
   sourcePosition: Position,
   sourceShape: ShapeType | undefined,
@@ -165,6 +222,8 @@ const getBoundaryCoordinates = (
   switch (sourceShape) {
     case Shape.CIRCLE:
       return getBoundaryCoordinatesForCircle(sourcePosition, sourceSize, destPosition);
+    case Shape.RECTANGLE:
+      return getBoundaryCoordinatesForRectangle(sourcePosition, sourceSize, destPosition);
   }
   return sourcePosition;
 };
