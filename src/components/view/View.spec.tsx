@@ -243,6 +243,9 @@ describe('View', () => {
           nodeTypeConfig: {
             [type1]: {
               shape: Shape.CIRCLE
+            },
+            [type2]: {
+              shape: Shape.RECTANGLE
             }
           },
           options: { connectorPlacement: ConnectorPlacement.BOUNDARY }
@@ -273,6 +276,50 @@ describe('View', () => {
           const view = shallow(
             <View
               state={mockStateWithOverlappingCircles}
+              configService={configServiceWithShapeAndBoundary}
+            />
+          );
+          expect(view).toMatchSnapshot();
+        });
+
+        it('renders the edge on the top boundary of a rectangular node', () => {
+          const mockNodesWithVerticalRectangles = Object.assign(
+            {},
+            generateNode('node-1', 0, 0, type2),
+            generateNode('node-2', 50, 200, type2)
+          );
+          const mockStateWithVerticalRectangles = {
+            edges: mockEdges,
+            editor: { mode: EditorMode.DRAG },
+            nodes: mockNodesWithVerticalRectangles,
+            panels: {},
+            workspace: workspaceState
+          };
+          const view = shallow(
+            <View
+              state={mockStateWithVerticalRectangles}
+              configService={configServiceWithShapeAndBoundary}
+            />
+          );
+          expect(view).toMatchSnapshot();
+        });
+
+        it('renders the edge on the side boundary of a rectangular node', () => {
+          const mockNodesWithHorizontalRectangles = Object.assign(
+            {},
+            generateNode('node-1', 0, 0, type2),
+            generateNode('node-2', 200, 50, type2)
+          );
+          const mockStateWithHorizontalRectangles = {
+            edges: mockEdges,
+            editor: { mode: EditorMode.DRAG },
+            nodes: mockNodesWithHorizontalRectangles,
+            panels: {},
+            workspace: workspaceState
+          };
+          const view = shallow(
+            <View
+              state={mockStateWithHorizontalRectangles}
               configService={configServiceWithShapeAndBoundary}
             />
           );
