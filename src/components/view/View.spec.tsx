@@ -325,6 +325,38 @@ describe('View', () => {
           );
           expect(view).toMatchSnapshot();
         });
+
+        it('renders the edge on the side boundary of a rectangular node' +
+          ' when orthogonal vertically', () => {
+          const mockNodesWithOrthogonalRectangles = Object.assign(
+            {},
+            generateNode('node-1', 0,   0,   type2),
+            generateNode('node-2', 0,   200, type2),
+            generateNode('node-3', 0,   400, type2),
+            generateNode('node-4', 200, 200, type2),
+            generateNode('node-5', 200, 400, type2)
+          );
+          const mockOrthogonalEdges = Object.assign({},
+            generateEdge('edge-1', 'node-1', 'node-2'), //vertical top
+            generateEdge('edge-2', 'node-3', 'node-2'), //vertical bottom
+            generateEdge('edge-3', 'node-4', 'node-2'), //horizontal right
+            generateEdge('edge-4', 'node-3', 'node-5')  //horizontal left
+          );
+          const mockStateWithOrthogonalRectangles = {
+            edges: mockOrthogonalEdges,
+            editor: { mode: EditorMode.DRAG },
+            nodes: mockNodesWithOrthogonalRectangles,
+            panels: {},
+            workspace: workspaceState
+          };
+          const view = shallow(
+            <View
+              state={mockStateWithOrthogonalRectangles}
+              configService={configServiceWithShapeAndBoundary}
+            />
+          );
+          expect(view).toMatchSnapshot();
+        });
       });
 
     });

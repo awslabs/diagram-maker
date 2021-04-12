@@ -165,12 +165,16 @@ const getBoundaryCoordinatesForRectangle = (
   if (sourcePosition.x === destinationPosition.x) {
     return {
       x: sourcePosition.x,
-      y: sourceSize.height / 2
+      y: destinationPosition.y > sourcePosition.y ?
+        sourcePosition.y + sourceSize.height / 2 :
+        sourcePosition.y - sourceSize.height / 2
     };
   }
   if (sourcePosition.y === destinationPosition.y) {
     return {
-      x: sourceSize.width / 2,
+      x: destinationPosition.x > sourcePosition.x ?
+        sourcePosition.x + sourceSize.width / 2 :
+        sourcePosition.x - sourceSize.width / 2,
       y: sourcePosition.y
     };
   }
@@ -178,7 +182,7 @@ const getBoundaryCoordinatesForRectangle = (
   // Otherwise - locate the boundary intersection point by calculating two right angle triangles.
   // The first, bigger one, is created between the source and destination points.
   // The second, smaller one, is created between the destination center and boundary intersection,
-  // with the rectangle. Use Pitagorean theorem for the calculations.
+  // with the rectangle. Use Pythagorus theorem for the calculations.
   const adjacentSideBig = Math.abs(sourcePosition.x - destinationPosition.x);
   const oppositeSideBig = Math.abs(sourcePosition.y - destinationPosition.y);
   const angleT = Math.atan(oppositeSideBig / adjacentSideBig);
