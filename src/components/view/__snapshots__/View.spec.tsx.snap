@@ -1478,125 +1478,7 @@ preact-render-spy (1 nodes)
 
 `;
 
-exports[`View nodes with edge nodes with types with shape & boundary defined renders the edge on the side boundary of a rectangular node 1`] = `
-preact-render-spy (1 nodes)
--------
-<div
-  class="dm-view"
-  tabIndex={0}
-  data-type="DiagramMaker.View"
->
-  <Workspace
-    position={
-      Object {
-        "x": 0,
-        "y": 0
-      }
-    }
-    canvasSize={
-      Object {
-        "height": 10,
-        "width": 10
-      }
-    }
-    scale={1.2}
-  >
-    <div class="dm-elements">
-      <svg
-        class="dm-edges"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <Edge
-          id="edge-1"
-          src={
-            Object {
-              "x": 100,
-              "y": 62.5
-            }
-          }
-          dest={
-            Object {
-              "x": 200,
-              "y": 87.5
-            }
-          }
-          srcTypeId="type-2"
-          destTypeId="type-2"
-          edgeStyle={2}
-          showArrowhead={false}
-        >
-        </Edge>
-      </svg>
-      <Node
-        renderCallback={[Function bound mockConstructor]}
-        destroyCallback={[Function mockConstructor]}
-        connectorPlacement="Boundary"
-        diagramMakerNode={
-          Object {
-            "consumerData": undefined,
-            "diagramMakerData": Object {
-              "position": Object {
-                "x": 0,
-                "y": 0
-              },
-              "size": Object {
-                "height": 100,
-                "width": 100
-              }
-            },
-            "id": "node-1",
-            "typeId": "type-2"
-          }
-        }
-      >
-      </Node>
-      <Node
-        renderCallback={[Function bound mockConstructor]}
-        destroyCallback={[Function mockConstructor]}
-        connectorPlacement="Boundary"
-        diagramMakerNode={
-          Object {
-            "consumerData": undefined,
-            "diagramMakerData": Object {
-              "position": Object {
-                "x": 200,
-                "y": 50
-              },
-              "size": Object {
-                "height": 100,
-                "width": 100
-              }
-            },
-            "id": "node-2",
-            "typeId": "type-2"
-          }
-        }
-      >
-      </Node>
-      <svg
-        class="dm-potential-edge"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-      </svg>
-    </div>
-  </Workspace>
-  <div class="dm-panels"></div>
-  <div
-    class="dm-interim"
-    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
-  >
-  </div>
-  <div
-    class="dm-selection"
-    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
-  >
-  </div>
-  <div class="dm-menu"></div>
-</div>
-
-`;
-
-exports[`View nodes with edge nodes with types with shape & boundary defined renders the edge on the side boundary of a rectangular node when orthogonal vertically 1`] = `
+exports[`View nodes with edge nodes with types with shape & boundary defined renders the edge on the boundary of a rectangular node when orthogonal 1`] = `
 preact-render-spy (1 nodes)
 -------
 <div
@@ -1815,6 +1697,124 @@ preact-render-spy (1 nodes)
               }
             },
             "id": "node-5",
+            "typeId": "type-2"
+          }
+        }
+      >
+      </Node>
+      <svg
+        class="dm-potential-edge"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+      </svg>
+    </div>
+  </Workspace>
+  <div class="dm-panels"></div>
+  <div
+    class="dm-interim"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div
+    class="dm-selection"
+    style="transform: translate3d(0px, 0px, 0) scale(1.2);"
+  >
+  </div>
+  <div class="dm-menu"></div>
+</div>
+
+`;
+
+exports[`View nodes with edge nodes with types with shape & boundary defined renders the edge on the side boundary of a rectangular node 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div
+  class="dm-view"
+  tabIndex={0}
+  data-type="DiagramMaker.View"
+>
+  <Workspace
+    position={
+      Object {
+        "x": 0,
+        "y": 0
+      }
+    }
+    canvasSize={
+      Object {
+        "height": 10,
+        "width": 10
+      }
+    }
+    scale={1.2}
+  >
+    <div class="dm-elements">
+      <svg
+        class="dm-edges"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <Edge
+          id="edge-1"
+          src={
+            Object {
+              "x": 100,
+              "y": 62.5
+            }
+          }
+          dest={
+            Object {
+              "x": 200,
+              "y": 87.5
+            }
+          }
+          srcTypeId="type-2"
+          destTypeId="type-2"
+          edgeStyle={2}
+          showArrowhead={false}
+        >
+        </Edge>
+      </svg>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Boundary"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 0,
+                "y": 0
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-1",
+            "typeId": "type-2"
+          }
+        }
+      >
+      </Node>
+      <Node
+        renderCallback={[Function bound mockConstructor]}
+        destroyCallback={[Function mockConstructor]}
+        connectorPlacement="Boundary"
+        diagramMakerNode={
+          Object {
+            "consumerData": undefined,
+            "diagramMakerData": Object {
+              "position": Object {
+                "x": 200,
+                "y": 50
+              },
+              "size": Object {
+                "height": 100,
+                "width": 100
+              }
+            },
+            "id": "node-2",
             "typeId": "type-2"
           }
         }

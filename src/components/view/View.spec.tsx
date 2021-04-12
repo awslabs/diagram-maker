@@ -326,8 +326,7 @@ describe('View', () => {
           expect(view).toMatchSnapshot();
         });
 
-        it('renders the edge on the side boundary of a rectangular node' +
-          ' when orthogonal vertically', () => {
+        it('renders the edge on the boundary of a rectangular node when orthogonal', () => {
           const mockNodesWithOrthogonalRectangles = Object.assign(
             {},
             generateNode('node-1', 0,   0,   type2),
