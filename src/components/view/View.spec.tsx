@@ -335,11 +335,12 @@ describe('View', () => {
             generateNode('node-4', 200, 200, type2),
             generateNode('node-5', 200, 400, type2)
           );
-          const mockOrthogonalEdges = Object.assign({},
-            generateEdge('edge-1', 'node-1', 'node-2'), //vertical top
-            generateEdge('edge-2', 'node-3', 'node-2'), //vertical bottom
-            generateEdge('edge-3', 'node-4', 'node-2'), //horizontal right
-            generateEdge('edge-4', 'node-3', 'node-5')  //horizontal left
+          const mockOrthogonalEdges = Object.assign(
+            {},
+            generateEdge('edge-1', 'node-1', 'node-2'), // vertical top
+            generateEdge('edge-2', 'node-3', 'node-2'), // vertical bottom
+            generateEdge('edge-3', 'node-4', 'node-2'), // horizontal right
+            generateEdge('edge-4', 'node-3', 'node-5')  // horizontal left
           );
           const mockStateWithOrthogonalRectangles = {
             edges: mockOrthogonalEdges,
