@@ -243,6 +243,9 @@ describe('View', () => {
           nodeTypeConfig: {
             [type1]: {
               shape: Shape.CIRCLE
+            },
+            [type2]: {
+              shape: Shape.RECTANGLE
             }
           },
           options: { connectorPlacement: ConnectorPlacement.BOUNDARY }
@@ -273,6 +276,82 @@ describe('View', () => {
           const view = shallow(
             <View
               state={mockStateWithOverlappingCircles}
+              configService={configServiceWithShapeAndBoundary}
+            />
+          );
+          expect(view).toMatchSnapshot();
+        });
+
+        it('renders the edge on the top boundary of a rectangular node', () => {
+          const mockNodesWithVerticalRectangles = Object.assign(
+            {},
+            generateNode('node-1', 0, 0, type2),
+            generateNode('node-2', 50, 200, type2)
+          );
+          const mockStateWithVerticalRectangles = {
+            edges: mockEdges,
+            editor: { mode: EditorMode.DRAG },
+            nodes: mockNodesWithVerticalRectangles,
+            panels: {},
+            workspace: workspaceState
+          };
+          const view = shallow(
+            <View
+              state={mockStateWithVerticalRectangles}
+              configService={configServiceWithShapeAndBoundary}
+            />
+          );
+          expect(view).toMatchSnapshot();
+        });
+
+        it('renders the edge on the side boundary of a rectangular node', () => {
+          const mockNodesWithHorizontalRectangles = Object.assign(
+            {},
+            generateNode('node-1', 0, 0, type2),
+            generateNode('node-2', 200, 50, type2)
+          );
+          const mockStateWithHorizontalRectangles = {
+            edges: mockEdges,
+            editor: { mode: EditorMode.DRAG },
+            nodes: mockNodesWithHorizontalRectangles,
+            panels: {},
+            workspace: workspaceState
+          };
+          const view = shallow(
+            <View
+              state={mockStateWithHorizontalRectangles}
+              configService={configServiceWithShapeAndBoundary}
+            />
+          );
+          expect(view).toMatchSnapshot();
+        });
+
+        it('renders the edge on the boundary of a rectangular node when orthogonal', () => {
+          const mockNodesWithOrthogonalRectangles = Object.assign(
+            {},
+            generateNode('node-1', 0,   0,   type2),
+            generateNode('node-2', 0,   200, type2),
+            generateNode('node-3', 0,   400, type2),
+            generateNode('node-4', 200, 200, type2),
+            generateNode('node-5', 200, 400, type2)
+          );
+          const mockOrthogonalEdges = Object.assign(
+            {},
+            generateEdge('edge-1', 'node-1', 'node-2'), // vertical top
+            generateEdge('edge-2', 'node-3', 'node-2'), // vertical bottom
+            generateEdge('edge-3', 'node-4', 'node-2'), // horizontal right
+            generateEdge('edge-4', 'node-3', 'node-5')  // horizontal left
+          );
+          const mockStateWithOrthogonalRectangles = {
+            edges: mockOrthogonalEdges,
+            editor: { mode: EditorMode.DRAG },
+            nodes: mockNodesWithOrthogonalRectangles,
+            panels: {},
+            workspace: workspaceState
+          };
+          const view = shallow(
+            <View
+              state={mockStateWithOrthogonalRectangles}
               configService={configServiceWithShapeAndBoundary}
             />
           );

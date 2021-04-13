@@ -39,6 +39,28 @@ export function createRectangularNode(node: DiagramMakerNode<{ odd?: boolean }>,
   return newDiv;
 }
 
+export function createRectangularConnectorNode(node: DiagramMakerNode<{ odd?: boolean }>, container: HTMLElement) {
+  const id = node.id.substring(0, 13);
+  const newDiv = createDivWithText(id);
+  newDiv.classList.add('rectangle', 'example-node', 'connector-node');
+  if (node.diagramMakerData.selected) {
+    newDiv.classList.add('selected');
+  }
+  container.innerHTML = '';
+  const connectorDiv = document.createElement('div');
+  connectorDiv.classList.add('outer', 'outer-rectangle');
+  connectorDiv.setAttribute('data-id', node.id);
+  connectorDiv.setAttribute('data-type', 'DiagramMaker.Connector');
+  connectorDiv.setAttribute('data-draggable', 'true');
+  connectorDiv.setAttribute('data-event-target', 'true');
+  newDiv.setAttribute('data-id', node.id);
+  newDiv.setAttribute('data-type', 'DiagramMaker.Connector');
+  newDiv.setAttribute('data-dropzone', 'true');
+  container.appendChild(connectorDiv);
+  container.appendChild(newDiv);
+  return newDiv;
+}
+
 export function createNodeWithInput(node: DiagramMakerNode<any>, container: HTMLElement) {
   if (container.innerHTML !== '') {
     const childDiv = container.children[0];
