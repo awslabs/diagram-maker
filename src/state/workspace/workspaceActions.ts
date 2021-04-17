@@ -55,6 +55,10 @@ export interface ZoomWorkspaceAction extends Action {
      * The zoom origin. Usually the cursor position.
      */
     position: Position;
+    /*
+     * The original Mouse event data.
+     */
+    originalEvent: Object;
   };
 }
 

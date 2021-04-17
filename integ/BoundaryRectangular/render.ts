@@ -57,6 +57,9 @@ export function renderDiagramMaker() {
         }
       },
       actionInterceptor: (action: Action, next: Dispatch<Action>, getState: () => DiagramMakerData<{}, {}>) => {
+        // Temp log to show that mouse wheel events get the originalEvent data
+        console.log(action);
+        
         updateActionInLogger(action);
         next(action);
       },

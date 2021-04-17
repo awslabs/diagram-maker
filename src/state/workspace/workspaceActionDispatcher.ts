@@ -11,6 +11,7 @@ import {
   WorkspaceResetZoomAction,
   ZoomWorkspaceAction
  } from './workspaceActions';
+import { NormalizedMouseScrollEvent } from 'diagramMaker/service/ui/UIEventNormalizer';
 
 export function createDragWorkspaceAction(position: Position): DragWorkspaceAction {
   return {
@@ -19,10 +20,14 @@ export function createDragWorkspaceAction(position: Position): DragWorkspaceActi
   };
 }
 
-export function createZoomWorkspaceAction(zoom: number, position: Position): ZoomWorkspaceAction {
+export function createZoomWorkspaceAction(
+  zoom: number,
+  position: Position,
+  originalEvent: Object
+): ZoomWorkspaceAction {
   return {
     type: WorkspaceActionsType.WORKSPACE_ZOOM,
-    payload: { zoom, position }
+    payload: { zoom, position, originalEvent }
   };
 }
 
@@ -69,9 +74,10 @@ export function handleWorkspaceDrag<NodeType, EdgeType>(
 export function handleWorkspaceZoom<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   zoom: number,
-  position: Position
+  position: Position,
+  originalEvent: Object
 ) {
-  const action = createZoomWorkspaceAction(zoom, position);
+  const action = createZoomWorkspaceAction(zoom, position, originalEvent);
   store.dispatch(action);
 }
 

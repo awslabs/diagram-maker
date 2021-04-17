@@ -176,6 +176,7 @@ export default class DiagramMakerApi<NodeType = {}, EdgeType = {}> {
       x: viewContainerSize.width / 2,
       y: viewContainerSize.height / 2
     };
-    this.store.dispatch(createZoomWorkspaceAction(zoom, position));
+    const originalEvent = { origin: "api" };
+    this.store.dispatch(createZoomWorkspaceAction(zoom, position, originalEvent));
   }
 }

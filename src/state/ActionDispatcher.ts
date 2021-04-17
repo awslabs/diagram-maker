@@ -286,7 +286,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       originalEvent.preventDefault();
 
       if (!editorState.contextMenu) {
-        handleWorkspaceZoom(this.store, -delta, position);
+        handleWorkspaceZoom(this.store, -delta, position, event.originalEvent);
       }
     }
   }
