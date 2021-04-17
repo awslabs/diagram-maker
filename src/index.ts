@@ -1,5 +1,5 @@
 export { default as DiagramMaker } from './DiagramMaker';
-export { ConnectorPlacement, Shape, VisibleConnectorTypes } from './service/ConfigService';
+export { ConnectorPlacement, Shape, VisibleConnectorTypes, ViewMode } from './service/ConfigService';
 export { DiagramMakerComponents } from './service/ui/types';
 export { NormalizedEvent } from './service/ui/UIEventNormalizer';
 export { Event } from './service/ui/UIEventManager';

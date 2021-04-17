@@ -32,6 +32,26 @@ export const ConnectorPlacement = {
   ...ConnectorPlacementType
 };
 
+export enum ViewModeType {
+  /**
+   * Displays the workspace as an embedded component.
+   * There are no scroll bars around it.
+   * If the workspace overflows outside of the boundaries of the container, it is hidden.
+   * User can pan or zoom to navigate the workspace.
+   */
+  PAN = 'Pan',
+  /**
+   * The workspace can be bigger than its container area.
+   * Scroll bars are shown around it.
+   * Mouse wheel scrolls the canvas by default.
+   */
+  SCROLL = 'Scroll'
+}
+
+export const ViewMode = {
+  ...ViewModeType
+};
+
 export type BoundRenderCallback = (
   diagramMakerContainer: HTMLElement,
   consumerContainer?: HTMLElement | void
@@ -274,6 +294,11 @@ export interface DiagramMakerConfig<NodeType, EdgeType> {
      * Defaults to false.
      */
     showArrowhead?: boolean;
+    /**
+     * The view mode of the workspace - pan or scroll.
+     * Defautls to pan.
+     */
+    viewMode?: ViewModeType;
   };
   /**
    * Render Callbacks for rendering nodes, potential nodes, edges, panels,
@@ -369,6 +394,10 @@ export default class ConfigService<NodeType, EdgeType> {
 
   public getShowArrowhead = (): boolean => {
     return (this.config.options && this.config.options.showArrowhead) || false;
+  }
+
+  public getViewMode = (): ViewModeType => {
+    return (this.config.options && this.config.options.viewMode) || ViewMode.PAN;
   }
 
   public getActionInterceptor = (): ActionInterceptor<NodeType, EdgeType> | undefined => {

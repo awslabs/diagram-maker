@@ -309,6 +309,8 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
       scale: workspaceScale
     } = this.props.state.workspace;
 
+    const overflow = this.props.configService.getViewMode() ===  'Scroll' ? 'scroll' : 'hidden';
+
     /**
      * We need to put interim on top of the panels so that we can make the potential nodes appear on top of the panels.
      * This is because workspace has a stacking context of its own and we cannot make the node appear on top of the
@@ -319,7 +321,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     const transform = `translate3d(${workspacePosition.x}px, ${workspacePosition.y}px, 0) scale(${workspaceScale})`;
 
     return (
-      <div className="dm-view" tabIndex={0} data-type={DiagramMakerComponentsType.VIEW}>
+      <div className="dm-view" style={{ overflow }} tabIndex={0} data-type={DiagramMakerComponentsType.VIEW}>
         <Workspace
           position={workspacePosition}
           canvasSize={workspaceSize}

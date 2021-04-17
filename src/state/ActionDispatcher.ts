@@ -283,10 +283,22 @@ export default class ActionDispatcher<NodeType, EdgeType> {
     const editorState = this.store.getState().editor;
 
     if (UITargetNormalizer.getTarget(originalEvent, DATA_ATTR_TYPE, DiagramMakerComponentsType.WORKSPACE)) {
-      originalEvent.preventDefault();
+      // to determine platform for ctrl(win)/cmd(mac) modifier key handling
+      // https://github.com/ianstormtaylor/is-hotkey/blob/master/src/index.js
+      const IS_MAC = (
+        typeof window !== 'undefined' &&
+        /Mac|iPod|iPhone|iPad/.test(window.navigator.platform)
+      );
+      const { metaKey, ctrlKey } = event.originalEvent;
+      const modKey = IS_MAC ? metaKey : ctrlKey;
+      // If scroll mode, do not prevent the default action.
+      // User can still zoom in scroll mode, by holding the Ctrl/Cmd key while scrolling.
+      if (this.config.getViewMode() !== 'Scroll' || modKey) {
+        originalEvent.preventDefault();
 
-      if (!editorState.contextMenu) {
-        handleWorkspaceZoom(this.store, -delta, position);
+        if (!editorState.contextMenu) {
+          handleWorkspaceZoom(this.store, -delta, position);
+        }
       }
     }
   }

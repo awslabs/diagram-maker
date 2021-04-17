@@ -101,6 +101,11 @@ const zoomReducer = (draftState: Draft<DiagramMakerWorkspace>, action: ZoomWorks
     newScale
   );
 
+  // Here, I should be able to check the current config.getViewMode
+  // How do I get access to the current config from this reducer???
+  // in scroll mode, x and y should always remain at 0, 0
+  // We should update the scrollTop / scrollLeft of the container, though...
+
   const newPosition = clampPosition({ x, y }, workspaceSize, newScale, containerSize);
 
   currentWorkspace.scale = newScale;

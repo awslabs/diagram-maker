@@ -1,5 +1,5 @@
 import {
-  ConnectorPlacement, DiagramMaker, Shape, VisibleConnectorTypes
+  ConnectorPlacement, DiagramMaker, Shape, ViewMode, VisibleConnectorTypes
 } from 'diagramMaker/index';
 import {
   DiagramMakerData, DiagramMakerEdge, DiagramMakerNode, DiagramMakerPotentialNode
@@ -26,7 +26,8 @@ export function renderDiagramMaker() {
     {
       options: {
         connectorPlacement: ConnectorPlacement.BOUNDARY,
-        showArrowhead: true
+        showArrowhead: true,
+        viewMode: ViewMode.SCROLL
       },
       renderCallbacks: {
         destroy: () => undefined,
@@ -57,6 +58,7 @@ export function renderDiagramMaker() {
         }
       },
       actionInterceptor: (action: Action, next: Dispatch<Action>, getState: () => DiagramMakerData<{}, {}>) => {
+        console.log(getState());
         updateActionInLogger(action);
         next(action);
       },
