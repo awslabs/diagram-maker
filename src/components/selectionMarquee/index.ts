@@ -1,1 +1,1 @@
-export { default as SelectionMarquee } from './SelectionMarquee';
+export { default as SelectionMarquee, SelectionMarqueeProps } from './SelectionMarquee';
