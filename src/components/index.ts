@@ -1,4 +1,4 @@
-export { Canvas, CanvasProps } from './Canvas';
+export { Canvas, CanvasProps } from './canvas';
 export { default as ComposeView } from './common/ComposeView';
 export {
   default as Connector,
@@ -14,7 +14,7 @@ export { Panel, PanelProps } from './panel';
 export { SelectionMarquee, SelectionMarqueeProps } from './selectionMarquee';
 export { View, ViewProps } from './view/View';
 export { getConnectedView, ConnectedViewOwnProps } from './view/ConnectedView';
-export { Workspace, WorkspaceProps } from './Workspace';
+export { Workspace, WorkspaceProps } from './workspace';
 
 export * from './edge/EdgeCurve';
 export { default as Edge, EdgeProps } from './edge/Edge';
