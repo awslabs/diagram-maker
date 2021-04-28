@@ -3,7 +3,10 @@
   "collectCoverageFrom": ["src/**/*.{ts,tsx}"],
   "coveragePathIgnorePatterns": [
     "/testing/",
-    "/typings/"
+    "/typings/",
+    "/src/components/index.ts",
+    "/src/state/index.ts",
+    "/src/service/index.ts"
   ],
   "coverageDirectory": "<rootDir>/coverage",
   "coverageReporters": ["text-summary", "cobertura", "html", "json-summary"],

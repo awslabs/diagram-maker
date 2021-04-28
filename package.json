@@ -86,7 +86,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "clean": "rm -rf ./build && rm -rf ./coverage && rm -rf ./dist",
-    "documentation": "typedoc src/ --gitRemote upstream --gitRevision master",
+    "documentation": "typedoc --gitRemote upstream --gitRevision master",
     "start": "webpack-dev-server --config webpack.dev.js",
     "server": "npm run start",
     "server:remote": "REMOTE=true npm run start",
