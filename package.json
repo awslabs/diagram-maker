@@ -59,7 +59,7 @@
     "mini-css-extract-plugin": "0.11.x",
     "node-sass": "^4.14.1",
     "nyc": "15.x",
-    "optimize-css-assets-webpack-plugin": "5.0.x",
+    "optimize-css-assets-webpack-plugin": "^6.0.0",
     "postcss": "8.2.x",
     "postcss-loader": "3.0.x",
     "postcss-scss": "2.1.x",
