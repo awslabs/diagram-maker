@@ -1,5 +1,8 @@
 # Changelog for Diagram maker
 
+## 1.3.0
+* Feature: Added Boundary locator for Rectangular Shape (#39) 
+
 ## 1.2.0
 * chore(deps): Bump highlight.js from 10.1.2 to 10.4.1
 * chore(deps): Bump ini from 1.3.5 to 1.3.8
