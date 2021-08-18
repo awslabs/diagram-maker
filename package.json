@@ -81,7 +81,9 @@
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "5.1.x"
+    "webpack-merge": "5.1.x",
+    "glob-parent": ">=5.1.2",
+    "trim-newlines": ">=3.0.1"
   },
   "scripts": {
     "build": "webpack --config webpack.prod.js",
