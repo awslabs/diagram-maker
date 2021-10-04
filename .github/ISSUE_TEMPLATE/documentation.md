@@ -1,6 +1,6 @@
 ---
 name: Documentation
-about: 'Suggest incorrect/improvement in documentation '
+about: 'Suggest error/improvement in documentation '
 title: ''
 labels: documentation
 assignees: ''
