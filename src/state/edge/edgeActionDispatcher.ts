@@ -4,7 +4,14 @@ import { v4 as uuid } from 'uuid';
 import { DiagramMakerData, Position } from 'diagramMaker/state/types';
 
 import {
-  CreateEdgeAction, DragEdgeAction, DragEndEdgeAction, DragStartEdgeAction, EdgeActionsType, SelectEdgeAction
+  CreateEdgeAction,
+  DragEdgeAction,
+  DragEndEdgeAction,
+  DragStartEdgeAction,
+  EdgeActionsType,
+  MouseOutAction,
+  MouseOverAction,
+  SelectEdgeAction
 } from './edgeActions';
 
 function createDragStartEdgeAction(id: string, position: Position): DragStartEdgeAction {
@@ -37,6 +44,20 @@ function createNewEdgeAction<EdgeType>(id: string, src: string, dest: string): C
 function createSelectEdgeAction(id: string): SelectEdgeAction {
   return {
     type: EdgeActionsType.EDGE_SELECT,
+    payload: { id }
+  };
+}
+
+function createMouseOverEdgeAction(id: string): MouseOverAction {
+  return {
+    type: EdgeActionsType.EDGE_MOUSE_OVER,
+    payload: { id }
+  };
+}
+
+function createMouseOutEdgeAction(id: string): MouseOutAction {
+  return {
+    type: EdgeActionsType.EDGE_MOUSE_OUT,
     payload: { id }
   };
 }
@@ -89,5 +110,23 @@ export function handleEdgeClick<NodeType, EdgeType>(
 ) {
   if (id) {
     store.dispatch(createSelectEdgeAction(id));
+  }
+}
+
+export function handleEdgeMouseOver<NodeType, EdgeType>(
+  store: Store<DiagramMakerData<NodeType, EdgeType>>,
+  id: string | undefined
+) {
+  if (id) {
+    store.dispatch(createMouseOverEdgeAction(id));
+  }
+}
+
+export function handleEdgeMouseOut<NodeType, EdgeType>(
+  store: Store<DiagramMakerData<NodeType, EdgeType>>,
+  id: string | undefined
+) {
+  if (id) {
+    store.dispatch(createMouseOutEdgeAction(id));
   }
 }

@@ -19,6 +19,10 @@ const contextOffset = {
 const context = document.body;
 
 describe('UIEventNormalizer', () => {
+  beforeEach(() => {
+    jest.spyOn(UITargetNormalizer, 'normalizeTarget').mockRestore();
+  });
+
   describe('getRequiredAttribute', () => {
     it('returns data-event-target for RIGHT_CLICK', () => {
       expect(getRequiredAttribute(MouseClickEventType.RIGHT_CLICK)).toBe(EventAttribute.DATA_EVENT_TARGET);
@@ -30,6 +34,14 @@ describe('UIEventNormalizer', () => {
 
     it('returns data-event-target for MOUSE_UP', () => {
       expect(getRequiredAttribute(MouseClickEventType.MOUSE_UP)).toBe(EventAttribute.DATA_EVENT_TARGET);
+    });
+
+    it('returns data-event-target for MOUSE_OVER', () => {
+      expect(getRequiredAttribute(MouseMoveEventType.MOUSE_OVER)).toBe(EventAttribute.DATA_EVENT_TARGET);
+    });
+
+    it('returns data-event-target for MOUSE_OUT', () => {
+      expect(getRequiredAttribute(MouseMoveEventType.MOUSE_OUT)).toBe(EventAttribute.DATA_EVENT_TARGET);
     });
 
     it('returns data-event-target for MOUSE_DRAG', () => {
@@ -218,6 +230,114 @@ describe('UIEventNormalizer', () => {
 
         expect(normalizedEvent.button).toBe(button);
       });
+    });
+  });
+
+  describe('normalizeMouseOverEvent', () => {
+    let event: MouseEvent;
+    const type = MouseMoveEventType.MOUSE_OVER;
+
+    beforeEach(() => {
+      event = new MouseEvent(type);
+    });
+
+    it('only triggers if it can find a target with data-event-target', () => {
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseOutEvent(event);
+
+      expect(normalizedEvent).toBe(undefined);
+    });
+
+    it('normalizes the type', () => {
+      const target = document.createElement('div');
+
+      target.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      Object.defineProperty(event, 'target', { value: target, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseOverEvent(event);
+
+      expect(normalizedEvent.type).toBe(type);
+    });
+
+    it('attaches the original event', () => {
+      const target = document.createElement('div');
+
+      target.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      Object.defineProperty(event, 'target', { value: target, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseOverEvent(event);
+
+      expect(normalizedEvent.originalEvent).toBe(event);
+    });
+
+    it('normalizes the target', () => {
+      const originalTarget = document.createElement('div');
+      const id = '1234';
+      const normalizeTargetSpy = jest.spyOn(UITargetNormalizer, 'normalizeTarget');
+
+      originalTarget.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      originalTarget.setAttribute('data-id', id);
+      originalTarget.setAttribute('data-type', type);
+      Object.defineProperty(event, 'target', { value: originalTarget, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseOutEvent(event);
+
+      expect(normalizedEvent.target).toEqual({ id, originalTarget, type });
+      expect(normalizeTargetSpy).toHaveBeenCalledTimes(1);
+      expect(normalizeTargetSpy).toHaveBeenCalledWith(originalTarget);
+    });
+  });
+
+  describe('normalizeMouseOutEvent', () => {
+    let event: MouseEvent;
+    const type = MouseMoveEventType.MOUSE_OUT;
+
+    beforeEach(() => {
+      event = new MouseEvent(type);
+    });
+
+    it('only triggers if it can find a target with data-event-target', () => {
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseOutEvent(event);
+
+      expect(normalizedEvent).toBe(undefined);
+    });
+
+    it('normalizes the type', () => {
+      const target = document.createElement('div');
+
+      target.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      Object.defineProperty(event, 'target', { value: target, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseOutEvent(event);
+
+      expect(normalizedEvent.type).toBe(type);
+    });
+
+    it('attaches the original event', () => {
+      const target = document.createElement('div');
+
+      target.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      Object.defineProperty(event, 'target', { value: target, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseOutEvent(event);
+
+      expect(normalizedEvent.originalEvent).toBe(event);
+    });
+
+    it('normalizes the target', () => {
+      const originalTarget = document.createElement('div');
+      const id = '1234';
+      const normalizeTargetSpy = jest.spyOn(UITargetNormalizer, 'normalizeTarget');
+
+      originalTarget.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      originalTarget.setAttribute('data-id', id);
+      originalTarget.setAttribute('data-type', type);
+      Object.defineProperty(event, 'target', { value: originalTarget, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseOutEvent(event);
+
+      expect(normalizedEvent.target).toEqual({ id, originalTarget, type });
+      expect(normalizeTargetSpy).toHaveBeenCalledTimes(1);
+      expect(normalizeTargetSpy).toHaveBeenCalledWith(originalTarget);
     });
   });
 

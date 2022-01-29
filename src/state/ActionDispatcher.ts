@@ -24,13 +24,20 @@ import {
   NormalizedEvent,
   NormalizedKeyboardEvent,
   NormalizedMouseClickEvent,
+  NormalizedMouseHoverEvent,
   NormalizedMouseMoveEvent,
   NormalizedMouseScrollEvent,
   NormalizedWindowEvent
 } from 'diagramMaker/service/ui/UIEventNormalizer';
 import UITargetNormalizer from 'diagramMaker/service/ui/UITargetNormalizer';
 import {
-  handleEdgeClick, handleEdgeCreate, handleEdgeDrag, handleEdgeDragEnd, handleEdgeDragStart
+  handleEdgeClick,
+  handleEdgeCreate,
+  handleEdgeDrag,
+  handleEdgeDragEnd,
+  handleEdgeDragStart,
+  handleEdgeMouseOut,
+  handleEdgeMouseOver
 } from 'diagramMaker/state/edge/edgeActionDispatcher';
 import {
   handleHideContextMenu,
@@ -78,7 +85,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
 
   private subscribeToUIEvents() {
     const { LEFT_CLICK, RIGHT_CLICK, MOUSE_UP, MOUSE_DOWN } = MouseClickEventType;
-    const { MOUSE_MOVE } = MouseMoveEventType;
+    const { MOUSE_MOVE, MOUSE_OVER, MOUSE_OUT } = MouseMoveEventType;
     const { DRAG, DRAG_START, DRAG_END } = DragEventType;
     const { DROP, DRAG_ENTER, DRAG_LEAVE, DRAG_OVER } = DropEventType;
     const { MOUSE_WHEEL } = WheelEventType;
@@ -91,6 +98,8 @@ export default class ActionDispatcher<NodeType, EdgeType> {
     this.subscribeWithFilter(MOUSE_UP, this.handleMouseUp);
     this.subscribeWithFilter(MOUSE_DOWN, this.handleMouseDown);
     this.subscribeWithFilter(MOUSE_MOVE, this.handleMouseMove);
+    this.subscribeWithFilter(MOUSE_OVER, this.handleMouseOver);
+    this.subscribeWithFilter(MOUSE_OUT, this.handleMouseOut);
     this.subscribeWithFilter(DRAG, this.handleDrag);
     this.subscribeWithFilter(DRAG_START, this.handleDragStart);
     this.subscribeWithFilter(DRAG_ENTER, this.handleDragEnter);
@@ -139,6 +148,30 @@ export default class ActionDispatcher<NodeType, EdgeType> {
         break;
       case (DiagramMakerComponentsType.WORKSPACE):
         handleWorkspaceClick(this.store);
+        break;
+    }
+  }
+
+  private handleMouseOver = (event: NormalizedMouseHoverEvent): void => {
+    const { target } = event;
+    const { type, id } = target;
+
+    switch (type) {
+      case (DiagramMakerComponentsType.EDGE_BADGE):
+      case (DiagramMakerComponentsType.EDGE):
+        handleEdgeMouseOver(this.store, id);
+        break;
+    }
+  }
+
+  private handleMouseOut = (event: NormalizedMouseHoverEvent): void => {
+    const { target } = event;
+    const { type, id } = target;
+
+    switch (type) {
+      case (DiagramMakerComponentsType.EDGE_BADGE):
+      case (DiagramMakerComponentsType.EDGE):
+        handleEdgeMouseOut(this.store, id);
         break;
     }
   }

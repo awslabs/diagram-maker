@@ -14,7 +14,11 @@ export enum EdgeActionsType {
   /** Potential Edge drag */
   EDGE_DRAG_END = 'EDGE_DRAG_END',
   /** Potential Edge drag end */
-  EDGE_DRAG = 'EDGE_DRAG'
+  EDGE_DRAG = 'EDGE_DRAG',
+  /** Mouse enters edge */
+  EDGE_MOUSE_OVER = 'EDGE_MOUSE_OVER',
+  /** Mouse leaves edge */
+  EDGE_MOUSE_OUT = 'EDGE_MOUSE_OUT'
 }
 
 export const EdgeActions = {
@@ -79,5 +83,23 @@ export interface DragEdgeAction extends Action {
   };
 }
 
+/** Action fired when the mouse enters an edge */
+export interface MouseOverAction extends Action {
+  type: EdgeActionsType.EDGE_MOUSE_OVER;
+  payload: {
+    /** ID of the edge that is being hovered */
+    id: string;
+  };
+}
+
+/** Action fired when the mouse leaves an edge */
+export interface MouseOutAction extends Action {
+  type: EdgeActionsType.EDGE_MOUSE_OUT;
+  payload: {
+    /** ID of the edge that is being hovered */
+    id: string;
+  };
+}
+
 export type EdgeAction<EdgeType> = CreateEdgeAction<EdgeType> | SelectEdgeAction | DeleteEdgeAction |
-  DragStartEdgeAction | DragEndEdgeAction | DragEdgeAction ;
+  DragStartEdgeAction | DragEndEdgeAction | DragEdgeAction | MouseOverAction | MouseOutAction;

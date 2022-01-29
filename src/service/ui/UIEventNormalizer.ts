@@ -57,6 +57,12 @@ export interface NormalizedMouseScrollEvent {
   type: WheelEventType;
 }
 
+export interface NormalizedMouseHoverEvent {
+  originalEvent: MouseEvent;
+  target: NormalizedTarget;
+  type: MouseMoveEventType;
+}
+
 export interface NormalizedMouseClickEvent {
   originalEvent: MouseEvent;
   button: MouseButton;
@@ -106,13 +112,15 @@ export interface NormalizedKeyboardEvent {
 
 export type NormalizedEvent =
   NormalizedContainerEvent | NormalizedMouseMoveEvent | NormalizedDragEvent | NormalizedWindowEvent |
-  NormalizedMouseScrollEvent | NormalizedMouseClickEvent | NormalizedKeyboardEvent;
+  NormalizedMouseScrollEvent | NormalizedMouseClickEvent | NormalizedKeyboardEvent | NormalizedMouseHoverEvent;
 
 export function getRequiredAttribute(type: EventType): EventAttribute | undefined {
   switch (type) {
     case MouseClickEventType.RIGHT_CLICK: return EventAttribute.DATA_EVENT_TARGET;
     case MouseClickEventType.MOUSE_DOWN: return EventAttribute.DATA_EVENT_TARGET;
     case MouseClickEventType.MOUSE_UP: return EventAttribute.DATA_EVENT_TARGET;
+    case MouseMoveEventType.MOUSE_OVER: return EventAttribute.DATA_EVENT_TARGET;
+    case MouseMoveEventType.MOUSE_OUT: return EventAttribute.DATA_EVENT_TARGET;
     case DragEventType.DRAG: return EventAttribute.DATA_DRAGGABLE;
   }
 }
@@ -132,6 +140,16 @@ export default class UIEventNormalizer {
       position: fromPageToContainer(pagePosition, contextOffset),
       type: MouseMoveEventType.MOUSE_MOVE
     };
+  }
+
+  public static normalizeMouseOverEvent(event: MouseEvent): NormalizedMouseHoverEvent | undefined {
+
+    return UIEventNormalizer.normalizeMouseHoverEvent(event, MouseMoveEventType.MOUSE_OVER);
+  }
+
+  public static normalizeMouseOutEvent(event: MouseEvent): NormalizedMouseHoverEvent | undefined {
+
+    return UIEventNormalizer.normalizeMouseHoverEvent(event, MouseMoveEventType.MOUSE_OUT);
   }
 
   public static normalizeMouseClickEvent(
@@ -175,7 +193,7 @@ export default class UIEventNormalizer {
   public static normalizeRightClickEvent(
     event: MouseEvent,
     contextOffset: Position
-    ): NormalizedMouseClickEvent | undefined {
+  ): NormalizedMouseClickEvent | undefined {
 
     return UIEventNormalizer.normalizeMouseClickEvent(event, contextOffset, MouseClickEventType.RIGHT_CLICK);
   }
@@ -183,7 +201,7 @@ export default class UIEventNormalizer {
   public static normalizeMouseUpEvent(
     event: MouseEvent,
     contextOffset: Position
-    ): NormalizedMouseClickEvent | undefined {
+  ): NormalizedMouseClickEvent | undefined {
 
     return UIEventNormalizer.normalizeMouseClickEvent(event, contextOffset, MouseClickEventType.MOUSE_UP);
   }
@@ -191,7 +209,7 @@ export default class UIEventNormalizer {
   public static normalizeMouseDownEvent(
     event: MouseEvent,
     contextOffset: Position
-    ): NormalizedMouseClickEvent | undefined {
+  ): NormalizedMouseClickEvent | undefined {
 
     return UIEventNormalizer.normalizeMouseClickEvent(event, contextOffset, MouseClickEventType.MOUSE_DOWN);
   }
@@ -266,5 +284,26 @@ export default class UIEventNormalizer {
 
   public static normalizeKeyPressEvent(event: KeyboardEvent, contextOffset: Position): NormalizedKeyboardEvent | void {
     return UIEventNormalizer.normalizeKeyboardEvent(event, contextOffset, KeyboardEventType.KEY_PRESS);
+  }
+
+  private static normalizeMouseHoverEvent(
+    originalEvent: MouseEvent,
+    type: MouseMoveEventType
+  ): NormalizedMouseHoverEvent | undefined {
+
+    const requiredAttribute = getRequiredAttribute(type);
+    const targetElement = UITargetNormalizer.getTarget(originalEvent, requiredAttribute);
+
+    if (!targetElement) {
+      return;
+    }
+
+    const target = UITargetNormalizer.normalizeTarget(targetElement);
+
+    return {
+      originalEvent,
+      target,
+      type
+    };
   }
 }

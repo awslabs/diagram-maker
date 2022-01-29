@@ -7,7 +7,13 @@ import ConfigService from 'diagramMaker/service/ConfigService';
 import Observer from 'diagramMaker/service/observer/Observer';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import {
-  ContainerEventType, DragEventType, DropEventType, KeyboardEventType, MouseClickEventType, WheelEventType
+  ContainerEventType,
+  DragEventType,
+  DropEventType,
+  KeyboardEventType,
+  MouseClickEventType,
+  MouseMoveEventType,
+  WheelEventType
 } from 'diagramMaker/service/ui/UIEventManager';
 import { KeyboardCode } from 'diagramMaker/service/ui/UIEventNormalizer';
 import UITargetNormalizer from 'diagramMaker/service/ui/UITargetNormalizer';
@@ -38,6 +44,7 @@ const { DROP } = DropEventType;
 const { MOUSE_WHEEL } = WheelEventType;
 const { KEY_DOWN } = KeyboardEventType;
 const { DIAGRAM_MAKER_CONTAINER_UPDATE } = ContainerEventType;
+const { MOUSE_OUT, MOUSE_OVER } = MouseMoveEventType;
 
 const {
   NODE, EDGE, EDGE_BADGE, NODE_CONNECTOR, PANEL_DRAG_HANDLE, POTENTIAL_NODE, WORKSPACE
@@ -156,6 +163,38 @@ describe('ActionDispatcher', () => {
       observer.publish(LEFT_CLICK, { target });
       expect(handleWorkspaceClickSpy).toHaveBeenCalledTimes(1);
       expect(handleWorkspaceClickSpy).toHaveBeenCalledWith(store);
+    });
+  });
+
+  describe('handleMouseOver', () => {
+    [EDGE, EDGE_BADGE].forEach((type) => {
+      it(`calls handleMouseOver if type is DiagramMakerComponents.${type}`, () => {
+        initialize({ x: 200, y: 300 }, 2);
+
+        const handleEdgeMouseOverSpy = spyOn(EdgeActionHandlers, 'handleEdgeMouseOver');
+        const id = 1234;
+        const target = { id, type };
+
+        observer.publish(MOUSE_OVER, { target });
+        expect(handleEdgeMouseOverSpy).toHaveBeenCalledTimes(1);
+        expect(handleEdgeMouseOverSpy).toHaveBeenCalledWith(store, id);
+      });
+    });
+  });
+
+  describe('handleMouseOut', () => {
+    [EDGE, EDGE_BADGE].forEach((type) => {
+      it(`calls handleMouseOut if type is DiagramMakerComponents.${type}`, () => {
+        initialize({ x: 200, y: 300 }, 2);
+
+        const handleEdgeMouseOutSpy = spyOn(EdgeActionHandlers, 'handleEdgeMouseOut');
+        const id = 1234;
+        const target = { id, type };
+
+        observer.publish(MOUSE_OUT, { target });
+        expect(handleEdgeMouseOutSpy).toHaveBeenCalledTimes(1);
+        expect(handleEdgeMouseOutSpy).toHaveBeenCalledWith(store, id);
+      });
     });
   });
 
