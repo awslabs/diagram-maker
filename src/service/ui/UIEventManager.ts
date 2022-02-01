@@ -27,7 +27,9 @@ export enum MouseClickEventType {
 }
 
 export enum MouseMoveEventType {
-  MOUSE_MOVE = 'mousemove'
+  MOUSE_MOVE = 'mousemove',
+  MOUSE_OVER = 'mouseover',
+  MOUSE_OUT = 'mouseout'
 }
 
 export enum WheelEventType {
@@ -58,8 +60,8 @@ export enum KeyboardEventType {
 }
 
 export type EventType = ContainerEventType | DestroyEventType |
-            MouseMoveEventType | MouseClickEventType | WheelEventType |
-            WindowEventType | DragEventType | KeyboardEventType | DropEventType;
+  MouseMoveEventType | MouseClickEventType | WheelEventType |
+  WindowEventType | DragEventType | KeyboardEventType | DropEventType;
 
 export const MouseClickEvent = { ...MouseClickEventType };
 export const MouseMoveEvent = { ...MouseMoveEventType };
@@ -79,7 +81,7 @@ export const Event = {
   ...KeyboardEvent
 };
 
-export type EventListener  = (event: Event) => void;
+export type EventListener = (event: Event) => void;
 
 export interface EventListenerRef {
   eventType: EventType;
@@ -89,7 +91,7 @@ export interface EventListenerRef {
 
 const { MOUSE_DOWN, MOUSE_UP, LEFT_CLICK, RIGHT_CLICK } = MouseClickEventType;
 const { MOUSE_WHEEL } = WheelEventType;
-const { MOUSE_MOVE } = MouseMoveEventType;
+const { MOUSE_MOVE, MOUSE_OVER, MOUSE_OUT } = MouseMoveEventType;
 const { RESIZE } = WindowEventType;
 const { DRAG, DRAG_START, DRAG_END } = DragEventType;
 const { DROP, DRAG_OVER, DRAG_ENTER, DRAG_LEAVE } = DropEventType;
@@ -115,6 +117,8 @@ export default class UIEventManager {
     this.listenFor(MOUSE_UP, UIEventNormalizer.normalizeMouseUpEvent, window);
     this.listenFor(MOUSE_MOVE, UIEventNormalizer.normalizeMouseMoveEvent, window);
     this.listenFor(RIGHT_CLICK, UIEventNormalizer.normalizeRightClickEvent, window);
+    this.listenFor(MOUSE_OVER, UIEventNormalizer.normalizeMouseOverEvent, window);
+    this.listenFor(MOUSE_OUT, UIEventNormalizer.normalizeMouseOutEvent, window);
 
     // Wheel
     this.listenFor(MOUSE_WHEEL, UIEventNormalizer.normalizeWheelEvent);

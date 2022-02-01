@@ -5,7 +5,13 @@ import { v4 as uuid } from 'uuid';
 import { asMock } from 'diagramMaker/testing/testUtils';
 
 import {
-  handleEdgeClick, handleEdgeCreate, handleEdgeDrag, handleEdgeDragEnd, handleEdgeDragStart
+  handleEdgeClick,
+  handleEdgeCreate,
+  handleEdgeDrag,
+  handleEdgeDragEnd,
+  handleEdgeDragStart,
+  handleEdgeMouseOut,
+  handleEdgeMouseOver
 } from './edgeActionDispatcher';
 import { EdgeActionsType } from './edgeActions';
 
@@ -136,6 +142,40 @@ describe('edgeActionDispatcher', () => {
         payload: { id, src, dest },
         type: EdgeActionsType.EDGE_CREATE
       });
+    });
+  });
+
+  describe('handleEdgeMouseOver', () => {
+    it('dispatches an edge mouse over action', () => {
+      const edgeId = 'edge1';
+      handleEdgeMouseOver(store, edgeId);
+      expect(store.dispatch).toHaveBeenCalledWith({
+        payload: { id: edgeId },
+        type: EdgeActionsType.EDGE_MOUSE_OVER
+      });
+    });
+
+    it('dispatches nothing when id is absent', () => {
+      const edgeId = undefined;
+      handleEdgeMouseOver(store, edgeId);
+      expect(store.dispatch).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('handleEdgeMouseOut', () => {
+    it('dispatches an edge mouse out action', () => {
+      const edgeId = 'edge1';
+      handleEdgeMouseOut(store, edgeId);
+      expect(store.dispatch).toHaveBeenCalledWith({
+        payload: { id: edgeId },
+        type: EdgeActionsType.EDGE_MOUSE_OUT
+      });
+    });
+
+    it('dispatches nothing when id is absent', () => {
+      const edgeId = undefined;
+      handleEdgeMouseOut(store, edgeId);
+      expect(store.dispatch).not.toHaveBeenCalled();
     });
   });
 });
