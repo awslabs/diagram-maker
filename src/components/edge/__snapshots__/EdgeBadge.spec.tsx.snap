@@ -1,47 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EdgeBadge renders badge if passed 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-badge"
-  style="left: 0px; top: 0px; width: 100px; height: 100px;"
+  className="dm-badge"
+  style={
+    Object {
+      "height": 100,
+      "left": 0,
+      "top": 0,
+      "width": 100,
+    }
+  }
 >
   <div
+    className="dm-badge-inner"
+    data-event-target={true}
     data-id="testBadge"
     data-type="DiagramMaker.EdgeBadge"
-    data-event-target={true}
-    class="dm-badge-inner"
   >
     <ComposeView
-      renderCallback={[Function mockConstructor]}
-      destroyCallback={[Function mockConstructor]}
-    >
-    </ComposeView>
+      destroyCallback={[MockFunction]}
+      renderCallback={[MockFunction]}
+    />
   </div>
 </div>
-
 `;
 
 exports[`EdgeBadge renders badge when isPartOfEdgePair is true 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-badge"
-  style="left: -25px; top: -25px; width: 100px; height: 100px;"
+  className="dm-badge"
+  style={
+    Object {
+      "height": 100,
+      "left": -25,
+      "top": -25,
+      "width": 100,
+    }
+  }
 >
   <div
+    className="dm-badge-inner"
+    data-event-target={true}
     data-id="overlappingBadge"
     data-type="DiagramMaker.EdgeBadge"
-    data-event-target={true}
-    class="dm-badge-inner"
   >
     <ComposeView
-      renderCallback={[Function mockConstructor]}
-      destroyCallback={[Function mockConstructor]}
-    >
-    </ComposeView>
+      destroyCallback={[MockFunction]}
+      renderCallback={[MockFunction]}
+    />
   </div>
 </div>
-
 `;

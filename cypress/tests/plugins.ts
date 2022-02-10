@@ -1,7 +1,7 @@
 import {
-    getElementByType,
-    getWorkspace
-  } from '../common/getters';
+  getElementByType,
+  getWorkspace,
+} from '../common/getters';
 import { clickElement } from '../common/interaction';
 import { convertTranslate2dToMatrix } from '../common/utils';
 

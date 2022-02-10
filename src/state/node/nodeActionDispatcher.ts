@@ -6,15 +6,14 @@ import { getCenteredPosition } from 'diagramMaker/service/positionUtils';
 import { NormalizedTarget } from 'diagramMaker/service/ui/UITargetNormalizer';
 import {
   DiagramMakerData,
-  DiagramMakerPotentialNode,
   Position,
   Rectangle,
-  Size
+  Size,
 } from 'diagramMaker/state/types';
 
 import {
   CreateNodeAction, DragEndNodeAction, DragEndPotentialNodeAction, DragNodeAction, DragPotentialNodeAction,
-  DragStartNodeAction, DragStartPotentialNodeAction, NodeActionsType, SelectNodeAction
+  DragStartNodeAction, DragStartPotentialNodeAction, NodeActionsType, SelectNodeAction,
 } from './nodeActions';
 
 export const MARGIN_PX = 10;
@@ -22,21 +21,21 @@ export const MARGIN_PX = 10;
 function createSelectNodeAction(id: string): SelectNodeAction {
   return {
     type: NodeActionsType.NODE_SELECT,
-    payload: { id }
+    payload: { id },
   };
 }
 
 function createDragStartNodeAction(id: string): DragStartNodeAction {
   return {
     type: NodeActionsType.NODE_DRAG_START,
-    payload: { id }
+    payload: { id },
   };
 }
 
 function createDragEndNodeAction(id: string): DragEndNodeAction {
   return {
     type: NodeActionsType.NODE_DRAG_END,
-    payload: { id }
+    payload: { id },
   };
 }
 
@@ -44,42 +43,51 @@ function createDragNodeAction(
   id: string,
   position: Position,
   workspaceRectangle: Rectangle,
-  size: Size
+  size: Size,
 ): DragNodeAction {
   return {
     type: NodeActionsType.NODE_DRAG,
-    payload: { id, position, workspaceRectangle, size }
+    payload: {
+      id, position, workspaceRectangle, size,
+    },
   };
 }
 
 function createPotentialNodeDragStartAction(
-  typeId: string, position: Position, size: Size
+  typeId: string,
+  position: Position,
+  size: Size,
 ): DragStartPotentialNodeAction {
   return {
     type: NodeActionsType.POTENTIAL_NODE_DRAG_START,
-    payload: { typeId, position, size }
+    payload: { typeId, position, size },
   };
 }
 
 function createPotentialNodeDragAction(position: Position, workspaceRectangle: Rectangle): DragPotentialNodeAction {
   return {
     type: NodeActionsType.POTENTIAL_NODE_DRAG,
-    payload: { position, workspaceRectangle }
+    payload: { position, workspaceRectangle },
   };
 }
 
 function createPotentialNodeDragEndAction(): DragEndPotentialNodeAction {
   return {
-    type: NodeActionsType.POTENTIAL_NODE_DRAG_END
+    type: NodeActionsType.POTENTIAL_NODE_DRAG_END,
   };
 }
 
 function createNewNodeAction<NodeType>(
-  id: string, typeId: string, position: Position, size: Size
+  id: string,
+  typeId: string,
+  position: Position,
+  size: Size,
 ): CreateNodeAction<NodeType> {
   return {
     type: NodeActionsType.NODE_CREATE,
-    payload: { id, typeId, position, size }
+    payload: {
+      id, typeId, position, size,
+    },
   };
 }
 
@@ -89,16 +97,16 @@ function getSizeFromDataAttrs(target: NormalizedTarget): Size | undefined {
   if (width && height) {
     const parsedWidth = parseInt(width, 10);
     const parsedHeight = parseInt(height, 10);
-    if (!isNaN(parsedWidth) && !isNaN(parsedHeight)) {
+    if (!Number.isNaN(parsedWidth) && !Number.isNaN(parsedHeight)) {
       return { width: parsedWidth, height: parsedHeight };
     }
   }
-  return;
+  return undefined;
 }
 
 export function handleNodeClick<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
-  id: string | undefined
+  id: string | undefined,
 ) {
   if (id) {
     const action = createSelectNodeAction(id);
@@ -108,7 +116,7 @@ export function handleNodeClick<NodeType, EdgeType>(
 
 export function handleNodeDragStart<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
-  id: string | undefined
+  id: string | undefined,
 ) {
   if (id) {
     const action = createDragStartNodeAction(id);
@@ -119,17 +127,17 @@ export function handleNodeDragStart<NodeType, EdgeType>(
 export function handleNodeDrag<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   id: string | undefined,
-  position: Position
+  position: Position,
 ) {
   if (id) {
     const { canvasSize } = store.getState().workspace;
     const workspaceRectangle = {
       position: { x: 0, y: 0 },
-      size: canvasSize
+      size: canvasSize,
     };
     const node = store.getState().nodes[id];
     if (node) {
-      const size = node.diagramMakerData.size;
+      const { size } = node.diagramMakerData;
       const action = createDragNodeAction(id, position, workspaceRectangle, size);
       store.dispatch(action);
     }
@@ -138,12 +146,11 @@ export function handleNodeDrag<NodeType, EdgeType>(
 
 export function handleNodeDragEnd<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
-  id: string | undefined
+  id: string | undefined,
 ) {
   if (id) {
     const action = createDragEndNodeAction(id);
     store.dispatch(action);
-
   }
 }
 
@@ -151,7 +158,7 @@ export function handlePotentialNodeDragStart<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   config: ConfigService<NodeType, EdgeType>,
   target: NormalizedTarget,
-  position: Position
+  position: Position,
 ) {
   const typeId = target.id;
   if (typeId) {
@@ -165,24 +172,25 @@ export function handlePotentialNodeDragStart<NodeType, EdgeType>(
 
 export function handlePotentialNodeDrag<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
-  position: Position
+  position: Position,
 ) {
-
   const { canvasSize } = store.getState().workspace;
   const workspaceRectangle = {
     position: { x: 0, y: 0 },
-    size: canvasSize
+    size: canvasSize,
   };
-  const potentialNode = store.getState().potentialNode as DiagramMakerPotentialNode;
-  const size = potentialNode.size;
-  const action = createPotentialNodeDragAction(getCenteredPosition(position, size), workspaceRectangle);
+  const { potentialNode } = store.getState();
 
-  store.dispatch(action);
+  if (potentialNode) {
+    const { size } = potentialNode;
+    const action = createPotentialNodeDragAction(getCenteredPosition(position, size), workspaceRectangle);
+    store.dispatch(action);
+  }
 }
 
 export function handlePotentialNodeDragEnd<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
-  typeId: string | undefined
+  typeId: string | undefined,
 ) {
   if (typeId) {
     const action = createPotentialNodeDragEndAction();
@@ -192,12 +200,12 @@ export function handlePotentialNodeDragEnd<NodeType, EdgeType>(
 
 export function handleNodeCreate<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
-  typeId: string | undefined
+  typeId: string | undefined,
 ) {
   if (typeId) {
     const id = `dm-node-${uuid()}`;
     const state = store.getState();
-    const potentialNode = state.potentialNode;
+    const { potentialNode } = state;
     if (potentialNode) {
       const { position, size } = potentialNode;
       const action = createNewNodeAction(id, typeId, position, size);

@@ -1,5 +1,5 @@
 import * as Preact from 'preact';
-import { Provider } from 'preact-redux';
+import { Provider } from 'react-redux';
 import { Store } from 'redux';
 
 import { getConnectedView } from 'diagramMaker/components/view/ConnectedView';
@@ -10,17 +10,16 @@ export function render<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   container: HTMLElement,
   configService: ConfigService<NodeType, EdgeType>,
-  root?: Element
 ) {
-  const ConnectedView = getConnectedView<NodeType, EdgeType>();
+  const ConnectedView = getConnectedView();
   return Preact.render(
     <Provider store={store}>
       <ConnectedView configService={configService} />
     </Provider>,
-    container, root
+    container,
   );
 }
 
-export function destroy(container: HTMLElement, root: Element) {
-  return Preact.render(null, container, root);
+export function destroy(container: HTMLElement) {
+  return Preact.render(null, container);
 }

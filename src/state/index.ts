@@ -6,7 +6,7 @@ export { default as editorReducer } from './editor/editorReducer';
 export {
   createDeleteItemsAction,
   createNewItemsAction,
-  handleDeleteSelectedItems
+  handleDeleteSelectedItems,
 } from './global/globalActionDispatcher';
 
 export { default as hierarchicalLayout } from './layout/hierarchicalLayout';
@@ -14,14 +14,14 @@ export { createLayoutAction } from './layout/layoutActionDispatcher';
 
 export {
   adjustWorkspace,
-  default as layoutReducer
+  default as layoutReducer,
 } from './layout/layoutReducer';
 
 export { default as workflowLayout } from './layout/workflowLayout';
 
 export {
   ActionInterceptor,
-  createInterceptorMiddleware
+  createInterceptorMiddleware,
 } from './middleware/createInterceptorMiddleware';
 
 export { getUndoMiddleware } from './middleware/undoMiddleware';
@@ -35,7 +35,7 @@ export { default as pluginReducer } from './plugin/pluginReducer';
 
 export {
   default as workspaceReducer,
-  getDefaultWorkspaceState
+  getDefaultWorkspaceState,
 } from './workspace/workspaceReducer';
 
 export { default as createStore } from './createStore';

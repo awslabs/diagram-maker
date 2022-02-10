@@ -65,9 +65,9 @@ export enum DiagramMakerComponentsType {
    * Used on workspace rendered by diagram maker.
    * For internal use only.
    */
-  WORKSPACE = 'DiagramMaker.Workspace'
+  WORKSPACE = 'DiagramMaker.Workspace',
 }
 
 export const DiagramMakerComponents = {
-  ...DiagramMakerComponentsType
+  ...DiagramMakerComponentsType,
 };

@@ -1,4 +1,4 @@
-import { Draft, produce } from 'immer';
+import { produce } from 'immer';
 
 import { DiagramMakerAction } from 'diagramMaker/state/actions';
 import { DiagramMakerPotentialEdge } from 'diagramMaker/state/types';
@@ -6,7 +6,8 @@ import { DiagramMakerPotentialEdge } from 'diagramMaker/state/types';
 import { EdgeActionsType } from './edgeActions';
 
 export default function potentialEdgeReducer<NodeType, EdgeType>(
-  state: DiagramMakerPotentialEdge | null | undefined, action: DiagramMakerAction<NodeType, EdgeType>
+  state: DiagramMakerPotentialEdge | null | undefined,
+  action: DiagramMakerAction<NodeType, EdgeType>,
 ): DiagramMakerPotentialEdge | null {
   if (state === undefined) {
     return null;
@@ -15,7 +16,7 @@ export default function potentialEdgeReducer<NodeType, EdgeType>(
     case (EdgeActionsType.EDGE_DRAG_START):
       return {
         position: action.payload.position,
-        src: action.payload.id
+        src: action.payload.id,
       };
     case (EdgeActionsType.EDGE_DRAG):
       return produce(state, (draftState) => {

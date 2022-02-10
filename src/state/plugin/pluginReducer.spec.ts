@@ -3,17 +3,16 @@ import { DiagramMakerPlugins } from 'diagramMaker/state/types';
 import pluginReducer from './pluginReducer';
 
 describe('pluginReducer', () => {
-
-  const getState1 = (testScale = 1): DiagramMakerPlugins => ({
+  const getState1 = (): DiagramMakerPlugins => ({
 
   });
 
   const getState2 = (): DiagramMakerPlugins => ({
-    [`minimap`]: {
-      data:{
-        size: { width: 200, height: 240 }
-      }
-    }
+    minimap: {
+      data: {
+        size: { width: 200, height: 240 },
+      },
+    },
   });
 
   it('initializes plugins data when no plugins data exists', () => {
@@ -25,5 +24,4 @@ describe('pluginReducer', () => {
     const action: any = { type: 'randomAction' };
     expect(pluginReducer(getState2(), action)).toEqual(getState2());
   });
-
 });

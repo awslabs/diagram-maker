@@ -20,16 +20,14 @@ module.exports = merge(baseConfig, {
           /\.spec\.tsx?$/
         ],
         enforce: 'post',
-        loader: 'istanbul-instrumenter-loader',
+        loader: 'babel-loader',
         options: {
-          esModules: true
+          plugins: ["istanbul"]
         }
       }
     ]
   },
-  stats: {
-    // This is because of a limitation in ts-loader
-    // https://github.com/TypeStrong/ts-loader#transpileonly-boolean-defaultfalse
-    warningsFilter: /export .* was not found in/
-  }
+  // This is because of a limitation in ts-loader
+  // https://github.com/TypeStrong/ts-loader#transpileonly-boolean-defaultfalse
+  ignoreWarnings: [/export .* was not found in/]
 });

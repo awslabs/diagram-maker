@@ -9,19 +9,18 @@ import {
   handleHideSelectionMarquee,
   handleShowContextMenu,
   handleShowSelectionMarquee,
-  handleUpdateSelectionMarquee
+  handleUpdateSelectionMarquee,
 } from './editorActionDispatcher';
 import { EditorActionsType } from './editorActions';
 
 describe('editorActionDispatcher', () => {
-
   const store: any = {
     dispatch: jest.fn(),
-    getState: jest.fn()
+    getState: jest.fn(),
   };
 
   const mockConfig: any = {
-    getBoundRenderContextMenu: jest.fn()
+    getBoundRenderContextMenu: jest.fn(),
   };
 
   beforeEach(() => {
@@ -49,7 +48,7 @@ describe('editorActionDispatcher', () => {
       mockState({ editor: { contextMenu: {} } });
       handleHideContextMenu(store);
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: EditorActionsType.HIDE_CONTEXT_MENU
+        type: EditorActionsType.HIDE_CONTEXT_MENU,
       });
       expect(store.dispatch).toHaveBeenCalledTimes(1);
     });
@@ -81,7 +80,7 @@ describe('editorActionDispatcher', () => {
       handleShowContextMenu(store, mockConfig, event);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { position, targetId: id, targetType: type },
-        type: EditorActionsType.SHOW_CONTEXT_MENU
+        type: EditorActionsType.SHOW_CONTEXT_MENU,
       });
       expect(store.dispatch).toHaveBeenCalledTimes(1);
       expect(event.originalEvent.preventDefault).toHaveBeenCalledTimes(1);
@@ -94,7 +93,7 @@ describe('editorActionDispatcher', () => {
       handleShowSelectionMarquee(store, anchor);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { anchor },
-        type: EditorActionsType.SHOW_SELECTION_MARQUEE
+        type: EditorActionsType.SHOW_SELECTION_MARQUEE,
       });
     });
   });
@@ -115,9 +114,9 @@ describe('editorActionDispatcher', () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: {
           anchor,
-          position
+          position,
         },
-        type: EditorActionsType.UPDATE_SELECTION_MARQUEE
+        type: EditorActionsType.UPDATE_SELECTION_MARQUEE,
       });
     });
 
@@ -129,9 +128,9 @@ describe('editorActionDispatcher', () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: {
           anchor,
-          position
+          position,
         },
-        type: EditorActionsType.UPDATE_SELECTION_MARQUEE
+        type: EditorActionsType.UPDATE_SELECTION_MARQUEE,
       });
     });
   });
@@ -147,7 +146,7 @@ describe('editorActionDispatcher', () => {
       mockState({ editor: { selectionMarquee: {} } });
       handleHideSelectionMarquee(store);
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: EditorActionsType.HIDE_SELECTION_MARQUEE
+        type: EditorActionsType.HIDE_SELECTION_MARQUEE,
       });
     });
   });
@@ -161,9 +160,9 @@ describe('editorActionDispatcher', () => {
         payload: {
           id,
           position,
-          size
+          size,
         },
-        type: EditorActionsType.FOCUS_NODE
+        type: EditorActionsType.FOCUS_NODE,
       });
     });
 
@@ -179,9 +178,9 @@ describe('editorActionDispatcher', () => {
           leftPanelWidth,
           position,
           rightPanelWidth,
-          size
+          size,
         },
-        type: EditorActionsType.FOCUS_NODE
+        type: EditorActionsType.FOCUS_NODE,
       });
     });
   });
@@ -193,9 +192,9 @@ describe('editorActionDispatcher', () => {
       const nodeRects = [nodeRect1, nodeRect2];
       expect(createFitAction(nodeRects)).toEqual({
         payload: {
-          nodeRects
+          nodeRects,
         },
-        type: EditorActionsType.FIT
+        type: EditorActionsType.FIT,
       });
     });
 
@@ -209,9 +208,9 @@ describe('editorActionDispatcher', () => {
         payload: {
           leftPanelWidth,
           nodeRects,
-          rightPanelWidth
+          rightPanelWidth,
         },
-        type: EditorActionsType.FIT
+        type: EditorActionsType.FIT,
       });
     });
   });
@@ -221,9 +220,9 @@ describe('editorActionDispatcher', () => {
       const mode = EditorMode.READ_ONLY;
       expect(createSetEditorModeAction(mode)).toEqual({
         payload: {
-          mode
+          mode,
         },
-        type: EditorActionsType.SET_EDITOR_MODE
+        type: EditorActionsType.SET_EDITOR_MODE,
       });
     });
   });

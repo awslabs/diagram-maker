@@ -1,37 +1,41 @@
 import { Draft, produce } from 'immer';
 
-import { constrainRectangleWithinRectangle } from 'diagramMaker/service/positionUtils';
 import { DiagramMakerAction } from 'diagramMaker/state/actions';
 import { EdgeActionsType } from 'diagramMaker/state/edge';
 import { EditorActionsType } from 'diagramMaker/state/editor/editorActions';
 import { GlobalActionsType } from 'diagramMaker/state/global/globalActions';
-import { DiagramMakerNode, DiagramMakerNodes, Position, Size } from 'diagramMaker/state/types';
+import {
+  DiagramMakerNode, DiagramMakerNodes, Position, Size,
+} from 'diagramMaker/state/types';
 import { WorkspaceActionsType } from 'diagramMaker/state/workspace';
 
-import { MARGIN_PX } from './nodeActionDispatcher';
 import { NodeActionsType } from './nodeActions';
 
 function isInsideBoundingBox(
-  nodePosition: Position, nodeSize: Size, boundingBoxAnchor: Position, boundingBoxPosition: Position
+  nodePosition: Position,
+  nodeSize: Size,
+  boundingBoxAnchor: Position,
+  boundingBoxPosition: Position,
 ): boolean {
   const boundingBoxTopLeft: Position = {
     x: Math.min(boundingBoxAnchor.x, boundingBoxPosition.x),
-    y: Math.min(boundingBoxAnchor.y, boundingBoxPosition.y)
+    y: Math.min(boundingBoxAnchor.y, boundingBoxPosition.y),
   };
   const boundingBoxSize: Size = {
     width: Math.abs(boundingBoxAnchor.x - boundingBoxPosition.x),
-    height: Math.abs(boundingBoxAnchor.y - boundingBoxPosition.y)
+    height: Math.abs(boundingBoxAnchor.y - boundingBoxPosition.y),
   };
   return (
-    nodePosition.x + nodeSize.width >= boundingBoxTopLeft.x &&
-    nodePosition.x <= boundingBoxTopLeft.x + boundingBoxSize.width &&
-    nodePosition.y + nodeSize.height >= boundingBoxTopLeft.y &&
-    nodePosition.y <= boundingBoxTopLeft.y + boundingBoxSize.height
+    nodePosition.x + nodeSize.width >= boundingBoxTopLeft.x
+    && nodePosition.x <= boundingBoxTopLeft.x + boundingBoxSize.width
+    && nodePosition.y + nodeSize.height >= boundingBoxTopLeft.y
+    && nodePosition.y <= boundingBoxTopLeft.y + boundingBoxSize.height
   );
 }
 
 export default function nodeReducer<NodeType, EdgeType>(
-  state: DiagramMakerNodes<NodeType> | undefined, action: DiagramMakerAction<NodeType, EdgeType>
+  state: DiagramMakerNodes<NodeType> | undefined,
+  action: DiagramMakerAction<NodeType, EdgeType>,
 ): DiagramMakerNodes<NodeType> {
   if (state === undefined) {
     return {};
@@ -45,9 +49,13 @@ export default function nodeReducer<NodeType, EdgeType>(
       });
     case NodeActionsType.NODE_CREATE:
       return produce(state, (draftState) => {
-        const { id, position, size, typeId, consumerData: untypedConsumerData } = action.payload;
+        const {
+          id, position, size, typeId, consumerData: untypedConsumerData,
+        } = action.payload;
         const consumerData = untypedConsumerData as Draft<NodeType>;
-        draftState[id] = { id, typeId, consumerData, diagramMakerData: { position, size } };
+        draftState[id] = {
+          id, typeId, consumerData, diagramMakerData: { position, size },
+        };
       });
     case NodeActionsType.NODE_DELETE:
       return produce(state, (draftState) => {
@@ -76,31 +84,31 @@ export default function nodeReducer<NodeType, EdgeType>(
       return produce(state, (draftState) => {
         const currentNode = draftState[action.payload.id];
         if (currentNode) {
-          const { position, workspaceRectangle } = action.payload;
+          const { position } = action.payload;
           currentNode.diagramMakerData.position = position;
 
           // Shift all the nodes when node is dragged outside top boundary
           if (position.y < 0) {
-            const offset = { x: 0, y: - position.y };
+            const offset = { x: 0, y: -position.y };
             const nodeIds = Object.keys(draftState);
             nodeIds.forEach((nodeId) => {
               const oldPos = draftState[nodeId].diagramMakerData.position;
               const newPos = {
                 x: oldPos.x + offset.x,
-                y: oldPos.y + offset.y
+                y: oldPos.y + offset.y,
               };
               draftState[nodeId].diagramMakerData.position = newPos;
             });
           }
           // Shift all the nodes when node is dragged outside left boundary
           if (position.x < 0) {
-            const offset = { x: - position.x, y: 0 };
+            const offset = { x: -position.x, y: 0 };
             const nodeIds = Object.keys(draftState);
             nodeIds.forEach((nodeId) => {
               const oldPos = draftState[nodeId].diagramMakerData.position;
               const newPos = {
                 x: oldPos.x + offset.x,
-                y: oldPos.y + offset.y
+                y: oldPos.y + offset.y,
               };
               draftState[nodeId].diagramMakerData.position = newPos;
             });
@@ -119,8 +127,10 @@ export default function nodeReducer<NodeType, EdgeType>(
         const nodeIds = Object.keys(draftState);
         nodeIds.forEach((nodeId) => {
           if (isInsideBoundingBox(
-            draftState[nodeId].diagramMakerData.position, draftState[nodeId].diagramMakerData.size,
-            action.payload.anchor, action.payload.position
+            draftState[nodeId].diagramMakerData.position,
+            draftState[nodeId].diagramMakerData.size,
+            action.payload.anchor,
+            action.payload.position,
           )) {
             draftState[nodeId].diagramMakerData.selected = true;
           } else {

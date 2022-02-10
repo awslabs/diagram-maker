@@ -12,14 +12,14 @@ import {
   MouseClickEventType,
   MouseMoveEventType,
   WheelEventType,
-  WindowEventType
+  WindowEventType,
 } from './UIEventManager';
 
 // to determine platform for ctrl(win)/cmd(mac) modifier key handling
 // https://github.com/ianstormtaylor/is-hotkey/blob/master/src/index.js
 const IS_MAC = (
-  typeof window !== 'undefined' &&
-  /Mac|iPod|iPhone|iPad/.test(window.navigator.platform)
+  typeof window !== 'undefined'
+  && /Mac|iPod|iPhone|iPad/.test(window.navigator.platform)
 );
 
 export enum MouseButton {
@@ -27,21 +27,21 @@ export enum MouseButton {
   MIDDLE,
   RIGHT,
   BROWSER_BACK,
-  BROWSER_FORWARD
+  BROWSER_FORWARD,
 }
 
 export enum KeyboardCode {
   DELETE = 'Delete',
-  BACKSPACE = 'Backspace'
+  BACKSPACE = 'Backspace',
 }
 
 export enum KeyboardKey {
-  A = 'a'
+  A = 'a',
 }
 
 export enum EventAttribute {
   DATA_EVENT_TARGET = 'data-event-target',
-  DATA_DRAGGABLE = 'data-draggable'
+  DATA_DRAGGABLE = 'data-draggable',
 }
 
 export interface NormalizedMouseMoveEvent {
@@ -122,6 +122,7 @@ export function getRequiredAttribute(type: EventType): EventAttribute | undefine
     case MouseMoveEventType.MOUSE_OVER: return EventAttribute.DATA_EVENT_TARGET;
     case MouseMoveEventType.MOUSE_OUT: return EventAttribute.DATA_EVENT_TARGET;
     case DragEventType.DRAG: return EventAttribute.DATA_DRAGGABLE;
+    default: return undefined;
   }
 }
 
@@ -138,31 +139,28 @@ export default class UIEventNormalizer {
     return {
       originalEvent: event,
       position: fromPageToContainer(pagePosition, contextOffset),
-      type: MouseMoveEventType.MOUSE_MOVE
+      type: MouseMoveEventType.MOUSE_MOVE,
     };
   }
 
   public static normalizeMouseOverEvent(event: MouseEvent): NormalizedMouseHoverEvent | undefined {
-
     return UIEventNormalizer.normalizeMouseHoverEvent(event, MouseMoveEventType.MOUSE_OVER);
   }
 
   public static normalizeMouseOutEvent(event: MouseEvent): NormalizedMouseHoverEvent | undefined {
-
     return UIEventNormalizer.normalizeMouseHoverEvent(event, MouseMoveEventType.MOUSE_OUT);
   }
 
   public static normalizeMouseClickEvent(
     event: MouseEvent,
     contextOffset: Position,
-    type: MouseClickEventType
+    type: MouseClickEventType,
   ): NormalizedMouseClickEvent | undefined {
-
     const requiredAttribute = getRequiredAttribute(type);
     const targetElement = UITargetNormalizer.getTarget(event, requiredAttribute);
 
     if (!targetElement) {
-      return;
+      return undefined;
     }
 
     const { pageX, pageY, button } = event;
@@ -186,31 +184,28 @@ export default class UIEventNormalizer {
       originalEvent,
       position,
       target,
-      type
+      type,
     };
   }
 
   public static normalizeRightClickEvent(
     event: MouseEvent,
-    contextOffset: Position
+    contextOffset: Position,
   ): NormalizedMouseClickEvent | undefined {
-
     return UIEventNormalizer.normalizeMouseClickEvent(event, contextOffset, MouseClickEventType.RIGHT_CLICK);
   }
 
   public static normalizeMouseUpEvent(
     event: MouseEvent,
-    contextOffset: Position
+    contextOffset: Position,
   ): NormalizedMouseClickEvent | undefined {
-
     return UIEventNormalizer.normalizeMouseClickEvent(event, contextOffset, MouseClickEventType.MOUSE_UP);
   }
 
   public static normalizeMouseDownEvent(
     event: MouseEvent,
-    contextOffset: Position
+    contextOffset: Position,
   ): NormalizedMouseClickEvent | undefined {
-
     return UIEventNormalizer.normalizeMouseClickEvent(event, contextOffset, MouseClickEventType.MOUSE_DOWN);
   }
 
@@ -222,7 +217,7 @@ export default class UIEventNormalizer {
       delta: deltaY,
       originalEvent: event,
       position: fromPageToContainer(pagePosition, contextOffset),
-      type: WheelEventType.MOUSE_WHEEL
+      type: WheelEventType.MOUSE_WHEEL,
     };
   }
 
@@ -231,30 +226,33 @@ export default class UIEventNormalizer {
 
     return {
       contextRect,
-      type: ContainerEventType.DIAGRAM_MAKER_CONTAINER_UPDATE
+      type: ContainerEventType.DIAGRAM_MAKER_CONTAINER_UPDATE,
     };
   }
 
-  public static normalizeWindowEvent(event: Event, contextOffset: Position): NormalizedWindowEvent {
+  public static normalizeWindowEvent(event: Event, _contextOffset: Position): NormalizedWindowEvent {
     const { innerWidth, innerHeight } = window;
 
     return {
       originalEvent: event,
       size: { width: innerWidth, height: innerHeight },
-      type: WindowEventType.RESIZE
+      type: WindowEventType.RESIZE,
     };
   }
 
   public static normalizeKeyboardEvent(
     event: KeyboardEvent,
     contextOffset: Position,
-    type: KeyboardEventType
+    type: KeyboardEventType,
   ): NormalizedKeyboardEvent | void {
-    const { key, code, shiftKey, metaKey, ctrlKey, target } = event;
+    const {
+      key, code, shiftKey, metaKey, ctrlKey, target,
+    } = event;
     const originalEvent = event;
     const modKey = IS_MAC ? metaKey : ctrlKey;
 
-    if (UITargetNormalizer.checkAttributeValue(target as Element, 'data-type', DiagramMakerComponentsType.VIEW)) {
+    if (target
+      && UITargetNormalizer.checkAttributeValue(target as Element, 'data-type', DiagramMakerComponentsType.VIEW)) {
       if (key === KeyboardCode.BACKSPACE || (key === 'a' && modKey)) {
         // Prevent the browser from navigating back
         // Since the back is fired on diagram maker
@@ -269,9 +267,11 @@ export default class UIEventNormalizer {
         metaKey,
         modKey,
         originalEvent,
-        type
+        type,
       } as NormalizedKeyboardEvent;
     }
+
+    return undefined;
   }
 
   public static normalizeKeyUpEvent(event: KeyboardEvent, contextOffset: Position): NormalizedKeyboardEvent | void {
@@ -288,14 +288,13 @@ export default class UIEventNormalizer {
 
   private static normalizeMouseHoverEvent(
     originalEvent: MouseEvent,
-    type: MouseMoveEventType
+    type: MouseMoveEventType,
   ): NormalizedMouseHoverEvent | undefined {
-
     const requiredAttribute = getRequiredAttribute(type);
     const targetElement = UITargetNormalizer.getTarget(originalEvent, requiredAttribute);
 
     if (!targetElement) {
-      return;
+      return undefined;
     }
 
     const target = UITargetNormalizer.normalizeTarget(targetElement);
@@ -303,7 +302,7 @@ export default class UIEventNormalizer {
     return {
       originalEvent,
       target,
-      type
+      type,
     };
   }
 }

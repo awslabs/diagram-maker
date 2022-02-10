@@ -1,10 +1,10 @@
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { ContextMenu } from '.';
 
 describe('ContextMenu', () => {
-
   const destroyCallback = jest.fn();
   const renderCallback = jest.fn();
 
@@ -18,9 +18,9 @@ describe('ContextMenu', () => {
         position={{ x: 400, y: 600 }}
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
-    expect(contextMenu).toMatchSnapshot();
+    expect(toJson(contextMenu)).toMatchSnapshot();
   });
 });

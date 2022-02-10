@@ -1,13 +1,12 @@
 import {
-  getAllNodes, getDiagramMakerView, getEdgeById, getNodeById, getPanelById, getPotentialNodeById, getWorkspace
+  getAllNodes, getDiagramMakerView, getEdgeById, getNodeById, getPanelById, getPotentialNodeById,
 } from '../common/getters';
 import {
-  clickElement, dragAndDropElement, dragElement, dragStartElement, dropElement, triggerKeyboardEvent
+  clickElement, dragAndDropElement, dragElement, dragStartElement, dropElement, triggerKeyboardEvent,
 } from '../common/interaction';
 import { convertTranslate2dToMatrix } from '../common/utils';
 
 describe('DiagramMaker.Nodes', () => {
-
   const nodeRect = { width: 100, height: 50 };
 
   beforeEach(() => {
@@ -56,8 +55,8 @@ describe('DiagramMaker.Nodes', () => {
       const centerY = -100;
       const topLeftX = centerX - nodeRect.width / 2;
       const topLeftY = centerY - nodeRect.height / 2;
-      const offsetX = - topLeftX;
-      const offsetY = - topLeftY;
+      const offsetX = -topLeftX;
+      const offsetY = -topLeftY;
       const expectedX = topLeftX + offsetX;
       const expectedY = topLeftY + offsetY;
       const expectedTransform = convertTranslate2dToMatrix(expectedX, expectedY);
@@ -196,7 +195,7 @@ describe('DiagramMaker.Nodes', () => {
   describe('node with input', () => {
     const initialNodeIds: string[] = [];
     beforeEach(() => {
-      getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+      getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
       const inputNode = getPotentialNodeById('testId-input');
       dragAndDropElement(inputNode, { pageX: 300, pageY: 400 });
@@ -230,7 +229,7 @@ describe('DiagramMaker.Nodes', () => {
   describe('node with dropdown', () => {
     const initialNodeIds: string[] = [];
     beforeEach(() => {
-      getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+      getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
       const inputNode = getPotentialNodeById('testId-dropdown');
       dragAndDropElement(inputNode, { pageX: 300, pageY: 400 });

@@ -1,16 +1,14 @@
 import {
   getAllEdges, getAllNodes, getContextMenu, getDiagramMakerView, getEdgeById, getElementByType,
-  getNodeById, getPanelById, getPotentialNodeById, getWorkspace
+  getNodeById, getPanelById, getPotentialNodeById, getWorkspace,
 } from '../common/getters';
 import {
-  clickElement, createEdgeBetween, dragAndDropElement, dragStartElement, rightClickElement, triggerKeyboardEvent
+  clickElement, createEdgeBetween, dragAndDropElement, dragStartElement, rightClickElement, triggerKeyboardEvent,
 } from '../common/interaction';
 import { convertScaleToMatrix, convertTranslate2dToMatrix } from '../common/utils';
 
 describe('DiagramMaker.Configurations', () => {
-
   describe('nodeTypeConfiguration', () => {
-
     beforeEach(() => {
       cy.visit('/LeftRightRectangular.html');
     });
@@ -18,7 +16,7 @@ describe('DiagramMaker.Configurations', () => {
     describe('size', () => {
       it('picks size from the config', () => {
         const initialNodeIds: string[] = [];
-        getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+        getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
         const element = getPotentialNodeById('testId-normal');
         dragAndDropElement(element, { pageX: 200, pageY: 200 });
         getAllNodes().each(($el) => {
@@ -32,7 +30,7 @@ describe('DiagramMaker.Configurations', () => {
 
       it('picks size from data attrs if present', () => {
         const initialNodeIds: string[] = [];
-        getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+        getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
         const element = getPotentialNodeById('testId-normalWithSize');
         dragAndDropElement(element, { pageX: 200, pageY: 200 });
         getAllNodes().each(($el) => {
@@ -49,7 +47,7 @@ describe('DiagramMaker.Configurations', () => {
       describe('normal node', () => {
         const initialNodeIds: string[] = [];
         beforeEach(() => {
-          getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+          getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
           const element = getPotentialNodeById('testId-normal');
           dragAndDropElement(element, { pageX: 200, pageY: 200 });
@@ -81,7 +79,7 @@ describe('DiagramMaker.Configurations', () => {
       describe('end node', () => {
         const initialNodeIds: string[] = [];
         beforeEach(() => {
-          getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+          getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
           const element = getPotentialNodeById('testId-end');
           dragAndDropElement(element, { pageX: 200, pageY: 200 });
@@ -111,7 +109,7 @@ describe('DiagramMaker.Configurations', () => {
       describe('start node', () => {
         const initialNodeIds: string[] = [];
         beforeEach(() => {
-          getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+          getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
           // Grab an starting node and add it to the DOM
           const element = getPotentialNodeById('testId-start');
@@ -142,7 +140,7 @@ describe('DiagramMaker.Configurations', () => {
       describe('dead node', () => {
         const initialNodeIds: string[] = [];
         beforeEach(() => {
-          getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+          getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
           const element = getPotentialNodeById('testId-dead');
           dragAndDropElement(element, { pageX: 200, pageY: 200 });
@@ -172,7 +170,7 @@ describe('DiagramMaker.Configurations', () => {
       describe('top bottom', () => {
         const initialNodeIds: string[] = [];
         beforeEach(() => {
-          getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+          getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
           const element = getPotentialNodeById('testId-topBottom');
           dragAndDropElement(element, { pageX: 200, pageY: 50 });
@@ -206,7 +204,7 @@ describe('DiagramMaker.Configurations', () => {
       describe('centered', () => {
         const initialNodeIds: string[] = [];
         beforeEach(() => {
-          getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+          getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
           const element = getPotentialNodeById('testId-centered');
           dragAndDropElement(element, { pageX: 200, pageY: 200 });
@@ -226,7 +224,6 @@ describe('DiagramMaker.Configurations', () => {
   });
 
   describe('context menu', () => {
-
     beforeEach(() => {
       cy.visit('/LeftRightRectangular.html');
     });
@@ -270,7 +267,9 @@ describe('DiagramMaker.Configurations', () => {
         getContextMenu().should('have.length', 1);
         const expectedTransform = convertScaleToMatrix(1);
         getWorkspace()
-          .trigger('wheel', { deltaY: -50, pageX: 0, pageY: 0, force: true });
+          .trigger('wheel', {
+            deltaY: -50, pageX: 0, pageY: 0, force: true,
+          });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
     });
@@ -312,7 +311,9 @@ describe('DiagramMaker.Configurations', () => {
         getContextMenu().should('have.length', 1);
         const expectedTransform = convertScaleToMatrix(1);
         getWorkspace()
-          .trigger('wheel', { deltaY: -50, pageX: 0, pageY: 0, force: true });
+          .trigger('wheel', {
+            deltaY: -50, pageX: 0, pageY: 0, force: true,
+          });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
     });
@@ -354,7 +355,9 @@ describe('DiagramMaker.Configurations', () => {
         getContextMenu().should('have.length', 1);
         const expectedTransform = convertScaleToMatrix(1);
         getWorkspace()
-          .trigger('wheel', { deltaY: -50, pageX: 0, pageY: 0, force: true });
+          .trigger('wheel', {
+            deltaY: -50, pageX: 0, pageY: 0, force: true,
+          });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
     });
@@ -396,7 +399,9 @@ describe('DiagramMaker.Configurations', () => {
         getContextMenu().should('have.length', 1);
         const expectedTransform = convertScaleToMatrix(1);
         getWorkspace()
-          .trigger('wheel', { deltaY: -50, pageX: 0, pageY: 0, force: true });
+          .trigger('wheel', {
+            deltaY: -50, pageX: 0, pageY: 0, force: true,
+          });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
     });
@@ -433,7 +438,7 @@ describe('DiagramMaker.Configurations', () => {
     describe('modifies an action', () => {
       it('adds red color to nodes created when its an odd node', () => {
         const initialNodeIds: string[] = [];
-        getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+        getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
         const element = getPotentialNodeById('testId-normal');
         dragAndDropElement(element, { pageX: 200, pageY: 200 });
@@ -451,7 +456,7 @@ describe('DiagramMaker.Configurations', () => {
         dragAndDropElement(element, { pageX: 200, pageY: 200 });
 
         const initialNodeIds: string[] = [];
-        getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+        getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
         element = getPotentialNodeById('testId-normal');
         dragAndDropElement(element, { pageX: 300, pageY: 300 });
@@ -468,7 +473,7 @@ describe('DiagramMaker.Configurations', () => {
     describe('fires additional action asynchronously', () => {
       it('fires create edge action for the opposite edge 1s after the original edge is created', () => {
         const initialNodeIds: string[] = [];
-        getAllNodes().each($el => initialNodeIds.push($el.data('id')));
+        getAllNodes().each(($el) => initialNodeIds.push($el.data('id')));
 
         let element = getPotentialNodeById('testId-normal');
         dragAndDropElement(element, { pageX: 200, pageY: 200 });

@@ -1,15 +1,6 @@
-jest.mock('redux', () => ({
-  applyMiddleware: jest.fn(),
-  compose: jest.fn(),
-  createStore: jest.fn()
-}));
-
-jest.mock('diagramMaker/state/middleware', () => ({
-  createInterceptorMiddleware: jest.fn(),
-  getUndoMiddleware: jest.fn()
-}));
-
-import { applyMiddleware, compose, createStore as reduxCreateStore, Reducer } from 'redux';
+import {
+  applyMiddleware, compose, createStore as reduxCreateStore, Reducer,
+} from 'redux';
 
 import { getRootReducer } from 'diagramMaker/state/common/rootReducer';
 import { sequenceReducers } from 'diagramMaker/state/common/sequenceReducers';
@@ -22,8 +13,18 @@ import { DiagramMakerAction } from './actions';
 import createStore from './createStore';
 import { DiagramMakerData } from './types';
 
-describe('createStore', () => {
+jest.mock('redux', () => ({
+  applyMiddleware: jest.fn(),
+  compose: jest.fn(),
+  createStore: jest.fn(),
+}));
 
+jest.mock('diagramMaker/state/middleware', () => ({
+  createInterceptorMiddleware: jest.fn(),
+  getUndoMiddleware: jest.fn(),
+}));
+
+describe('createStore', () => {
   let initialData: DiagramMakerData<{}, {}>;
   let finalReducer: () => void;
   let consumerReducer: Reducer<DiagramMakerData<{}, {}>, DiagramMakerAction<{}, {}>>;
@@ -32,32 +33,34 @@ describe('createStore', () => {
   const panels = {};
   const edges = {};
   const editor = {
-    mode: EditorMode.DRAG
+    mode: EditorMode.DRAG,
+  };
+  const workspace: DiagramMakerWorkspace = {
+    position: {
+      x: 0,
+      y: 0,
+    },
+    scale: 1,
+    canvasSize: {
+      width: 10,
+      height: 10,
+    },
+    viewContainerSize: {
+      width: 5,
+      height: 5,
+    },
   };
 
   beforeEach(() => {
     jest.resetAllMocks();
-    initialData = { nodes, edges, panels, workspace, editor };
+    initialData = {
+      nodes, edges, panels, workspace, editor,
+    };
     finalReducer = jest.fn();
     consumerReducer = jest.fn();
     actionInterceptor = jest.fn();
   });
 
-  const workspace: DiagramMakerWorkspace = {
-    position: {
-      x: 0,
-      y: 0
-    },
-    scale: 1,
-    canvasSize: {
-      width: 10,
-      height: 10
-    },
-    viewContainerSize: {
-      width: 5,
-      height: 5
-    }
-  };
   it('calls redux create store with diagramMaker root reducer and layout reducer', () => {
     asMock(sequenceReducers).mockReturnValueOnce(finalReducer);
 
@@ -83,7 +86,7 @@ describe('createStore', () => {
   });
 
   it('calls createInterceptorMiddleware on actionInterceptor', () => {
-    const createInterceptorMiddlewareSpy = spyOn(middleware, 'createInterceptorMiddleware');
+    const createInterceptorMiddlewareSpy = jest.spyOn(middleware, 'createInterceptorMiddleware');
 
     createStore(initialData, consumerReducer, undefined, actionInterceptor);
 
@@ -103,7 +106,7 @@ describe('createStore', () => {
   });
 
   it('calls getUndoMiddleware', () => {
-    const getUndoMiddlewareSpy = spyOn(middleware, 'getUndoMiddleware');
+    const getUndoMiddlewareSpy = jest.spyOn(middleware, 'getUndoMiddleware');
 
     createStore(initialData, consumerReducer, undefined, actionInterceptor);
 

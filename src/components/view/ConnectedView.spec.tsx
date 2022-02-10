@@ -1,6 +1,7 @@
 import * as Preact from 'preact';
-import { Provider } from 'preact-redux';
-import { shallow } from 'preact-render-spy';
+import { Provider } from 'react-redux';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { getConnectedView } from 'diagramMaker/components/view/ConnectedView';
 import createStore from 'diagramMaker/state/createStore';
@@ -11,9 +12,9 @@ describe('ConnectedView', () => {
     const ConnectedView = getConnectedView();
     const component = (
       <Provider store={createStore()}>
-        <ConnectedView configService={configService}/>
+        <ConnectedView configService={configService} />
       </Provider>
     );
-    expect(shallow(component)).toMatchSnapshot();
+    expect(toJson(shallow(component))).toMatchSnapshot();
   });
 });

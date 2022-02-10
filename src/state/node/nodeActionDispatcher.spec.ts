@@ -1,42 +1,37 @@
-jest.mock('uuid', () => ({ v4: jest.fn() }));
-jest.mock('lodash', () => {
-  return {
-    clamp: jest.fn(() => 567)
-  };
-});
-
 import { v4 as uuid } from 'uuid';
 
 import { asMock } from 'diagramMaker/testing/testUtils';
 
 import {
   handleNodeClick, handleNodeCreate, handleNodeDrag, handleNodeDragEnd,
-  handleNodeDragStart, handlePotentialNodeDrag, handlePotentialNodeDragEnd, handlePotentialNodeDragStart
+  handleNodeDragStart, handlePotentialNodeDrag, handlePotentialNodeDragEnd, handlePotentialNodeDragStart,
 } from './nodeActionDispatcher';
 import { NodeActionsType } from './nodeActions';
 
-describe('nodeActionDispatcher', () => {
+jest.mock('uuid', () => ({ v4: jest.fn() }));
+jest.mock('lodash', () => ({
+  clamp: jest.fn(() => 567),
+}));
 
+describe('nodeActionDispatcher', () => {
   const canvasSize = { width: 100, height: 100 };
   const store: any = {
     dispatch: jest.fn(),
-    getState: jest.fn(() => {
-      return {
-        nodes: {
-          ['node1']: {
-            diagramMakerData: {
-              size: { width: 0, height: 0 }
-            }
-          }
+    getState: jest.fn(() => ({
+      nodes: {
+        node1: {
+          diagramMakerData: {
+            size: { width: 0, height: 0 },
+          },
         },
-        potentialNode: {
-          size: { width: 10, height: 10 }
-        },
-        workspace: {
-          canvasSize
-        }
-      };
-    })
+      },
+      potentialNode: {
+        size: { width: 10, height: 10 },
+      },
+      workspace: {
+        canvasSize,
+      },
+    })),
   };
 
   beforeEach(() => {
@@ -55,8 +50,10 @@ describe('nodeActionDispatcher', () => {
       asMock(store.getState).mockReturnValueOnce({ potentialNode });
       handleNodeCreate(store, typeId);
       expect(store.dispatch).toHaveBeenCalledWith({
-        payload: { id, typeId, position, size },
-        type: NodeActionsType.NODE_CREATE
+        payload: {
+          id, typeId, position, size,
+        },
+        type: NodeActionsType.NODE_CREATE,
       });
     });
 
@@ -80,7 +77,7 @@ describe('nodeActionDispatcher', () => {
       handleNodeClick(store, nodeId);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: nodeId },
-        type: NodeActionsType.NODE_SELECT
+        type: NodeActionsType.NODE_SELECT,
       });
     });
 
@@ -97,7 +94,7 @@ describe('nodeActionDispatcher', () => {
       handleNodeDragStart(store, nodeId);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: nodeId },
-        type: NodeActionsType.NODE_DRAG_START
+        type: NodeActionsType.NODE_DRAG_START,
       });
     });
 
@@ -114,7 +111,7 @@ describe('nodeActionDispatcher', () => {
       handleNodeDragEnd(store, nodeId);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: nodeId },
-        type: NodeActionsType.NODE_DRAG_END
+        type: NodeActionsType.NODE_DRAG_END,
       });
     });
 
@@ -134,16 +131,16 @@ describe('nodeActionDispatcher', () => {
         payload: {
           id: nodeId,
           position: nodePosition,
-          size:{
+          size: {
             height: 0,
-            width: 0
+            width: 0,
           },
           workspaceRectangle: {
             position: { x: 0, y: 0 },
-            size: canvasSize
-          }
+            size: canvasSize,
+          },
         },
-        type: NodeActionsType.NODE_DRAG
+        type: NodeActionsType.NODE_DRAG,
       });
     });
 
@@ -156,9 +153,8 @@ describe('nodeActionDispatcher', () => {
   });
 
   describe('handlePotentialNodeDragStart', () => {
-
     const config: any = {
-      getSizeForNodeType: jest.fn()
+      getSizeForNodeType: jest.fn(),
     };
 
     it('dispatches a potential node drag start action when id & size is present on data attrs', () => {
@@ -173,13 +169,14 @@ describe('nodeActionDispatcher', () => {
       asMock(getAttributeMock).mockImplementation((attr) => {
         if (attr === 'data-width') return width;
         if (attr === 'data-height') return height;
+        return undefined;
       });
 
       handlePotentialNodeDragStart(store, config, target, originalPosition);
       const typeId = id;
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { position, size, typeId },
-        type: NodeActionsType.POTENTIAL_NODE_DRAG_START
+        type: NodeActionsType.POTENTIAL_NODE_DRAG_START,
       });
     });
 
@@ -196,7 +193,7 @@ describe('nodeActionDispatcher', () => {
       const typeId = id;
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { position, size, typeId },
-        type: NodeActionsType.POTENTIAL_NODE_DRAG_START
+        type: NodeActionsType.POTENTIAL_NODE_DRAG_START,
       });
     });
 
@@ -223,7 +220,7 @@ describe('nodeActionDispatcher', () => {
       const typeId = 'nodeType1';
       handlePotentialNodeDragEnd(store, typeId);
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: NodeActionsType.POTENTIAL_NODE_DRAG_END
+        type: NodeActionsType.POTENTIAL_NODE_DRAG_END,
       });
     });
 
@@ -242,16 +239,19 @@ describe('nodeActionDispatcher', () => {
       asMock(store.getState).mockReturnValueOnce({
         potentialNode: { size },
         workspace: {
-          canvasSize
-        }
+          canvasSize,
+        },
       });
       handlePotentialNodeDrag(store, originalPosition);
       expect(store.dispatch).toHaveBeenCalledWith({
-        payload: { position, workspaceRectangle: {
-          position: { x: 0, y: 0 },
-          size: canvasSize
-        }},
-        type: NodeActionsType.POTENTIAL_NODE_DRAG
+        payload: {
+          position,
+          workspaceRectangle: {
+            position: { x: 0, y: 0 },
+            size: canvasSize,
+          },
+        },
+        type: NodeActionsType.POTENTIAL_NODE_DRAG,
       });
     });
   });

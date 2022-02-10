@@ -1,7 +1,9 @@
 import { Action } from 'redux';
 
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
-import { EditorModeType, Position, Rectangle, Size } from 'diagramMaker/state/types';
+import {
+  EditorModeType, Position, Rectangle, Size,
+} from 'diagramMaker/state/types';
 
 export enum EditorActionsType {
   /** Set the mode for the editor. */
@@ -19,11 +21,11 @@ export enum EditorActionsType {
   /** Focus the given node */
   FOCUS_NODE = 'FOCUS_NODE',
   /** Fits all nodes into view */
-  FIT = 'FIT'
+  FIT = 'FIT',
 }
 
 export const EditorActions = {
-  ...EditorActionsType
+  ...EditorActionsType,
 };
 
 /** Action fired to set the mode for the editor */

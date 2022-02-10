@@ -5,13 +5,13 @@ import {
   handleWorkspaceClick,
   handleWorkspaceDrag,
   handleWorkspaceResize,
-  handleWorkspaceZoom
+  handleWorkspaceZoom,
 } from './workspaceActionDispatcher';
 import { WorkspaceActionsType } from './workspaceActions';
 
 describe('workspaceActionDispatcher', () => {
   const store: any = {
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
   };
 
   beforeEach(() => {
@@ -28,7 +28,7 @@ describe('workspaceActionDispatcher', () => {
 
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { position },
-        type: WorkspaceActionsType.WORKSPACE_DRAG
+        type: WorkspaceActionsType.WORKSPACE_DRAG,
       });
     });
   });
@@ -38,14 +38,14 @@ describe('workspaceActionDispatcher', () => {
       const zoom = 2;
       const position = {
         x: 100,
-        y: 100
+        y: 100,
       };
 
       handleWorkspaceZoom(store, zoom, position);
 
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { zoom, position },
-        type: WorkspaceActionsType.WORKSPACE_ZOOM
+        type: WorkspaceActionsType.WORKSPACE_ZOOM,
       });
     });
   });
@@ -55,7 +55,7 @@ describe('workspaceActionDispatcher', () => {
       handleWorkspaceClick(store);
 
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: WorkspaceActionsType.WORKSPACE_DESELECT
+        type: WorkspaceActionsType.WORKSPACE_DESELECT,
       });
     });
   });
@@ -64,14 +64,14 @@ describe('workspaceActionDispatcher', () => {
     it('dispatches a workspace resize action', () => {
       const containerSize = {
         height: 800,
-        width: 1600
+        width: 1600,
       };
 
       handleWorkspaceResize(store, containerSize);
 
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { containerSize },
-        type: WorkspaceActionsType.WORKSPACE_RESIZE
+        type: WorkspaceActionsType.WORKSPACE_RESIZE,
       });
     });
   });
@@ -81,7 +81,7 @@ describe('workspaceActionDispatcher', () => {
       handleSelectAll(store);
 
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: WorkspaceActionsType.WORKSPACE_SELECT_ALL
+        type: WorkspaceActionsType.WORKSPACE_SELECT_ALL,
       });
     });
   });
@@ -92,9 +92,9 @@ describe('workspaceActionDispatcher', () => {
       const position = { x: 10, y: 10 };
       expect(createZoomWorkspaceAction(zoom, position)).toEqual({
         payload: {
-          position, zoom
+          position, zoom,
         },
-        type: WorkspaceActionsType.WORKSPACE_ZOOM
+        type: WorkspaceActionsType.WORKSPACE_ZOOM,
       });
     });
   });
@@ -102,7 +102,7 @@ describe('workspaceActionDispatcher', () => {
   describe('createWorkspaceResetZoomAction', () => {
     it('returns reset zoom workspace action', () => {
       expect(createWorkspaceResetZoomAction()).toEqual({
-        type: WorkspaceActionsType.WORKSPACE_RESET_ZOOM
+        type: WorkspaceActionsType.WORKSPACE_RESET_ZOOM,
       });
     });
   });

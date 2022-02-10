@@ -2,11 +2,11 @@ import * as Preact from 'preact';
 
 import { ComposeView } from 'diagramMaker/components/common';
 import {
-  Connector, ConnectorProps, ConnectorType
+  Connector, ConnectorProps, ConnectorType,
 } from 'diagramMaker/components/connector';
 import {
   BoundRenderCallback, ConnectorPlacement, ConnectorPlacementType, DestroyCallback,
-  TypeForVisibleConnectorTypes, VisibleConnectorTypes
+  TypeForVisibleConnectorTypes, VisibleConnectorTypes,
 } from 'diagramMaker/service/ConfigService';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import { DiagramMakerNode } from 'diagramMaker/state/types';
@@ -22,7 +22,6 @@ export interface NodeProps<NodeType> {
 }
 
 export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>, {}> {
-
   public render(): JSX.Element {
     const { diagramMakerData, id } = this.props.diagramMakerNode;
     const { x, y } = diagramMakerData.position;
@@ -36,8 +35,8 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
         style={{ width, height, transform }}
         data-id={id}
         data-type={DiagramMakerComponentsType.NODE}
-        data-event-target={true}
-        data-draggable={true}
+        data-event-target
+        data-draggable
       >
         <ComposeView
           renderCallback={renderCallback}
@@ -48,9 +47,9 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
     );
   }
 
-  public shouldComponentUpdate = (nextProps: NodeProps<NodeType>): boolean => {
-    return nextProps.diagramMakerNode !== this.props.diagramMakerNode;
-  }
+  public shouldComponentUpdate = (
+    nextProps: NodeProps<NodeType>,
+  ) => nextProps.diagramMakerNode !== this.props.diagramMakerNode;
 
   private getConnectors(): ConnectorProps[] {
     const { id, diagramMakerData } = this.props.diagramMakerNode;
@@ -64,12 +63,12 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
       case ConnectorPlacement.LEFT_RIGHT:
         return [
           { id, position: { x: 0, y: verticalCenter }, type: INPUT },
-          { id, position: { x: width, y: verticalCenter }, type: OUTPUT }
+          { id, position: { x: width, y: verticalCenter }, type: OUTPUT },
         ];
       case ConnectorPlacement.TOP_BOTTOM:
         return [
           { id, position: { x: horizontalCenter, y: 0 }, type: INPUT },
-          { id, position: { x: horizontalCenter, y: height }, type: OUTPUT }
+          { id, position: { x: horizontalCenter, y: height }, type: OUTPUT },
         ];
       default:
         return [];
@@ -86,19 +85,20 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
     const { INPUT, OUTPUT } = ConnectorType;
     switch (this.props.visibleConnectorTypes) {
       case VisibleConnectorTypes.INPUT_ONLY:
-        return connectorProps.filter(connectorProp => connectorProp.type === INPUT);
+        return connectorProps.filter((connectorProp) => connectorProp.type === INPUT);
       case VisibleConnectorTypes.OUTPUT_ONLY:
-        return connectorProps.filter(connectorProp => connectorProp.type === OUTPUT);
+        return connectorProps.filter((connectorProp) => connectorProp.type === OUTPUT);
       case VisibleConnectorTypes.NONE:
         return [];
+      default:
+        return connectorProps;
     }
-    return connectorProps;
   }
 
   private renderConnectors(): JSX.Element[] {
-    return this.getFilteredConnectors().map((connector, i) => {
+    return this.getFilteredConnectors().map((connector) => {
       const { id, type, position } = connector;
-      return <Connector id={id} key={i} type={type} position={position} />;
+      return <Connector key={`${id}-${type}`} id={id} type={type} position={position} />;
     });
   }
 }

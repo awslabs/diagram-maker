@@ -1,23 +1,21 @@
-jest.unmock('./layoutReducer');
-jest.mock('./hierarchicalLayout', () => ({ default: jest.fn() }));
-jest.mock('./workflowLayout', () => ({ default: jest.fn() }));
-
 import getInitialState from 'diagramMaker/state/getInitialState';
 import { DeleteItemsAction, GlobalActionsType } from 'diagramMaker/state/global/globalActions';
-import { DiagramMakerData, EditorMode } from 'diagramMaker/state/types';
+import { DiagramMakerData } from 'diagramMaker/state/types';
 import { asMock } from 'diagramMaker/testing/testUtils';
-import set from 'lodash-es/set';
 
 import hierarchicalLayout from './hierarchicalLayout';
 import {
   HierarchicalLayoutConfig, LayoutAction, LayoutActionsType, LayoutConfig, LayoutType,
-  WorkflowLayoutConfig, WorkflowLayoutDirection
+  WorkflowLayoutConfig, WorkflowLayoutDirection,
 } from './layoutActions';
 import layoutReducer, { adjustWorkspace } from './layoutReducer';
 import workflowLayout from './workflowLayout';
 
-describe('layoutReducer', () => {
+jest.unmock('./layoutReducer');
+jest.mock('./hierarchicalLayout', () => ({ default: jest.fn() }));
+jest.mock('./workflowLayout', () => ({ default: jest.fn() }));
 
+describe('layoutReducer', () => {
   function getState(): DiagramMakerData<{}, {}> {
     return getInitialState();
   }
@@ -40,11 +38,11 @@ describe('layoutReducer', () => {
           layoutType: LayoutType.HIERARCHICAL,
           fixedNodeIds: ['node-1', 'node-5'],
           distanceMin: 123,
-          distanceDeclineRate: 0.45
+          distanceDeclineRate: 0.45,
         };
         const action: LayoutAction = {
           type: LayoutActionsType.LAYOUT,
-          payload: layoutConfig
+          payload: layoutConfig,
         };
         asMock(hierarchicalLayout).mockImplementationOnce(() => state);
 
@@ -61,11 +59,11 @@ describe('layoutReducer', () => {
         const layoutConfig: WorkflowLayoutConfig = {
           layoutType: LayoutType.WORKFLOW,
           direction: WorkflowLayoutDirection.TOP_BOTTOM,
-          distanceMin: 123
+          distanceMin: 123,
         };
         const action: LayoutAction = {
           type: LayoutActionsType.LAYOUT,
-          payload: layoutConfig
+          payload: layoutConfig,
         };
         asMock(workflowLayout).mockImplementationOnce(() => state);
 
@@ -81,7 +79,7 @@ describe('layoutReducer', () => {
         const state = getState();
         const action: LayoutAction = {
           type: LayoutActionsType.LAYOUT,
-          payload: { layoutType: 'rainbow layout' } as any as LayoutConfig
+          payload: { layoutType: 'rainbow layout' } as any as LayoutConfig,
         };
         expect(layoutReducer(state, action)).toEqual(state);
         checkReducerPurity(state);
@@ -94,7 +92,7 @@ describe('layoutReducer', () => {
       const state = getState();
       const action: DeleteItemsAction = {
         type: GlobalActionsType.DELETE_ITEMS,
-        payload: { nodeIds: [], edgeIds: [] }
+        payload: { nodeIds: [], edgeIds: [] },
       };
       expect(layoutReducer(state, action)).toBe(state);
     });
@@ -104,7 +102,7 @@ describe('layoutReducer', () => {
     it('initializes state using `getInitialState()`, when provided state is empty', () => {
       const action: DeleteItemsAction = {
         type: GlobalActionsType.DELETE_ITEMS,
-        payload: { nodeIds: [], edgeIds: [] }
+        payload: { nodeIds: [], edgeIds: [] },
       };
       expect(layoutReducer(undefined, action)).toEqual(getInitialState());
     });
@@ -118,42 +116,42 @@ describe('adjustWorkspace', () => {
         node1: {
           diagramMakerData: {
             position: { x: 100, y: 100 },
-            size: { height: 100, width: 100 }
+            size: { height: 100, width: 100 },
           },
-          id: 'node1'
-        }
+          id: 'node1',
+        },
       },
-      workspace:{
+      workspace: {
         canvasSize: {
           height: 100,
-          width: 100
+          width: 100,
         },
         position: {
           x: 0,
-          y: 0
-        }
-      }
+          y: 0,
+        },
+      },
     };
     const expectedState = {
       nodes: {
         node1: {
           diagramMakerData: {
             position: { x: 100, y: 100 },
-            size: { height: 100, width: 100 }
+            size: { height: 100, width: 100 },
           },
-          id: 'node1'
-        }
+          id: 'node1',
+        },
       },
-      workspace:{
+      workspace: {
         canvasSize: {
           height: 200,
-          width: 200
+          width: 200,
         },
         position: {
           x: 0,
-          y: 0
-        }
-      }
+          y: 0,
+        },
+      },
     };
     expect(adjustWorkspace(state)).toEqual(expectedState);
   });
@@ -164,42 +162,42 @@ describe('adjustWorkspace', () => {
         node1: {
           diagramMakerData: {
             position: { x: -100, y: -100 },
-            size: { height: 100, width: 100 }
+            size: { height: 100, width: 100 },
           },
-          id: 'node1'
-        }
+          id: 'node1',
+        },
       },
-      workspace:{
+      workspace: {
         canvasSize: {
           height: 100,
-          width: 100
+          width: 100,
         },
         position: {
           x: 0,
-          y: 0
-        }
-      }
+          y: 0,
+        },
+      },
     };
     const expectedState = {
       nodes: {
         node1: {
           diagramMakerData: {
             position: { x: 0, y: 0 },
-            size: { height: 100, width: 100 }
+            size: { height: 100, width: 100 },
           },
-          id: 'node1'
-        }
+          id: 'node1',
+        },
       },
-      workspace:{
+      workspace: {
         canvasSize: {
           height: 200,
-          width: 200
+          width: 200,
         },
         position: {
           x: 0,
-          y: 0
-        }
-      }
+          y: 0,
+        },
+      },
     };
     expect(adjustWorkspace(state)).toEqual(expectedState);
   });

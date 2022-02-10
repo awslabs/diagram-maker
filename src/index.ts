@@ -2,7 +2,7 @@ export { default as DiagramMaker } from './DiagramMaker';
 export {
   ConnectorPlacement,
   Shape,
-  VisibleConnectorTypes
+  VisibleConnectorTypes,
 } from './service/ConfigService';
 export { DiagramMakerComponents } from './service/ui/types';
 export { NormalizedEvent } from './service/ui/UIEventNormalizer';
@@ -13,13 +13,13 @@ export { GlobalAction, GlobalActions } from './state/global/globalActions';
 export {
   Layout,
   LayoutActions,
-  WorkflowLayoutDirection
+  WorkflowLayoutDirection,
 } from './state/layout/layoutActions';
 export { NodeAction, NodeActions } from './state/node/nodeActions';
 export { PanelAction, PanelActions } from './state/panel/panelActions';
 export {
   WorkspaceAction,
-  WorkspaceActions
+  WorkspaceActions,
 } from './state/workspace/workspaceActions';
 export { DiagramMakerAction, DiagramMakerActions } from './state/actions';
 export { EditorMode, PositionAnchor } from './state/types';

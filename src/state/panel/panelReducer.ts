@@ -5,9 +5,11 @@ import { DiagramMakerAction } from 'diagramMaker/state/actions';
 import {
   DragPanelAction,
   DragStartPanelAction,
-  PanelActionsType
+  PanelActionsType,
 } from 'diagramMaker/state/panel/panelActions';
-import { DiagramMakerPanels, Position, PositionAnchor, Size } from 'diagramMaker/state/types';
+import {
+  DiagramMakerPanels, Position, PositionAnchor, Size,
+} from 'diagramMaker/state/types';
 
 const ANCHOR_DISTANCE = 10;
 
@@ -17,10 +19,10 @@ const isPanelWithinAnchorBounds = (panelPosition: Position, panelSize: Size, con
   const rightDistance = Math.abs(containerSize.width - (x + panelSize.width));
   const bottomDistance = Math.abs(containerSize.height - (y + panelSize.height));
 
-  if (x < ANCHOR_DISTANCE  && y < ANCHOR_DISTANCE
-    || rightDistance < ANCHOR_DISTANCE && y < ANCHOR_DISTANCE
-    || x < ANCHOR_DISTANCE && bottomDistance < ANCHOR_DISTANCE
-    || rightDistance < ANCHOR_DISTANCE && bottomDistance < ANCHOR_DISTANCE
+  if ((x < ANCHOR_DISTANCE && y < ANCHOR_DISTANCE)
+    || (rightDistance < ANCHOR_DISTANCE && y < ANCHOR_DISTANCE)
+    || (x < ANCHOR_DISTANCE && bottomDistance < ANCHOR_DISTANCE)
+    || (rightDistance < ANCHOR_DISTANCE && bottomDistance < ANCHOR_DISTANCE)
   ) {
     return true;
   }
@@ -30,7 +32,7 @@ const isPanelWithinAnchorBounds = (panelPosition: Position, panelSize: Size, con
 
 const anchorPanel = (
   draftState: Draft<DiagramMakerPanels>,
-  action: DragPanelAction
+  action: DragPanelAction,
 ) => {
   const containerSize = action.payload.viewContainerSize;
   const currentPanel = draftState[action.payload.id];
@@ -39,7 +41,7 @@ const anchorPanel = (
   const rightDistance = Math.abs(containerSize.width - (x + currentPanel.size.width));
   const bottomDistance = Math.abs(containerSize.height - (y + currentPanel.size.height));
 
-  if (x < ANCHOR_DISTANCE  && y < ANCHOR_DISTANCE) {
+  if (x < ANCHOR_DISTANCE && y < ANCHOR_DISTANCE) {
     currentPanel.positionAnchor = PositionAnchor.TOP_LEFT;
     currentPanel.position = { x: 0, y: 0 };
   } else if (rightDistance < ANCHOR_DISTANCE && y < ANCHOR_DISTANCE) {
@@ -76,7 +78,7 @@ const dragReducer = (draftState: Draft<DiagramMakerPanels>, action: DragPanelAct
 
   currentPanel.position = constrainRectangleWithinRectangle(
     { position, size },
-    { position: { x: 0, y: 0 }, size: viewContainerSize }
+    { position: { x: 0, y: 0 }, size: viewContainerSize },
   );
 
   if (currentPanel.undocking) {
@@ -92,7 +94,8 @@ const dragReducer = (draftState: Draft<DiagramMakerPanels>, action: DragPanelAct
 };
 
 export default function panelReducer<NodeType, EdgeType>(
-  state: DiagramMakerPanels | undefined, action: DiagramMakerAction<NodeType, EdgeType>
+  state: DiagramMakerPanels | undefined,
+  action: DiagramMakerAction<NodeType, EdgeType>,
 ): DiagramMakerPanels {
   if (state === undefined) {
     return {};

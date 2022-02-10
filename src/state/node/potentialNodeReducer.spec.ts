@@ -4,26 +4,25 @@ import * as positionUtils from 'diagramMaker/service/positionUtils';
 import { DiagramMakerPotentialNode } from 'diagramMaker/state/types';
 
 import {
-  DragEndPotentialNodeAction, DragPotentialNodeAction, DragStartPotentialNodeAction, NodeActionsType
+  DragEndPotentialNodeAction, DragPotentialNodeAction, DragStartPotentialNodeAction, NodeActionsType,
 } from './nodeActions';
 import potentialNodeReducer from './potentialNodeReducer';
 
 describe('potentialNodeReducer', () => {
-
   const getState = (): DiagramMakerPotentialNode => ({
     typeId: 'node-1',
     position: { x: 0, y: 0 },
-    size: { width: 200, height: 200 }
+    size: { width: 200, height: 200 },
   });
 
   const workspaceRectangle = {
     position: {
-      x: 0, y: 0
+      x: 0, y: 0,
     },
     size: {
       height: 1000,
-      width: 1000
-    }
+      width: 1000,
+    },
   };
 
   function checkReducerPurity(state: DiagramMakerPotentialNode) {
@@ -52,7 +51,7 @@ describe('potentialNodeReducer', () => {
       const position = { x: 0, y: 0 };
       const size = { width: 200, height: 200 };
       const action: DragStartPotentialNodeAction = {
-        type: NodeActionsType.POTENTIAL_NODE_DRAG_START, payload: { typeId, position, size }
+        type: NodeActionsType.POTENTIAL_NODE_DRAG_START, payload: { typeId, position, size },
       };
       const expectedState = getState();
       expect(potentialNodeReducer(null, action)).toEqual(expectedState);
@@ -65,7 +64,7 @@ describe('potentialNodeReducer', () => {
       const position = { x: 10, y: 10 };
       const action: DragPotentialNodeAction = {
         type: NodeActionsType.POTENTIAL_NODE_DRAG,
-        payload: { position, workspaceRectangle }
+        payload: { position, workspaceRectangle },
       };
       const expectedState = getState();
       const constrainRectangleWithinRectangleSpy = jest.spyOn(positionUtils, 'constrainRectangleWithinRectangle');
@@ -79,7 +78,7 @@ describe('potentialNodeReducer', () => {
       const position = { x: 0, y: 0 };
       const action: DragPotentialNodeAction = {
         type: NodeActionsType.POTENTIAL_NODE_DRAG,
-        payload: { position, workspaceRectangle }
+        payload: { position, workspaceRectangle },
       };
       expect(potentialNodeReducer(null, action)).toEqual(null);
     });
@@ -89,11 +88,10 @@ describe('potentialNodeReducer', () => {
     it('returns null', () => {
       const state = getState();
       const action: DragEndPotentialNodeAction = {
-        type: NodeActionsType.POTENTIAL_NODE_DRAG_END
+        type: NodeActionsType.POTENTIAL_NODE_DRAG_END,
       };
       expect(potentialNodeReducer(state, action)).toBe(null);
       checkReducerPurity(state);
     });
   });
-
 });

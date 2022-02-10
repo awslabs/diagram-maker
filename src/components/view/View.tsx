@@ -1,23 +1,23 @@
 import * as Preact from 'preact';
 
 import { ContextMenu } from 'diagramMaker/components/contextMenu';
-import { Edge, EdgeBadge, EdgeStyle, PotentialEdge } from 'diagramMaker/components/edge';
+import {
+  Edge, EdgeBadge, EdgeStyle, PotentialEdge,
+} from 'diagramMaker/components/edge';
 import { Node, PotentialNode } from 'diagramMaker/components/node';
 import { Panel } from 'diagramMaker/components/panel';
 import { SelectionMarquee } from 'diagramMaker/components/selectionMarquee';
 import { Workspace } from 'diagramMaker/components/workspace';
 import ConfigService, {
-  ConnectorPlacement, ConnectorPlacementType, DestroyCallback, Shape, ShapeType, TypeForVisibleConnectorTypes
+  ConnectorPlacement, ConnectorPlacementType, Shape, ShapeType, TypeForVisibleConnectorTypes,
 } from 'diagramMaker/service/ConfigService';
 import { getInflectionPoint } from 'diagramMaker/service/positionUtils';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import {
   DiagramMakerData,
-  DiagramMakerEdge,
-  DiagramMakerEdges,
   DiagramMakerNode,
   Position,
-  Size
+  Size,
 } from 'diagramMaker/state/types';
 
 import './View.scss';
@@ -26,7 +26,7 @@ const CONNECTOR_PLACEMENT_TO_EDGE_TYPE = {
   [ConnectorPlacement.LEFT_RIGHT]: EdgeStyle.LEFT_RIGHT_BEZIER,
   [ConnectorPlacement.TOP_BOTTOM]: EdgeStyle.TOP_BOTTOM_BEZIER,
   [ConnectorPlacement.CENTERED]: EdgeStyle.STRAIGHT,
-  [ConnectorPlacement.BOUNDARY]: EdgeStyle.STRAIGHT
+  [ConnectorPlacement.BOUNDARY]: EdgeStyle.STRAIGHT,
 };
 
 interface EdgeCoordinatePair {
@@ -41,9 +41,9 @@ export interface ViewProps<NodeType, EdgeType> {
 
 const getConnectorPlacementForNode = <NodeType, EdgeType>(
   node: DiagramMakerNode<NodeType>,
-  configService: ConfigService<NodeType, EdgeType>
+  configService: ConfigService<NodeType, EdgeType>,
 ) => {
-  const typeId = node.typeId;
+  const { typeId } = node;
   if (!typeId) {
     return configService.getConnectorPlacement();
   }
@@ -51,55 +51,49 @@ const getConnectorPlacementForNode = <NodeType, EdgeType>(
   return configService.getConnectorPlacementForNodeType(typeId);
 };
 
-const getCenteredConnectorCoordinates =
-<NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
+const getCenteredConnectorCoordinates = <NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
   const { position, size } = node.diagramMakerData;
   return {
     x: position.x + size.width / 2,
-    y: position.y + size.height / 2
+    y: position.y + size.height / 2,
   };
 };
 
-const getLeftRightConnectorCoordinatesSource =
-<NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
+const getLeftRightConnectorCoordinatesSource = <NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
   const { position, size } = node.diagramMakerData;
   return {
     x: position.x + size.width,
-    y: position.y + size.height / 2
+    y: position.y + size.height / 2,
   };
 };
 
-const getLeftRightConnectorCoordinatesDestination =
-<NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
+const getLeftRightConnectorCoordinatesDest = <NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
   const { position, size } = node.diagramMakerData;
   return {
     x: position.x,
-    y: position.y + size.height / 2
+    y: position.y + size.height / 2,
   };
 };
 
-const getTopBottomConnectorCoordinatesDestination =
-<NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
+const getTopBottomConnectorCoordinatesDest = <NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
   const { position, size } = node.diagramMakerData;
   return {
     x: position.x + size.width / 2,
-    y: position.y
+    y: position.y,
   };
 };
 
-const getTopBottomConnectorCoordinatesSource =
-<NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
+const getTopBottomConnectorCoordinatesSource = <NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
   const { position, size } = node.diagramMakerData;
   return {
     x: position.x + size.width / 2,
-    y: position.y + size.height
+    y: position.y + size.height,
   };
 };
 
-const getEdgeCoordinateSource =
-<NodeType, EdgeType>(
+const getEdgeCoordinateSource = <NodeType, EdgeType>(
   node: DiagramMakerNode<NodeType>,
-  configService: ConfigService<NodeType, EdgeType>
+  configService: ConfigService<NodeType, EdgeType>,
 ): Position => {
   let sourceCoordinates: Position;
   const connectorPlacement = getConnectorPlacementForNode(node, configService);
@@ -113,17 +107,16 @@ const getEdgeCoordinateSource =
   return sourceCoordinates;
 };
 
-const getEdgeCoordinateDestination =
-<NodeType, EdgeType>(
+const getEdgeCoordinateDestination = <NodeType, EdgeType>(
   node: DiagramMakerNode<NodeType>,
-  configService: ConfigService<NodeType, EdgeType>
+  configService: ConfigService<NodeType, EdgeType>,
 ): Position => {
   let sourceCoordinates: Position;
   const connectorPlacement = getConnectorPlacementForNode(node, configService);
   if (connectorPlacement === ConnectorPlacement.LEFT_RIGHT) {
-    sourceCoordinates = getLeftRightConnectorCoordinatesDestination(node);
+    sourceCoordinates = getLeftRightConnectorCoordinatesDest(node);
   } else if (connectorPlacement === ConnectorPlacement.TOP_BOTTOM) {
-    sourceCoordinates = getTopBottomConnectorCoordinatesDestination(node);
+    sourceCoordinates = getTopBottomConnectorCoordinatesDest(node);
   } else {
     sourceCoordinates = getCenteredConnectorCoordinates(node);
   }
@@ -139,7 +132,7 @@ const getDistance = (srcPosition: Position, destPosition: Position) => {
 const getBoundaryCoordinatesForCircle = (
   sourcePosition: Position,
   sourceSize: Size,
-  destinationPosition: Position
+  destinationPosition: Position,
 ): Position => {
   const distance = getDistance(sourcePosition, destinationPosition);
   if (distance === 0) {
@@ -152,30 +145,30 @@ const getBoundaryCoordinatesForCircle = (
   const n = distance - m;
   return {
     x: ((m * x2) + (n * x1)) / distance,
-    y: ((m * y2) + (n * y1)) / distance
+    y: ((m * y2) + (n * y1)) / distance,
   };
 };
 
 const getBoundaryCoordinatesForRectangle = (
   sourcePosition: Position,
   sourceSize: Size,
-  destinationPosition: Position
+  destinationPosition: Position,
 ): Position => {
   // If the two points are orthogonal, the boundary is half the width or height of the rectangle.
   if (sourcePosition.x === destinationPosition.x) {
     return {
       x: sourcePosition.x,
-      y: destinationPosition.y > sourcePosition.y ?
-        sourcePosition.y + sourceSize.height / 2 :
-        sourcePosition.y - sourceSize.height / 2
+      y: destinationPosition.y > sourcePosition.y
+        ? sourcePosition.y + sourceSize.height / 2
+        : sourcePosition.y - sourceSize.height / 2,
     };
   }
   if (sourcePosition.y === destinationPosition.y) {
     return {
-      x: destinationPosition.x > sourcePosition.x ?
-        sourcePosition.x + sourceSize.width / 2 :
-        sourcePosition.x - sourceSize.width / 2,
-      y: sourcePosition.y
+      x: destinationPosition.x > sourcePosition.x
+        ? sourcePosition.x + sourceSize.width / 2
+        : sourcePosition.x - sourceSize.width / 2,
+      y: sourcePosition.y,
     };
   }
 
@@ -205,15 +198,15 @@ const getBoundaryCoordinatesForRectangle = (
 
   // Calculate directions
   if (destinationPosition.x < sourcePosition.x) {
-    distanceX = distanceX * -1;
+    distanceX *= -1;
   }
   if (destinationPosition.y < sourcePosition.y) {
-    distanceY = distanceY * -1;
+    distanceY *= -1;
   }
 
   return {
     x: sourcePosition.x + distanceX,
-    y: sourcePosition.y + distanceY
+    y: sourcePosition.y + distanceY,
   };
 };
 
@@ -221,23 +214,23 @@ const getBoundaryCoordinates = (
   sourcePosition: Position,
   sourceShape: ShapeType | undefined,
   sourceSize: Size,
-  destPosition: Position
+  destPosition: Position,
 ): Position => {
   switch (sourceShape) {
     case Shape.CIRCLE:
       return getBoundaryCoordinatesForCircle(sourcePosition, sourceSize, destPosition);
     case Shape.RECTANGLE:
       return getBoundaryCoordinatesForRectangle(sourcePosition, sourceSize, destPosition);
+    default:
+      return sourcePosition;
   }
-  return sourcePosition;
 };
 
-const applyBoundaryCheck =
-<NodeType, EdgeType>(
+const applyBoundaryCheck = <NodeType, EdgeType>(
   configService: ConfigService<NodeType, EdgeType>,
   nodeSrc: DiagramMakerNode<NodeType>,
   positionSrc: Position,
-  positionDest: Position
+  positionDest: Position,
 ) => {
   const sourceConnectorPlacement = getConnectorPlacementForNode(nodeSrc, configService);
   let sourceShape: ShapeType | undefined;
@@ -249,23 +242,22 @@ const applyBoundaryCheck =
       positionSrc,
       sourceShape,
       nodeSrc.diagramMakerData.size,
-      positionDest
+      positionDest,
     );
   }
 
   return positionSrc;
 };
 
-const getEdgeCoordinatePair =
-<NodeType, EdgeType>(
+const getEdgeCoordinatePair = <NodeType, EdgeType>(
   nodeSrc: DiagramMakerNode<NodeType>,
   nodeDest: DiagramMakerNode<NodeType>,
   configService: ConfigService<NodeType, EdgeType>,
-  overlappingEdge?: boolean
+  overlappingEdge?: boolean,
 ): EdgeCoordinatePair => {
   const coordinates: EdgeCoordinatePair = {
     src: getEdgeCoordinateSource(nodeSrc, configService),
-    dest: getEdgeCoordinateDestination(nodeDest, configService)
+    dest: getEdgeCoordinateDestination(nodeDest, configService),
   };
   let tempDest = coordinates.dest;
   let tempSrc = coordinates.src;
@@ -286,13 +278,13 @@ const getEdgeCoordinatePair =
 
   return {
     src: newSrc,
-    dest: newDest
+    dest: newDest,
   };
 };
 
 const getEdgeStyle = (
   sourceConnectorPlacement: ConnectorPlacementType,
-  destinationConnectorPlacement: ConnectorPlacementType
+  destinationConnectorPlacement: ConnectorPlacementType,
 ): EdgeStyle => {
   if (sourceConnectorPlacement === destinationConnectorPlacement) {
     return CONNECTOR_PLACEMENT_TO_EDGE_TYPE[sourceConnectorPlacement];
@@ -301,12 +293,11 @@ const getEdgeStyle = (
 };
 
 class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, EdgeType>> {
-
   public render() {
     const {
       position: workspacePosition,
       canvasSize: workspaceSize,
-      scale: workspaceScale
+      scale: workspaceScale,
     } = this.props.state.workspace;
 
     /**
@@ -319,6 +310,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     const transform = `translate3d(${workspacePosition.x}px, ${workspacePosition.y}px, 0) scale(${workspaceScale})`;
 
     return (
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       <div className="dm-view" tabIndex={0} data-type={DiagramMakerComponentsType.VIEW}>
         <Workspace
           position={workspacePosition}
@@ -361,7 +353,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
 
   private renderArrowheadMarker() {
     if (!this.props.configService.getShowArrowhead()) {
-      return;
+      return undefined;
     }
 
     return (
@@ -383,12 +375,12 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
   }
 
   private renderNodes() {
-    const nodes = this.props.state.nodes;
+    const { nodes } = this.props.state;
     const renderCallback = this.props.configService.getRenderNode();
     const destroyCallback = this.props.configService.getRenderDestroy();
     const nodeKeys = Object.keys(nodes);
     return nodeKeys.map((nodeKey: string) => {
-      const typeId = nodes[nodeKey].typeId;
+      const { typeId } = nodes[nodeKey];
       const connectorPlacement = getConnectorPlacementForNode(nodes[nodeKey], this.props.configService);
       let visibleConnectorTypes: TypeForVisibleConnectorTypes | undefined;
       if (typeId) {
@@ -414,7 +406,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     const destroyCallback = this.props.configService.getRenderDestroy();
 
     if (!node || !renderCallback) {
-      return;
+      return undefined;
     }
 
     const { typeId, position, size } = node;
@@ -436,28 +428,28 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     let pairEdges: JSX.Element[] = [];
 
     edgePairs.forEach((edgePair: string[]) => {
-      pairEdges = pairEdges.concat(edgePair.map(edgeKey => this.renderEdge(edgeKey, true)));
+      pairEdges = pairEdges.concat(edgePair.map((edgeKey) => this.renderEdge(edgeKey, true)));
     });
 
-    const singleEdges = edgeSingles.map(edgeKey => this.renderEdge(edgeKey));
+    const singleEdges = edgeSingles.map((edgeKey) => this.renderEdge(edgeKey));
 
     return singleEdges.concat(pairEdges);
   }
 
   private renderEdge(edgeKey: string, isEdgePair?: boolean) {
-    const nodes = this.props.state.nodes;
-    const edges = this.props.state.edges;
+    const { nodes } = this.props.state;
+    const { edges } = this.props.state;
     const edgeSource = nodes[edges[edgeKey].src];
     const edgeDestination = nodes[edges[edgeKey].dest];
     const edgeCoordinates = getEdgeCoordinatePair(
-        edgeSource,
-        edgeDestination,
-        this.props.configService,
-        isEdgePair
-      );
+      edgeSource,
+      edgeDestination,
+      this.props.configService,
+      isEdgePair,
+    );
     const edgeStyle = isEdgePair ? EdgeStyle.QUADRATIC_BEZIER : getEdgeStyle(
       getConnectorPlacementForNode(edgeSource, this.props.configService),
-      getConnectorPlacementForNode(edgeDestination, this.props.configService)
+      getConnectorPlacementForNode(edgeDestination, this.props.configService),
     );
 
     return (
@@ -476,24 +468,24 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
   }
 
   private renderEdgeBadges() {
-    const nodes = this.props.state.nodes;
-    const edges = this.props.state.edges;
+    const { nodes } = this.props.state;
+    const { edges } = this.props.state;
     const renderCallback = this.props.configService.getRenderEdge();
     const destroyCallback = this.props.configService.getRenderDestroy();
 
     if (!renderCallback) {
-      return;
+      return undefined;
     }
 
     const { singles: edgeSingles, pairs: edgePairs } = this.getEdges();
     let pairEdges: JSX.Element[] = [];
     edgePairs.forEach((edgePair: string[]) => {
-      pairEdges = pairEdges.concat(edgePair.map((edgeKey: string, index: number) => {
+      pairEdges = pairEdges.concat(edgePair.map((edgeKey: string) => {
         const edgeCoordinates = getEdgeCoordinatePair(
           nodes[edges[edgeKey].src],
           nodes[edges[edgeKey].dest],
           this.props.configService,
-          true
+          true,
         );
 
         return (
@@ -504,7 +496,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
             dest={edgeCoordinates.dest}
             renderCallback={renderCallback.bind(null, edges[edgeKey])}
             destroyCallback={destroyCallback}
-            isPartOfEdgePair={true}
+            isPartOfEdgePair
           />
         );
       }));
@@ -515,7 +507,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
         const edgeCoordinates = getEdgeCoordinatePair(
           nodes[edges[edgeKey].src],
           nodes[edges[edgeKey].dest],
-          this.props.configService
+          this.props.configService,
         );
 
         return (
@@ -533,19 +525,19 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     return singleEdges.concat(pairEdges);
   }
 
-  private getEdges(): { singles: string[], pairs: string[][]} {
-    const nodes = this.props.state.nodes;
-    const edges = this.props.state.edges;
+  private getEdges(): { singles: string[], pairs: string[][] } {
+    const { nodes } = this.props.state;
+    const { edges } = this.props.state;
     const edgeKeys = Object.keys(edges);
     const activeEdges = edgeKeys.filter(
-      (edgeKey: string) => !!(nodes[edges[edgeKey].src] && nodes[edges[edgeKey].dest])
+      (edgeKey: string) => !!(nodes[edges[edgeKey].src] && nodes[edges[edgeKey].dest]),
     );
     const connectorPlacement = this.props.configService.getConnectorPlacement();
     const edgeMapping: { [key: string]: string } = {};
     const edgePairs: string[][] = [];
     if (
-      connectorPlacement === ConnectorPlacementType.LEFT_RIGHT ||
-      connectorPlacement === ConnectorPlacementType.TOP_BOTTOM
+      connectorPlacement === ConnectorPlacementType.LEFT_RIGHT
+      || connectorPlacement === ConnectorPlacementType.TOP_BOTTOM
     ) {
       return { singles: activeEdges, pairs: [] };
     }
@@ -566,17 +558,17 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
       }
     });
 
-    const edgeSingles: string[] = Object.keys(edgeMapping).map(val => edgeMapping[val]);
+    const edgeSingles: string[] = Object.keys(edgeMapping).map((val) => edgeMapping[val]);
     return {
       singles: edgeSingles,
-      pairs: edgePairs
+      pairs: edgePairs,
     };
   }
 
   private renderPanels() {
-    const state = this.props.state;
-    const panels = this.props.state.panels;
-    const viewContainerSize = this.props.state.workspace.viewContainerSize;
+    const { state } = this.props;
+    const { panels } = this.props.state;
+    const { viewContainerSize } = this.props.state.workspace;
     const renderCallback = this.props.configService.getRenderPanel;
     const destroyCallback = this.props.configService.getRenderDestroy();
 
@@ -596,16 +588,16 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
   }
 
   private renderPotentialEdge() {
-    const nodes = this.props.state.nodes;
+    const { nodes } = this.props.state;
     const edge = this.props.state.potentialEdge;
     if (!edge) {
-      return;
+      return undefined;
     }
 
     const sourceCoordinates = getEdgeCoordinateSource(nodes[edge.src], this.props.configService);
     const edgeStyle = getEdgeStyle(
       getConnectorPlacementForNode(nodes[edge.src], this.props.configService),
-      this.props.configService.getConnectorPlacement()
+      this.props.configService.getConnectorPlacement(),
     );
     return (
       <PotentialEdge
@@ -621,7 +613,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
   private renderSelectionMarquee() {
     const marquee = this.props.state.editor.selectionMarquee;
     if (!marquee) {
-      return;
+      return undefined;
     }
     return (
       <SelectionMarquee
@@ -634,12 +626,12 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
   private renderContextMenu() {
     const menu = this.props.state.editor.contextMenu;
     if (!menu) {
-      return;
+      return undefined;
     }
     const renderCallback = this.props.configService.getBoundRenderContextMenu(menu.targetType, menu.targetId);
     const destroyCallback = this.props.configService.getRenderDestroy();
     if (!renderCallback) {
-      return;
+      return undefined;
     }
 
     return (

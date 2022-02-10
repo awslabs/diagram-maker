@@ -1,12 +1,11 @@
 import {
-  getAllEdges, getDiagramMakerView, getEdgeBadgeById, getEdgeById, getNodeById, getPotentialEdge
+  getAllEdges, getDiagramMakerView, getEdgeBadgeById, getEdgeById, getNodeById, getPotentialEdge,
 } from '../common/getters';
 import {
-  clickElement, createEdgeBetween, dragAndDropElement, dragStartElement, triggerKeyboardEvent
+  clickElement, createEdgeBetween, dragAndDropElement, dragStartElement, triggerKeyboardEvent,
 } from '../common/interaction';
 
 describe('DiagramMaker.Edges', () => {
-
   describe('Edges with left right rectangular nodes', () => {
     beforeEach(() => {
       cy.visit('/LeftRightRectangular.html');
@@ -80,7 +79,6 @@ describe('DiagramMaker.Edges', () => {
     });
 
     describe('create edge', () => {
-
       it('creates an edge with left right rectangular nodes', () => {
         getAllEdges().should('have.length', 1);
         createEdgeBetween('node2', 'node1');
@@ -196,7 +194,6 @@ describe('DiagramMaker.Edges', () => {
   });
 
   describe('Edges with top bottom rectangular nodes', () => {
-
     beforeEach(() => {
       cy.visit('/TopBottomRectangular.html');
     });

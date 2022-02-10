@@ -1,249 +1,265 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Node renders at the given position and size 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-node"
-  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  className="dm-node"
+  data-draggable={true}
+  data-event-target={true}
   data-id="myNode"
   data-type="DiagramMaker.Node"
-  data-event-target={true}
-  data-draggable={true}
+  style={
+    Object {
+      "height": 300,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 200,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Node renders connectors on the left and right 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-node"
-  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  className="dm-node"
+  data-draggable={true}
+  data-event-target={true}
   data-id="myNode"
   data-type="DiagramMaker.Node"
-  data-event-target={true}
-  data-draggable={true}
+  style={
+    Object {
+      "height": 300,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 200,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
   <Connector
     id="myNode"
-    type={0}
+    key="myNode-0"
     position={
       Object {
         "x": 0,
-        "y": 150
+        "y": 150,
       }
     }
-  >
-  </Connector>
+    type={0}
+  />
   <Connector
     id="myNode"
-    type={1}
+    key="myNode-1"
     position={
       Object {
         "x": 200,
-        "y": 150
+        "y": 150,
       }
     }
-  >
-  </Connector>
+    type={1}
+  />
 </div>
-
 `;
 
 exports[`Node renders connectors on the top and bottom 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-node"
-  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  className="dm-node"
+  data-draggable={true}
+  data-event-target={true}
   data-id="myNode"
   data-type="DiagramMaker.Node"
-  data-event-target={true}
-  data-draggable={true}
+  style={
+    Object {
+      "height": 300,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 200,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
   <Connector
     id="myNode"
+    key="myNode-0"
+    position={
+      Object {
+        "x": 100,
+        "y": 0,
+      }
+    }
     type={0}
-    position={
-      Object {
-        "x": 100,
-        "y": 0
-      }
-    }
-  >
-  </Connector>
+  />
   <Connector
     id="myNode"
-    type={1}
+    key="myNode-1"
     position={
       Object {
         "x": 100,
-        "y": 300
+        "y": 300,
       }
     }
-  >
-  </Connector>
+    type={1}
+  />
 </div>
-
 `;
 
 exports[`Node renders without any connectors 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-node"
-  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  className="dm-node"
+  data-draggable={true}
+  data-event-target={true}
   data-id="myNode"
   data-type="DiagramMaker.Node"
-  data-event-target={true}
-  data-draggable={true}
+  style={
+    Object {
+      "height": 300,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 200,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Node visibleConnectorTypes renders connector only for input 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-node"
-  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  className="dm-node"
+  data-draggable={true}
+  data-event-target={true}
   data-id="myNode"
   data-type="DiagramMaker.Node"
-  data-event-target={true}
-  data-draggable={true}
+  style={
+    Object {
+      "height": 300,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 200,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
   <Connector
     id="myNode"
-    type={0}
+    key="myNode-0"
     position={
       Object {
         "x": 0,
-        "y": 150
+        "y": 150,
       }
     }
-  >
-  </Connector>
+    type={0}
+  />
 </div>
-
 `;
 
 exports[`Node visibleConnectorTypes renders connector only for output 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-node"
-  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  className="dm-node"
+  data-draggable={true}
+  data-event-target={true}
   data-id="myNode"
   data-type="DiagramMaker.Node"
-  data-event-target={true}
-  data-draggable={true}
+  style={
+    Object {
+      "height": 300,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 200,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
   <Connector
     id="myNode"
-    type={1}
+    key="myNode-1"
     position={
       Object {
         "x": 200,
-        "y": 150
+        "y": 150,
       }
     }
-  >
-  </Connector>
+    type={1}
+  />
 </div>
-
 `;
 
 exports[`Node visibleConnectorTypes renders input & output connectors 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-node"
-  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  className="dm-node"
+  data-draggable={true}
+  data-event-target={true}
   data-id="myNode"
   data-type="DiagramMaker.Node"
-  data-event-target={true}
-  data-draggable={true}
+  style={
+    Object {
+      "height": 300,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 200,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
   <Connector
     id="myNode"
-    type={0}
+    key="myNode-0"
     position={
       Object {
         "x": 0,
-        "y": 150
+        "y": 150,
       }
     }
-  >
-  </Connector>
+    type={0}
+  />
   <Connector
     id="myNode"
-    type={1}
+    key="myNode-1"
     position={
       Object {
         "x": 200,
-        "y": 150
+        "y": 150,
       }
     }
-  >
-  </Connector>
+    type={1}
+  />
 </div>
-
 `;
 
 exports[`Node visibleConnectorTypes renders no connectors 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-node"
-  style="width: 200px; height: 300px; transform: translate3d(400px, 600px, 0);"
+  className="dm-node"
+  data-draggable={true}
+  data-event-target={true}
   data-id="myNode"
   data-type="DiagramMaker.Node"
-  data-event-target={true}
-  data-draggable={true}
+  style={
+    Object {
+      "height": 300,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 200,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;

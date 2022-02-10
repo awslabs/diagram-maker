@@ -1,9 +1,3 @@
-jest.unmock('./rootReducer');
-
-jest.mock('redux', () => ({
-  combineReducers: jest.fn()
-}));
-
 import { combineReducers } from 'redux';
 import { undoHistoryReducer } from 'redux-undo-redo';
 
@@ -15,6 +9,12 @@ import { pluginReducer } from 'diagramMaker/state/plugin';
 import { workspaceReducer } from 'diagramMaker/state/workspace';
 
 import { getRootReducer } from './rootReducer';
+
+jest.unmock('./rootReducer');
+
+jest.mock('redux', () => ({
+  combineReducers: jest.fn(),
+}));
 
 describe('getRootReducer', () => {
   it('calls combineReducers from redux', () => {
@@ -28,7 +28,7 @@ describe('getRootReducer', () => {
       potentialEdge: potentialEdgeReducer,
       potentialNode: potentialNodeReducer,
       undoHistory: undoHistoryReducer,
-      workspace: workspaceReducer
+      workspace: workspaceReducer,
     });
   });
 });

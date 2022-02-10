@@ -5,7 +5,7 @@ import {
   DragPanelAction,
   DragStartPanelAction,
   PanelActionsType,
-  ResizePanelAction
+  ResizePanelAction,
 } from './panelActions';
 import panelReducer from './panelReducer';
 
@@ -14,36 +14,36 @@ describe('panelReducer', () => {
     'panel-1': {
       id: 'panel-1',
       position: { x: 0, y: 0 },
-      size: { width: 100, height: 100 }
+      size: { width: 100, height: 100 },
     },
     'panel-2': {
       id: 'panel-2',
       position: { x: 250, y: 0 },
-      size: { width: 100, height: 200 }
+      size: { width: 100, height: 200 },
     },
     'panel-3': {
       id: 'panel-3',
       position: { x: 250, y: 0 },
       size: { width: 50, height: 800 },
-      positionAnchor: PositionAnchorType.TOP_LEFT
+      positionAnchor: PositionAnchorType.TOP_LEFT,
     },
     'panel-4': {
       id: 'panel-4',
       position: { x: 0, y: 0 },
       size: { width: 100, height: 100 },
-      undocking: true
+      undocking: true,
     },
     'panel-5': {
       id: 'panel-5',
       position: { x: 30, y: 30 },
       size: { width: 100, height: 100 },
-      undocking: false
-    }
+      undocking: false,
+    },
   });
 
   const viewContainerSize = {
     height: 1000,
-    width: 1000
+    width: 1000,
   };
 
   function checkReducerPurity(state: DiagramMakerPanels) {
@@ -71,8 +71,8 @@ describe('panelReducer', () => {
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const constrainRectangleWithinRectangleSpy = jest.spyOn(positionUtils, 'constrainRectangleWithinRectangle');
       const expectedState: DiagramMakerPanels = {
@@ -80,8 +80,8 @@ describe('panelReducer', () => {
         'panel-1': {
           id: 'panel-1',
           position: { x: 100, y: 100 },
-          size: { width: 100, height: 100 }
-        }
+          size: { width: 100, height: 100 },
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       expect(constrainRectangleWithinRectangleSpy).toHaveBeenCalledTimes(1);
@@ -90,15 +90,15 @@ describe('panelReducer', () => {
 
     it('returns old state when unknown panel is dragged', () => {
       const id = 'panel-200';
-      const position =  { x: 100, y: 100 };
+      const position = { x: 100, y: 100 };
       const state = getState();
       const action: DragPanelAction = {
         type: PanelActionsType.PANEL_DRAG,
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       expect(panelReducer(state, action)).toEqual(state);
       checkReducerPurity(state);
@@ -110,15 +110,15 @@ describe('panelReducer', () => {
       const state = getState();
       const action: ResizePanelAction = {
         type: PanelActionsType.PANEL_RESIZE,
-        payload: { id: 'panel-1', size: { width: 150, height: 200 } }
+        payload: { id: 'panel-1', size: { width: 150, height: 200 } },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
         'panel-1': {
           id: 'panel-1',
           position: { x: 0, y: 0 },
-          size: { width: 150, height: 200 }
-        }
+          size: { width: 150, height: 200 },
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -130,8 +130,8 @@ describe('panelReducer', () => {
         type: PanelActionsType.PANEL_RESIZE,
         payload: {
           id: 'panel-200',
-          size: { width: 150, height: 200 }
-        }
+          size: { width: 150, height: 200 },
+        },
       };
       expect(panelReducer(state, action)).toEqual(state);
       checkReducerPurity(state);
@@ -143,7 +143,7 @@ describe('panelReducer', () => {
       const state = getState();
       const action: DragStartPanelAction = {
         type: PanelActionsType.PANEL_DRAG_START,
-        payload: { id: 'panel-3' }
+        payload: { id: 'panel-3' },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
@@ -151,8 +151,8 @@ describe('panelReducer', () => {
           id: 'panel-3',
           position: { x: 250, y: 0 },
           size: { width: 50, height: 800 },
-          undocking: true
-        }
+          undocking: true,
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -162,7 +162,7 @@ describe('panelReducer', () => {
       const state = getState();
       const action: DragStartPanelAction = {
         type: PanelActionsType.PANEL_DRAG_START,
-        payload: { id: 'panel-1' }
+        payload: { id: 'panel-1' },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
@@ -170,8 +170,8 @@ describe('panelReducer', () => {
           id: 'panel-1',
           position: { x: 0, y: 0 },
           size: { width: 100, height: 100 },
-          undocking: false
-        }
+          undocking: false,
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -188,16 +188,16 @@ describe('panelReducer', () => {
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
         'panel-2': {
           id: 'panel-2',
           position: { x: 250, y: 0 },
-          size: { width: 100, height: 200 }
-        }
+          size: { width: 100, height: 200 },
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -212,8 +212,8 @@ describe('panelReducer', () => {
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
@@ -221,8 +221,8 @@ describe('panelReducer', () => {
           id: 'panel-4',
           position: { x: 100, y: 100 },
           size: { width: 100, height: 100 },
-          undocking: false
-        }
+          undocking: false,
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -240,8 +240,8 @@ describe('panelReducer', () => {
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
@@ -250,8 +250,8 @@ describe('panelReducer', () => {
           position: { x: 0, y: 0 },
           size: { width: 100, height: 100 },
           positionAnchor: PositionAnchorType.TOP_LEFT,
-          undocking: false
-        }
+          undocking: false,
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -269,8 +269,8 @@ describe('panelReducer', () => {
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
@@ -279,8 +279,8 @@ describe('panelReducer', () => {
           position: { x: 0, y: 0 },
           size: { width: 100, height: 100 },
           positionAnchor: PositionAnchorType.TOP_RIGHT,
-          undocking: false
-        }
+          undocking: false,
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -298,8 +298,8 @@ describe('panelReducer', () => {
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
@@ -308,8 +308,8 @@ describe('panelReducer', () => {
           position: { x: 0, y: 0 },
           size: { width: 100, height: 100 },
           positionAnchor: PositionAnchorType.BOTTOM_LEFT,
-          undocking: false
-        }
+          undocking: false,
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -320,15 +320,15 @@ describe('panelReducer', () => {
       const dockX = 895;
       const dockY = 895;
       const id = 'panel-5';
-      const position =  { x: dockX, y: dockY };
+      const position = { x: dockX, y: dockY };
 
       const action: DragPanelAction = {
         type: PanelActionsType.PANEL_DRAG,
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
@@ -337,8 +337,8 @@ describe('panelReducer', () => {
           position: { x: 0, y: 0 },
           size: { width: 100, height: 100 },
           positionAnchor: PositionAnchorType.BOTTOM_RIGHT,
-          undocking: false
-        }
+          undocking: false,
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -349,15 +349,15 @@ describe('panelReducer', () => {
       const dockX = 10000;
       const dockY = 10000;
       const id = 'panel-5';
-      const position =  { x: dockX, y: dockY };
+      const position = { x: dockX, y: dockY };
 
       const action: DragPanelAction = {
         type: PanelActionsType.PANEL_DRAG,
         payload: {
           id,
           position,
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const expectedState: DiagramMakerPanels = {
         ...state,
@@ -366,8 +366,8 @@ describe('panelReducer', () => {
           position: { x: 0, y: 0 },
           size: { width: 100, height: 100 },
           positionAnchor: PositionAnchorType.BOTTOM_RIGHT,
-          undocking: false
-        }
+          undocking: false,
+        },
       };
       expect(panelReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);

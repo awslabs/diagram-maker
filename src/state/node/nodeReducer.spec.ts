@@ -2,62 +2,62 @@ import merge from 'lodash-es/merge';
 import omit from 'lodash-es/omit';
 import set from 'lodash-es/set';
 
-import * as positionUtils from 'diagramMaker/service/positionUtils';
 import { EdgeActionsType, SelectEdgeAction } from 'diagramMaker/state/edge';
 import {
-  EditorActionsType, FocusNodeAction, UpdateSelectionMarqueeAction
+  EditorActionsType, FocusNodeAction, UpdateSelectionMarqueeAction,
 } from 'diagramMaker/state/editor/editorActions';
 import { CreateItemsAction, DeleteItemsAction, GlobalActionsType } from 'diagramMaker/state/global/globalActions';
-import { DiagramMakerNode, DiagramMakerNodes, Position, Size } from 'diagramMaker/state/types';
+import {
+  DiagramMakerNode, DiagramMakerNodes, Position,
+} from 'diagramMaker/state/types';
 import { DeselectAction, WorkspaceActionsType } from 'diagramMaker/state/workspace';
 import { SelectAllAction } from 'diagramMaker/state/workspace/workspaceActions';
 
 import {
   CreateNodeAction, DeleteNodeAction, DragEndNodeAction, DragNodeAction,
-  DragStartNodeAction, NodeActionsType, SelectNodeAction
+  DragStartNodeAction, NodeActionsType, SelectNodeAction,
 } from './nodeActions';
 import nodeReducer from './nodeReducer';
 
 describe('nodeReducer', () => {
-
   const getState = (): DiagramMakerNodes<string> => ({
     'node-1': {
       id: 'node-1',
       diagramMakerData: {
         position: { x: 0, y: 0 },
-        size: { width: 100, height: 100 }
+        size: { width: 100, height: 100 },
       },
-      consumerData: undefined
+      consumerData: undefined,
     },
     'node-2': {
       id: 'node-2',
       diagramMakerData: {
         position: { x: 0, y: 0 },
-        size: { width: 100, height: 100 }
+        size: { width: 100, height: 100 },
       },
-      consumerData: undefined
-    }
+      consumerData: undefined,
+    },
   });
 
   const workspaceRectangle = {
     position: {
-      x: 0, y: 0
+      x: 0, y: 0,
     },
     size: {
       height: 1000,
-      width: 1000
-    }
+      width: 1000,
+    },
   };
 
   const createNode = <NodeType>(
     id: string,
     consumerData?: NodeType,
-    diagramMakerData = { position: { x: 10, y: 10 }, size: { width: 10, height: 10 } }
+    diagramMakerData = { position: { x: 10, y: 10 }, size: { width: 10, height: 10 } },
   ): DiagramMakerNode<NodeType> => ({
-    id,
-    diagramMakerData,
-    consumerData
-  });
+      id,
+      diagramMakerData,
+      consumerData,
+    });
 
   /**
    * Verifies that initial `state` (that was initialized before applying reducer)
@@ -95,9 +95,14 @@ describe('nodeReducer', () => {
       const diagramMakerData = { position, size };
       const consumerData = 'testData';
       const action: CreateNodeAction<string> = {
-        type: NodeActionsType.NODE_CREATE, payload: { id, typeId, position, size, consumerData }
+        type: NodeActionsType.NODE_CREATE,
+        payload: {
+          id, typeId, position, size, consumerData,
+        },
       };
-      const nodeState = { id, typeId, diagramMakerData, consumerData };
+      const nodeState = {
+        id, typeId, diagramMakerData, consumerData,
+      };
       expect(nodeReducer(state, action)).toEqual(merge(getState(), { 'node-1': nodeState }));
       checkReducerPurity(state);
     });
@@ -113,7 +118,7 @@ describe('nodeReducer', () => {
       set(expectedState, 'node-4', newNode2);
       const action: CreateItemsAction<string, void> = {
         type: GlobalActionsType.CREATE_ITEMS,
-        payload: { nodes: [newNode1, newNode2], edges: [] }
+        payload: { nodes: [newNode1, newNode2], edges: [] },
       };
       expect(nodeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -175,7 +180,7 @@ describe('nodeReducer', () => {
       const state = getState();
       const action: FocusNodeAction = {
         type: EditorActionsType.FOCUS_NODE,
-        payload: { id: 'node-1', position: { x: 10, y: 10 }, size: { width: 10, height: 10 } }
+        payload: { id: 'node-1', position: { x: 10, y: 10 }, size: { width: 10, height: 10 } },
       };
       const expectedState = getState();
       set(expectedState, 'node-1.diagramMakerData.selected', true);
@@ -191,7 +196,7 @@ describe('nodeReducer', () => {
       set(expectedState, 'node-2.diagramMakerData.selected', false);
       const action: FocusNodeAction = {
         type: EditorActionsType.FOCUS_NODE,
-        payload: { id: 'node-3', position: { x: 10, y: 10 }, size: { width: 10, height: 10 } }
+        payload: { id: 'node-3', position: { x: 10, y: 10 }, size: { width: 10, height: 10 } },
       };
       expect(nodeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -242,7 +247,9 @@ describe('nodeReducer', () => {
       const size = { height: 100, width: 100 };
       const action: DragNodeAction = {
         type: NodeActionsType.NODE_DRAG,
-        payload: { id, position, workspaceRectangle, size }
+        payload: {
+          id, position, workspaceRectangle, size,
+        },
       };
       const expectedState = getState();
       set(expectedState, 'node-1.diagramMakerData.position', position);
@@ -257,7 +264,9 @@ describe('nodeReducer', () => {
       const size = { height: 100, width: 100 };
       const action: DragNodeAction = {
         type: NodeActionsType.NODE_DRAG,
-        payload: { id, position, workspaceRectangle, size }
+        payload: {
+          id, position, workspaceRectangle, size,
+        },
       };
       const expectedState = getState();
       const node1Pos = { x: 0, y: 0 };
@@ -275,7 +284,9 @@ describe('nodeReducer', () => {
       const size = { height: 100, width: 100 };
       const action: DragNodeAction = {
         type: NodeActionsType.NODE_DRAG,
-        payload: { id, position, workspaceRectangle, size }
+        payload: {
+          id, position, workspaceRectangle, size,
+        },
       };
       const expectedState = getState();
       const node1Pos = { x: 0, y: 0 };
@@ -293,7 +304,9 @@ describe('nodeReducer', () => {
       const size = { height: 100, width: 100 };
       const action: DragNodeAction = {
         type: NodeActionsType.NODE_DRAG,
-        payload: { id, position, workspaceRectangle, size }
+        payload: {
+          id, position, workspaceRectangle, size,
+        },
       };
       const expectedState = getState();
       const node1Pos = { x: 1100, y: 0 };
@@ -309,7 +322,9 @@ describe('nodeReducer', () => {
       const size = { height: 100, width: 100 };
       const action: DragNodeAction = {
         type: NodeActionsType.NODE_DRAG,
-        payload: { id, position, workspaceRectangle, size }
+        payload: {
+          id, position, workspaceRectangle, size,
+        },
       };
       const expectedState = getState();
       const node1Pos = { x: 0, y: 1100 };
@@ -325,7 +340,9 @@ describe('nodeReducer', () => {
       const size = { height: 10, width: 10 };
       const action: DragNodeAction = {
         type: NodeActionsType.NODE_DRAG,
-        payload: { id, position, workspaceRectangle, size }
+        payload: {
+          id, position, workspaceRectangle, size,
+        },
       };
       expect(nodeReducer(state, action)).toEqual(state);
       checkReducerPurity(state);
@@ -342,8 +359,8 @@ describe('nodeReducer', () => {
           type: EditorActionsType.UPDATE_SELECTION_MARQUEE,
           payload: {
             anchor,
-            position
-          }
+            position,
+          },
         };
         const expectedState = getState();
         set(expectedState, 'node-1.diagramMakerData.selected', true);
@@ -360,8 +377,8 @@ describe('nodeReducer', () => {
           type: EditorActionsType.UPDATE_SELECTION_MARQUEE,
           payload: {
             anchor,
-            position
-          }
+            position,
+          },
         };
         const expectedState = getState();
         set(expectedState, 'node-1.diagramMakerData.selected', true);
@@ -380,8 +397,8 @@ describe('nodeReducer', () => {
           type: EditorActionsType.UPDATE_SELECTION_MARQUEE,
           payload: {
             anchor,
-            position
-          }
+            position,
+          },
         };
         const expectedState = getState();
         set(expectedState, 'node-1.diagramMakerData.selected', false);
@@ -416,14 +433,14 @@ describe('nodeReducer', () => {
     });
   });
 
-  describe('delete items action',  () => {
+  describe('delete items action', () => {
     it('deletes the given nodes', () => {
       const state = getState();
       const expectedState = { ...state };
       delete expectedState['node-2'];
       const payload = {
         edgeIds: [],
-        nodeIds: ['node-2']
+        nodeIds: ['node-2'],
       };
       const type = GlobalActionsType.DELETE_ITEMS;
       const action: DeleteItemsAction = { type, payload };

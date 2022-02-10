@@ -21,7 +21,8 @@ const getHtmlWebpackConfig = () => {
     return folders.map((entryName) => ({
     chunks: [entryName],
     filename: `${entryName}.html`,
-    template: 'integ/index.html'
+    template: 'integ/index.html',
+    scriptLoading: 'blocking'
   }));
 }
 

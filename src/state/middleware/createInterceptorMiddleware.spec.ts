@@ -6,7 +6,6 @@ import { NodeActionsType } from 'diagramMaker/state/node';
 import { createInterceptorMiddleware } from '.';
 
 describe('interceptor middleware', () => {
-
   let dispatch: Dispatch;
   let getState: () => {};
   let action: DiagramMakerAction<{}, {}>;
@@ -16,8 +15,10 @@ describe('interceptor middleware', () => {
     dispatch = jest.fn();
     getState = jest.fn();
     action = {
-      payload: { id: '1234', typeId: '5678', position: { x: 0, y: 0 }, size: { width: 10, height: 10 } },
-      type: NodeActionsType.NODE_CREATE
+      payload: {
+        id: '1234', typeId: '5678', position: { x: 0, y: 0 }, size: { width: 10, height: 10 },
+      },
+      type: NodeActionsType.NODE_CREATE,
     };
     next = jest.fn();
   });

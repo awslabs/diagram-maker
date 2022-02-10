@@ -1,12 +1,10 @@
 import { produce } from 'immer';
 import clone from 'lodash-es/clone';
-import fill from 'lodash-es/fill';
-import includes from 'lodash-es/includes';
 import isFinite from 'lodash-es/isFinite';
 import isNumber from 'lodash-es/isNumber';
 import values from 'lodash-es/values';
 
-import { DiagramMakerData, DiagramMakerNode } from 'diagramMaker/state/types';
+import { DiagramMakerData } from 'diagramMaker/state/types';
 
 import { HierarchicalLayoutConfig } from './layoutActions';
 
@@ -27,167 +25,66 @@ interface NodeDirection {
   isFixed: boolean;
 }
 
-export default function hierarchicalLayout<NodeType, EdgeType>(
-  state: DiagramMakerData<NodeType, EdgeType>,
-  layoutConfig: HierarchicalLayoutConfig
-): DiagramMakerData<NodeType, EdgeType> {
-  // Initialize config values with defaults, if needed.
-  const distanceMin = layoutConfig.distanceMin;
-  const distanceMax = isNumber(layoutConfig.distanceMax) ? layoutConfig.distanceMax : (3 * distanceMin);
-  const distanceDeclineRate = isNumber(layoutConfig.distanceDeclineRate) ? layoutConfig.distanceDeclineRate : 0.3;
+/**
+ * Normalizes any angle to range [0, 2 * PI).
+ */
+function normalizeAngle(angle: number): number {
+  let result = angle;
+  while (result < 0) { result += Math.PI * 2; }
+  while (result >= Math.PI * 2) { result -= Math.PI * 2; }
+  return result;
+}
 
-  const initialGravityAngle = isNumber(layoutConfig.gravityAngle)
-    ? normalizeAngle(-layoutConfig.gravityAngle) // As Y-axis points down, the angle must be inverted.
-    : (Math.PI * 0.5); // Default gravity points straight down.
+/**
+ * Returns true when `angle` is left (or "counter-clockwise") to `angleBase`.
+ *
+ * An angle is not considered left to itself:
+ *   isLeftTurn(a, a) -> false
+ *
+ * An angle is considered left to diametrically opposite angle:
+ *   isLeftTurn(a, a + PI) -> true
+ */
+function isLeftTurn(angleBase: number, angle: number): boolean {
+  const angleOpposite = normalizeAngle(angleBase + Math.PI);
 
-  const gravityStrength = isNumber(layoutConfig.gravityStrength) ? layoutConfig.gravityStrength : 0.0;
-
-  // Construct an initial graph without calculated positioning.
-  const fixedNodeIdSet: { [key: string]: boolean } = {};
-  layoutConfig.fixedNodeIds.forEach(nodeId => fixedNodeIdSet[nodeId] = true);
-
-  const fixedNodes: number[] = [];
-  const nodeIndex: { [key: string]: number } = {};
-  const graph: GraphNode[] = values(state.nodes).map((node, index) => {
-    nodeIndex[node.id] = index;
-
-    const graphNode: GraphNode = {
-      id: node.id,
-      neighbors: [],
-      parents: []
-    };
-
-    const position = node.diagramMakerData.position;
-    const size = node.diagramMakerData.size;
-    if (fixedNodeIdSet[node.id]) {
-      graphNode.isFixed = true;
-      graphNode.x = position.x + size.width / 2;
-      graphNode.y = position.y + size.height / 2;
-
-      fixedNodes.push(index);
-    }
-    return graphNode;
-  });
-
-  // Add neighbor information based on DiagramMaker edges.
-  values(state.edges).forEach((edge) => {
-    const srcIndex = nodeIndex[edge.src];
-    const destIndex = nodeIndex[edge.dest];
-
-    // Note:
-    // The directionality of the graph is ignored.
-    // No matter if we're laying out children nodes around the parent,
-    // or parent nodes around the child, the same rules spread in both directions.
-    graph[srcIndex].neighbors.push(destIndex);
-    graph[destIndex].neighbors.push(srcIndex);
-  });
-
-  // Calculate positioning during BFS traversal.
-  const nodeStatus: TraversalStatus[] = graph.map(
-    node => node.isFixed ? TraversalStatus.VISITED : TraversalStatus.NOT_VISITED
-  );
-
-  let currentLayer: number[] = fixedNodes;
-  let r = distanceMax;
-  while (currentLayer.length) {
-    // Mark current layer as VISITED.
-    currentLayer.forEach((node) => {
-      nodeStatus[node] = TraversalStatus.VISITED;
-    });
-
-    // Calculate next layer by traversing neighbors of the current layer.
-    const nextLayer: number[] = [];
-    currentLayer.forEach((node) => {
-      graph[node].neighbors.forEach((neighbor) => {
-        if (nodeStatus[neighbor] === TraversalStatus.VISITED) { return; }
-
-        graph[neighbor].parents.push(node);
-        if (nodeStatus[neighbor] === TraversalStatus.NOT_VISITED) {
-          nextLayer.push(neighbor);
-          nodeStatus[neighbor] = TraversalStatus.PROCESSING;
-        }
-      });
-    });
-
-    // Position the next layer.
-
-    // Start with the nodes that are connected to multiple fixed parents.
-    // Place them in the centroid of all of their parents.
-    nextLayer.forEach((node) => {
-      if (graph[node].parents.length > 1) {
-        const parentsCount = graph[node].parents.length;
-
-        const sumX = graph[node].parents.reduce((sum, parent) => sum + (graph[parent].x as number), 0);
-        graph[node].x = sumX / parentsCount;
-
-        const sumY = graph[node].parents.reduce((sum, parent) => sum + (graph[parent].y as number), 0);
-        graph[node].y = sumY / parentsCount;
-
-        graph[node].isFixed = true;
-      }
-    });
-
-    // Calculate the fixtures (angles that are already fixed) for each node in the current layer.
-    const fixtures: NodeDirection[][] = graph.map(node => []);
-    currentLayer.forEach((node) => {
-      graph[node].neighbors.forEach((neighbor) => {
-        if (graph[neighbor].isFixed) {
-          fixtures[node].push({
-            angle: getAngle(graph[node], graph[neighbor]),
-            isFixed: true
-          });
-        }
-      });
-      sortNodeDirections(fixtures[node]);
-    });
-
-    // Distribute all remaining free-hanging nodes between the fixtures.
-    currentLayer.forEach((node) => {
-      let gravityAngle = initialGravityAngle;
-
-      const meanOfFixtures = meanOfAngles(fixtures[node].map(fixture => fixture.angle));
-      if (!isNaN(meanOfFixtures)) {
-        gravityAngle = normalizeAngle(meanOfFixtures + Math.PI);
-      }
-
-      const freeNodesCount = graph[node].neighbors.length - fixtures[node].length;
-      const arrangement = arrangeEvenly(freeNodesCount, fixtures[node], gravityAngle);
-
-      applyGravity(arrangement, gravityAngle, gravityStrength);
-
-      let arrangementIndex = 0;
-      graph[node].neighbors.forEach((neighbor) => {
-        if (!graph[neighbor].isFixed) {
-          while (arrangement[arrangementIndex].isFixed) {
-            arrangementIndex += 1;
-          }
-          const angle = arrangement[arrangementIndex].angle;
-          graph[neighbor].x = (graph[node].x as number) + Math.cos(angle) * r;
-          graph[neighbor].y = (graph[node].y as number) + Math.sin(angle) * r;
-          graph[neighbor].isFixed = true;
-
-          arrangementIndex += 1;
-        }
-      });
-    });
-
-    // Move on to the next layer.
-    currentLayer = nextLayer;
-    r = distanceMin + (r - distanceMin) * (1 - distanceDeclineRate);
+  if (angleBase < Math.PI) {
+    return (angle > angleBase && angle <= angleOpposite);
   }
+  return (angle > angleBase || angle <= angleOpposite);
+}
 
-  // Update the original data with the calculated values.
-  return produce(state, (draftState) => {
-    graph.forEach((node) => {
-      if (isFinite(node.x) && isFinite(node.y)) {
-        const nodeSize = draftState.nodes[node.id].diagramMakerData.size;
-        const diagramMakerNode = draftState.nodes[node.id].diagramMakerData.position = {
-          x: (node.x as number) - nodeSize.width / 2,
-          y: (node.y as number) - nodeSize.height / 2
-        };
-      }
-    });
-  });
+/**
+ * Calculates the angle of vector from `node1` to `node2` relative to X axis.
+ */
+function getAngle(node1: GraphNode, node2: GraphNode): number {
+  const x1 = node1.x as number;
+  const y1 = node1.y as number;
+  const x2 = node2.x as number;
+  const y2 = node2.y as number;
+
+  // Math.atan2(y, x) takes Y coordinate first. WAT?!
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+
+  // Math.atan2(y, x) returns angle in the range [-PI, PI].
+  // Converting it to the positive range [0, 2 * PI]
+  return normalizeAngle(angle);
+}
+
+/**
+ * Finds the smaller angle between two angles.
+ */
+function angleBetween(angleA: number, angleB: number): number {
+  const angle = Math.abs(angleA - angleB);
+  return Math.min(angle, Math.PI * 2 - angle);
+}
+
+/**
+ * Most functions expect directions to be sorted by the `angle`,
+ * so that the traversal will happen around the circle.
+ */
+function sortNodeDirections(directions: NodeDirection[]): void {
+  directions.sort((a, b) => a.angle - b.angle);
 }
 
 /**
@@ -252,7 +149,7 @@ function arrangeEvenly(nodesCount: number, fixtures: NodeDirection[], defaultAng
   }
 
   // Initialize `minAngle[X][0]`. This is when we don't have any nodes to arrange.
-  minAngle[0][0] = segments[0];
+  [minAngle[0][0]] = segments;
   bestNodesCount[0][0] = 0;
   for (let segmentIndex = 1; segmentIndex < segments.length; segmentIndex += 1) {
     minAngle[segmentIndex][0] = Math.min(segments[segmentIndex], minAngle[segmentIndex - 1][0]);
@@ -285,7 +182,7 @@ function arrangeEvenly(nodesCount: number, fixtures: NodeDirection[], defaultAng
   }
 
   // Based on the results, extract the optimal number of nodes that should go in each segment.
-  const segmentNodesCount: number[] = segments.map(segment => 0);
+  const segmentNodesCount: number[] = segments.map(() => 0);
   let remaining = nodesCount;
   for (let segmentIndex = segments.length - 1; segmentIndex >= 0; segmentIndex -= 1) {
     segmentNodesCount[segmentIndex] = bestNodesCount[segmentIndex][remaining];
@@ -295,7 +192,7 @@ function arrangeEvenly(nodesCount: number, fixtures: NodeDirection[], defaultAng
   // Finally, calculate and return the actual angles.
   for (let segmentIndex = 0; segmentIndex < segments.length; segmentIndex += 1) {
     arrangement.push(fixtures[segmentIndex]);
-    let angle = fixtures[segmentIndex].angle;
+    let { angle } = fixtures[segmentIndex];
     const angleIncrement = segments[segmentIndex] / (segmentNodesCount[segmentIndex] + 1);
     for (let node = 0; node < segmentNodesCount[segmentIndex]; node += 1) {
       angle += angleIncrement;
@@ -309,14 +206,61 @@ function arrangeEvenly(nodesCount: number, fixtures: NodeDirection[], defaultAng
 }
 
 /**
+ * Pushes the `angle` towards `targetAngle` with `strength`.
+ *
+ * The higher `strength` is, the closer `angle` will move towards:
+ * - `strength` of 1.0 means that `targetAngle` pushes away with the same force as `angle` is being pushed towards.
+ * - `strength` of 2.0 means that `targetAngle` is twice as strong as the `angle`.
+ */
+function pushTowardsAngle(angle: number, targetAngle: number, strength: number): number {
+  const angleIncrement = (strength / (strength + 1)) * angleBetween(angle, targetAngle);
+  if (isLeftTurn(angle, targetAngle)) {
+    return normalizeAngle(angle + angleIncrement);
+  }
+  return normalizeAngle(angle - angleIncrement);
+}
+
+/**
+ * Returns the mean (or "average") of `angles`.
+ * Returns NaN, when angles are dimaterically opposite.
+ */
+function meanOfAngles(angles: number[]): number {
+  if (!angles.length) {
+    return NaN;
+  }
+
+  // https://en.wikipedia.org/wiki/Mean_of_circular_quantities#Mean_of_angles
+  const x = angles
+    .map((a) => Math.cos(a))
+    .reduce((acc, value) => acc + value, 0);
+
+  const y = angles
+    .map((a) => Math.sin(a))
+    .reduce((acc, value) => acc + value, 0);
+
+  if (Math.abs(x) < 0.001 && Math.abs(y) < 0.001) {
+    // The centroid is very close to the origin (0, 0)
+    // which means that all angles balance each other out.
+    return NaN;
+  }
+  return normalizeAngle(Math.atan2(y, x));
+}
+
+/**
  * Moves all nodes in the direction of `gravityAngle` while not pressing too hard against the neighbors.
  * Fixed directions are not moved.
  */
-function applyGravity(directions: NodeDirection[], gravityAngle: number, gravityStrength: number): void {
+function applyGravity(
+  originalDirections: NodeDirection[],
+  gravityAngle: number,
+  gravityStrength: number,
+): NodeDirection[] {
   // No nodes or no gravity, nothing to do here.
-  if (!directions.length || gravityStrength <= 0) {
-    return;
+  if (!originalDirections.length || gravityStrength <= 0) {
+    return originalDirections;
   }
+
+  const directions = originalDirections.map((direction) => ({ ...direction }));
 
   // If it's one node and it's free, move it to `gravityAngle`.
   // If it's fixed, nothing to do.
@@ -324,7 +268,7 @@ function applyGravity(directions: NodeDirection[], gravityAngle: number, gravity
     if (!directions[0].isFixed) {
       directions[0].angle = gravityAngle;
     }
-    return;
+    return directions;
   }
 
   const incIndex = (i: number) => ((i + 1) % directions.length);
@@ -376,11 +320,13 @@ function applyGravity(directions: NodeDirection[], gravityAngle: number, gravity
     const angleNextToGravity = angleBetween(angleNext, gravityAngle);
     if (Math.abs(angleNextToGravity - anglePreviousToGravity) < 0.01) {
       // Two free nodes are equally close to gravity. Move them equally closer, based on `gravityStrength`.
-      directions[previousIndex].angle =
-        pushTowardsAngle(directions[previousIndex].angle, gravityAngle, gravityStrength);
+      directions[previousIndex].angle = pushTowardsAngle(
+        directions[previousIndex].angle,
+        gravityAngle,
+        gravityStrength,
+      );
 
-      directions[nextIndex].angle =
-        pushTowardsAngle(directions[nextIndex].angle, gravityAngle, gravityStrength);
+      directions[nextIndex].angle = pushTowardsAngle(directions[nextIndex].angle, gravityAngle, gravityStrength);
     } else if (anglePreviousToGravity <= angleNextToGravity) {
       // `previousIndex` is closer to `gravityAngle`. Move it right to `gravityAngle`.
       directions[previousIndex].angle = gravityAngle;
@@ -396,8 +342,11 @@ function applyGravity(directions: NodeDirection[], gravityAngle: number, gravity
   let index = incIndex(nextIndex);
   while (index !== previousIndex && isLeftTurn(gravityAngle, directions[index].angle)) {
     if (!directions[index].isFixed) {
-      directions[index].angle =
-        pushTowardsAngle(directions[index].angle, directions[decIndex(index)].angle, gravityStrength);
+      directions[index].angle = pushTowardsAngle(
+        directions[index].angle,
+        directions[decIndex(index)].angle,
+        gravityStrength,
+      );
     }
     index = incIndex(index);
   }
@@ -406,114 +355,180 @@ function applyGravity(directions: NodeDirection[], gravityAngle: number, gravity
   index = decIndex(previousIndex);
   while (index !== nextIndex && !isLeftTurn(gravityAngle, directions[index].angle)) {
     if (!directions[index].isFixed) {
-      directions[index].angle =
-        pushTowardsAngle(directions[index].angle, directions[incIndex(index)].angle, gravityStrength);
+      directions[index].angle = pushTowardsAngle(
+        directions[index].angle,
+        directions[incIndex(index)].angle,
+        gravityStrength,
+      );
     }
     index = decIndex(index);
   }
 
   sortNodeDirections(directions);
+
+  return directions;
 }
 
-/**
- * Most functions expect directions to be sorted by the `angle`,
- * so that the traversal will happen around the circle.
- */
-function sortNodeDirections(directions: NodeDirection[]): void {
-  directions.sort((a, b) => a.angle - b.angle);
-}
+export default function hierarchicalLayout<NodeType, EdgeType>(
+  state: DiagramMakerData<NodeType, EdgeType>,
+  layoutConfig: HierarchicalLayoutConfig,
+): DiagramMakerData<NodeType, EdgeType> {
+  // Initialize config values with defaults, if needed.
+  const { distanceMin } = layoutConfig;
+  const distanceMax = isNumber(layoutConfig.distanceMax) ? layoutConfig.distanceMax : (3 * distanceMin);
+  const distanceDeclineRate = isNumber(layoutConfig.distanceDeclineRate) ? layoutConfig.distanceDeclineRate : 0.3;
 
-/**
- * Pushes the `angle` towards `targetAngle` with `strength`.
- *
- * The higher `strength` is, the closer `angle` will move towards:
- * - `strength` of 1.0 means that `targetAngle` pushes away with the same force as `angle` is being pushed towards.
- * - `strength` of 2.0 means that `targetAngle` is twice as strong as the `angle`.
- */
-function pushTowardsAngle(angle: number, targetAngle: number, strength: number): number {
-  const angleIncrement = (strength / (strength + 1)) * angleBetween(angle, targetAngle);
-  if (isLeftTurn(angle, targetAngle)) {
-    return normalizeAngle(angle + angleIncrement);
+  const initialGravityAngle = isNumber(layoutConfig.gravityAngle)
+    ? normalizeAngle(-layoutConfig.gravityAngle) // As Y-axis points down, the angle must be inverted.
+    : (Math.PI * 0.5); // Default gravity points straight down.
+
+  const gravityStrength = isNumber(layoutConfig.gravityStrength) ? layoutConfig.gravityStrength : 0.0;
+
+  // Construct an initial graph without calculated positioning.
+  const fixedNodeIdSet: { [key: string]: boolean } = {};
+  layoutConfig.fixedNodeIds.forEach((nodeId) => { fixedNodeIdSet[nodeId] = true; });
+
+  const fixedNodes: number[] = [];
+  const nodeIndex: { [key: string]: number } = {};
+  const graph: GraphNode[] = values(state.nodes).map((node, index) => {
+    nodeIndex[node.id] = index;
+
+    const graphNode: GraphNode = {
+      id: node.id,
+      neighbors: [],
+      parents: [],
+    };
+
+    const { position } = node.diagramMakerData;
+    const { size } = node.diagramMakerData;
+    if (fixedNodeIdSet[node.id]) {
+      graphNode.isFixed = true;
+      graphNode.x = position.x + size.width / 2;
+      graphNode.y = position.y + size.height / 2;
+
+      fixedNodes.push(index);
+    }
+    return graphNode;
+  });
+
+  // Add neighbor information based on DiagramMaker edges.
+  values(state.edges).forEach((edge) => {
+    const srcIndex = nodeIndex[edge.src];
+    const destIndex = nodeIndex[edge.dest];
+
+    // Note:
+    // The directionality of the graph is ignored.
+    // No matter if we're laying out children nodes around the parent,
+    // or parent nodes around the child, the same rules spread in both directions.
+    graph[srcIndex].neighbors.push(destIndex);
+    graph[destIndex].neighbors.push(srcIndex);
+  });
+
+  // Calculate positioning during BFS traversal.
+  const nodeStatus: TraversalStatus[] = graph.map(
+    (node) => (node.isFixed ? TraversalStatus.VISITED : TraversalStatus.NOT_VISITED),
+  );
+
+  let currentLayer: number[] = fixedNodes;
+  let r: number = distanceMax;
+  while (currentLayer.length) {
+    const radius = r;
+    // Mark current layer as VISITED.
+    currentLayer.forEach((node) => {
+      nodeStatus[node] = TraversalStatus.VISITED;
+    });
+
+    // Calculate next layer by traversing neighbors of the current layer.
+    const nextLayer: number[] = [];
+    currentLayer.forEach((node) => {
+      graph[node].neighbors.forEach((neighbor) => {
+        if (nodeStatus[neighbor] === TraversalStatus.VISITED) { return; }
+
+        graph[neighbor].parents.push(node);
+        if (nodeStatus[neighbor] === TraversalStatus.NOT_VISITED) {
+          nextLayer.push(neighbor);
+          nodeStatus[neighbor] = TraversalStatus.PROCESSING;
+        }
+      });
+    });
+
+    // Position the next layer.
+
+    // Start with the nodes that are connected to multiple fixed parents.
+    // Place them in the centroid of all of their parents.
+    nextLayer.forEach((node) => {
+      if (graph[node].parents.length > 1) {
+        const parentsCount = graph[node].parents.length;
+
+        const sumX = graph[node].parents.reduce((sum, parent) => sum + (graph[parent].x as number), 0);
+        graph[node].x = sumX / parentsCount;
+
+        const sumY = graph[node].parents.reduce((sum, parent) => sum + (graph[parent].y as number), 0);
+        graph[node].y = sumY / parentsCount;
+
+        graph[node].isFixed = true;
+      }
+    });
+
+    // Calculate the fixtures (angles that are already fixed) for each node in the current layer.
+    const fixtures: NodeDirection[][] = graph.map(() => []);
+    currentLayer.forEach((node) => {
+      graph[node].neighbors.forEach((neighbor) => {
+        if (graph[neighbor].isFixed) {
+          fixtures[node].push({
+            angle: getAngle(graph[node], graph[neighbor]),
+            isFixed: true,
+          });
+        }
+      });
+      sortNodeDirections(fixtures[node]);
+    });
+
+    // Distribute all remaining free-hanging nodes between the fixtures.
+    currentLayer.forEach((node) => {
+      let gravityAngle = initialGravityAngle;
+
+      const meanOfFixtures = meanOfAngles(fixtures[node].map((fixture) => fixture.angle));
+      if (!Number.isNaN(meanOfFixtures)) {
+        gravityAngle = normalizeAngle(meanOfFixtures + Math.PI);
+      }
+
+      const freeNodesCount = graph[node].neighbors.length - fixtures[node].length;
+      const tempArrangement = arrangeEvenly(freeNodesCount, fixtures[node], gravityAngle);
+
+      const arrangement = applyGravity(tempArrangement, gravityAngle, gravityStrength);
+
+      let arrangementIndex = 0;
+      graph[node].neighbors.forEach((neighbor) => {
+        if (!graph[neighbor].isFixed) {
+          while (arrangement[arrangementIndex].isFixed) {
+            arrangementIndex += 1;
+          }
+          const { angle } = arrangement[arrangementIndex];
+          graph[neighbor].x = (graph[node].x as number) + Math.cos(angle) * radius;
+          graph[neighbor].y = (graph[node].y as number) + Math.sin(angle) * radius;
+          graph[neighbor].isFixed = true;
+
+          arrangementIndex += 1;
+        }
+      });
+    });
+
+    // Move on to the next layer.
+    currentLayer = nextLayer;
+    r = distanceMin + (radius - distanceMin) * (1 - distanceDeclineRate);
   }
-  return normalizeAngle(angle - angleIncrement);
-}
 
-/**
- * Returns the mean (or "average") of `angles`.
- * Returns NaN, when angles are dimaterically opposite.
- */
-function meanOfAngles(angles: number[]): number {
-  if (!angles.length) {
-    return NaN;
-  }
-
-  // https://en.wikipedia.org/wiki/Mean_of_circular_quantities#Mean_of_angles
-  const x = angles
-    .map(a => Math.cos(a))
-    .reduce((acc, value) => acc + value, 0);
-
-  const y = angles
-    .map(a => Math.sin(a))
-    .reduce((acc, value) => acc + value, 0);
-
-  if (Math.abs(x) < 0.001 && Math.abs(y) < 0.001) {
-    // The centroid is very close to the origin (0, 0)
-    // which means that all angles balance each other out.
-    return NaN;
-  }
-  return normalizeAngle(Math.atan2(y, x));
-}
-
-/**
- * Returns true when `angle` is left (or "counter-clockwise") to `angleBase`.
- *
- * An angle is not considered left to itself:
- *   isLeftTurn(a, a) -> false
- *
- * An angle is considered left to diametrically opposite angle:
- *   isLeftTurn(a, a + PI) -> true
- */
-function isLeftTurn(angleBase: number, angle: number): boolean {
-  const angleOpposite = normalizeAngle(angleBase + Math.PI);
-
-  if (angleBase < Math.PI) {
-    return (angle > angleBase && angle <= angleOpposite);
-  }
-  return (angle > angleBase || angle <= angleOpposite);
-}
-
-/**
- * Finds the smaller angle between two angles.
- */
-function angleBetween(angleA: number, angleB: number): number {
-  const angle = Math.abs(angleA - angleB);
-  return Math.min(angle, Math.PI * 2 - angle);
-}
-
-/**
- * Calculates the angle of vector from `node1` to `node2` relative to X axis.
- */
-function getAngle(node1: GraphNode, node2: GraphNode): number {
-  const x1 = node1.x as number;
-  const y1 = node1.y as number;
-  const x2 = node2.x as number;
-  const y2 = node2.y as number;
-
-  // Math.atan2(y, x) takes Y coordinate first. WAT?!
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2
-  const angle = Math.atan2(y2 - y1, x2 - x1);
-
-  // Math.atan2(y, x) returns angle in the range [-PI, PI].
-  // Converting it to the positive range [0, 2 * PI]
-  return normalizeAngle(angle);
-}
-
-/**
- * Normalizes any angle to range [0, 2 * PI).
- */
-function normalizeAngle(angle: number): number {
-  let result = angle;
-  while (result < 0) { result += Math.PI * 2; }
-  while (result >= Math.PI * 2) { result -= Math.PI * 2; }
-  return result;
+  // Update the original data with the calculated values.
+  return produce(state, (draftState) => {
+    graph.forEach((node) => {
+      if (isFinite(node.x) && isFinite(node.y)) {
+        const nodeSize = draftState.nodes[node.id].diagramMakerData.size;
+        draftState.nodes[node.id].diagramMakerData.position = {
+          x: (node.x as number) - nodeSize.width / 2,
+          y: (node.y as number) - nodeSize.height / 2,
+        };
+      }
+    });
+  });
 }

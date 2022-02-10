@@ -1,15 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ConnectedView connects View component to redux store 1`] = `
-preact-render-spy (1 nodes)
--------
-<Connect(View)
-  configService={
+<Provider
+  value={
     Object {
-      "mockConfigService": [Function mockConstructor]
+      "store": Object {
+        "@@observable": [Function],
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "subscription": Object {
+        "addNestedSub": [Function],
+        "getListeners": [Function],
+        "handleChangeWrapper": [Function],
+        "isSubscribed": [Function],
+        "notifyNestedSubs": [Function],
+        "onStateChange": [Function],
+        "trySubscribe": [Function],
+        "tryUnsubscribe": [Function],
+      },
     }
   }
 >
-</Connect(View)>
-
+  <Connect(View)
+    configService={
+      Object {
+        "mockConfigService": [MockFunction],
+      }
+    }
+  />
+</Provider>
 `;

@@ -5,11 +5,13 @@ export interface DotPatternProps {
   radius: number;
 }
 
-const getQuarterCirclePathData = (cx: number, cy: number, r: number): string => {
-  return `M${cx},${cy} m${-r},0 a${r},${r} 0 1,1 ${r * 2},0 a${r},${r} 0 1,1 ${-r * 2},0`;
-};
+const getQuarterCirclePathData = (
+  cx: number,
+  cy: number,
+  r: number,
+): string => `M${cx},${cy} m${-r},0 a${r},${r} 0 1,1 ${r * 2},0 a${r},${r} 0 1,1 ${-r * 2},0`;
 
-const DotPattern = (props: DotPatternProps): JSX.Element => {
+function DotPattern(props: DotPatternProps): JSX.Element {
   const { cellSize, radius } = props;
   const pathTL = getQuarterCirclePathData(0, 0, radius);
   const pathTR = getQuarterCirclePathData(cellSize, 0, radius);
@@ -29,6 +31,6 @@ const DotPattern = (props: DotPatternProps): JSX.Element => {
       <rect fill="url(#dm-dot-pattern)" width="100%" height="100%" />
     </svg>
   );
-};
+}
 
 export default DotPattern;

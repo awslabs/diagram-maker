@@ -2,19 +2,19 @@ import { AnyAction, Store } from 'redux';
 import { actions as undoActions } from 'redux-undo-redo';
 
 import {
-  createFitAction, createFocusNodeAction, createSetEditorModeAction
+  createFitAction, createFocusNodeAction, createSetEditorModeAction,
 } from 'diagramMaker/state/editor/editorActionDispatcher';
 import { createLayoutAction, LayoutConfig } from 'diagramMaker/state/layout';
 import { DiagramMakerData, EditorModeType } from 'diagramMaker/state/types';
 import {
-  createWorkspaceResetZoomAction, createZoomWorkspaceAction
+  createWorkspaceResetZoomAction, createZoomWorkspaceAction,
 } from 'diagramMaker/state/workspace/workspaceActionDispatcher';
 
 const DEFAULT_ZOOM_DELTA = 50;
 
 export default class DiagramMakerApi<NodeType = {}, EdgeType = {}> {
   constructor(
-    private store: Store<DiagramMakerData<NodeType, EdgeType>>
+    private store: Store<DiagramMakerData<NodeType, EdgeType>>,
   ) {}
 
   /**
@@ -56,7 +56,9 @@ export default class DiagramMakerApi<NodeType = {}, EdgeType = {}> {
    * @returns {DiagramMakerApi} - Returns this `DiagramMakerApi` instance for method chaining.
    */
   public focusNode(
-    nodeId: string, leftPanelWidth?: number, rightPanelWidth?: number
+    nodeId: string,
+    leftPanelWidth?: number,
+    rightPanelWidth?: number,
   ): DiagramMakerApi<NodeType, EdgeType> {
     const nodeState = this.store.getState().nodes[nodeId];
     if (nodeState) {
@@ -78,7 +80,7 @@ export default class DiagramMakerApi<NodeType = {}, EdgeType = {}> {
   public focusSelected(leftPanelWidth?: number, rightPanelWidth?: number): DiagramMakerApi<NodeType, EdgeType> {
     const state = this.store.getState();
     const nodeKeys = Object.keys(state.nodes);
-    const selectedNodes = nodeKeys.filter(nodeKey => state.nodes[nodeKey].diagramMakerData.selected);
+    const selectedNodes = nodeKeys.filter((nodeKey) => state.nodes[nodeKey].diagramMakerData.selected);
     if (selectedNodes.length === 0) {
       this.resetZoom();
     } else if (selectedNodes.length === 1) {
@@ -99,13 +101,15 @@ export default class DiagramMakerApi<NodeType = {}, EdgeType = {}> {
    * @returns {DiagramMakerApi} - Returns this `DiagramMakerApi` instance for method chaining.
    */
   public fit(
-    leftPanelWidth?: number, rightPanelWidth?: number, nodeKeys?: string[]
+    leftPanelWidth?: number,
+    rightPanelWidth?: number,
+    nodeKeys?: string[],
   ): DiagramMakerApi<NodeType, EdgeType> {
     const state = this.store.getState();
     const nodesToFit = nodeKeys || Object.keys(state.nodes);
-    const nodeRects = nodesToFit.map(nodeKey => ({
+    const nodeRects = nodesToFit.map((nodeKey) => ({
       position: state.nodes[nodeKey].diagramMakerData.position,
-      size: state.nodes[nodeKey].diagramMakerData.size
+      size: state.nodes[nodeKey].diagramMakerData.size,
     }));
     this.store.dispatch(createFitAction(nodeRects, leftPanelWidth, rightPanelWidth));
     return this;
@@ -171,10 +175,10 @@ export default class DiagramMakerApi<NodeType = {}, EdgeType = {}> {
   }
 
   private workspaceZoom(zoom: number) {
-    const viewContainerSize = this.store.getState().workspace.viewContainerSize;
+    const { viewContainerSize } = this.store.getState().workspace;
     const position = {
       x: viewContainerSize.width / 2,
-      y: viewContainerSize.height / 2
+      y: viewContainerSize.height / 2,
     };
     this.store.dispatch(createZoomWorkspaceAction(zoom, position));
   }

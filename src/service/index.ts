@@ -4,7 +4,7 @@ export { default as UIEventManager } from './ui/UIEventManager';
 export { default as UIEventNormalizer } from './ui/UIEventNormalizer';
 export {
   default as UITargetNormalizer,
-  NormalizedTarget
+  NormalizedTarget,
 } from './ui/UITargetNormalizer';
 export { default as ConfigService } from './ConfigService';
 

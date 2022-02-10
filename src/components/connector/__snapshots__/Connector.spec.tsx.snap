@@ -1,31 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Connector renders at the given position with input data attributes 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-connector dm-connector-input"
-  style="transform: translate3d(150px, 300px, 0);"
+  className="dm-connector dm-connector-input"
+  data-dropzone={true}
   data-id="test"
   data-type="DiagramMaker.Connector"
-  data-dropzone={true}
+  style={
+    Object {
+      "transform": "translate3d(150px, 300px, 0)",
+    }
+  }
 >
-  <div class="dm-handle"></div>
+  <div
+    className="dm-handle"
+  />
 </div>
-
 `;
 
 exports[`Connector renders at the given position with output data attributes 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-connector dm-connector-output"
-  style="transform: translate3d(150px, 300px, 0);"
+  className="dm-connector dm-connector-output"
+  data-draggable={true}
   data-id="test"
   data-type="DiagramMaker.Connector"
-  data-draggable={true}
+  style={
+    Object {
+      "transform": "translate3d(150px, 300px, 0)",
+    }
+  }
 >
-  <div class="dm-handle"></div>
+  <div
+    className="dm-handle"
+  />
 </div>
-
 `;

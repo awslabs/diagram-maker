@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renderUtils render renders view 1`] = `
-<Provider store={Object {}}>
-  <Connect(View) configService="someConfig"></Connect(View)>
+<Provider
+  store={Object {}}
+>
+  <Connect(View)
+    configService="someConfig"
+  />
 </Provider>
 `;

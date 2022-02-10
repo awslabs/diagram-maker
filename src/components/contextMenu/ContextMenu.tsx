@@ -14,7 +14,6 @@ export interface ContextMenuProps {
 }
 
 export default class ContextMenu extends Preact.Component<ContextMenuProps> {
-
   public render(): JSX.Element {
     const { x, y } = this.props.position;
     const transform = `translate3d(${x}px, ${y}px, 0)`;

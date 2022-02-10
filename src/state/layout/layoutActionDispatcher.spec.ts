@@ -7,11 +7,11 @@ describe('layoutActionDispatcher', () => {
       const config: HierarchicalLayoutConfig = {
         layoutType: LayoutType.HIERARCHICAL,
         fixedNodeIds: ['node1'],
-        distanceMin: 50
+        distanceMin: 50,
       };
       expect(createLayoutAction(config)).toEqual({
         payload: config,
-        type: LayoutActionsType.LAYOUT
+        type: LayoutActionsType.LAYOUT,
       });
     });
   });

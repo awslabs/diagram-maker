@@ -2,33 +2,32 @@ import { produce } from 'immer';
 import keys from 'lodash-es/keys';
 import values from 'lodash-es/values';
 
-import { DiagramMakerData, DiagramMakerNode, Position } from 'diagramMaker/state/types';
+import { DiagramMakerData, Position } from 'diagramMaker/state/types';
 
 import { WorkflowLayoutConfig, WorkflowLayoutDirection } from './layoutActions';
 
-/* tslint:disable:no-var-requires */
 let Dagre: any;
 try {
+  // eslint-disable-next-line global-require
   Dagre = require('dagre');
 } catch (e) {
   // Dagre is optional
 }
-/* tslint:enabled */
 
 const WORKFLOW_DIRECTION_TO_DAGRE_MAP = {
   [WorkflowLayoutDirection.TOP_BOTTOM]: 'TB',
   [WorkflowLayoutDirection.BOTTOM_TOP]: 'BT',
   [WorkflowLayoutDirection.LEFT_RIGHT]: 'LR',
-  [WorkflowLayoutDirection.RIGHT_LEFT]: 'RL'
+  [WorkflowLayoutDirection.RIGHT_LEFT]: 'RL',
 };
 
 export default function workflowLayout<NodeType, EdgeType>(
   state: DiagramMakerData<NodeType, EdgeType>,
-  workflowConfig: WorkflowLayoutConfig
+  workflowConfig: WorkflowLayoutConfig,
 ): DiagramMakerData<NodeType, EdgeType> {
   if (!Dagre) {
     throw new Error(
-      'Could not find "dagre" library. It must be included in your application in order to use "Workflow" layout.'
+      'Could not find "dagre" library. It must be included in your application in order to use "Workflow" layout.',
     );
   }
 
@@ -36,7 +35,7 @@ export default function workflowLayout<NodeType, EdgeType>(
   dagreGraph.setGraph({
     rankdir: WORKFLOW_DIRECTION_TO_DAGRE_MAP[workflowConfig.direction],
     nodesep: workflowConfig.distanceMin,
-    ranksep: workflowConfig.distanceMin
+    ranksep: workflowConfig.distanceMin,
   });
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
@@ -44,7 +43,7 @@ export default function workflowLayout<NodeType, EdgeType>(
     const nodeData = state.nodes[nodeId].diagramMakerData;
     dagreGraph.setNode(nodeId, {
       height: nodeData.size.height,
-      width: nodeData.size.width
+      width: nodeData.size.width,
     });
   });
 
@@ -63,7 +62,7 @@ export default function workflowLayout<NodeType, EdgeType>(
     const dagreFixedNode = dagreGraph.node(workflowConfig.fixedNodeId);
     offset = {
       x: initialFixedNodePosition.x - dagreFixedNode.x,
-      y: initialFixedNodePosition.y - dagreFixedNode.y
+      y: initialFixedNodePosition.y - dagreFixedNode.y,
     };
   }
 
@@ -72,7 +71,7 @@ export default function workflowLayout<NodeType, EdgeType>(
       const dagreNode = dagreGraph.node(nodeId);
       draftState.nodes[nodeId].diagramMakerData.position = {
         x: dagreNode.x + offset.x,
-        y: dagreNode.y + offset.y
+        y: dagreNode.y + offset.y,
       };
     });
   });

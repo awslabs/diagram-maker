@@ -1,15 +1,15 @@
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import GridPattern from './GridPattern';
 
 describe('GridPattern', () => {
   it('renders grid pattern', () => {
-
     const gridPattern = shallow(
-      <GridPattern cellSize={10} patternSize={100}/>
+      <GridPattern cellSize={10} patternSize={100} />,
     );
 
-    expect(gridPattern).toMatchSnapshot();
+    expect(toJson(gridPattern)).toMatchSnapshot();
   });
 });

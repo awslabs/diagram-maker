@@ -18,11 +18,11 @@ export enum EdgeActionsType {
   /** Mouse enters edge */
   EDGE_MOUSE_OVER = 'EDGE_MOUSE_OVER',
   /** Mouse leaves edge */
-  EDGE_MOUSE_OUT = 'EDGE_MOUSE_OUT'
+  EDGE_MOUSE_OUT = 'EDGE_MOUSE_OUT',
 }
 
 export const EdgeActions = {
-  ...EdgeActionsType
+  ...EdgeActionsType,
 };
 
 /** Action fired to select an edge */
@@ -102,4 +102,4 @@ export interface MouseOutAction extends Action {
 }
 
 export type EdgeAction<EdgeType> = CreateEdgeAction<EdgeType> | SelectEdgeAction | DeleteEdgeAction |
-  DragStartEdgeAction | DragEndEdgeAction | DragEdgeAction | MouseOverAction | MouseOutAction;
+DragStartEdgeAction | DragEndEdgeAction | DragEdgeAction | MouseOverAction | MouseOutAction;

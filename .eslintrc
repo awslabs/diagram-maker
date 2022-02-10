@@ -1,0 +1,36 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "jsx-a11y",
+    "jest"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json"
+  },
+  "rules": {
+    "max-len": ["error", { "code": 120 }],
+    // Since we use Preact, there's no react in scope
+    "react/react-in-jsx-scope": "off",
+    // We follow a pattern of using index files to re-export all public objects/types & we dont want to use default export if there's just one
+    "import/prefer-default-export": "off",
+    // We need to create a new object in unit tests without using the resulting object
+    "no-new": "off",
+    // In some cases function signature requires a positional arg, but is not needed in body, prepend _ to make it work
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    // Allow immer for param re-assign
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsForRegex": ["[dD]raft"] }],
+    // TODO: See if newer versions of preact can better handle rendering consumer provided callbacks using memoized callbacks
+    "react/jsx-no-bind": "off",
+    // TODO: Change when dependency bundling strategy is revisited
+    "import/no-extraneous-dependencies": "off"
+  }
+}

@@ -1,14 +1,5 @@
-jest.mock('diagramMaker/state/global/globalActionDispatcher', () => ({
-  createDeleteItemsAction: jest.fn(),
-  createNewItemsAction: jest.fn()
-}));
-
-jest.mock('redux-undo-redo', () => ({
-  createUndoMiddleware: jest.fn()
-}));
-
 import {
-  createUndoMiddleware, RevertingActionsFunction, RevertingActionsObject, UndoMiddlewareConfig
+  createUndoMiddleware, RevertingActionsFunction, RevertingActionsObject, UndoMiddlewareConfig,
 } from 'redux-undo-redo';
 
 import { CreateEdgeAction, EdgeActions, EdgeActionsType } from 'diagramMaker/state/edge/edgeActions';
@@ -20,8 +11,16 @@ import { asMock } from 'diagramMaker/testing/testUtils';
 
 import { getUndoMiddleware } from './undoMiddleware';
 
-describe('undoMiddleware', () => {
+jest.mock('diagramMaker/state/global/globalActionDispatcher', () => ({
+  createDeleteItemsAction: jest.fn(),
+  createNewItemsAction: jest.fn(),
+}));
 
+jest.mock('redux-undo-redo', () => ({
+  createUndoMiddleware: jest.fn(),
+}));
+
+describe('undoMiddleware', () => {
   beforeEach(() => jest.clearAllMocks());
 
   it('calls createUndoMiddleware passing the config', () => {
@@ -31,7 +30,7 @@ describe('undoMiddleware', () => {
 
   describe('reverting actions', () => {
     let configObject: UndoMiddlewareConfig<{}>;
-    asMock(createUndoMiddleware).mockImplementationOnce(object => configObject = object);
+    asMock(createUndoMiddleware).mockImplementationOnce((object) => { configObject = object; });
     getUndoMiddleware();
 
     describe('edge create', () => {
@@ -43,8 +42,8 @@ describe('undoMiddleware', () => {
           payload: {
             id,
             src: 'node-1',
-            dest: 'node-2'
-          }
+            dest: 'node-2',
+          },
         };
         const action = { type: 'MOCK_ACTION' };
         asMock(createDeleteItemsAction).mockImplementationOnce(() => action);
@@ -67,8 +66,8 @@ describe('undoMiddleware', () => {
             id,
             typeId,
             position,
-            size
-          }
+            size,
+          },
         };
         const action = { type: 'MOCK_ACTION' };
         asMock(createDeleteItemsAction).mockImplementationOnce(() => action);
@@ -79,37 +78,37 @@ describe('undoMiddleware', () => {
     });
 
     describe('delete items', () => {
-      const revertObj =
-        configObject.revertingActions[GlobalActions.DELETE_ITEMS] as RevertingActionsObject<DiagramMakerData<{}, {}>>;
+      const tempRevertObj = configObject.revertingActions[GlobalActions.DELETE_ITEMS];
+      const revertObj = tempRevertObj as RevertingActionsObject<DiagramMakerData<{}, {}>>;
       const revertFunc = revertObj.action;
-      const createArgs = revertObj.createArgs;
+      const { createArgs } = revertObj;
       it('calls createNewItemsAction with node id', () => {
         const node = {
-          id: 'node-1'
+          id: 'node-1',
         };
         const nodes = [node];
         const edge = {
-          id: 'edge-1'
+          id: 'edge-1',
         };
         const edges = [edge];
         const args = {
           edges,
-          nodes
+          nodes,
         };
         const state: any = {
           edges: {
-            'edge-1': edge
+            'edge-1': edge,
           },
           nodes: {
-            'node-1': node
-          }
+            'node-1': node,
+          },
         };
         const deleteItemsAction: DeleteItemsAction = {
           type: GlobalActions.DELETE_ITEMS,
           payload: {
             nodeIds: ['node-1'],
-            edgeIds: ['edge-1']
-          }
+            edgeIds: ['edge-1'],
+          },
         };
         const action = { type: 'MOCK_ACTION' };
         asMock(createNewItemsAction).mockImplementationOnce(() => action);
@@ -118,10 +117,9 @@ describe('undoMiddleware', () => {
         expect(createNewItemsAction).toHaveBeenCalledWith(nodes, edges);
         expect(createArgs(state, deleteItemsAction)).toEqual({
           edges,
-          nodes
+          nodes,
         });
       });
     });
   });
-
 });

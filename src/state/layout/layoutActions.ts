@@ -4,11 +4,11 @@ export enum LayoutType {
   /** Layout used for heirarchical graphs. Used for tree type graph structures. */
   HIERARCHICAL = 'Hierarchical',
   /** Layout used for flow digrams. */
-  WORKFLOW = 'Workflow'
+  WORKFLOW = 'Workflow',
 }
 
 export const Layout = {
-  ...LayoutType
+  ...LayoutType,
 };
 
 export interface HierarchicalLayoutConfig {
@@ -78,11 +78,11 @@ export enum WorkflowLayoutDirectionType {
   /** Flow goes from left to right */
   LEFT_RIGHT = 'LeftRight',
   /** Flow goes from right to left */
-  RIGHT_LEFT = 'RightLeft'
+  RIGHT_LEFT = 'RightLeft',
 }
 
 export const WorkflowLayoutDirection = {
-  ...WorkflowLayoutDirectionType
+  ...WorkflowLayoutDirectionType,
 };
 
 export interface WorkflowLayoutConfig {
@@ -111,11 +111,11 @@ export type LayoutConfig = HierarchicalLayoutConfig | WorkflowLayoutConfig;
 
 export enum LayoutActionsType {
   /** Layout the nodes using auto layout */
-  LAYOUT = 'LAYOUT'
+  LAYOUT = 'LAYOUT',
 }
 
 export const LayoutActions = {
-  ...LayoutActionsType
+  ...LayoutActionsType,
 };
 
 export interface LayoutAction extends Action {

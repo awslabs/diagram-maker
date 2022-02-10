@@ -31,7 +31,6 @@ describe('workflowLayout', () => {
 
     const nodeSize: Size = { width: 23, height: 45 };
 
-    /* tslint:disable:object-literal-sort-keys */
     const graph = fromAdjacencyList(
       {
         'node-start': ['node-a', 'node-b'],
@@ -40,20 +39,19 @@ describe('workflowLayout', () => {
         'node-a-2': ['node-b-1-1'],
         'node-b': ['node-b-1'],
         'node-b-1': ['node-b-1-1'],
-        'node-b-1-1': []
+        'node-b-1-1': [],
       },
-      nodeSize
+      nodeSize,
     );
-    /* tslint:enable */
 
     const layoutConfig: WorkflowLayoutConfig = {
       layoutType: LayoutType.WORKFLOW,
       direction: WorkflowLayoutDirection.LEFT_RIGHT,
-      distanceMin: 123
+      distanceMin: 123,
     };
 
     let edgeLabelFn = null;
-    asMock(dagreGraphMock.setDefaultEdgeLabel).mockImplementationOnce(fn => edgeLabelFn = fn);
+    asMock(dagreGraphMock.setDefaultEdgeLabel).mockImplementationOnce((fn) => { edgeLabelFn = fn; });
 
     workflowLayout(graph, layoutConfig);
 
@@ -62,7 +60,7 @@ describe('workflowLayout', () => {
     expect(dagreGraphMock.setGraph).toBeCalledWith({
       nodesep: layoutConfig.distanceMin,
       rankdir: 'LR',
-      ranksep: layoutConfig.distanceMin
+      ranksep: layoutConfig.distanceMin,
     });
 
     // Edge label function should assign empty objects to all edges.
@@ -74,7 +72,7 @@ describe('workflowLayout', () => {
     keys(graph.nodes).forEach((nodeId) => {
       expect(dagreGraphMock.setNode).toBeCalledWith(nodeId, {
         height: nodeSize.height,
-        width: nodeSize.width
+        width: nodeSize.width,
       });
     });
 
@@ -86,19 +84,17 @@ describe('workflowLayout', () => {
   it('calls Dagre.layout(...) and updates node positions', () => {
     const dagreGraphMock = getDagreGraphMock();
 
-    /* tslint:disable:object-literal-sort-keys */
     const graph = fromAdjacencyList({
       'node-a': ['node-b', 'node-c'],
       'node-b': ['node-c'],
-      'node-c': []
+      'node-c': [],
     });
-    /* tslint:enable */
     const graphOriginal = cloneDeep(graph);
 
     const layoutConfig: WorkflowLayoutConfig = {
       layoutType: LayoutType.WORKFLOW,
       direction: WorkflowLayoutDirection.TOP_BOTTOM,
-      distanceMin: 50
+      distanceMin: 50,
     };
 
     asMock(dagreGraphMock.nodes).mockImplementationOnce(() => keys(graph.nodes));
@@ -133,22 +129,20 @@ describe('workflowLayout', () => {
   it('moves whole graph after layout to keep `fixedNodeId` in the same position', () => {
     const dagreGraphMock = getDagreGraphMock();
 
-    /* tslint:disable:object-literal-sort-keys */
     let graph = fromAdjacencyList({
       'node-a': ['node-b', 'node-c'],
       'node-b': ['node-c'],
-      'node-c': []
+      'node-c': [],
     });
     graph = produce(graph, (draft) => {
       draft.nodes['node-b'].diagramMakerData.position = { x: 500, y: 500 };
     });
-    /* tslint:enable */
 
     const layoutConfig: WorkflowLayoutConfig = {
       layoutType: LayoutType.WORKFLOW,
       direction: WorkflowLayoutDirection.RIGHT_LEFT,
       distanceMin: 30,
-      fixedNodeId: 'node-b'
+      fixedNodeId: 'node-b',
     };
 
     asMock(dagreGraphMock.nodes).mockImplementationOnce(() => keys(graph.nodes));

@@ -25,11 +25,11 @@ export enum EditorModeType {
   /**
    * Allows selection of multiple nodes with a rectangular marquee.
    */
-  SELECT = 'Select'
+  SELECT = 'Select',
 }
 
 export const EditorMode = {
-  ...EditorModeType
+  ...EditorModeType,
 };
 
 export interface Rectangle {
@@ -43,7 +43,7 @@ export const ShowConnectors: { [type: string]: ShowConnectorsType } = {
   BOTH: 'Both',
   INPUT_ONLY: 'Input',
   NONE: 'None',
-  OUTPUT_ONLY: 'Output'
+  OUTPUT_ONLY: 'Output',
 };
 
 /** Interface for storing the state of the diagram maker workspace */
@@ -79,11 +79,11 @@ export enum PositionAnchorType {
   /** Bottom Left edge of the container that diagram maker renders in */
   BOTTOM_LEFT = 'BottomLeft',
   /** Bottom Right edge of the container that diagram maker renders in */
-  BOTTOM_RIGHT = 'BottomRight'
+  BOTTOM_RIGHT = 'BottomRight',
 }
 
 export const PositionAnchor = {
-  ...PositionAnchorType
+  ...PositionAnchorType,
 };
 
 /**

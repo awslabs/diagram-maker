@@ -10,11 +10,10 @@ import {
   getMidpoint,
   getScrollPosition,
   isPositionInRectangle,
-  subtract
+  subtract,
 } from './positionUtils';
 
 describe('positionUtils', () => {
-
   describe('getCenterCoordinateForCurve', () => {
     it('returns the center coordinate for bezier curve', () => {
       const src = { x: 0, y: 0 };
@@ -44,7 +43,7 @@ describe('positionUtils', () => {
     it('returns scroll position in position format', () => {
       expect(getScrollPosition()).toEqual({
         x: window.pageXOffset,
-        y: window.pageYOffset
+        y: window.pageYOffset,
       });
     });
   });
@@ -70,7 +69,7 @@ describe('positionUtils', () => {
       const screenPosition: any = { left: 30, top: 30 };
       expect(fromScreenToPage(screenPosition)).toEqual({
         x: screenPosition.left + window.pageXOffset,
-        y: screenPosition.top + window.pageYOffset
+        y: screenPosition.top + window.pageYOffset,
       });
     });
   });
@@ -80,7 +79,7 @@ describe('positionUtils', () => {
       const pagePosition = { x: 30, y: 30 };
       expect(fromPageToScreen(pagePosition)).toEqual({
         x: pagePosition.x - window.pageXOffset,
-        y: pagePosition.y - window.pageYOffset
+        y: pagePosition.y - window.pageYOffset,
       });
     });
   });
@@ -109,12 +108,12 @@ describe('positionUtils', () => {
     const rectangle = {
       position: {
         x: 50,
-        y: 50
+        y: 50,
       },
       size: {
         height: 400,
-        width: 400
-      }
+        width: 400,
+      },
     };
 
     it('returns false if the position is outside of the rectangle', () => {
@@ -153,7 +152,7 @@ describe('positionUtils', () => {
   describe('constrainRectangleWithinRectangle', () => {
     const boundingRectangle = {
       position: { x: 200, y: 250 },
-      size: { width: 100, height: 150 }
+      size: { width: 100, height: 150 },
     };
     const margin = 25;
     const testCases = [
@@ -161,79 +160,79 @@ describe('positionUtils', () => {
       {
         expectedPosition: {
           x: 230,
-          y: 320
+          y: 320,
         },
         position: {
           x: 230,
-          y: 320
+          y: 320,
         },
-        size: { width: 10, height: 10 }
+        size: { width: 10, height: 10 },
       },
 
       // Right side is out of bounds
       {
         expectedPosition: {
           x: 265,
-          y: 320
+          y: 320,
         },
         position: {
           x: 290,
-          y: 320
+          y: 320,
         },
-        size: { width: 10, height: 10 }
+        size: { width: 10, height: 10 },
       },
 
       // Left side is out of bounds
       {
         expectedPosition: {
           x: 225,
-          y: 320
+          y: 320,
         },
         position: {
           x: 215,
-          y: 320
+          y: 320,
         },
-        size: { width: 10, height: 10 }
+        size: { width: 10, height: 10 },
       },
 
       // Top is out of bounds
       {
         expectedPosition: {
           x: 230,
-          y: 275
+          y: 275,
         },
         position: {
           x: 230,
-          y: 240
+          y: 240,
         },
-        size: { width: 10, height: 10 }
+        size: { width: 10, height: 10 },
       },
 
       // Bottom is out of bounds
       {
         expectedPosition: {
           x: 230,
-          y: 365
+          y: 365,
         },
         position: {
           x: 230,
-          y: 400
+          y: 400,
         },
-        size: { width: 10, height: 10 }
+        size: { width: 10, height: 10 },
       },
 
       // Totally out of bounds
       {
         expectedPosition: {
           x: 225,
-          y: 365
+          y: 365,
         },
         position: {
           x: -1000,
-          y: 1000
+          y: 1000,
         },
-        size: { width: 10, height: 10 }
-      }
+        size: { width: 10, height: 10 },
+      },
     ];
 
     it('returns the expected position', () => {

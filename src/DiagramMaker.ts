@@ -2,16 +2,17 @@
 // TODO: import polyfills instead of bundling it
 import 'diagramMaker/polyfills/object-values';
 
-import { Action, AnyAction, Reducer, Store, StoreEnhancer } from 'redux';
+import {
+  Action, Reducer, Store, StoreEnhancer,
+} from 'redux';
 
 import { destroy, render } from 'diagramMaker/components/renderUtils';
 import ConfigService, { DiagramMakerConfig } from 'diagramMaker/service/ConfigService';
 import DiagramMakerApi from 'diagramMaker/service/DiagramMakerApi';
-import { default as Observer, ObserverCallback } from 'diagramMaker/service/observer/Observer';
-import {
+import Observer, { ObserverCallback } from 'diagramMaker/service/observer/Observer';
+import UIEventManager, {
   ContainerEventType,
-  default as UIEventManager,
-  DestroyEventType
+  DestroyEventType,
 } from 'diagramMaker/service/ui/UIEventManager';
 import UIEventNormalizer from 'diagramMaker/service/ui/UIEventNormalizer';
 import ActionDispatcher from 'diagramMaker/state/ActionDispatcher';
@@ -30,34 +31,39 @@ export default class DiagramMaker<NodeType = {}, EdgeType = {}> {
    * Will be moved to API and closed out.
    */
   public readonly store: Store<DiagramMakerData<NodeType, EdgeType>>;
+
   /**
    * DiagramMaker APIs.
    */
   public readonly api: DiagramMakerApi<NodeType, EdgeType>;
 
-  // Root is required to ensure that we replace on rerender, since Preact.render appends by default.
-  private ROOT: Element;
   private config: ConfigService<NodeType, EdgeType>;
+
   private container: HTMLElement;
+
   private actionDispatcher: ActionDispatcher<NodeType, EdgeType>;
+
   private observer: Observer;
+
   private eventManager: UIEventManager;
 
   constructor(
     domHandle: string | HTMLElement,
     config: DiagramMakerConfig<NodeType, EdgeType>,
-    { initialData, consumerRootReducer, consumerEnhancer, eventListener }: {
+    {
+      initialData, consumerRootReducer, consumerEnhancer, eventListener,
+    }: {
       initialData?: DiagramMakerData<NodeType, EdgeType>,
       consumerRootReducer?: Reducer<DiagramMakerData<NodeType, EdgeType>, Action>,
       consumerEnhancer?: StoreEnhancer,
       eventListener?: ObserverCallback;
-    } = {}
+    } = {},
   ) {
     this.config = new ConfigService(config);
     this.store = createStore(initialData, consumerRootReducer, consumerEnhancer, this.config.getActionInterceptor());
     this.api = new DiagramMakerApi(this.store);
 
-    this.container = this.getContainer(domHandle);
+    this.container = DiagramMaker.getContainer(domHandle);
     this.observer = new Observer();
     if (eventListener) {
       this.observer.subscribeAll(eventListener);
@@ -65,7 +71,7 @@ export default class DiagramMaker<NodeType = {}, EdgeType = {}> {
     this.eventManager = new UIEventManager(this.observer, this.container);
     this.actionDispatcher = new ActionDispatcher(this.observer, this.store, this.config);
 
-    this.ROOT = render<NodeType, EdgeType>(this.store, this.container, this.config);
+    render<NodeType, EdgeType>(this.store, this.container, this.config);
 
     this.updateContainer();
   }
@@ -81,7 +87,7 @@ export default class DiagramMaker<NodeType = {}, EdgeType = {}> {
   public updateContainer = () => {
     const normalizedEvent = UIEventNormalizer.normalizeContainerEvent(this.container);
     this.observer.publish(ContainerEventType.DIAGRAM_MAKER_CONTAINER_UPDATE, normalizedEvent);
-  }
+  };
 
   /**
    * API called to clean up a diagram maker instance after the user navigates away from the page
@@ -94,10 +100,10 @@ export default class DiagramMaker<NodeType = {}, EdgeType = {}> {
    */
   public destroy = () => {
     this.observer.publish(DestroyEventType.DESTROY);
-    destroy(this.container, this.ROOT);
-  }
+    destroy(this.container);
+  };
 
-  private getContainer = (domHandle: string | HTMLElement) => {
+  private static getContainer = (domHandle: string | HTMLElement) => {
     if (typeof domHandle !== 'string') {
       return domHandle;
     }
@@ -106,5 +112,5 @@ export default class DiagramMaker<NodeType = {}, EdgeType = {}> {
       throw new Error('Container not found');
     }
     return container;
-  }
+  };
 }

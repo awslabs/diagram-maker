@@ -1,45 +1,45 @@
-jest.mock('redux-undo-redo', () => ({
-  actions: {
-    redo: jest.fn(),
-    undo: jest.fn()
-  }
-}));
-
-jest.mock('diagramMaker/state/layout/layoutActionDispatcher', () => ({
-  createLayoutAction: jest.fn()
-}));
-
-jest.mock('diagramMaker/state/workspace/workspaceActionDispatcher', () => ({
-  createWorkspaceResetZoomAction: jest.fn(),
-  createZoomWorkspaceAction: jest.fn()
-}));
-
-jest.mock('diagramMaker/state/editor/editorActionDispatcher', () => ({
-  createFitAction: jest.fn(), createFocusNodeAction: jest.fn(), createSetEditorModeAction: jest.fn()
-}));
-
 import { Store } from 'redux';
 import { actions as undoActions } from 'redux-undo-redo';
 
 import {
-  createFitAction, createFocusNodeAction, createSetEditorModeAction
+  createFitAction, createFocusNodeAction, createSetEditorModeAction,
 } from 'diagramMaker/state/editor/editorActionDispatcher';
 import {
-  createLayoutAction, HierarchicalLayoutConfig, LayoutType
+  createLayoutAction, HierarchicalLayoutConfig, LayoutType,
 } from 'diagramMaker/state/layout';
-import { DiagramMakerData, EditorMode, EditorModeType  } from 'diagramMaker/state/types';
+import { DiagramMakerData, EditorMode, EditorModeType } from 'diagramMaker/state/types';
 import {
-  createWorkspaceResetZoomAction, createZoomWorkspaceAction
+  createWorkspaceResetZoomAction, createZoomWorkspaceAction,
 } from 'diagramMaker/state/workspace/workspaceActionDispatcher';
 import { asMock } from 'diagramMaker/testing/testUtils';
 
 import DiagramMakerApi from './DiagramMakerApi';
 
+jest.mock('redux-undo-redo', () => ({
+  actions: {
+    redo: jest.fn(),
+    undo: jest.fn(),
+  },
+}));
+
+jest.mock('diagramMaker/state/layout/layoutActionDispatcher', () => ({
+  createLayoutAction: jest.fn(),
+}));
+
+jest.mock('diagramMaker/state/workspace/workspaceActionDispatcher', () => ({
+  createWorkspaceResetZoomAction: jest.fn(),
+  createZoomWorkspaceAction: jest.fn(),
+}));
+
+jest.mock('diagramMaker/state/editor/editorActionDispatcher', () => ({
+  createFitAction: jest.fn(), createFocusNodeAction: jest.fn(), createSetEditorModeAction: jest.fn(),
+}));
+
 describe('DiagramMakerApi', () => {
   function mockStore(): Store<DiagramMakerData<{}, {}>> {
     return {
       dispatch: jest.fn(),
-      getState: jest.fn()
+      getState: jest.fn(),
     } as any;
   }
 
@@ -53,7 +53,7 @@ describe('DiagramMakerApi', () => {
       const layoutConfig: HierarchicalLayoutConfig = {
         layoutType: LayoutType.HIERARCHICAL,
         fixedNodeIds: ['node-1'],
-        distanceMin: 30
+        distanceMin: 30,
       };
       asMock(createLayoutAction).mockImplementationOnce(() => action);
 
@@ -95,10 +95,10 @@ describe('DiagramMakerApi', () => {
           [testId]: {
             diagramMakerData: {
               position,
-              size
-            }
-          }
-        }
+              size,
+            },
+          },
+        },
       };
       const api = new DiagramMakerApi(store);
       const action = { type: 'MOCK_ACTION' };
@@ -123,10 +123,10 @@ describe('DiagramMakerApi', () => {
           [testId]: {
             diagramMakerData: {
               position,
-              size
-            }
-          }
-        }
+              size,
+            },
+          },
+        },
       };
       const leftPanelWidth = 100;
       const rightPanelWidth = 100;
@@ -163,12 +163,12 @@ describe('DiagramMakerApi', () => {
       const mockState = {
         nodes: {
           'node-1': { diagramMakerData: {} },
-          'node-2': { diagramMakerData: {} }
-        }
+          'node-2': { diagramMakerData: {} },
+        },
       };
       const api = new DiagramMakerApi(store);
-      const resetZoomSpy = spyOn(api, 'resetZoom');
-      asMock(store.getState).mockReturnValueOnce(mockState);
+      const resetZoomSpy = jest.spyOn(api, 'resetZoom');
+      asMock(store.getState).mockReturnValue(mockState);
 
       const result = api.focusSelected();
       expect(result).toBe(api);
@@ -180,12 +180,12 @@ describe('DiagramMakerApi', () => {
       const mockState = {
         nodes: {
           'node-1': { diagramMakerData: { selected: true } },
-          'node-2': { diagramMakerData: {} }
-        }
+          'node-2': { diagramMakerData: {} },
+        },
       };
       const api = new DiagramMakerApi(store);
-      const focusNodeSpy = spyOn(api, 'focusNode');
-      asMock(store.getState).mockReturnValueOnce(mockState);
+      const focusNodeSpy = jest.spyOn(api, 'focusNode');
+      asMock(store.getState).mockReturnValue(mockState);
 
       const result = api.focusSelected();
       expect(result).toBe(api);
@@ -198,12 +198,12 @@ describe('DiagramMakerApi', () => {
       const mockState = {
         nodes: {
           'node-1': { diagramMakerData: { selected: true } },
-          'node-2': { diagramMakerData: { selected: true } }
-        }
+          'node-2': { diagramMakerData: { selected: true } },
+        },
       };
       const api = new DiagramMakerApi(store);
-      const fitSpy = spyOn(api, 'fit');
-      asMock(store.getState).mockReturnValueOnce(mockState);
+      const fitSpy = jest.spyOn(api, 'fit');
+      asMock(store.getState).mockReturnValue(mockState);
 
       const result = api.focusSelected();
       expect(result).toBe(api);
@@ -216,14 +216,14 @@ describe('DiagramMakerApi', () => {
       const mockState = {
         nodes: {
           'node-1': { diagramMakerData: { selected: true } },
-          'node-2': { diagramMakerData: { selected: true } }
-        }
+          'node-2': { diagramMakerData: { selected: true } },
+        },
       };
       const api = new DiagramMakerApi(store);
-      const fitSpy = spyOn(api, 'fit');
+      const fitSpy = jest.spyOn(api, 'fit');
       const leftPanelWidth = 100;
       const rightPanelWidth = 100;
-      asMock(store.getState).mockReturnValueOnce(mockState);
+      asMock(store.getState).mockReturnValue(mockState);
 
       const result = api.focusSelected(leftPanelWidth, rightPanelWidth);
       expect(result).toBe(api);
@@ -240,16 +240,16 @@ describe('DiagramMakerApi', () => {
           'node-1': {
             diagramMakerData: {
               position: { x: 10, y: 10 },
-              size: { width: 10, height: 10 }
-            }
+              size: { width: 10, height: 10 },
+            },
           },
           'node-2': {
             diagramMakerData: {
               position: { x: 20, y: 20 },
-              size: { width: 20, height: 20 }
-            }
-          }
-        }
+              size: { width: 20, height: 20 },
+            },
+          },
+        },
       };
       const api = new DiagramMakerApi(store);
       const action = { type: 'MOCK_ACTION' };
@@ -259,9 +259,9 @@ describe('DiagramMakerApi', () => {
       const nodeKeys = ['node-1'];
       const result = api.fit(undefined, undefined, nodeKeys);
 
-      const expectedRects = nodeKeys.map(nodeKey => ({
+      const expectedRects = nodeKeys.map((nodeKey) => ({
         position: (mockState.nodes as any)[nodeKey].diagramMakerData.position,
-        size: (mockState.nodes as any)[nodeKey].diagramMakerData.size
+        size: (mockState.nodes as any)[nodeKey].diagramMakerData.size,
       }));
       expect(result).toBe(api);
       expect(createFitAction).toHaveBeenCalledTimes(1);
@@ -277,16 +277,16 @@ describe('DiagramMakerApi', () => {
           'node-1': {
             diagramMakerData: {
               position: { x: 10, y: 10 },
-              size: { width: 10, height: 10 }
-            }
+              size: { width: 10, height: 10 },
+            },
           },
           'node-2': {
             diagramMakerData: {
               position: { x: 20, y: 20 },
-              size: { width: 20, height: 20 }
-            }
-          }
-        }
+              size: { width: 20, height: 20 },
+            },
+          },
+        },
       };
       const api = new DiagramMakerApi(store);
       const action = { type: 'MOCK_ACTION' };
@@ -296,9 +296,9 @@ describe('DiagramMakerApi', () => {
       const result = api.fit();
 
       const expectedNodeKeys = ['node-1', 'node-2'];
-      const expectedRects = expectedNodeKeys.map(nodeKey => ({
+      const expectedRects = expectedNodeKeys.map((nodeKey) => ({
         position: (mockState.nodes as any)[nodeKey].diagramMakerData.position,
-        size: (mockState.nodes as any)[nodeKey].diagramMakerData.size
+        size: (mockState.nodes as any)[nodeKey].diagramMakerData.size,
       }));
       expect(result).toBe(api);
       expect(createFitAction).toHaveBeenCalledTimes(1);
@@ -314,16 +314,16 @@ describe('DiagramMakerApi', () => {
           'node-1': {
             diagramMakerData: {
               position: { x: 10, y: 10 },
-              size: { width: 10, height: 10 }
-            }
+              size: { width: 10, height: 10 },
+            },
           },
           'node-2': {
             diagramMakerData: {
               position: { x: 20, y: 20 },
-              size: { width: 20, height: 20 }
-            }
-          }
-        }
+              size: { width: 20, height: 20 },
+            },
+          },
+        },
       };
       const api = new DiagramMakerApi(store);
       const action = { type: 'MOCK_ACTION' };
@@ -335,9 +335,9 @@ describe('DiagramMakerApi', () => {
       const result = api.fit(leftPanelWidth, rightPanelWidth);
 
       const expectedNodeKeys = ['node-1', 'node-2'];
-      const expectedRects = expectedNodeKeys.map(nodeKey => ({
+      const expectedRects = expectedNodeKeys.map((nodeKey) => ({
         position: (mockState.nodes as any)[nodeKey].diagramMakerData.position,
-        size: (mockState.nodes as any)[nodeKey].diagramMakerData.size
+        size: (mockState.nodes as any)[nodeKey].diagramMakerData.size,
       }));
       expect(result).toBe(api);
       expect(createFitAction).toHaveBeenCalledTimes(1);
@@ -353,8 +353,8 @@ describe('DiagramMakerApi', () => {
       const store = mockStore();
       const mockState = {
         workspace: {
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const api = new DiagramMakerApi(store);
       const action = { type: 'MOCK_ACTION' };
@@ -366,7 +366,7 @@ describe('DiagramMakerApi', () => {
 
       const expectedPosition = {
         x: viewContainerSize.width / 2,
-        y: viewContainerSize.height / 2
+        y: viewContainerSize.height / 2,
       };
       expect(result).toBe(api);
       expect(createZoomWorkspaceAction).toHaveBeenCalledTimes(1);
@@ -380,8 +380,8 @@ describe('DiagramMakerApi', () => {
       const store = mockStore();
       const mockState = {
         workspace: {
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const api = new DiagramMakerApi(store);
       const action = { type: 'MOCK_ACTION' };
@@ -393,7 +393,7 @@ describe('DiagramMakerApi', () => {
 
       const expectedPosition = {
         x: viewContainerSize.width / 2,
-        y: viewContainerSize.height / 2
+        y: viewContainerSize.height / 2,
       };
       expect(result).toBe(api);
       expect(createZoomWorkspaceAction).toHaveBeenCalledTimes(1);
@@ -409,8 +409,8 @@ describe('DiagramMakerApi', () => {
       const store = mockStore();
       const mockState = {
         workspace: {
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const api = new DiagramMakerApi(store);
       const action = { type: 'MOCK_ACTION' };
@@ -422,7 +422,7 @@ describe('DiagramMakerApi', () => {
 
       const expectedPosition = {
         x: viewContainerSize.width / 2,
-        y: viewContainerSize.height / 2
+        y: viewContainerSize.height / 2,
       };
       expect(result).toBe(api);
       expect(createZoomWorkspaceAction).toHaveBeenCalledTimes(1);
@@ -436,8 +436,8 @@ describe('DiagramMakerApi', () => {
       const store = mockStore();
       const mockState = {
         workspace: {
-          viewContainerSize
-        }
+          viewContainerSize,
+        },
       };
       const api = new DiagramMakerApi(store);
       const action = { type: 'MOCK_ACTION' };
@@ -449,7 +449,7 @@ describe('DiagramMakerApi', () => {
 
       const expectedPosition = {
         x: viewContainerSize.width / 2,
-        y: viewContainerSize.height / 2
+        y: viewContainerSize.height / 2,
       };
       expect(result).toBe(api);
       expect(createZoomWorkspaceAction).toHaveBeenCalledTimes(1);

@@ -1,4 +1,4 @@
-Cypress.Commands.overwrite('visit', function (originalVisit, filename, options) {
-  var visitUrl = Cypress.config().baseUrl ? filename : 'dist/examples'.concat(filename);
+Cypress.Commands.overwrite('visit', (originalVisit, filename, options) => {
+  const visitUrl = Cypress.config().baseUrl ? filename : 'dist/examples'.concat(filename);
   originalVisit(visitUrl, options);
 });

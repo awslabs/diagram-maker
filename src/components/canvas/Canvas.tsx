@@ -1,4 +1,4 @@
-import * as classnames from 'classnames';
+import classnames from 'classnames';
 import * as Preact from 'preact';
 
 import './Canvas.scss';
@@ -7,14 +7,14 @@ export interface CanvasProps {
   className?: string | string[];
 }
 
-const Canvas = (props: Preact.RenderableProps<CanvasProps>): JSX.Element => {
-  const className = classnames('dm-canvas', props.className);
+function Canvas(props: Preact.RenderableProps<CanvasProps>): JSX.Element {
+  const { children, className } = props;
 
   return (
-    <div className={className}>
-        {props.children}
+    <div className={classnames('dm-canvas', className)}>
+      {children}
     </div>
   );
-};
+}
 
 export default Canvas;

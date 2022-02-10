@@ -1,5 +1,3 @@
-jest.mock('./readOnly/readOnlyEventFilter', () => ({ default: jest.fn() }));
-
 import { NormalizedEvent } from 'diagramMaker/service/ui/UIEventNormalizer';
 import { EditorMode } from 'diagramMaker/state/types';
 
@@ -7,8 +5,9 @@ import { rootEventFilter } from '.';
 
 import readOnlyEventFilter from './readOnly/readOnlyEventFilter';
 
-describe('rootEventFilter', () => {
+jest.mock('./readOnly/readOnlyEventFilter', () => ({ default: jest.fn() }));
 
+describe('rootEventFilter', () => {
   beforeEach(() => jest.clearAllMocks());
 
   it('applies readOnlyEventFilter if the editor mode is READ_ONLY', () => {

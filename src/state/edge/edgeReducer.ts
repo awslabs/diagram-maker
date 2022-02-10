@@ -9,7 +9,8 @@ import { WorkspaceActionsType } from 'diagramMaker/state/workspace';
 import { EdgeActionsType } from './edgeActions';
 
 export default function edgeReducer<NodeType, EdgeType>(
-  state: DiagramMakerEdges<EdgeType> | undefined, action: DiagramMakerAction<NodeType, EdgeType>
+  state: DiagramMakerEdges<EdgeType> | undefined,
+  action: DiagramMakerAction<NodeType, EdgeType>,
 ): DiagramMakerEdges<EdgeType> {
   if (state === undefined) {
     return {};
@@ -27,7 +28,9 @@ export default function edgeReducer<NodeType, EdgeType>(
       });
     case (EdgeActionsType.EDGE_CREATE):
       return produce(state, (draftState) => {
-        const { id, src, dest, consumerData: untypedConsumerData } = action.payload;
+        const {
+          id, src, dest, consumerData: untypedConsumerData,
+        } = action.payload;
         const consumerData = untypedConsumerData as Draft<EdgeType>;
         const diagramMakerData = {};
         draftState[id] = {
@@ -35,7 +38,7 @@ export default function edgeReducer<NodeType, EdgeType>(
           dest,
           diagramMakerData,
           id,
-          src
+          src,
         };
       });
     case (EdgeActionsType.EDGE_SELECT):

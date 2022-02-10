@@ -1,8 +1,9 @@
 import { Draft } from 'immer';
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { mount, shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
-import { Node } from 'diagramMaker/components/node';
+import { Node, NodeProps } from 'diagramMaker/components/node';
 import { ConnectorPlacement, VisibleConnectorTypes } from 'diagramMaker/service/ConfigService';
 import { DiagramMakerNode } from 'diagramMaker/state/types';
 
@@ -19,14 +20,14 @@ describe('Node', () => {
     diagramMakerData: {
       position: {
         x: 400,
-        y: 600
+        y: 600,
       },
       size: {
         height: 300,
-        width: 200
-      }
+        width: 200,
+      },
     },
-    id: 'myNode'
+    id: 'myNode',
   });
 
   beforeEach(() => {
@@ -39,10 +40,10 @@ describe('Node', () => {
         diagramMakerNode={getDiagramMakerNode()}
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
-    expect(node).toMatchSnapshot();
+    expect(toJson(node)).toMatchSnapshot();
   });
 
   it('renders without any connectors', () => {
@@ -51,10 +52,10 @@ describe('Node', () => {
         diagramMakerNode={getDiagramMakerNode()}
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
-    expect(node).toMatchSnapshot();
+    expect(toJson(node)).toMatchSnapshot();
   });
 
   it('renders connectors on the top and bottom', () => {
@@ -64,10 +65,10 @@ describe('Node', () => {
         renderCallback={renderCallback}
         connectorPlacement={ConnectorPlacement.TOP_BOTTOM}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
-    expect(node).toMatchSnapshot();
+    expect(toJson(node)).toMatchSnapshot();
   });
 
   it('renders connectors on the left and right', () => {
@@ -77,10 +78,10 @@ describe('Node', () => {
         renderCallback={renderCallback}
         connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
-    expect(node).toMatchSnapshot();
+    expect(toJson(node)).toMatchSnapshot();
   });
 
   describe('visibleConnectorTypes', () => {
@@ -94,10 +95,10 @@ describe('Node', () => {
           connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
           destroyCallback={destroyCallback}
           visibleConnectorTypes={visibleConnectorTypes}
-        />
+        />,
       );
 
-      expect(node).toMatchSnapshot();
+      expect(toJson(node)).toMatchSnapshot();
     });
 
     it('renders connector only for input', () => {
@@ -110,10 +111,10 @@ describe('Node', () => {
           connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
           destroyCallback={destroyCallback}
           visibleConnectorTypes={visibleConnectorTypes}
-        />
+        />,
       );
 
-      expect(node).toMatchSnapshot();
+      expect(toJson(node)).toMatchSnapshot();
     });
 
     it('renders no connectors', () => {
@@ -126,10 +127,10 @@ describe('Node', () => {
           connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
           destroyCallback={destroyCallback}
           visibleConnectorTypes={visibleConnectorTypes}
-        />
+        />,
       );
 
-      expect(node).toMatchSnapshot();
+      expect(toJson(node)).toMatchSnapshot();
     });
 
     it('renders input & output connectors', () => {
@@ -142,43 +143,50 @@ describe('Node', () => {
           connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
           destroyCallback={destroyCallback}
           visibleConnectorTypes={visibleConnectorTypes}
-        />
+        />,
       );
 
-      expect(node).toMatchSnapshot();
+      expect(toJson(node)).toMatchSnapshot();
     });
   });
 
   describe('shouldComponentUpdate', () => {
     it('returns false if nextProps and the current props point to the same object', () => {
-      const node = shallow(
+      const nodeData = getDiagramMakerNode();
+      const node = mount<Node<{}>, NodeProps<{}>>(
         <Node
-          diagramMakerNode={getDiagramMakerNode()}
+          diagramMakerNode={nodeData}
           renderCallback={renderCallback}
           destroyCallback={destroyCallback}
-        />
+        />,
       );
 
-      const component = node.component();
-      const { shouldComponentUpdate, props } = component;
+      node.setProps({
+        renderCallback,
+        destroyCallback,
+        diagramMakerNode: nodeData as DiagramMakerNode<{}>,
+      });
 
-      expect(shouldComponentUpdate(props)).toBe(false);
+      expect(renderCallback).toHaveBeenCalledTimes(1);
     });
 
     it('returns true if nextProps and the current props point to a different object', () => {
-      const node = shallow(
+      const nodeData = getDiagramMakerNode();
+      const node = mount<Node<{}>, NodeProps<{}>>(
         <Node
-          diagramMakerNode={getDiagramMakerNode()}
+          diagramMakerNode={nodeData}
           renderCallback={renderCallback}
           destroyCallback={destroyCallback}
-        />
+        />,
       );
 
-      const component = node.component();
-      const { shouldComponentUpdate, props } = component;
-      const newProps = { ...props, diagramMakerNode: getDiagramMakerNode() };
+      node.setProps({
+        renderCallback,
+        destroyCallback,
+        diagramMakerNode: getDiagramMakerNode() as DiagramMakerNode<{}>,
+      });
 
-      expect(shouldComponentUpdate(newProps)).toBe(true);
+      expect(renderCallback).toHaveBeenCalledTimes(2);
     });
   });
 });

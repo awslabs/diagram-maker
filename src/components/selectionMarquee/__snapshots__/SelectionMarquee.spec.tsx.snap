@@ -1,14 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SelectionMarquee renders at the given position and size 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-marquee"
-  style="height: 400px; left: 200px; top: 100px; width: 600px;"
+  className="dm-marquee"
   data-event-target={true}
   data-type="DiagramMaker.SelectionMarquee"
->
-</div>
-
+  style={
+    Object {
+      "height": 400,
+      "left": 200,
+      "top": 100,
+      "width": 600,
+    }
+  }
+/>
 `;

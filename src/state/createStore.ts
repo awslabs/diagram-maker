@@ -4,7 +4,7 @@ import {
   createStore as reduxCreateStore,
   Reducer,
   Store,
-  StoreEnhancer
+  StoreEnhancer,
 } from 'redux';
 
 import { DiagramMakerAction } from 'diagramMaker/state/actions';
@@ -18,9 +18,8 @@ export default function createStore<NodeType, EdgeType>(
   initialData?: DiagramMakerData<NodeType, EdgeType>,
   consumerRootReducer?: Reducer<DiagramMakerData<NodeType, EdgeType>, DiagramMakerAction<NodeType, EdgeType>>,
   consumerEnhancer?: StoreEnhancer,
-  actionInterceptor?: ActionInterceptor<NodeType, EdgeType>
+  actionInterceptor?: ActionInterceptor<NodeType, EdgeType>,
 ): Store<DiagramMakerData<NodeType, EdgeType>> {
-
   const interceptorMiddleware = applyMiddleware(createInterceptorMiddleware(actionInterceptor));
   const undoMiddleware = applyMiddleware(getUndoMiddleware());
   const middleware = compose(interceptorMiddleware, undoMiddleware);
@@ -40,9 +39,9 @@ export default function createStore<NodeType, EdgeType>(
     sequenceReducers<DiagramMakerData<NodeType, EdgeType>, DiagramMakerAction<NodeType, EdgeType>>(
       getRootReducer(),
       layoutReducer,
-      consumerRootReducer
+      consumerRootReducer,
     ),
     initialData as any,
-    composedEnhancer
+    composedEnhancer,
   );
 }

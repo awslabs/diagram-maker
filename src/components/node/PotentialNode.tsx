@@ -16,9 +16,10 @@ export interface PotentialNodeProps {
 }
 
 export default class PotentialNode extends Preact.Component<PotentialNodeProps, {}> {
-
   public render(): JSX.Element {
-    const { typeId, position, renderCallback, destroyCallback, size } = this.props;
+    const {
+      typeId, position, renderCallback, destroyCallback, size,
+    } = this.props;
     const { x, y } = position;
     const { width, height } = size;
     const transform = `translate3d(${x}px, ${y}px, 0)`;
@@ -29,7 +30,7 @@ export default class PotentialNode extends Preact.Component<PotentialNodeProps, 
         style={{ width, height, transform }}
         data-id={typeId}
         data-type={DiagramMakerComponentsType.POTENTIAL_NODE}
-        data-event-target={true}
+        data-event-target
       >
         <ComposeView
           renderCallback={renderCallback}

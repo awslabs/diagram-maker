@@ -1,8 +1,10 @@
 import { Action, AnyAction, Middleware } from 'redux';
 
-export declare function undoHistoryReducer<ActionType extends Action>(state: UndoHistoryState<ActionType> | undefined, action: AnyAction): UndoHistoryState<ActionType>;
+export declare function undoHistoryReducer<ActionType extends Action>(
+  state: UndoHistoryState<ActionType> | undefined, action: AnyAction
+): UndoHistoryState<ActionType>;
 
-export type ActionsQueue<ActionType extends Action> = ActionType[]
+export type ActionsQueue<ActionType extends Action> = ActionType[];
 
 export interface UndoHistoryState<ActionType extends Action> {
   readonly undoQueue: ActionsQueue<ActionType>;

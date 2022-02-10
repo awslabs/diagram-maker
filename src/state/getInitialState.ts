@@ -8,7 +8,7 @@ export default function getInitialState<NodeType, EdgeType>(): DiagramMakerData<
     panels: {},
     workspace: getDefaultWorkspaceState(),
     editor: {
-      mode: EditorMode.DRAG
-    }
+      mode: EditorMode.DRAG,
+    },
   };
 }

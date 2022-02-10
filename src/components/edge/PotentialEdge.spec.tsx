@@ -1,5 +1,6 @@
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { EdgeStyle } from './EdgeCurve';
 import PotentialEdge from './PotentialEdge';
@@ -9,24 +10,24 @@ describe('PotentialEdge', () => {
     const edge = shallow(
       <PotentialEdge
         edgeStyle={EdgeStyle.LEFT_RIGHT_BEZIER}
-        src={{ x:0, y:100 }}
-        dest={{ x:100, y:0 }}
-      />
+        src={{ x: 0, y: 100 }}
+        dest={{ x: 100, y: 0 }}
+      />,
     );
 
-    expect(edge).toMatchSnapshot();
+    expect(toJson(edge)).toMatchSnapshot();
   });
 
   it('passes show arrowhead', () => {
     const edge = shallow(
       <PotentialEdge
         edgeStyle={EdgeStyle.LEFT_RIGHT_BEZIER}
-        src={{ x:0, y:100 }}
-        dest={{ x:100, y:0 }}
-        showArrowhead={true}
-      />
+        src={{ x: 0, y: 100 }}
+        dest={{ x: 100, y: 0 }}
+        showArrowhead
+      />,
     );
 
-    expect(edge).toMatchSnapshot();
+    expect(toJson(edge)).toMatchSnapshot();
   });
 });
