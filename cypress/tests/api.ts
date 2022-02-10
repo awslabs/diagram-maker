@@ -19,8 +19,6 @@ describe('DiagramMaker.API', () => {
   };
   const workspace = { width: 3200, height: 1600 };
 
-  // TODO: Add layout integ tests
-
   describe('setEditorMode', () => {
     describe('Select', () => {
       const selectId = 'Select';

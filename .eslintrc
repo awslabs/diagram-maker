@@ -28,9 +28,9 @@
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     // Allow immer for param re-assign
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsForRegex": ["[dD]raft"] }],
+    // Allow optional dependency of dagre
+    "import/no-extraneous-dependencies": ["error", { "optionalDependencies": true }],
     // TODO: See if newer versions of preact can better handle rendering consumer provided callbacks using memoized callbacks
-    "react/jsx-no-bind": "off",
-    // TODO: Change when dependency bundling strategy is revisited
-    "import/no-extraneous-dependencies": "off"
+    "react/jsx-no-bind": "off"
   }
 }

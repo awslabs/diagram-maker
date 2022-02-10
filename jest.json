@@ -28,7 +28,7 @@
     "^react/jsx-runtime$": "preact/jsx-runtime"
   },
   "setupFiles": [
-    "<rootDir>/src/testing/testEnvironment.ts"
+    "<rootDir>/src/testing/test-setup.ts"
   ],
   "testEnvironment": "jsdom",
   "testMatch": ["**/?(*.)(spec|test).(ts|tsx)"],
