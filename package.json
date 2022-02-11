@@ -57,7 +57,7 @@
     "jest-snapshot": "26.4.x",
     "lodash-es": "4.17.x",
     "mini-css-extract-plugin": "^1.6.2",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "nyc": "15.x",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "postcss": "8.2.x",
