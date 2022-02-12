@@ -12,17 +12,25 @@ export interface PotentialEdgeProps {
   src: Position;
   dest: Position;
   edgeStyle: EdgeStyle;
-  className?: string | string[];
+  className?: string;
   showArrowhead?: boolean;
 }
 
-const getCurve = (
-  src: Position,
-  dest: Position,
-  edgeStyle: EdgeStyle,
-  className: string,
-  showArrowhead?: boolean,
-) => <EdgeCurve src={src} dest={dest} edgeStyle={edgeStyle} className={className} showArrowhead={showArrowhead} />;
+const getCurve = ({
+  src,
+  dest,
+  edgeStyle,
+  className,
+  showArrowhead,
+}: PotentialEdgeProps) => (
+  <EdgeCurve
+    src={src}
+    dest={dest}
+    edgeStyle={edgeStyle}
+    className={className}
+    showArrowhead={showArrowhead}
+  />
+);
 
 function PotentialEdge(props: Preact.RenderableProps<PotentialEdgeProps>): JSX.Element {
   const {
@@ -31,7 +39,9 @@ function PotentialEdge(props: Preact.RenderableProps<PotentialEdgeProps>): JSX.E
 
   const classNames = classnames('dm-edge', className);
 
-  const curvePath = getCurve(src, dest, edgeStyle, 'dm-path-inner', showArrowhead);
+  const curvePath = getCurve({
+    src, dest, edgeStyle, className: 'dm-path-inner', showArrowhead,
+  });
 
   return (
     <g
