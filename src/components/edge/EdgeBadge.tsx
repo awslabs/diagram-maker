@@ -19,7 +19,9 @@ export interface EdgeBadgeProps {
 
 export default class EdgeBadge extends Preact.Component<EdgeBadgeProps> {
   public render() {
-    const { id, src, dest, renderCallback, destroyCallback, isPartOfEdgePair } = this.props;
+    const {
+      id, src, dest, renderCallback, destroyCallback, isPartOfEdgePair,
+    } = this.props;
 
     let left = Math.min(src.x, dest.x);
     let top = Math.min(src.y, dest.y);
@@ -32,9 +34,11 @@ export default class EdgeBadge extends Preact.Component<EdgeBadgeProps> {
       left = centerCoordinate.x - (width * 0.5);
       top = centerCoordinate.y - (height * 0.5);
     }
-    const style = { left, top, width, height };
+    const style = {
+      left, top, width, height,
+    };
 
-    return(
+    return (
       <div
         className="dm-badge"
         style={style}
@@ -42,7 +46,7 @@ export default class EdgeBadge extends Preact.Component<EdgeBadgeProps> {
         <div
           data-id={id}
           data-type={DiagramMakerComponentsType.EDGE_BADGE}
-          data-event-target={true}
+          data-event-target
           className="dm-badge-inner"
         >
           <ComposeView

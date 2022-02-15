@@ -6,11 +6,11 @@ export enum GlobalActionsType {
   /** Delete several items including nodes, edges together */
   DELETE_ITEMS = 'DELETE_ITEMS',
   /** Create several items including nodes, edges together */
-  CREATE_ITEMS = 'CREATE_ITEMS'
+  CREATE_ITEMS = 'CREATE_ITEMS',
 }
 
 export const GlobalActions = {
-  ...GlobalActionsType
+  ...GlobalActionsType,
 };
 
 /** Action fired to delete items */

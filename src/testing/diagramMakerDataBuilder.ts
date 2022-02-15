@@ -1,6 +1,6 @@
 import {
   DiagramMakerData, DiagramMakerEdge, DiagramMakerEditor, DiagramMakerNode, DiagramMakerWorkspace, EditorMode,
-  Size
+  Size,
 } from 'diagramMaker/state/types';
 
 interface AdjacencyList {
@@ -12,19 +12,19 @@ export function buildWorkspace(): DiagramMakerWorkspace {
     position: { x: 0, y: 0 },
     scale: 1.0,
     canvasSize: { width: 1600, height: 1600 },
-    viewContainerSize: { width: 800, height: 800 }
+    viewContainerSize: { width: 800, height: 800 },
   };
 }
 
 export function buildEditor(): DiagramMakerEditor {
   return {
-    mode: EditorMode.SELECT
+    mode: EditorMode.SELECT,
   };
 }
 
 export function fromAdjacencyList<NodeType = {}, EdgeType = {}>(
   adjacencyList: AdjacencyList,
-  nodeSize?: Size
+  nodeSize?: Size,
 ): DiagramMakerData<NodeType, EdgeType> {
   // Prepare nodes
   const nodes: { [key: string]: DiagramMakerNode<NodeType> } = {};
@@ -33,8 +33,8 @@ export function fromAdjacencyList<NodeType = {}, EdgeType = {}>(
       id: nodeId,
       diagramMakerData: {
         position: { x: 0, y: 0 },
-        size: nodeSize || { width: 150, height: 50 }
-      }
+        size: nodeSize || { width: 150, height: 50 },
+      },
     };
   });
 
@@ -48,7 +48,7 @@ export function fromAdjacencyList<NodeType = {}, EdgeType = {}>(
         id: edgeId,
         src: sourceNodeId,
         dest: destinationNodeId,
-        diagramMakerData: {}
+        diagramMakerData: {},
       };
 
       edgeCount += 1;
@@ -60,6 +60,6 @@ export function fromAdjacencyList<NodeType = {}, EdgeType = {}>(
     edges,
     panels: {},
     workspace: buildWorkspace(),
-    editor: buildEditor()
+    editor: buildEditor(),
   };
 }

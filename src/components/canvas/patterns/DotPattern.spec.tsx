@@ -1,15 +1,15 @@
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import DotPattern from './DotPattern';
 
 describe('DotPattern', () => {
   it('renders dot pattern', () => {
-
     const dotPattern = shallow(
-      <DotPattern cellSize={10} radius={1} />
+      <DotPattern cellSize={10} radius={1} />,
     );
 
-    expect(dotPattern).toMatchSnapshot();
+    expect(toJson(dotPattern)).toMatchSnapshot();
   });
 });

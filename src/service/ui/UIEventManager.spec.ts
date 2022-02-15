@@ -1,16 +1,16 @@
 import Observer from 'diagramMaker/service/observer/Observer';
 import { fromContainerToPage, fromScreenToPage, subtract } from 'diagramMaker/service/positionUtils';
-import UIEventNormalizer, {
+import {
   EventAttribute,
   MouseButton,
   NormalizedDragEvent,
-  NormalizedDropEvent
+  NormalizedDropEvent,
 } from 'diagramMaker/service/ui/UIEventNormalizer';
 import {
   mockGetDropZoneTarget,
   mockGetElementsFromPoint,
   unmockGetDropZoneTarget,
-  unmockGetElementsFromPoint
+  unmockGetElementsFromPoint,
 } from 'diagramMaker/service/ui/UITargetNormalizer.spec';
 
 import UIEventManager, {
@@ -19,7 +19,7 @@ import UIEventManager, {
   DragEventType,
   DropEventType,
   MouseClickEventType,
-  MouseMoveEventType
+  MouseMoveEventType,
 } from './UIEventManager';
 
 // The reason some objects are being cast as 'any' within jest.spyOn calls, is because
@@ -28,7 +28,9 @@ import UIEventManager, {
 
 const { LEFT } = MouseButton;
 const { DRAG, DRAG_START, DRAG_END } = DragEventType;
-const { DROP, DRAG_OVER, DRAG_ENTER, DRAG_LEAVE } = DropEventType;
+const {
+  DROP, DRAG_OVER, DRAG_ENTER, DRAG_LEAVE,
+} = DropEventType;
 const { MOUSE_MOVE } = MouseMoveEventType;
 const { LEFT_CLICK, MOUSE_DOWN, MOUSE_UP } = MouseClickEventType;
 
@@ -70,7 +72,7 @@ describe('UIEventManager', () => {
 
       Object.defineProperty(event, 'target', {
         value: null,
-        writable: true
+        writable: true,
       });
 
       observer.subscribe(MOUSE_UP, mouseUpMock);
@@ -82,12 +84,10 @@ describe('UIEventManager', () => {
 
   describe('destroyEventListeners', () => {
     it('destroys all created event listeners', () => {
-      const destroyEventListenerSpy = jest.spyOn(manager as any, 'destroyEventListener');
       const removeEventListenerSpy = jest.spyOn(context, 'removeEventListener');
 
       observer.publish(DestroyEventType.DESTROY);
 
-      expect(destroyEventListenerSpy).toHaveBeenCalled();
       expect(removeEventListenerSpy).toHaveBeenCalled();
     });
   });
@@ -98,8 +98,8 @@ describe('UIEventManager', () => {
       const event = {
         button: LEFT,
         originalEvent: {
-          target: context
-        }
+          target: context,
+        },
       };
 
       observer.publish(MOUSE_UP, event);
@@ -116,8 +116,8 @@ describe('UIEventManager', () => {
       event = {
         button: LEFT,
         originalEvent: {
-          target: context
-        }
+          target: context,
+        },
       };
     });
 
@@ -164,15 +164,15 @@ describe('UIEventManager', () => {
       const event = {
         button: LEFT,
         originalEvent: {
-          target: context
+          target: context,
         },
         position: {
           x: 100,
-          y: 200
+          y: 200,
         },
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       };
 
       observer.publish(MOUSE_DOWN, event);
@@ -188,15 +188,15 @@ describe('UIEventManager', () => {
       const event = {
         button: LEFT,
         originalEvent: {
-          target: context
+          target: context,
         },
         position: {
           x: 100,
-          y: 200
+          y: 200,
         },
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       };
 
       observer.publish(MOUSE_DOWN, event);
@@ -210,15 +210,15 @@ describe('UIEventManager', () => {
       const event = {
         button: LEFT,
         originalEvent: {
-          target: context
+          target: context,
         },
         position: {
           x: 100,
-          y: 200
+          y: 200,
         },
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       };
 
       observer.publish(MOUSE_DOWN, event);
@@ -254,15 +254,15 @@ describe('UIEventManager', () => {
       observer.publish(MOUSE_DOWN, {
         button: LEFT,
         originalEvent: {
-          target
+          target,
         },
         position: {
           x: 100,
-          y: 200
+          y: 200,
         },
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       });
 
       expect(setPotentialDraggableSpy).toBeCalledTimes(1);
@@ -280,12 +280,12 @@ describe('UIEventManager', () => {
         button,
         offset: { x: 0, y: 0 },
         originalEvent: {
-          target
+          target,
         },
         position: testPosition,
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       });
 
       const targetPagePosition = fromScreenToPage(target.getBoundingClientRect());
@@ -306,7 +306,7 @@ describe('UIEventManager', () => {
         left: 30, // Left offset
         right: 0,
         top: 20, // Top offset
-        width: 120
+        width: 120,
       }) as any);
 
       const targetParent = document.createElement('div');
@@ -320,15 +320,15 @@ describe('UIEventManager', () => {
         button,
         offset: { x: 100, y: 200 },
         originalEvent: {
-          target: targetChild
+          target: targetChild,
         },
         position: {
           x: 100,
-          y: 200
+          y: 200,
         },
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       });
 
       expect(setCurrentDragOffsetSpy).toBeCalledTimes(1);
@@ -346,12 +346,12 @@ describe('UIEventManager', () => {
         button,
         offset: { x: 0, y: 0 },
         originalEvent: {
-          target
+          target,
         },
         position: testPosition,
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       });
 
       const targetPagePosition = fromScreenToPage(target.getBoundingClientRect());
@@ -371,15 +371,15 @@ describe('UIEventManager', () => {
         button,
         offset,
         originalEvent: {
-          target
+          target,
         },
         position: {
           x: 100,
-          y: 200
+          y: 200,
         },
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       });
 
       expect(setCurrentDragOffsetSpy).not.toHaveBeenCalled();
@@ -534,7 +534,7 @@ describe('UIEventManager', () => {
 
     beforeEach(() => {
       event = {
-        position: { x: 1, y: 1 }
+        position: { x: 1, y: 1 },
       };
       mockGetDropZoneTarget(() => document.createElement('div'));
     });
@@ -576,8 +576,8 @@ describe('UIEventManager', () => {
       event = {
         button: LEFT,
         originalEvent: {
-          target: context
-        }
+          target: context,
+        },
       };
     });
 
@@ -638,8 +638,8 @@ describe('UIEventManager', () => {
       event = {
         button: LEFT,
         originalEvent: {
-          target: context
-        }
+          target: context,
+        },
       };
     });
 
@@ -676,11 +676,11 @@ describe('UIEventManager', () => {
       observer.publish(MOUSE_UP, {
         button: LEFT,
         originalEvent: {
-          target: undefined
+          target: undefined,
         },
         target: {
-          originalTarget: document.createElement('div')
-        }
+          originalTarget: document.createElement('div'),
+        },
       });
 
       expect(leftClickMock).not.toHaveBeenCalled();
@@ -695,11 +695,11 @@ describe('UIEventManager', () => {
       const mouseUpEvent = {
         button: LEFT,
         originalEvent: {
-          target: undefined
+          target: undefined,
         },
         target: {
-          originalTarget: potentialClickable
-        }
+          originalTarget: potentialClickable,
+        },
       };
 
       observer.subscribe(LEFT_CLICK, leftClickMock);
@@ -708,7 +708,7 @@ describe('UIEventManager', () => {
       expect(leftClickMock).toHaveBeenCalledTimes(1);
       expect(leftClickMock).toHaveBeenCalledWith({
         ...mouseUpEvent,
-        type: MouseClickEventType.LEFT_CLICK
+        type: MouseClickEventType.LEFT_CLICK,
       });
     });
   });
@@ -720,8 +720,8 @@ describe('UIEventManager', () => {
       event = {
         button: LEFT,
         originalEvent: {
-          target: document.createElement('div')
-        }
+          target: document.createElement('div'),
+        },
       };
     });
 
@@ -756,7 +756,6 @@ describe('UIEventManager', () => {
   });
 
   describe('checkForDragStart', () => {
-
     beforeEach(() => {
       mockGetElementsFromPoint(() => [document.createElement('div')]);
     });

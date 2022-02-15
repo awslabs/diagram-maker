@@ -1,10 +1,9 @@
-import * as classnames from 'classnames';
 import * as Preact from 'preact';
 
 import { ComposeView } from 'diagramMaker/components/common';
 import { BoundRenderCallback, DestroyCallback } from 'diagramMaker/service/ConfigService';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
-import { Position, PositionAnchorType, Size  } from 'diagramMaker/state/types';
+import { Position, PositionAnchorType, Size } from 'diagramMaker/state/types';
 
 import './Panel.scss';
 
@@ -23,7 +22,7 @@ const getPosition = (
   y: number,
   positionAnchor: PositionAnchorType,
   panelSize: Size,
-  viewContainerSize: Size
+  viewContainerSize: Size,
 ): Position => {
   switch (positionAnchor) {
     case PositionAnchorType.TOP_LEFT: {
@@ -47,11 +46,12 @@ const getPosition = (
 
       return { x: bottomRightX, y: bottomRightY };
     }
+    default:
+      return { x, y };
   }
 };
 
 export default class Panel extends Preact.Component<PanelProps> {
-
   public render(): JSX.Element {
     const { x, y } = this.props.position;
     const { width, height } = this.props.size;
@@ -65,7 +65,7 @@ export default class Panel extends Preact.Component<PanelProps> {
       <div
         data-id={this.props.id}
         data-type={DiagramMakerComponentsType.PANEL}
-        data-event-target={true}
+        data-event-target
         className="dm-panel"
         style={{ width, height, transform }}
       >

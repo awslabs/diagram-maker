@@ -1,4 +1,4 @@
-import { Draft, produce } from 'immer';
+import { produce } from 'immer';
 
 import { constrainRectangleWithinRectangle } from 'diagramMaker/service/positionUtils';
 import { DiagramMakerAction } from 'diagramMaker/state/actions';
@@ -8,7 +8,8 @@ import { MARGIN_PX } from './nodeActionDispatcher';
 import { NodeActionsType } from './nodeActions';
 
 export default function potentialNodeReducer<NodeType, EdgeType>(
-  state: DiagramMakerPotentialNode | null | undefined, action: DiagramMakerAction<NodeType, EdgeType>
+  state: DiagramMakerPotentialNode | null | undefined,
+  action: DiagramMakerAction<NodeType, EdgeType>,
 ): DiagramMakerPotentialNode | null {
   if (state === undefined) {
     return null;
@@ -18,7 +19,7 @@ export default function potentialNodeReducer<NodeType, EdgeType>(
       return {
         position: action.payload.position,
         size: action.payload.size,
-        typeId: action.payload.typeId
+        typeId: action.payload.typeId,
       };
     case (NodeActionsType.POTENTIAL_NODE_DRAG):
       return produce(state, (draftState) => {

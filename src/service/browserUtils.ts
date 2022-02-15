@@ -5,12 +5,12 @@ export function getBrowserSize(): Size {
 
   let width = Math.max(
     document.body.scrollWidth,
-    document.body.offsetWidth
+    document.body.offsetWidth,
   );
 
   let height = Math.max(
     document.body.scrollHeight,
-    document.body.offsetHeight
+    document.body.offsetHeight,
   );
 
   if (documentElement) {
@@ -18,14 +18,14 @@ export function getBrowserSize(): Size {
       width,
       documentElement.scrollWidth,
       documentElement.offsetWidth,
-      documentElement.clientWidth
+      documentElement.clientWidth,
     );
 
     height = Math.max(
       height,
       documentElement.scrollHeight,
       documentElement.offsetHeight,
-      documentElement.clientHeight
+      documentElement.clientHeight,
     );
   }
 
@@ -35,11 +35,11 @@ export function getBrowserSize(): Size {
 export function getBrowserRectangle(): Rectangle {
   const position = {
     x: 0,
-    y: 0
+    y: 0,
   };
 
   return {
     position,
-    size: getBrowserSize()
+    size: getBrowserSize(),
   };
 }

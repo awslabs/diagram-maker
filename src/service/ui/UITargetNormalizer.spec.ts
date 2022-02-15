@@ -15,21 +15,21 @@ const originalMsElementsFromPointMethod = (document as any).msElementsFromPoint;
 export const unmockGetDropZoneTarget = () => {
   Object.defineProperty(UITargetNormalizer, 'getDropZoneTarget', {
     value: originalGetDropZoneTargetMethod,
-    writable: true
+    writable: true,
   });
 };
 
 export const mockGetDropZoneTarget = (value: any) => {
   Object.defineProperty(UITargetNormalizer, 'getDropZoneTarget', {
     value,
-    writable: true
+    writable: true,
   });
 };
 
 export const unmockGetElementsFromPoint = () => {
   Object.defineProperty(UITargetNormalizer, 'getElementsFromPoint', {
     value: originalGetElementsFromPointMethod,
-    writable: true
+    writable: true,
   });
 };
 
@@ -37,35 +37,35 @@ export const unmockGetElementsFromPoint = () => {
 export const mockGetElementsFromPoint = (value: any) => {
   Object.defineProperty(UITargetNormalizer, 'getElementsFromPoint', {
     value,
-    writable: true
+    writable: true,
   });
 };
 
 export const unmockElementsFromPoint = () => {
   Object.defineProperty(document, 'elementsFromPoint', {
     value: originalElementsFromPointMethod,
-    writable: true
+    writable: true,
   });
 };
 
 export const mockElementsFromPoint = (value: any) => {
   Object.defineProperty(document, 'elementsFromPoint', {
     value,
-    writable: true
+    writable: true,
   });
 };
 
 export const unmockMsElementsFromPoint = () => {
   Object.defineProperty(document, 'elementsFromPoint', {
     value: originalMsElementsFromPointMethod,
-    writable: true
+    writable: true,
   });
 };
 
 export const mockMsElementsFromPoint = (value: any) => {
   Object.defineProperty(document, 'msElementsFromPoint', {
     value,
-    writable: true
+    writable: true,
   });
 };
 
@@ -186,7 +186,7 @@ describe('UITargetNormalizer', () => {
         document.createElement('div'),
         elementWithDropzone,
         document.createElement('div'),
-        document.createElement('div')
+        document.createElement('div'),
       ];
 
       const contextOffset = { x: 0, y: 0 };
@@ -204,9 +204,9 @@ describe('UITargetNormalizer', () => {
     });
 
     it('returns undefined if there are not any matching targets', () => {
-      const element = document.createElement('div');
+      const elements = [document.createElement('div')];
 
-      const mockedGetElementsFromPoint = jest.fn(() => element);
+      const mockedGetElementsFromPoint = jest.fn(() => elements);
 
       mockGetElementsFromPoint(mockedGetElementsFromPoint);
 
@@ -291,10 +291,10 @@ describe('UITargetNormalizer', () => {
       const expectedPosition = { x, y };
       const event: any = {
         clientX: x,
-        clientY: y
+        clientY: y,
       };
 
-      const isPositionInRectangleSpy = spyOn(positionUtils, 'isPositionInRectangle');
+      const isPositionInRectangleSpy = jest.spyOn(positionUtils, 'isPositionInRectangle');
 
       UITargetNormalizer.isMouseEventInsideBrowser(event);
 

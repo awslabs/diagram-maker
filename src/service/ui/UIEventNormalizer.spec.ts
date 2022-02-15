@@ -5,7 +5,7 @@ import {
   MouseClickEventType,
   MouseMoveEventType,
   WheelEventType,
-  WindowEventType
+  WindowEventType,
 } from 'diagramMaker/service/ui/UIEventManager';
 import UITargetNormalizer from 'diagramMaker/service/ui/UITargetNormalizer';
 
@@ -13,13 +13,14 @@ import UIEventNormalizer, { EventAttribute, getRequiredAttribute, MouseButton } 
 
 const contextOffset = {
   x: 200,
-  y: 400
+  y: 400,
 };
 
 const context = document.body;
 
 describe('UIEventNormalizer', () => {
   beforeEach(() => {
+    jest.clearAllMocks();
     jest.spyOn(UITargetNormalizer, 'normalizeTarget').mockRestore();
   });
 
@@ -74,7 +75,7 @@ describe('UIEventNormalizer', () => {
 
       expect(normalizedEvent.position).toEqual({
         x: pageX - contextOffset.x,
-        y: pageY - contextOffset.y
+        y: pageY - contextOffset.y,
       });
     });
 
@@ -95,7 +96,7 @@ describe('UIEventNormalizer', () => {
     it('calls normalizeMouseClickEvent', () => {
       const type = MouseClickEventType.RIGHT_CLICK;
       const event = new MouseEvent(type);
-      const normalizeMouseClickEventSpy = spyOn(UIEventNormalizer, 'normalizeMouseClickEvent');
+      const normalizeMouseClickEventSpy = jest.spyOn(UIEventNormalizer, 'normalizeMouseClickEvent');
 
       UIEventNormalizer.normalizeRightClickEvent(event, contextOffset);
 
@@ -108,7 +109,7 @@ describe('UIEventNormalizer', () => {
     it('calls normalizeMouseClickEvent', () => {
       const type = MouseClickEventType.MOUSE_UP;
       const event = new MouseEvent(type);
-      const normalizeMouseClickEventSpy = spyOn(UIEventNormalizer, 'normalizeMouseClickEvent');
+      const normalizeMouseClickEventSpy = jest.spyOn(UIEventNormalizer, 'normalizeMouseClickEvent');
 
       UIEventNormalizer.normalizeMouseUpEvent(event, contextOffset);
 
@@ -121,7 +122,7 @@ describe('UIEventNormalizer', () => {
     it('calls normalizeMouseClickEvent', () => {
       const type = MouseClickEventType.MOUSE_DOWN;
       const event = new MouseEvent(type);
-      const normalizeMouseClickEventSpy = spyOn(UIEventNormalizer, 'normalizeMouseClickEvent');
+      const normalizeMouseClickEventSpy = jest.spyOn(UIEventNormalizer, 'normalizeMouseClickEvent');
 
       UIEventNormalizer.normalizeMouseDownEvent(event, contextOffset);
 
@@ -171,11 +172,11 @@ describe('UIEventNormalizer', () => {
 
       expect(normalizedEvent.position).toEqual({
         x: pageX - contextOffset.x,
-        y: pageY - contextOffset.y
+        y: pageY - contextOffset.y,
       });
       expect(normalizedEvent.offset).toEqual({
         x: pageX - targetScreenPosition.left - window.pageXOffset,
-        y: pageY - targetScreenPosition.top - window.pageYOffset
+        y: pageY - targetScreenPosition.top - window.pageYOffset,
       });
     });
 
@@ -193,7 +194,6 @@ describe('UIEventNormalizer', () => {
     it('normalizes the target', () => {
       const originalTarget = document.createElement('div');
       const id = '1234';
-      const dataType = 'example-type';
       const normalizeTargetSpy = jest.spyOn(UITargetNormalizer, 'normalizeTarget');
 
       originalTarget.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
@@ -209,13 +209,12 @@ describe('UIEventNormalizer', () => {
     });
 
     it('normalizes the mouse button', () => {
-
       const buttonsToTest = [
         MouseButton.LEFT,
         MouseButton.MIDDLE,
         MouseButton.RIGHT,
         MouseButton.BROWSER_BACK,
-        MouseButton.BROWSER_FORWARD
+        MouseButton.BROWSER_FORWARD,
       ];
 
       buttonsToTest.forEach((button) => {
@@ -367,7 +366,7 @@ describe('UIEventNormalizer', () => {
 
       expect(normalizedEvent.position).toEqual({
         x: pageX - contextOffset.x,
-        y: pageY - contextOffset.y
+        y: pageY - contextOffset.y,
       });
     });
 
@@ -397,7 +396,7 @@ describe('UIEventNormalizer', () => {
     it('normalizes the size', () => {
       expect(normalizedEvent.size).toEqual({
         height: 768,
-        width: 1024
+        width: 1024,
       });
     });
 
@@ -410,7 +409,7 @@ describe('UIEventNormalizer', () => {
     it('calls normalizeKeyboardEvent', () => {
       const type = KeyboardEventType.KEY_UP;
       const event = new KeyboardEvent(type);
-      const normalizeKeyboardEventSpy = spyOn(UIEventNormalizer, 'normalizeKeyboardEvent');
+      const normalizeKeyboardEventSpy = jest.spyOn(UIEventNormalizer, 'normalizeKeyboardEvent');
 
       UIEventNormalizer.normalizeKeyUpEvent(event, contextOffset);
 
@@ -423,7 +422,7 @@ describe('UIEventNormalizer', () => {
     it('calls normalizeKeyboardEvent', () => {
       const type = KeyboardEventType.KEY_DOWN;
       const event = new KeyboardEvent(type);
-      const normalizeKeyboardEventSpy = spyOn(UIEventNormalizer, 'normalizeKeyboardEvent');
+      const normalizeKeyboardEventSpy = jest.spyOn(UIEventNormalizer, 'normalizeKeyboardEvent');
 
       UIEventNormalizer.normalizeKeyDownEvent(event, contextOffset);
 
@@ -436,7 +435,7 @@ describe('UIEventNormalizer', () => {
     it('calls normalizeKeyboardEvent', () => {
       const type = KeyboardEventType.KEY_PRESS;
       const event = new KeyboardEvent(type);
-      const normalizeKeyboardEventSpy = spyOn(UIEventNormalizer, 'normalizeKeyboardEvent');
+      const normalizeKeyboardEventSpy = jest.spyOn(UIEventNormalizer, 'normalizeKeyboardEvent');
 
       UIEventNormalizer.normalizeKeyPressEvent(event, contextOffset);
 
@@ -450,7 +449,7 @@ describe('UIEventNormalizer', () => {
       height: 10,
       left: 10,
       top: 10,
-      width: 10
+      width: 10,
     };
 
     let normalizedEvent: any;
@@ -480,7 +479,7 @@ describe('UIEventNormalizer', () => {
       target.setAttribute('data-type', DiagramMakerComponentsType.VIEW);
 
       const event: any = {
-        code, ctrlKey, key, metaKey, preventDefault, shiftKey, target
+        code, ctrlKey, key, metaKey, preventDefault, shiftKey, target,
       };
 
       const originalEvent = event;
@@ -494,7 +493,7 @@ describe('UIEventNormalizer', () => {
         modKey,
         originalEvent,
         shiftKey,
-        type
+        type,
       });
       expect(event.preventDefault).not.toHaveBeenCalled();
     });
@@ -512,7 +511,7 @@ describe('UIEventNormalizer', () => {
       target.setAttribute('data-type', DiagramMakerComponentsType.VIEW);
 
       const event: any = {
-        code, ctrlKey, key, metaKey, preventDefault, shiftKey, target
+        code, ctrlKey, key, metaKey, preventDefault, shiftKey, target,
       };
 
       const originalEvent = event;
@@ -526,7 +525,7 @@ describe('UIEventNormalizer', () => {
         modKey,
         originalEvent,
         shiftKey,
-        type
+        type,
       });
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
     });
@@ -544,7 +543,7 @@ describe('UIEventNormalizer', () => {
       target.setAttribute('data-type', DiagramMakerComponentsType.VIEW);
 
       const event: any = {
-        code, ctrlKey, key, metaKey, preventDefault, shiftKey, target
+        code, ctrlKey, key, metaKey, preventDefault, shiftKey, target,
       };
 
       const originalEvent = event;
@@ -558,7 +557,7 @@ describe('UIEventNormalizer', () => {
         modKey,
         originalEvent,
         shiftKey,
-        type
+        type,
       });
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
     });
@@ -566,7 +565,6 @@ describe('UIEventNormalizer', () => {
     it('doesnt normalize if target is not diagram maker view', () => {
       const key = 'Backspace';
       const code = 'KeyA';
-      const modKey = false;
       const ctrlKey = false;
       const shiftKey = false;
       const metaKey = true;
@@ -575,10 +573,9 @@ describe('UIEventNormalizer', () => {
       const target = document.createElement('div');
 
       const event: any = {
-        code, ctrlKey, key, metaKey, preventDefault, shiftKey, target
+        code, ctrlKey, key, metaKey, preventDefault, shiftKey, target,
       };
 
-      const originalEvent = event;
       const normalizedEvent = UIEventNormalizer.normalizeKeyboardEvent(event, contextOffset, type);
 
       expect(normalizedEvent).toBeUndefined();

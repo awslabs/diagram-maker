@@ -3,33 +3,30 @@ import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import {
   handlePanelDrag,
   handlePanelDragStart,
-  handlePanelResize
+  handlePanelResize,
 } from './panelActionDispatcher';
 import { PanelActionsType } from './panelActions';
 
 describe('panelActionDispatcher', () => {
-
   const viewContainerSize = { height: 800, width: 1200 };
   const canvasSize = { height: 100, width: 100 };
 
   const store: any = {
     dispatch: jest.fn(),
-    getState: jest.fn(() => {
-      return {
-        panels: {
-          ['panel1']: {
-            size: {
-              height: 100,
-              width: 100
-            }
-          }
+    getState: jest.fn(() => ({
+      panels: {
+        panel1: {
+          size: {
+            height: 100,
+            width: 100,
+          },
         },
-        workspace: {
-          canvasSize,
-          viewContainerSize
-        }
-      };
-    })
+      },
+      workspace: {
+        canvasSize,
+        viewContainerSize,
+      },
+    })),
   };
 
   beforeEach(() => {
@@ -56,7 +53,7 @@ describe('panelActionDispatcher', () => {
 
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { position, id, viewContainerSize },
-        type: PanelActionsType.PANEL_DRAG
+        type: PanelActionsType.PANEL_DRAG,
       });
     });
 
@@ -82,7 +79,7 @@ describe('panelActionDispatcher', () => {
 
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { position, id, viewContainerSize },
-        type: PanelActionsType.PANEL_DRAG
+        type: PanelActionsType.PANEL_DRAG,
       });
     });
 
@@ -100,7 +97,7 @@ describe('panelActionDispatcher', () => {
 
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { position, id, viewContainerSize },
-        type: PanelActionsType.PANEL_DRAG
+        type: PanelActionsType.PANEL_DRAG,
       });
     });
 
@@ -121,7 +118,7 @@ describe('panelActionDispatcher', () => {
 
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id },
-        type: PanelActionsType.PANEL_DRAG_START
+        type: PanelActionsType.PANEL_DRAG_START,
       });
     });
 
@@ -141,7 +138,7 @@ describe('panelActionDispatcher', () => {
       handlePanelResize(store, panelId, size);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { size, id: panelId },
-        type: PanelActionsType.PANEL_RESIZE
+        type: PanelActionsType.PANEL_RESIZE,
       });
     });
 

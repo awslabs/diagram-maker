@@ -11,7 +11,11 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      diagramMaker: path.join(__dirname, 'src')
+      "diagramMaker": path.join(__dirname, 'src'),
+      "react": "preact/compat",
+      "react-dom/test-utils": "preact/test-utils",
+      "react-dom": "preact/compat",     // Must be below test-utils
+      "react/jsx-runtime": "preact/jsx-runtime"
     },
     extensions: ['.tsx', '.ts', '.js']
   },
@@ -41,8 +45,10 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              parser: 'postcss-scss',
-              plugins: [autoprefixer()],
+              postcssOptions: {
+                parser: 'postcss-scss',
+                plugins: [autoprefixer()]
+              },
               sourceMap: true
             }
           }
@@ -63,8 +69,10 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              parser: 'postcss-scss',
-              plugins: [autoprefixer()],
+              postcssOptions: {
+                parser: 'postcss-scss',
+                plugins: [autoprefixer()]
+              },
               sourceMap: true
             }
           },

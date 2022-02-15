@@ -13,7 +13,6 @@ import {
   MouseClickEventType,
   MouseMoveEventType,
   WheelEventType,
-  WindowEventType
 } from 'diagramMaker/service/ui/UIEventManager';
 import {
   KeyboardCode,
@@ -25,9 +24,7 @@ import {
   NormalizedKeyboardEvent,
   NormalizedMouseClickEvent,
   NormalizedMouseHoverEvent,
-  NormalizedMouseMoveEvent,
   NormalizedMouseScrollEvent,
-  NormalizedWindowEvent
 } from 'diagramMaker/service/ui/UIEventNormalizer';
 import UITargetNormalizer from 'diagramMaker/service/ui/UITargetNormalizer';
 import {
@@ -37,14 +34,14 @@ import {
   handleEdgeDragEnd,
   handleEdgeDragStart,
   handleEdgeMouseOut,
-  handleEdgeMouseOver
+  handleEdgeMouseOver,
 } from 'diagramMaker/state/edge/edgeActionDispatcher';
 import {
   handleHideContextMenu,
   handleHideSelectionMarquee,
   handleShowContextMenu,
   handleShowSelectionMarquee,
-  handleUpdateSelectionMarquee
+  handleUpdateSelectionMarquee,
 } from 'diagramMaker/state/editor/editorActionDispatcher';
 import { handleDeleteSelectedItems } from 'diagramMaker/state/global/globalActionDispatcher';
 import { rootEventFilter } from 'diagramMaker/state/mode';
@@ -56,63 +53,76 @@ import {
   handleNodeDragStart,
   handlePotentialNodeDrag,
   handlePotentialNodeDragEnd,
-  handlePotentialNodeDragStart
+  handlePotentialNodeDragStart,
 } from 'diagramMaker/state/node/nodeActionDispatcher';
 import {
   handlePanelDrag,
-  handlePanelDragStart
+  handlePanelDragStart,
 } from 'diagramMaker/state/panel/panelActionDispatcher';
 
-import { DiagramMakerData, DiagramMakerWorkspace, EditorMode, Position } from 'diagramMaker/state/types';
+import {
+  DiagramMakerData, DiagramMakerWorkspace, EditorMode, Position,
+} from 'diagramMaker/state/types';
 import {
   handleSelectAll,
   handleWorkspaceClick,
   handleWorkspaceDrag,
   handleWorkspaceResize,
-  handleWorkspaceZoom
+  handleWorkspaceZoom,
 } from 'diagramMaker/state/workspace/workspaceActionDispatcher';
 
 const DATA_ATTR_TYPE = 'data-type';
 export default class ActionDispatcher<NodeType, EdgeType> {
+  private static getNormalizedPositionOffset = (
+    position: Position,
+    offset = { x: 0, y: 0 },
+  ): Position => subtract(position, offset);
+
+  private static getNormalizedPositionOffsetInWorkspace = (
+    position: Position,
+    workspace: DiagramMakerWorkspace,
+    offset = { x: 0, y: 0 },
+  ): Position => {
+    const targetPosition = ActionDispatcher.getNormalizedPositionOffset(position, offset);
+    return {
+      x: (targetPosition.x - workspace.position.x) / workspace.scale,
+      y: (targetPosition.y - workspace.position.y) / workspace.scale,
+    };
+  };
+
   constructor(
     private observer: Observer,
     private store: Store<DiagramMakerData<NodeType, EdgeType>>,
-    private config: ConfigService<NodeType, EdgeType>
+    private config: ConfigService<NodeType, EdgeType>,
   ) {
-
     this.subscribeToUIEvents();
   }
 
   private subscribeToUIEvents() {
-    const { LEFT_CLICK, RIGHT_CLICK, MOUSE_UP, MOUSE_DOWN } = MouseClickEventType;
-    const { MOUSE_MOVE, MOUSE_OVER, MOUSE_OUT } = MouseMoveEventType;
+    const {
+      LEFT_CLICK, RIGHT_CLICK, MOUSE_DOWN,
+    } = MouseClickEventType;
+    const { MOUSE_OVER, MOUSE_OUT } = MouseMoveEventType;
     const { DRAG, DRAG_START, DRAG_END } = DragEventType;
-    const { DROP, DRAG_ENTER, DRAG_LEAVE, DRAG_OVER } = DropEventType;
+    const {
+      DROP,
+    } = DropEventType;
     const { MOUSE_WHEEL } = WheelEventType;
-    const { KEY_DOWN, KEY_UP, KEY_PRESS } = KeyboardEventType;
-    const { RESIZE } = WindowEventType;
+    const { KEY_DOWN } = KeyboardEventType;
     const { DIAGRAM_MAKER_CONTAINER_UPDATE } = ContainerEventType;
 
     this.subscribeWithFilter(LEFT_CLICK, this.handleLeftMouseClick);
     this.subscribeWithFilter(RIGHT_CLICK, this.handleRightMouseClick);
-    this.subscribeWithFilter(MOUSE_UP, this.handleMouseUp);
     this.subscribeWithFilter(MOUSE_DOWN, this.handleMouseDown);
-    this.subscribeWithFilter(MOUSE_MOVE, this.handleMouseMove);
     this.subscribeWithFilter(MOUSE_OVER, this.handleMouseOver);
     this.subscribeWithFilter(MOUSE_OUT, this.handleMouseOut);
     this.subscribeWithFilter(DRAG, this.handleDrag);
     this.subscribeWithFilter(DRAG_START, this.handleDragStart);
-    this.subscribeWithFilter(DRAG_ENTER, this.handleDragEnter);
-    this.subscribeWithFilter(DRAG_LEAVE, this.handleDragLeave);
-    this.subscribeWithFilter(DRAG_OVER, this.handleDragOver);
     this.subscribeWithFilter(DRAG_END, this.handleDragEnd);
     this.subscribeWithFilter(DROP, this.handleDrop);
-    this.subscribeWithFilter(RESIZE, this.handleWindowResize);
     this.subscribeWithFilter(DIAGRAM_MAKER_CONTAINER_UPDATE, this.handleContainerUpdate);
     this.subscribeWithFilter(MOUSE_WHEEL, this.handleWheelScroll);
     this.subscribeWithFilter(KEY_DOWN, this.handleKeyDown);
-    this.subscribeWithFilter(KEY_UP, this.handleKeyUp);
-    this.subscribeWithFilter(KEY_PRESS, this.handleKeyPress);
   }
 
   // Typescript will not allow `event` to be typed as `NormalizedEvent`,
@@ -149,8 +159,10 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       case (DiagramMakerComponentsType.WORKSPACE):
         handleWorkspaceClick(this.store);
         break;
+      default:
+        break;
     }
-  }
+  };
 
   private handleMouseOver = (event: NormalizedMouseHoverEvent): void => {
     const { target } = event;
@@ -161,8 +173,10 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       case (DiagramMakerComponentsType.EDGE):
         handleEdgeMouseOver(this.store, id);
         break;
+      default:
+        break;
     }
-  }
+  };
 
   private handleMouseOut = (event: NormalizedMouseHoverEvent): void => {
     const { target } = event;
@@ -173,25 +187,10 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       case (DiagramMakerComponentsType.EDGE):
         handleEdgeMouseOut(this.store, id);
         break;
+      default:
+        break;
     }
-  }
-
-  private getNormalizedPositionOffset = (
-    position: Position,
-    offset = { x: 0, y: 0 }
-  ): Position => subtract(position, offset)
-
-  private getNormalizedPositionOffsetInWorkspace = (
-    position: Position,
-    workspace: DiagramMakerWorkspace,
-    offset = { x: 0, y: 0 }
-  ): Position => {
-    const targetPosition = this.getNormalizedPositionOffset(position, offset);
-    return {
-      x: (targetPosition.x - workspace.position.x) / workspace.scale,
-      y: (targetPosition.y - workspace.position.y) / workspace.scale
-    };
-  }
+  };
 
   private handleDrag = (event: NormalizedDragEvent): void => {
     const { target, position, offset = { x: 0, y: 0 } } = event;
@@ -202,31 +201,35 @@ export default class ActionDispatcher<NodeType, EdgeType> {
     switch (type) {
       case DiagramMakerComponentsType.PANEL_DRAG_HANDLE:
         if (id) {
-          const normalizedPosition = this.getNormalizedPositionOffset(position, offset);
+          const normalizedPosition = ActionDispatcher.getNormalizedPositionOffset(position, offset);
           const draggableElement = target.originalTarget as HTMLElement;
           handlePanelDrag(
             this.store,
             id,
             draggableElement,
             normalizedPosition,
-            workspaceState.viewContainerSize
+            workspaceState.viewContainerSize,
           );
         }
         break;
       case DiagramMakerComponentsType.NODE:
-        handleNodeDrag(this.store, id, this.getNormalizedPositionOffsetInWorkspace(position, workspaceState, offset));
+        handleNodeDrag(this.store, id, ActionDispatcher.getNormalizedPositionOffsetInWorkspace(
+          position,
+          workspaceState,
+          offset,
+        ));
         break;
       case DiagramMakerComponentsType.WORKSPACE:
         switch (editorMode) {
           case EditorMode.SELECT:
             handleUpdateSelectionMarquee(
               this.store,
-              this.getNormalizedPositionOffsetInWorkspace(position, workspaceState)
+              ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
             );
             break;
           case EditorMode.DRAG:
           default:
-            handleWorkspaceDrag(this.store, this.getNormalizedPositionOffset(position, offset));
+            handleWorkspaceDrag(this.store, ActionDispatcher.getNormalizedPositionOffset(position, offset));
             break;
         }
         break;
@@ -234,20 +237,22 @@ export default class ActionDispatcher<NodeType, EdgeType> {
         handleEdgeDrag(
           this.store,
           // No item offset, bc we want to draw dragged edges right at the tip of the pointer
-          this.getNormalizedPositionOffsetInWorkspace(position, workspaceState)
+          ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
         );
         break;
       case (DiagramMakerComponentsType.POTENTIAL_NODE):
         handlePotentialNodeDrag(
           this.store,
-          this.getNormalizedPositionOffsetInWorkspace(position, workspaceState)
+          ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
         );
         break;
+      default:
+        break;
     }
-  }
+  };
 
   private handleDragStart = (event: NormalizedDragEvent): void => {
-    const { target, position, offset = { x: 0, y: 0 } } = event;
+    const { target, position } = event;
     const { type, id } = target;
     const editorMode = this.store.getState().editor.mode;
     const workspaceState = this.store.getState().workspace;
@@ -257,7 +262,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
         if (editorMode === EditorMode.SELECT) {
           handleShowSelectionMarquee(
             this.store,
-            this.getNormalizedPositionOffsetInWorkspace(position, workspaceState)
+            ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
           );
         }
         break;
@@ -272,7 +277,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
           this.store,
           id,
           // No item offset, bc we want to draw dragged edges right at the tip of the pointer
-          this.getNormalizedPositionOffsetInWorkspace(position, workspaceState)
+          ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
         );
         break;
       case (DiagramMakerComponentsType.POTENTIAL_NODE):
@@ -280,14 +285,16 @@ export default class ActionDispatcher<NodeType, EdgeType> {
           this.store,
           this.config,
           target,
-          this.getNormalizedPositionOffsetInWorkspace(position, workspaceState)
+          ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
         );
         break;
+      default:
+        break;
     }
-  }
+  };
 
   private handleDragEnd = (event: NormalizedDragEvent): void => {
-    const { target, position, offset = { x: 0, y: 0 } } = event;
+    const { target } = event;
     const { type, id } = target;
     const editorState = this.store.getState().editor;
     const editorMode = editorState && editorState.mode;
@@ -307,8 +314,10 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       case (DiagramMakerComponentsType.POTENTIAL_NODE):
         handlePotentialNodeDragEnd(this.store, id);
         break;
+      default:
+        break;
     }
-  }
+  };
 
   private handleWheelScroll = (event: NormalizedMouseScrollEvent): void => {
     const { delta, originalEvent, position } = event;
@@ -322,28 +331,12 @@ export default class ActionDispatcher<NodeType, EdgeType> {
         handleWorkspaceZoom(this.store, -delta, position);
       }
     }
-  }
-
-  private handleDragEnter = (event: NormalizedDropEvent): void => {
-    const { target, dropzone, position, offset = { x: 0, y: 0 } } = event;
-
-    // Handle drag enter
-  }
-
-  private handleDragLeave = (event: NormalizedDropEvent): void => {
-    const { target, dropzone, position, offset = { x: 0, y: 0 } } = event;
-
-    // Handle drag leave
-  }
-
-  private handleDragOver = (event: NormalizedDropEvent): void => {
-    const { target, dropzone, position, offset = { x: 0, y: 0 } } = event;
-
-    // Handle drag over
-  }
+  };
 
   private handleDrop = (event: NormalizedDropEvent): void => {
-    const { target, dropzone, position, offset = { x: 0, y: 0 } } = event;
+    const {
+      target, dropzone,
+    } = event;
     const { type, id } = target;
 
     switch (dropzone.type) {
@@ -356,15 +349,13 @@ export default class ActionDispatcher<NodeType, EdgeType> {
         if (type === DiagramMakerComponentsType.POTENTIAL_NODE) {
           handleNodeCreate(this.store, id);
         }
+        break;
+      default:
+        break;
     }
 
     // Handle drop
-  }
-
-  private handleWindowResize = (event: NormalizedWindowEvent): void => {
-    const { size, originalEvent } = event;
-    // Handle window resize
-  }
+  };
 
   private handleContainerUpdate = (event: NormalizedContainerEvent): void => {
     const { contextRect } = event;
@@ -373,36 +364,15 @@ export default class ActionDispatcher<NodeType, EdgeType> {
 
     // Handle container resize
     handleWorkspaceResize(this.store, size);
-  }
+  };
 
   private handleRightMouseClick = (event: NormalizedMouseClickEvent): void => {
-    const { target, button, position, offset, originalEvent } = event;
-
     handleShowContextMenu(this.store, this.config, event);
-  }
+  };
 
-  private handleMouseUp = (event: NormalizedMouseClickEvent): void => {
-    const { target, button, position, offset, originalEvent } = event;
-
-    // Handle mouse up
-  }
-
-  private handleMouseDown = (event: NormalizedMouseClickEvent): void => {
-    const { target, button, position, offset, originalEvent } = event;
-
+  private handleMouseDown = (_event: NormalizedMouseClickEvent): void => {
     handleHideContextMenu(this.store);
-  }
-
-  private handleMouseMove = (event: NormalizedMouseMoveEvent): void => {
-    const { position, originalEvent } = event;
-
-    // Handle mouse move
-  }
-
-  private handleKeyUp = (event: NormalizedKeyboardEvent): void => {
-    const { originalEvent, code, key, modKey, shiftKey, metaKey, ctrlKey } = event;
-
-  }
+  };
 
   // @NOTE Justification for using KeyDown as opposed to KeyUp or KeyPress for the Delete event:
   // 1) We cannot use KeyPress for the Delete key (or other non-printable keys).
@@ -415,7 +385,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
   // we were doing something like duplicating a node via keypress.
 
   private handleKeyDown = (event: NormalizedKeyboardEvent): void => {
-    const { originalEvent, code, key, modKey, shiftKey, metaKey, ctrlKey } = event;
+    const { key, modKey } = event;
 
     switch (key) {
       case KeyboardKey.A:
@@ -429,12 +399,8 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       case KeyboardCode.BACKSPACE:
         handleDeleteSelectedItems(this.store);
         break;
+      default:
+        break;
     }
-  }
-
-  private handleKeyPress = (event: NormalizedKeyboardEvent): void => {
-    const { originalEvent, code, key, modKey, shiftKey, metaKey, ctrlKey } = event;
-
-    // Handle key press
-  }
+  };
 }

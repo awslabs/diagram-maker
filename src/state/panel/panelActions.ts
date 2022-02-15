@@ -8,11 +8,11 @@ export enum PanelActionsType {
   /** Drag a panel */
   PANEL_DRAG = 'PANEL_DRAG',
   /** Resize a panel */
-  PANEL_RESIZE = 'PANEL_RESIZE'
+  PANEL_RESIZE = 'PANEL_RESIZE',
 }
 
 export const PanelActions = {
-  ...PanelActionsType
+  ...PanelActionsType,
 };
 
 /** Action fired to resize a panel */

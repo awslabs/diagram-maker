@@ -1,8 +1,7 @@
 import {
-  getDiagramMakerView,
   getElementByDataIdAndType,
   getPanelById,
-  getPanelDragHandleById
+  getPanelDragHandleById,
 } from '../common/getters';
 import { dragAndDropElement } from '../common/interaction';
 import { convertTranslate2dToMatrix } from '../common/utils';

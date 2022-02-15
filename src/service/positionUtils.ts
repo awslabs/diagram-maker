@@ -26,7 +26,7 @@ export function getCenterCoordinateForCurve(src: Position, dest: Position, contr
 export function getMidpoint(firstPosition: Position, secondPosition: Position): Position {
   return {
     x: (firstPosition.x + secondPosition.x) / 2,
-    y: (firstPosition.y + secondPosition.y) / 2
+    y: (firstPosition.y + secondPosition.y) / 2,
   };
 }
 
@@ -54,7 +54,7 @@ export function getInflectionPoint(firstPosition: Position, secondPosition: Posi
 
   return {
     x: startingX,
-    y: startingY
+    y: startingY,
   };
 }
 
@@ -65,7 +65,7 @@ export function getInflectionPoint(firstPosition: Position, secondPosition: Posi
 export function getScrollPosition(): Position {
   return {
     x: window.pageXOffset,
-    y: window.pageYOffset
+    y: window.pageYOffset,
   };
 }
 
@@ -81,7 +81,7 @@ export function getScrollPosition(): Position {
 export function add(firstPosition: Position, secondPosition: Position): Position {
   return {
     x: firstPosition.x + secondPosition.x,
-    y: firstPosition.y + secondPosition.y
+    y: firstPosition.y + secondPosition.y,
   };
 }
 
@@ -97,7 +97,7 @@ export function add(firstPosition: Position, secondPosition: Position): Position
 export function subtract(firstPosition: Position, secondPosition: Position): Position {
   return {
     x: firstPosition.x - secondPosition.x,
-    y: firstPosition.y - secondPosition.y
+    y: firstPosition.y - secondPosition.y,
   };
 }
 
@@ -192,9 +192,8 @@ export function isPositionInRectangle(position: Position, rectange: Rectangle): 
 export function constrainRectangleWithinRectangle(
   innerRectangle: Rectangle,
   boundingRectangle: Rectangle,
-  margin = 0
+  margin = 0,
 ): Position {
-
   const maxX = boundingRectangle.size.width + boundingRectangle.position.x - innerRectangle.size.width - margin;
   const maxY = boundingRectangle.size.height + boundingRectangle.position.y - innerRectangle.size.height - margin;
 
@@ -205,12 +204,12 @@ export function constrainRectangleWithinRectangle(
     x: clamp(
       innerRectangle.position.x,
       minX,
-      maxX
+      maxX,
     ),
     y: clamp(
       innerRectangle.position.y,
       minY,
-      maxY
-    )
+      maxY,
+    ),
   };
 }

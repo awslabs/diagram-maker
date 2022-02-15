@@ -10,8 +10,12 @@ import { pluginReducer } from 'diagramMaker/state/plugin';
 import { DiagramMakerData } from 'diagramMaker/state/types';
 import { workspaceReducer } from 'diagramMaker/state/workspace';
 
-export function getRootReducer<NodeType, EdgeType>(
-): Reducer<DiagramMakerData<NodeType, EdgeType>, DiagramMakerAction<NodeType, EdgeType>> {
+type RootReducer<NodeType, EdgeType> = Reducer<
+DiagramMakerData<NodeType, EdgeType>,
+DiagramMakerAction<NodeType, EdgeType>
+>;
+
+export function getRootReducer<NodeType, EdgeType>(): RootReducer<NodeType, EdgeType> {
   return combineReducers<DiagramMakerData<NodeType, EdgeType>, DiagramMakerAction<NodeType, EdgeType>>({
     edges: edgeReducer,
     editor: editorReducer,
@@ -21,6 +25,6 @@ export function getRootReducer<NodeType, EdgeType>(
     potentialEdge: potentialEdgeReducer,
     potentialNode: potentialNodeReducer,
     undoHistory: undoHistoryReducer,
-    workspace: workspaceReducer
+    workspace: workspaceReducer,
   });
 }

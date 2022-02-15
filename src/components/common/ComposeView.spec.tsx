@@ -1,7 +1,8 @@
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow } from 'enzyme';
 
 import { ComposeView } from '.';
+import { ComposeViewProps } from './ComposeView';
 
 describe('ComposeView', () => {
   const destroyCallback = jest.fn();
@@ -17,47 +18,42 @@ describe('ComposeView', () => {
   });
 
   it('calls props.renderCallback() after component mounts', () => {
-
     shallow(
       <ComposeView
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
     expect(renderCallback).toHaveBeenCalledTimes(1);
   });
 
   it('calls props.renderCallback after component update', () => {
-    const context = shallow(
+    const context = shallow<ComposeView, ComposeViewProps>(
       <ComposeView
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
     jest.clearAllMocks();
 
-    context.render(
-      <ComposeView
-        renderCallback={renderCallback}
-        destroyCallback={destroyCallback}
-      />
-    );
-    expect(renderCallback).toHaveBeenCalledTimes(1);
+    context.setProps({
+      renderCallback,
+      destroyCallback,
+    });
+    expect(renderCallback).toHaveBeenCalledTimes(2);
   });
 
   it('calls props.destroyCallback() before unmounting', () => {
-
     const context = shallow(
       <ComposeView
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
-    // FIXME: Preact-render-spy typings do not support passing null, but the API does
-    context.render(null as any);
+    context.unmount();
 
     expect(destroyCallback).toHaveBeenCalledTimes(1);
   });

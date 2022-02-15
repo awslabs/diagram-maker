@@ -1,7 +1,9 @@
 import set from 'lodash-es/set';
 
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
-import { DiagramMakerEditor, EditorMode, EditorModeType, Position, Size } from 'diagramMaker/state/types';
+import {
+  DiagramMakerEditor, EditorMode, EditorModeType, Position,
+} from 'diagramMaker/state/types';
 
 import {
   EditorActionsType,
@@ -10,31 +12,30 @@ import {
   SetEditorModeAction,
   ShowContextMenuAction,
   ShowSelectionMarqueeAction,
-  UpdateSelectionMarqueeAction
+  UpdateSelectionMarqueeAction,
 } from './editorActions';
 import editorReducer from './editorReducer';
 
 describe('editorReducer', () => {
-
   const getState = (): DiagramMakerEditor => ({
     contextMenu: {
       position: { x: 0, y: 0 },
       targetId: 'node-1',
-      targetType: DiagramMakerComponentsType.NODE
+      targetType: DiagramMakerComponentsType.NODE,
     },
-    mode: EditorMode.DRAG
+    mode: EditorMode.DRAG,
   });
 
   const getStateWithMarquee = (): DiagramMakerEditor => ({
     mode: EditorMode.SELECT,
     selectionMarquee: {
       anchor: { x: 10, y: 10 },
-      position: { x: 10, y: 10 }
-    }
+      position: { x: 10, y: 10 },
+    },
   });
 
   const defaultState = {
-    mode: EditorMode.DRAG
+    mode: EditorMode.DRAG,
   };
 
   function checkReducerPurity(state: DiagramMakerEditor, expectedState: DiagramMakerEditor) {
@@ -64,7 +65,7 @@ describe('editorReducer', () => {
       const position = { x: 17, y: 17 };
       const action: ShowContextMenuAction = {
         type: EditorActionsType.SHOW_CONTEXT_MENU,
-        payload: { position, targetType, targetId }
+        payload: { position, targetType, targetId },
       };
       const expectedState = getState();
       set(expectedState, 'contextMenu', action.payload);
@@ -89,7 +90,7 @@ describe('editorReducer', () => {
       const mode: EditorModeType = EditorMode.SELECT;
       const action: SetEditorModeAction = {
         type: EditorActionsType.SET_EDITOR_MODE,
-        payload: { mode }
+        payload: { mode },
       };
 
       const expectedState = getState();
@@ -106,7 +107,7 @@ describe('editorReducer', () => {
       const anchor: Position = { x: 10, y: 10 };
       const action: ShowSelectionMarqueeAction = {
         type: EditorActionsType.SHOW_SELECTION_MARQUEE,
-        payload: { anchor }
+        payload: { anchor },
       };
 
       const expectedState = getState();
@@ -122,10 +123,9 @@ describe('editorReducer', () => {
       const state = getStateWithMarquee();
       const anchor = state.selectionMarquee ? state.selectionMarquee.anchor : { x: 0, y: 0 };
       const position: Position = { x: 5, y: 5 };
-      const size: Size = { width: 5, height: 5 };
       const action: UpdateSelectionMarqueeAction = {
         type: EditorActionsType.UPDATE_SELECTION_MARQUEE,
-        payload: { anchor, position }
+        payload: { anchor, position },
       };
 
       const expectedState = getStateWithMarquee();
@@ -141,7 +141,7 @@ describe('editorReducer', () => {
     it('hides the selection marquee', () => {
       const state = getStateWithMarquee();
       const action: HideSelectionMarqueeAction = {
-        type: EditorActionsType.HIDE_SELECTION_MARQUEE
+        type: EditorActionsType.HIDE_SELECTION_MARQUEE,
       };
 
       const expectedState = getStateWithMarquee();
@@ -151,5 +151,4 @@ describe('editorReducer', () => {
       checkReducerPurity(state, getStateWithMarquee());
     });
   });
-
 });

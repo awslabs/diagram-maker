@@ -1,5 +1,3 @@
-jest.mock('uuid', () => ({ v4: jest.fn() }));
-
 import { v4 as uuid } from 'uuid';
 
 import { asMock } from 'diagramMaker/testing/testUtils';
@@ -11,15 +9,16 @@ import {
   handleEdgeDragEnd,
   handleEdgeDragStart,
   handleEdgeMouseOut,
-  handleEdgeMouseOver
+  handleEdgeMouseOver,
 } from './edgeActionDispatcher';
 import { EdgeActionsType } from './edgeActions';
 
-describe('edgeActionDispatcher', () => {
+jest.mock('uuid', () => ({ v4: jest.fn() }));
 
+describe('edgeActionDispatcher', () => {
   const store: any = {
     dispatch: jest.fn(),
-    getState: jest.fn()
+    getState: jest.fn(),
   };
 
   beforeEach(() => {
@@ -36,7 +35,7 @@ describe('edgeActionDispatcher', () => {
       handleEdgeClick(store, edgeId);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: edgeId },
-        type: EdgeActionsType.EDGE_SELECT
+        type: EdgeActionsType.EDGE_SELECT,
       });
     });
 
@@ -54,7 +53,7 @@ describe('edgeActionDispatcher', () => {
       handleEdgeDragStart(store, edgeId, edgePosition);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: edgeId, position: edgePosition },
-        type: EdgeActionsType.EDGE_DRAG_START
+        type: EdgeActionsType.EDGE_DRAG_START,
       });
     });
 
@@ -71,7 +70,7 @@ describe('edgeActionDispatcher', () => {
       const edgeId = 'edge1';
       handleEdgeDragEnd(store, edgeId);
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: EdgeActionsType.EDGE_DRAG_END
+        type: EdgeActionsType.EDGE_DRAG_END,
       });
     });
 
@@ -88,7 +87,7 @@ describe('edgeActionDispatcher', () => {
       handleEdgeDrag(store, edgePosition);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { position: edgePosition },
-        type: EdgeActionsType.EDGE_DRAG
+        type: EdgeActionsType.EDGE_DRAG,
       });
     });
   });
@@ -140,7 +139,7 @@ describe('edgeActionDispatcher', () => {
       handleEdgeCreate(store, src, dest);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id, src, dest },
-        type: EdgeActionsType.EDGE_CREATE
+        type: EdgeActionsType.EDGE_CREATE,
       });
     });
   });
@@ -151,7 +150,7 @@ describe('edgeActionDispatcher', () => {
       handleEdgeMouseOver(store, edgeId);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: edgeId },
-        type: EdgeActionsType.EDGE_MOUSE_OVER
+        type: EdgeActionsType.EDGE_MOUSE_OVER,
       });
     });
 
@@ -168,7 +167,7 @@ describe('edgeActionDispatcher', () => {
       handleEdgeMouseOut(store, edgeId);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: edgeId },
-        type: EdgeActionsType.EDGE_MOUSE_OUT
+        type: EdgeActionsType.EDGE_MOUSE_OUT,
       });
     });
 

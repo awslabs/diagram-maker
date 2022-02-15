@@ -14,8 +14,8 @@ export default class UITargetNormalizer {
   public static normalizeTarget(target: HTMLElement): NormalizedTarget {
     return {
       originalTarget: target,
-      id: target && target.getAttribute('data-id') || undefined,
-      type: target && target.getAttribute('data-type') || undefined
+      id: (target && target.getAttribute('data-id')) || undefined,
+      type: (target && target.getAttribute('data-type')) || undefined,
     };
   }
 
@@ -32,14 +32,13 @@ export default class UITargetNormalizer {
   public static isMouseEventInsideBrowser(event: MouseEvent): boolean {
     const clientPosition: Position = {
       x: event.clientX,
-      y: event.clientY
+      y: event.clientY,
     };
 
     return isPositionInRectangle(clientPosition, getBrowserRectangle());
   }
 
   public static normalizeMouseEventTarget(event: MouseEvent): MouseEvent {
-
     // Firefox returns the `document` object as the target for
     // mouse events fired outside of the window.  Chrome and Safari
     // instead return the root HTML tag.
@@ -76,19 +75,19 @@ export default class UITargetNormalizer {
 
     return {
       ...event,
-      target: document.documentElement
+      target: document.documentElement,
     };
   }
 
   public static getTarget(
     event: MouseEvent,
     requiredAttribute?: string,
-    requiredAttributeValue?: string
+    requiredAttributeValue?: string,
   ): HTMLElement | undefined {
     const { target } = UITargetNormalizer.normalizeMouseEventTarget(event);
 
     if (!target) {
-      return;
+      return undefined;
     }
 
     let currentTarget = target as HTMLElement;
@@ -102,13 +101,13 @@ export default class UITargetNormalizer {
       return currentTarget;
     }
 
-    while (!UITargetNormalizer.checkAttributeValue(currentTarget, requiredAttribute, requiredAttributeValue) &&
-      currentTarget.parentElement) {
+    while (!UITargetNormalizer.checkAttributeValue(currentTarget, requiredAttribute, requiredAttributeValue)
+      && currentTarget.parentElement) {
       currentTarget = currentTarget.parentElement;
     }
 
-    return UITargetNormalizer
-      .checkAttributeValue(currentTarget, requiredAttribute, requiredAttributeValue) && currentTarget || undefined;
+    return (UITargetNormalizer
+      .checkAttributeValue(currentTarget, requiredAttribute, requiredAttributeValue) && currentTarget) || undefined;
   }
 
   // IE11 Fallback (msElementsFromPoint)
@@ -132,15 +131,14 @@ export default class UITargetNormalizer {
     const targets = UITargetNormalizer.getElementsFromPoint(screenPosition);
     let dropTarget: HTMLElement | undefined;
 
-    for (const target of targets) {
+    targets.forEach((target) => {
       if (UITargetNormalizer.checkAttributeValue(target, 'data-dropzone')) {
-        dropTarget = target as HTMLElement;
-        break;
+        dropTarget = dropTarget || target as HTMLElement;
       }
-    }
+    });
 
     if (!dropTarget) {
-      return;
+      return undefined;
     }
 
     return dropTarget;
@@ -149,7 +147,7 @@ export default class UITargetNormalizer {
   private static nodeListToElementArray(nodeList: NodeListOf<Element>): Element[] {
     const elementArray: Element[] = [];
 
-    const length = nodeList.length;
+    const { length } = nodeList;
     for (let i = 0; i < length; i += 1) {
       elementArray.push(nodeList[i]);
     }

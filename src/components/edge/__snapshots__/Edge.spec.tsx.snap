@@ -1,193 +1,173 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Edge passes show arrowhead 1`] = `
-preact-render-spy (1 nodes)
--------
 <g
-  class="dm-edge"
+  className="dm-edge"
+  data-event-target={true}
   data-id="myEdge"
   data-type="DiagramMaker.Edge"
-  data-event-target={true}
 >
   <EdgeCurve
-    src={
-      Object {
-        "x": 0,
-        "y": 100
-      }
-    }
+    className="dm-path-inner"
     dest={
       Object {
         "x": 100,
-        "y": 0
+        "y": 0,
       }
     }
     edgeStyle={0}
-    class="dm-path-inner"
     showArrowhead={true}
-  >
-  </EdgeCurve>
+    src={
+      Object {
+        "x": 0,
+        "y": 100,
+      }
+    }
+  />
   <EdgeCurve
-    src={
-      Object {
-        "x": 0,
-        "y": 100
-      }
-    }
+    className="dm-path-outer"
     dest={
       Object {
         "x": 100,
-        "y": 0
+        "y": 0,
       }
     }
     edgeStyle={0}
-    class="dm-path-outer"
     showArrowhead={true}
-  >
-  </EdgeCurve>
+    src={
+      Object {
+        "x": 0,
+        "y": 100,
+      }
+    }
+  />
 </g>
-
 `;
 
 exports[`Edge renders selected class 1`] = `
-preact-render-spy (1 nodes)
--------
 <g
-  class="dm-edge dm-selected"
+  className="dm-edge dm-selected"
+  data-event-target={true}
   data-id="myEdge"
   data-type="DiagramMaker.Edge"
-  data-event-target={true}
 >
   <EdgeCurve
-    src={
-      Object {
-        "x": 0,
-        "y": 100
-      }
-    }
+    className="dm-path-inner"
     dest={
       Object {
         "x": 100,
-        "y": 0
+        "y": 0,
       }
     }
     edgeStyle={0}
-    class="dm-path-inner"
-  >
-  </EdgeCurve>
+    src={
+      Object {
+        "x": 0,
+        "y": 100,
+      }
+    }
+  />
   <EdgeCurve
-    src={
-      Object {
-        "x": 0,
-        "y": 100
-      }
-    }
+    className="dm-path-outer"
     dest={
       Object {
         "x": 100,
-        "y": 0
+        "y": 0,
       }
     }
     edgeStyle={0}
-    class="dm-path-outer"
-  >
-  </EdgeCurve>
+    src={
+      Object {
+        "x": 0,
+        "y": 100,
+      }
+    }
+  />
 </g>
-
 `;
 
 exports[`Edge renders source & dest types 1`] = `
-preact-render-spy (1 nodes)
--------
 <g
-  class="dm-edge"
+  className="dm-edge"
+  data-edge-dest-type="destinationType"
+  data-edge-source-type="sourceType"
+  data-event-target={true}
   data-id="myEdge"
   data-type="DiagramMaker.Edge"
-  data-event-target={true}
-  data-edge-source-type="sourceType"
-  data-edge-dest-type="destinationType"
 >
   <EdgeCurve
-    src={
-      Object {
-        "x": 0,
-        "y": 100
-      }
-    }
+    className="dm-path-inner"
     dest={
       Object {
         "x": 100,
-        "y": 0
+        "y": 0,
       }
     }
     edgeStyle={0}
-    class="dm-path-inner"
-  >
-  </EdgeCurve>
+    src={
+      Object {
+        "x": 0,
+        "y": 100,
+      }
+    }
+  />
   <EdgeCurve
-    src={
-      Object {
-        "x": 0,
-        "y": 100
-      }
-    }
+    className="dm-path-outer"
     dest={
       Object {
         "x": 100,
-        "y": 0
+        "y": 0,
       }
     }
     edgeStyle={0}
-    class="dm-path-outer"
-  >
-  </EdgeCurve>
+    src={
+      Object {
+        "x": 0,
+        "y": 100,
+      }
+    }
+  />
 </g>
-
 `;
 
 exports[`Edge renders the paths using props 1`] = `
-preact-render-spy (1 nodes)
--------
 <g
-  class="dm-edge"
+  className="dm-edge"
+  data-event-target={true}
   data-id="myEdge"
   data-type="DiagramMaker.Edge"
-  data-event-target={true}
 >
   <EdgeCurve
-    src={
-      Object {
-        "x": 0,
-        "y": 100
-      }
-    }
+    className="dm-path-inner"
     dest={
       Object {
         "x": 100,
-        "y": 0
+        "y": 0,
       }
     }
     edgeStyle={0}
-    class="dm-path-inner"
-  >
-  </EdgeCurve>
+    src={
+      Object {
+        "x": 0,
+        "y": 100,
+      }
+    }
+  />
   <EdgeCurve
-    src={
-      Object {
-        "x": 0,
-        "y": 100
-      }
-    }
+    className="dm-path-outer"
     dest={
       Object {
         "x": 100,
-        "y": 0
+        "y": 0,
       }
     }
     edgeStyle={0}
-    class="dm-path-outer"
-  >
-  </EdgeCurve>
+    src={
+      Object {
+        "x": 0,
+        "y": 100,
+      }
+    }
+  />
 </g>
-
 `;

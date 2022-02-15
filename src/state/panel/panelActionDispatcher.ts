@@ -7,7 +7,7 @@ import {
   DragPanelAction,
   DragStartPanelAction,
   PanelActionsType,
-  ResizePanelAction
+  ResizePanelAction,
 } from './panelActions';
 
 function getPanelAttributeAsBoolean(target: Element): boolean {
@@ -31,7 +31,7 @@ function getPanelElement(dragHandleElement: HTMLElement): HTMLElement | undefine
     currentTarget = currentTarget.parentElement;
   }
 
-  return getPanelAttributeAsBoolean(currentTarget) && currentTarget || undefined;
+  return (getPanelAttributeAsBoolean(currentTarget) && currentTarget) || undefined;
 }
 
 function getDraggablePanelOffset(dragHandleElement: HTMLElement): Position {
@@ -43,46 +43,46 @@ function getDraggablePanelOffset(dragHandleElement: HTMLElement): Position {
 
     return {
       x: dragHandleRect.left - panelRect.left,
-      y: dragHandleRect.top - panelRect.top
+      y: dragHandleRect.top - panelRect.top,
     };
   }
   return { x: 0, y: 0 };
 }
 
-function getDraggablePanelPosition(dragHandleElement: HTMLElement, normalizedPosition: Position, id: string): Position {
+function getDraggablePanelPosition(dragHandleElement: HTMLElement, normalizedPosition: Position): Position {
   const draggablePanelOffset = getDraggablePanelOffset(dragHandleElement);
 
   return {
     x: normalizedPosition.x - draggablePanelOffset.x,
-    y: normalizedPosition.y - draggablePanelOffset.y
+    y: normalizedPosition.y - draggablePanelOffset.y,
   };
 }
 
 function createResizePanelAction(id: string, size: Size): ResizePanelAction {
   return {
     type: PanelActionsType.PANEL_RESIZE,
-    payload: { id, size }
+    payload: { id, size },
   };
 }
 
 function createDragPanelAction(id: string, position: Position, viewContainerSize: Size): DragPanelAction {
   return {
     type: PanelActionsType.PANEL_DRAG,
-    payload: { id, position, viewContainerSize }
+    payload: { id, position, viewContainerSize },
   };
 }
 
 function createDragPanelStartAction(id: string): DragStartPanelAction {
   return {
     type: PanelActionsType.PANEL_DRAG_START,
-    payload: { id }
+    payload: { id },
   };
 }
 
 export function handlePanelResize<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   id: string | undefined,
-  size: Size
+  size: Size,
 ) {
   if (id) {
     const action = createResizePanelAction(id, size);
@@ -95,10 +95,10 @@ export function handlePanelDrag<NodeType, EdgeType>(
   id: string | undefined,
   draggableElement: HTMLElement,
   normalizedPosition: Position,
-  viewContainerSize: Size
+  viewContainerSize: Size,
 ) {
   if (id) {
-    const position = getDraggablePanelPosition(draggableElement, normalizedPosition, id);
+    const position = getDraggablePanelPosition(draggableElement, normalizedPosition);
     const action = createDragPanelAction(id, position, viewContainerSize);
     store.dispatch(action);
   }
@@ -106,7 +106,7 @@ export function handlePanelDrag<NodeType, EdgeType>(
 
 export function handlePanelDragStart<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
-  id: string | undefined
+  id: string | undefined,
 ) {
   if (id) {
     const action = createDragPanelStartAction(id);

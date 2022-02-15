@@ -1,9 +1,9 @@
 import {
   getAllEdges, getAllNodes, getDiagramMakerView, getEdgeById, getElementByDataIdAndType, getNodeById,
-  getPanelById, getPotentialEdge, getPotentialNodeById, getSelectionMarquee, getWorkspace
+  getPanelById, getPotentialEdge, getPotentialNodeById, getSelectionMarquee, getWorkspace,
 } from '../common/getters';
 import {
-  clickElement, dragAndDropElement, dragElement, dragStartElement, dropElement, triggerKeyboardEvent
+  clickElement, dragAndDropElement, dragElement, dragStartElement, dropElement, triggerKeyboardEvent,
 } from '../common/interaction';
 import { convertScaleToMatrix, convertTranslate2dToMatrix } from '../common/utils';
 
@@ -14,14 +14,13 @@ describe('DiagramMaker.API', () => {
 
   const toolsType = 'DiagramMaker.Tools';
   const viewport = { width: 1200, height: 900 };
-  const nodeRect = { width: 100, height: 50, top: 150, left: 200 };
+  const nodeRect = {
+    width: 100, height: 50, top: 150, left: 200,
+  };
   const workspace = { width: 3200, height: 1600 };
-
-  // TODO: Add layout integ tests
 
   describe('setEditorMode', () => {
     describe('Select', () => {
-
       const selectId = 'Select';
 
       beforeEach(() => {
@@ -102,7 +101,9 @@ describe('DiagramMaker.API', () => {
         getElementByDataIdAndType(readOnlyId, toolsType).click();
         const expectedTransform = convertScaleToMatrix(1.3);
         getWorkspace()
-          .trigger('wheel', { deltaY: -50, pageX: 0, pageY: 0, force: true });
+          .trigger('wheel', {
+            deltaY: -50, pageX: 0, pageY: 0, force: true,
+          });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
 
@@ -226,7 +227,9 @@ describe('DiagramMaker.API', () => {
       it('centers the workspace & resets the zoom', () => {
         const expectedTransform = convertScaleToMatrix(1.3);
         getWorkspace()
-          .trigger('wheel', { deltaY: -50, pageX: 0, pageY: 0, force: true });
+          .trigger('wheel', {
+            deltaY: -50, pageX: 0, pageY: 0, force: true,
+          });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
         getElementByDataIdAndType(focusSelectedId, toolsType).click();
         const expectedLeft = (viewport.width - workspace.width) / 2;
@@ -248,14 +251,15 @@ describe('DiagramMaker.API', () => {
         dragAndDropElement(node, { pageX: centerX, pageY: centerY });
         node.should('have.css', 'transform').and('eq', expectedNodeTransform);
         getElementByDataIdAndType(focusSelectedId, toolsType).click();
-        const expectedTransform =
-          convertTranslate2dToMatrix(viewport.width / 2 - centerX, viewport.height / 2 - centerY);
+        const expectedTransform = convertTranslate2dToMatrix(
+          viewport.width / 2 - centerX,
+          viewport.height / 2 - centerY,
+        );
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
     });
 
     describe('when multiple nodes are selected', () => {
-
       beforeEach(() => {
         const selectId = 'Select';
         getElementByDataIdAndType(selectId, toolsType).click();
@@ -267,19 +271,21 @@ describe('DiagramMaker.API', () => {
       it('fits the selected nodes', () => {
         getElementByDataIdAndType(focusSelectedId, toolsType).click();
         const buffer = 50;
-        const nodeBoundingRect = { width: 300, height: 200, top: 150, left: 200 };
+        const nodeBoundingRect = {
+          width: 300, height: 200, top: 150, left: 200,
+        };
         const nodeBoundingRectWithBuffer = {
           height: nodeBoundingRect.height + 2 * buffer,
           left: nodeBoundingRect.left - buffer,
           top: nodeBoundingRect.top - buffer,
-          width: nodeBoundingRect.width + 2 * buffer
+          width: nodeBoundingRect.width + 2 * buffer,
         };
         const scaleForWidth = viewport.width / nodeBoundingRectWithBuffer.width;
         const scaleForHeight = viewport.height / nodeBoundingRectWithBuffer.height;
         const expectedScale = Math.min(scaleForWidth, scaleForHeight);
         const expectedPosition = {
           x: -nodeBoundingRectWithBuffer.left * expectedScale,
-          y: -nodeBoundingRectWithBuffer.top * expectedScale
+          y: -nodeBoundingRectWithBuffer.top * expectedScale,
         };
         const expectedTransform = convertScaleToMatrix(expectedScale, expectedPosition.x, expectedPosition.y);
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
@@ -292,19 +298,21 @@ describe('DiagramMaker.API', () => {
     it('fits all the nodes on the screen', () => {
       getElementByDataIdAndType(fitId, toolsType).click();
       const buffer = 50;
-      const nodeBoundingRect = { width: 300, height: 200, top: 150, left: 200 };
+      const nodeBoundingRect = {
+        width: 300, height: 200, top: 150, left: 200,
+      };
       const nodeBoundingRectWithBuffer = {
         height: nodeBoundingRect.height + 2 * buffer,
         left: nodeBoundingRect.left - buffer,
         top: nodeBoundingRect.top - buffer,
-        width: nodeBoundingRect.width + 2 * buffer
+        width: nodeBoundingRect.width + 2 * buffer,
       };
       const scaleForWidth = viewport.width / nodeBoundingRectWithBuffer.width;
       const scaleForHeight = viewport.height / nodeBoundingRectWithBuffer.height;
       const expectedScale = Math.min(scaleForWidth, scaleForHeight);
       const expectedPosition = {
         x: -nodeBoundingRectWithBuffer.left * expectedScale,
-        y: -nodeBoundingRectWithBuffer.top * expectedScale
+        y: -nodeBoundingRectWithBuffer.top * expectedScale,
       };
       const expectedTransform = convertScaleToMatrix(expectedScale, expectedPosition.x, expectedPosition.y);
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);

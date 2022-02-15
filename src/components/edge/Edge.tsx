@@ -1,10 +1,10 @@
-import * as classnames from 'classnames';
+import classnames from 'classnames';
 import * as Preact from 'preact';
 
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import { Position } from 'diagramMaker/state/types';
 
-import { default as EdgeCurve, EdgeStyle } from './EdgeCurve';
+import EdgeCurve, { EdgeStyle } from './EdgeCurve';
 
 import './Edge.scss';
 
@@ -22,23 +22,30 @@ export interface EdgeProps {
 
 // @TODO: Make edge and label fully interactive like nodes
 export default class Edge extends Preact.Component<EdgeProps> {
+  private static getCurve = (
+    src: Position,
+    dest: Position,
+    edgeStyle: EdgeStyle,
+    className: string,
+    showArrowhead?: boolean,
+  ) => <EdgeCurve src={src} dest={dest} edgeStyle={edgeStyle} className={className} showArrowhead={showArrowhead} />;
 
   public render() {
     const {
-      src, dest, className, edgeStyle, id, selected, showArrowhead
+      src, dest, className, edgeStyle, id, selected, showArrowhead,
     } = this.props;
 
     const classNames = classnames('dm-edge', className, { 'dm-selected': selected });
 
-    const curvePathInner = this.getCurve(src, dest, edgeStyle, 'dm-path-inner', showArrowhead);
-    const curvePathOuter = this.getCurve(src, dest, edgeStyle, 'dm-path-outer', showArrowhead);
+    const curvePathInner = Edge.getCurve(src, dest, edgeStyle, 'dm-path-inner', showArrowhead);
+    const curvePathOuter = Edge.getCurve(src, dest, edgeStyle, 'dm-path-outer', showArrowhead);
 
-    return(
+    return (
       <g
         className={classNames}
         data-id={id}
         data-type={DiagramMakerComponentsType.EDGE}
-        data-event-target={true}
+        data-event-target
         data-edge-source-type={this.props.srcTypeId}
         data-edge-dest-type={this.props.destTypeId}
       >
@@ -47,9 +54,4 @@ export default class Edge extends Preact.Component<EdgeProps> {
       </g>
     );
   }
-
-  private getCurve = (
-    src: Position, dest: Position, edgeStyle: EdgeStyle, className: string, showArrowhead?: boolean
-  ) =>
-    <EdgeCurve src={src} dest={dest} edgeStyle={edgeStyle} className={className} showArrowhead={showArrowhead} />
 }

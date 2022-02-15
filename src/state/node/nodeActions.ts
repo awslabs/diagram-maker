@@ -12,11 +12,11 @@ export enum NodeActionsType {
   NODE_LAYOUT = 'NODE_LAYOUT',
   POTENTIAL_NODE_DRAG_START = 'POTENTIAL_NODE_DRAG_START',
   POTENTIAL_NODE_DRAG = 'POTENTIAL_NODE_DRAG',
-  POTENTIAL_NODE_DRAG_END = 'POTENTIAL_NODE_DRAG_END'
+  POTENTIAL_NODE_DRAG_END = 'POTENTIAL_NODE_DRAG_END',
 }
 
 export const NodeActions = {
-  ...NodeActionsType
+  ...NodeActionsType,
 };
 
 /** Action fired to create a new node */

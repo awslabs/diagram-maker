@@ -1,4 +1,6 @@
-import { DiagramMakerEdge, DiagramMakerEdges, DiagramMakerNode, DiagramMakerNodes } from 'diagramMaker/state/types';
+import {
+  DiagramMakerEdge, DiagramMakerEdges, DiagramMakerNode, DiagramMakerNodes,
+} from 'diagramMaker/state/types';
 
 import { createDeleteItemsAction, createNewItemsAction, handleDeleteSelectedItems } from './globalActionDispatcher';
 import { GlobalActionsType } from './globalActions';
@@ -6,7 +8,7 @@ import { GlobalActionsType } from './globalActions';
 const position = { x: 0, y: 0 };
 const size = { width: 100, height: 20 };
 
-describe('globalActionDispatcher',  () => {
+describe('globalActionDispatcher', () => {
   describe('createDeleteItemsAction', () => {
     it('returns delete items action', () => {
       const nodeIds = ['node-1', 'node-2'];
@@ -14,9 +16,9 @@ describe('globalActionDispatcher',  () => {
       expect(createDeleteItemsAction(nodeIds, edgeIds)).toEqual({
         payload: {
           edgeIds,
-          nodeIds
+          nodeIds,
         },
-        type: GlobalActionsType.DELETE_ITEMS
+        type: GlobalActionsType.DELETE_ITEMS,
       });
     });
   });
@@ -26,12 +28,12 @@ describe('globalActionDispatcher',  () => {
       const nodes: DiagramMakerNode<{}>[] = [
         {
           id: 'node-1',
-          diagramMakerData: { position, size, selected: false }
+          diagramMakerData: { position, size, selected: false },
         },
         {
           id: 'node-2',
-          diagramMakerData: { position, size, selected: true }
-        }
+          diagramMakerData: { position, size, selected: true },
+        },
       ];
       const edges: DiagramMakerEdge<{}>[] = [
         {
@@ -39,24 +41,24 @@ describe('globalActionDispatcher',  () => {
           src: 'node-1',
           dest: 'node-2',
           diagramMakerData: {
-            selected: true
-          }
+            selected: true,
+          },
         },
         {
           id: 'edge-2',
           src: 'node-2',
           dest: 'node-1',
           diagramMakerData: {
-            selected: false
-          }
-        }
+            selected: false,
+          },
+        },
       ];
       expect(createNewItemsAction(nodes, edges)).toEqual({
         payload: {
           edges,
-          nodes
+          nodes,
         },
-        type: GlobalActionsType.CREATE_ITEMS
+        type: GlobalActionsType.CREATE_ITEMS,
       });
     });
   });
@@ -66,24 +68,22 @@ describe('globalActionDispatcher',  () => {
       const nodes: DiagramMakerNodes<{}> = {
         'node-1': {
           id: 'node-1',
-          diagramMakerData: { position, size, selected: false }
+          diagramMakerData: { position, size, selected: false },
         },
         'node-2': {
           id: 'node-2',
-          diagramMakerData: { position, size, selected: true }
-        }
+          diagramMakerData: { position, size, selected: true },
+        },
       };
       const edges: DiagramMakerEdges<{}> = {};
       const dispatch = jest.fn();
 
       const store: any = {
         dispatch,
-        getState: () => {
-          return {
-            edges,
-            nodes
-          };
-        }
+        getState: () => ({
+          edges,
+          nodes,
+        }),
       };
 
       handleDeleteSelectedItems(store);
@@ -91,9 +91,9 @@ describe('globalActionDispatcher',  () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: {
           edgeIds: [],
-          nodeIds: ['node-2']
+          nodeIds: ['node-2'],
         },
-        type: GlobalActionsType.DELETE_ITEMS
+        type: GlobalActionsType.DELETE_ITEMS,
       });
     });
 
@@ -101,12 +101,12 @@ describe('globalActionDispatcher',  () => {
       const nodes: DiagramMakerNodes<{}> = {
         'node-1': {
           id: 'node-1',
-          diagramMakerData: { position, size }
+          diagramMakerData: { position, size },
         },
         'node-2': {
           id: 'node-2',
-          diagramMakerData: { position, size }
-        }
+          diagramMakerData: { position, size },
+        },
       };
 
       const edges: DiagramMakerEdges<{}> = {
@@ -115,29 +115,27 @@ describe('globalActionDispatcher',  () => {
           src: 'node-1',
           dest: 'node-2',
           diagramMakerData: {
-            selected: true
-          }
+            selected: true,
+          },
         },
         'edge-2': {
           id: 'edge-2',
           src: 'node-2',
           dest: 'node-1',
           diagramMakerData: {
-            selected: false
-          }
-        }
+            selected: false,
+          },
+        },
       };
 
       const dispatch = jest.fn();
 
       const store: any = {
         dispatch,
-        getState: () => {
-          return {
-            edges,
-            nodes
-          };
-        }
+        getState: () => ({
+          edges,
+          nodes,
+        }),
       };
 
       handleDeleteSelectedItems(store);
@@ -145,9 +143,9 @@ describe('globalActionDispatcher',  () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: {
           edgeIds: ['edge-1'],
-          nodeIds: []
+          nodeIds: [],
         },
-        type: GlobalActionsType.DELETE_ITEMS
+        type: GlobalActionsType.DELETE_ITEMS,
       });
     });
 
@@ -155,16 +153,16 @@ describe('globalActionDispatcher',  () => {
       const nodes: DiagramMakerNodes<{}> = {
         'node-1': {
           id: 'node-1',
-          diagramMakerData: { position, size }
+          diagramMakerData: { position, size },
         },
         'node-2': {
           id: 'node-2',
-          diagramMakerData: { position, size }
+          diagramMakerData: { position, size },
         },
         'node-3': {
           id: 'node-3',
-          diagramMakerData: { position, size, selected: true }
-        }
+          diagramMakerData: { position, size, selected: true },
+        },
       };
 
       const edges: DiagramMakerEdges<{}> = {
@@ -173,29 +171,27 @@ describe('globalActionDispatcher',  () => {
           src: 'node-3',
           dest: 'node-1',
           diagramMakerData: {
-            selected: false
-          }
+            selected: false,
+          },
         },
         'edge-2': {
           id: 'edge-2',
           src: 'node-1',
           dest: 'node-2',
           diagramMakerData: {
-            selected: false
-          }
-        }
+            selected: false,
+          },
+        },
       };
 
       const dispatch = jest.fn();
 
       const store: any = {
         dispatch,
-        getState: () => {
-          return {
-            edges,
-            nodes
-          };
-        }
+        getState: () => ({
+          edges,
+          nodes,
+        }),
       };
 
       handleDeleteSelectedItems(store);
@@ -203,9 +199,9 @@ describe('globalActionDispatcher',  () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: {
           edgeIds: ['edge-1'],
-          nodeIds: ['node-3']
+          nodeIds: ['node-3'],
         },
-        type: GlobalActionsType.DELETE_ITEMS
+        type: GlobalActionsType.DELETE_ITEMS,
       });
     });
 
@@ -213,16 +209,16 @@ describe('globalActionDispatcher',  () => {
       const nodes: DiagramMakerNodes<{}> = {
         'node-1': {
           id: 'node-1',
-          diagramMakerData: { position, size }
+          diagramMakerData: { position, size },
         },
         'node-2': {
           id: 'node-2',
-          diagramMakerData: { position, size }
+          diagramMakerData: { position, size },
         },
         'node-3': {
           id: 'node-3',
-          diagramMakerData: { position, size, selected: true }
-        }
+          diagramMakerData: { position, size, selected: true },
+        },
       };
 
       const edges: DiagramMakerEdges<{}> = {
@@ -231,29 +227,27 @@ describe('globalActionDispatcher',  () => {
           src: 'node-1',
           dest: 'node-3',
           diagramMakerData: {
-            selected: false
-          }
+            selected: false,
+          },
         },
         'edge-2': {
           id: 'edge-2',
           src: 'node-1',
           dest: 'node-2',
           diagramMakerData: {
-            selected: false
-          }
-        }
+            selected: false,
+          },
+        },
       };
 
       const dispatch = jest.fn();
 
       const store: any = {
         dispatch,
-        getState: () => {
-          return {
-            edges,
-            nodes
-          };
-        }
+        getState: () => ({
+          edges,
+          nodes,
+        }),
       };
 
       handleDeleteSelectedItems(store);
@@ -261,9 +255,9 @@ describe('globalActionDispatcher',  () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: {
           edgeIds: ['edge-1'],
-          nodeIds: ['node-3']
+          nodeIds: ['node-3'],
         },
-        type: GlobalActionsType.DELETE_ITEMS
+        type: GlobalActionsType.DELETE_ITEMS,
       });
     });
 
@@ -271,16 +265,16 @@ describe('globalActionDispatcher',  () => {
       const nodes: DiagramMakerNodes<{}> = {
         'node-1': {
           id: 'node-1',
-          diagramMakerData: { position, size, selected: true }
+          diagramMakerData: { position, size, selected: true },
         },
         'node-2': {
           id: 'node-2',
-          diagramMakerData: { position, size, selected: true }
+          diagramMakerData: { position, size, selected: true },
         },
         'node-3': {
           id: 'node-3',
-          diagramMakerData: { position, size }
-        }
+          diagramMakerData: { position, size },
+        },
       };
 
       const edges: DiagramMakerEdges<{}> = {
@@ -289,29 +283,27 @@ describe('globalActionDispatcher',  () => {
           src: 'node-3',
           dest: 'node-3',
           diagramMakerData: {
-            selected: false
-          }
+            selected: false,
+          },
         },
         'edge-2': {
           id: 'edge-2',
           src: 'node-1',
           dest: 'node-2',
           diagramMakerData: {
-            selected: false
-          }
-        }
+            selected: false,
+          },
+        },
       };
 
       const dispatch = jest.fn();
 
       const store: any = {
         dispatch,
-        getState: () => {
-          return {
-            edges,
-            nodes
-          };
-        }
+        getState: () => ({
+          edges,
+          nodes,
+        }),
       };
 
       handleDeleteSelectedItems(store);
@@ -319,9 +311,9 @@ describe('globalActionDispatcher',  () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: {
           edgeIds: ['edge-2'],
-          nodeIds: ['node-1', 'node-2']
+          nodeIds: ['node-1', 'node-2'],
         },
-        type: GlobalActionsType.DELETE_ITEMS
+        type: GlobalActionsType.DELETE_ITEMS,
       });
     });
   });

@@ -1,5 +1,6 @@
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { SelectionMarquee } from '.';
 
@@ -13,9 +14,9 @@ describe('SelectionMarquee', () => {
       <SelectionMarquee
         anchor={{ x: 200, y: 100 }}
         position={{ x: 800, y: 500 }}
-      />
+      />,
     );
 
-    expect(selectionMarquee).toMatchSnapshot();
+    expect(toJson(selectionMarquee)).toMatchSnapshot();
   });
 });

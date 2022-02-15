@@ -6,11 +6,12 @@ import { DiagramMakerEditor, EditorMode } from 'diagramMaker/state/types';
 import { EditorActionsType } from './editorActions';
 
 export default function editorReducer<NodeType, EdgeType>(
-  state: DiagramMakerEditor | undefined, action: DiagramMakerAction<NodeType, EdgeType>
+  state: DiagramMakerEditor | undefined,
+  action: DiagramMakerAction<NodeType, EdgeType>,
 ): DiagramMakerEditor {
   if (state === undefined) {
     return {
-      mode: EditorMode.DRAG
+      mode: EditorMode.DRAG,
     };
   }
   switch (action.type) {
@@ -23,7 +24,7 @@ export default function editorReducer<NodeType, EdgeType>(
         draftState.contextMenu = {
           position: action.payload.position,
           targetId: action.payload.targetId,
-          targetType: action.payload.targetType
+          targetType: action.payload.targetType,
         };
       });
     case EditorActionsType.HIDE_CONTEXT_MENU:
@@ -34,15 +35,15 @@ export default function editorReducer<NodeType, EdgeType>(
       return produce(state, (draftState) => {
         draftState.selectionMarquee = {
           anchor: action.payload.anchor,
-          position: action.payload.anchor
+          position: action.payload.anchor,
         };
       });
     case EditorActionsType.UPDATE_SELECTION_MARQUEE:
       return produce(state, (draftState) => {
-        const anchor = state.selectionMarquee && state.selectionMarquee.anchor || action.payload.position;
+        const anchor = (state.selectionMarquee && state.selectionMarquee.anchor) || action.payload.position;
         draftState.selectionMarquee = {
           anchor,
-          position: action.payload.position
+          position: action.payload.position,
         };
       });
     case EditorActionsType.HIDE_SELECTION_MARQUEE:

@@ -1,4 +1,4 @@
-import * as classnames from 'classnames';
+import classnames from 'classnames';
 import * as Preact from 'preact';
 
 import Canvas from 'diagramMaker/components/canvas/Canvas';
@@ -18,31 +18,32 @@ export interface WorkspaceProps {
 
 export const DEFAULT_CANVAS_PATTERN: JSX.Element = <DotPattern cellSize={10} radius={1} />;
 
-const Workspace = (props: Preact.RenderableProps<WorkspaceProps>): JSX.Element => {
-  const className = classnames('dm-workspace', props.className);
-  const { height, width } = props.canvasSize;
-  const { x, y } = props.position;
-  const scale = props.scale;
+function Workspace(props: Preact.RenderableProps<WorkspaceProps>): JSX.Element {
+  const {
+    canvasPattern, canvasSize, children, className, position, scale,
+  } = props;
+  const { height, width } = canvasSize;
+  const { x, y } = position;
 
   const transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
 
-  const canvasPattern = props.canvasPattern || DEFAULT_CANVAS_PATTERN;
+  const pattern = canvasPattern || DEFAULT_CANVAS_PATTERN;
 
   return (
     <div
-      className={className}
+      className={classnames('dm-workspace', className)}
       style={{ height, width, transform }}
       data-type={DiagramMakerComponentsType.WORKSPACE}
-      data-event-target={true}
-      data-draggable={true}
-      data-dropzone={true}
+      data-event-target
+      data-draggable
+      data-dropzone
     >
-        <Canvas>
-          {canvasPattern}
-        </Canvas>
-        {props.children}
+      <Canvas>
+        {pattern}
+      </Canvas>
+      {children}
     </div>
   );
-};
+}
 
 export default Workspace;

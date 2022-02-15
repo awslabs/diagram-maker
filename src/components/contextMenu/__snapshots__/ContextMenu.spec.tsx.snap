@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContextMenu renders at the given position and size 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-context-menu"
-  style="transform: translate3d(400px, 600px, 0);"
+  className="dm-context-menu"
   data-type="DiagramMaker.ContextMenu"
+  style={
+    Object {
+      "transform": "translate3d(400px, 600px, 0)",
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;

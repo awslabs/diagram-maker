@@ -6,37 +6,38 @@ import { NodeActionsType, SelectNodeAction } from 'diagramMaker/state/node';
 import { DiagramMakerEdge, DiagramMakerEdges } from 'diagramMaker/state/types';
 import { DeselectAction, WorkspaceActionsType } from 'diagramMaker/state/workspace';
 
-import { CreateEdgeAction, DeleteEdgeAction, EdgeActionsType, SelectEdgeAction } from './edgeActions';
+import {
+  CreateEdgeAction, DeleteEdgeAction, EdgeActionsType, SelectEdgeAction,
+} from './edgeActions';
 import edgeReducer from './edgeReducer';
 
 describe('edgeReducer', () => {
-
   const getState = (): DiagramMakerEdges<string> => ({
     'edge-1': {
       id: 'edge-1',
       src: 'node-1',
       dest: 'node-2',
       diagramMakerData: {},
-      consumerData: undefined
+      consumerData: undefined,
     },
     'edge-2': {
       id: 'edge-2',
       src: 'node-3',
       dest: 'node-4',
       diagramMakerData: {},
-      consumerData: undefined
-    }
+      consumerData: undefined,
+    },
   });
 
   const createEdge = <EdgeType>(
-    id: string, src: string, dest: string, consumerData?: EdgeType, diagramMakerData = {}
+    id: string, src: string, dest: string, consumerData?: EdgeType, diagramMakerData = {},
   ): DiagramMakerEdge<EdgeType> => ({
-    id,
-    src,
-    dest,
-    diagramMakerData,
-    consumerData
-  });
+      id,
+      src,
+      dest,
+      diagramMakerData,
+      consumerData,
+    });
 
   function checkReducerPurity(state: DiagramMakerEdges<string>) {
     expect(state).toEqual(getState());
@@ -105,10 +106,15 @@ describe('edgeReducer', () => {
       const dest = 'node-6';
       const consumerData = 'testData';
       const diagramMakerData = {};
-      const newEdge: DiagramMakerEdge<string> = { id, src, dest, diagramMakerData, consumerData };
+      const newEdge: DiagramMakerEdge<string> = {
+        id, src, dest, diagramMakerData, consumerData,
+      };
       set(expectedState, id, newEdge);
       const action: CreateEdgeAction<string> = {
-        type: EdgeActionsType.EDGE_CREATE, payload: { id, src, dest, consumerData }
+        type: EdgeActionsType.EDGE_CREATE,
+        payload: {
+          id, src, dest, consumerData,
+        },
       };
       expect(edgeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -125,7 +131,7 @@ describe('edgeReducer', () => {
       set(expectedState, 'edge-4', newEdge2);
       const action: CreateItemsAction<void, string> = {
         type: GlobalActionsType.CREATE_ITEMS,
-        payload: { nodes: [], edges: [newEdge1, newEdge2] }
+        payload: { nodes: [], edges: [newEdge1, newEdge2] },
       };
       expect(edgeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
@@ -156,14 +162,14 @@ describe('edgeReducer', () => {
     });
   });
 
-  describe('delete items action',  () => {
+  describe('delete items action', () => {
     it('deletes the given edges', () => {
       const state = getState();
       const expectedState = { ...state };
       delete expectedState['edge-1'];
       const payload = {
         edgeIds: ['edge-1'],
-        nodeIds: []
+        nodeIds: [],
       };
       const type = GlobalActionsType.DELETE_ITEMS;
       const action: DeleteItemsAction = { type, payload };

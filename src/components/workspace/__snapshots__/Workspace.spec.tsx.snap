@@ -1,67 +1,177 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Workspace renders canvas given dot pattern 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-workspace workspace"
-  style="height: 400px; width: 800px; transform: translate3d(0px, 0px, 0) scale(1);"
-  data-type="DiagramMaker.Workspace"
-  data-event-target={true}
+  className="dm-workspace workspace"
   data-draggable={true}
   data-dropzone={true}
+  data-event-target={true}
+  data-type="DiagramMaker.Workspace"
+  style={
+    Object {
+      "height": 400,
+      "transform": "translate3d(0px, 0px, 0) scale(1)",
+      "width": 800,
+    }
+  }
 >
   <Canvas>
     <DotPattern
       cellSize={10}
       radius={1}
     >
+      <svg
+        className="dm-dots"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern
+            height={10}
+            id="dm-dot-pattern"
+            patternUnits="userSpaceOnUse"
+            width={10}
+          >
+            <path
+              d="M0,0 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+            />
+            <path
+              d="M10,0 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+            />
+            <path
+              d="M10,10 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+            />
+            <path
+              d="M0,10 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+            />
+          </pattern>
+        </defs>
+        <rect
+          fill="url(#dm-dot-pattern)"
+          height="100%"
+          width="100%"
+        />
+      </svg>
     </DotPattern>
   </Canvas>
 </div>
-
 `;
 
 exports[`Workspace renders canvas given grid pattern 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-workspace workspace"
-  style="height: 400px; width: 800px; transform: translate3d(0px, 0px, 0) scale(1);"
-  data-type="DiagramMaker.Workspace"
-  data-event-target={true}
+  className="dm-workspace workspace"
   data-draggable={true}
   data-dropzone={true}
+  data-event-target={true}
+  data-type="DiagramMaker.Workspace"
+  style={
+    Object {
+      "height": 400,
+      "transform": "translate3d(0px, 0px, 0) scale(1)",
+      "width": 800,
+    }
+  }
 >
   <Canvas>
     <GridPattern
       cellSize={10}
       patternSize={100}
     >
+      <svg
+        className="dm-grid"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern
+            height={10}
+            id="dm-grid-smallpattern"
+            patternUnits="userSpaceOnUse"
+            width={10}
+          >
+            <path
+              d="M 10 0 L 0 0 0 10"
+              strokeWidth="0.5"
+            />
+          </pattern>
+          <pattern
+            height={100}
+            id="dm-grid-pattern"
+            patternUnits="userSpaceOnUse"
+            width={100}
+          >
+            <rect
+              fill="url(#dm-grid-smallpattern)"
+              height={100}
+              width={100}
+            />
+            <path
+              d="M 100 0 L 0 0 0 100"
+              strokeWidth="1"
+            />
+          </pattern>
+        </defs>
+        <rect
+          fill="url(#dm-grid-pattern)"
+          height="100%"
+          width="100%"
+        />
+      </svg>
     </GridPattern>
   </Canvas>
 </div>
-
 `;
 
 exports[`Workspace renders dot pattern as default 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
-  class="dm-workspace workspace"
-  style="height: 400px; width: 800px; transform: translate3d(0px, 0px, 0) scale(1);"
-  data-type="DiagramMaker.Workspace"
-  data-event-target={true}
+  className="dm-workspace workspace"
   data-draggable={true}
   data-dropzone={true}
+  data-event-target={true}
+  data-type="DiagramMaker.Workspace"
+  style={
+    Object {
+      "height": 400,
+      "transform": "translate3d(0px, 0px, 0) scale(1)",
+      "width": 800,
+    }
+  }
 >
   <Canvas>
     <DotPattern
       cellSize={10}
       radius={1}
     >
+      <svg
+        className="dm-dots"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern
+            height={10}
+            id="dm-dot-pattern"
+            patternUnits="userSpaceOnUse"
+            width={10}
+          >
+            <path
+              d="M0,0 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+            />
+            <path
+              d="M10,0 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+            />
+            <path
+              d="M10,10 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+            />
+            <path
+              d="M0,10 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+            />
+          </pattern>
+        </defs>
+        <rect
+          fill="url(#dm-dot-pattern)"
+          height="100%"
+          width="100%"
+        />
+      </svg>
     </DotPattern>
   </Canvas>
 </div>
-
 `;

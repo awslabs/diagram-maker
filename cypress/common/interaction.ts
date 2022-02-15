@@ -25,7 +25,7 @@ function getRightButtonMouseEventParams() {
 export function dragAndDropElement(
   element: Cypress.Chainable,
   position: { pageX: number, pageY: number },
-  mouseParams: { button: number } = getLeftButtonMouseEventParams()
+  mouseParams: { button: number } = getLeftButtonMouseEventParams(),
 ) {
   element.trigger('mousedown', { ...mouseParams, which: 1, force: true })
     .trigger('mousemove', { ...mouseParams, ...position, force: true })
@@ -42,9 +42,11 @@ export function dragStartElement(
   element: Cypress.Chainable,
   position: { pageX: number, pageY: number },
   originPosition?: { pageX: number, pageY: number },
-  mouseParams: { button: number } = getLeftButtonMouseEventParams()
+  mouseParams: { button: number } = getLeftButtonMouseEventParams(),
 ) {
-  element.trigger('mousedown', { ...mouseParams, which: 1, ...originPosition, force: true })
+  element.trigger('mousedown', {
+    ...mouseParams, which: 1, ...originPosition, force: true,
+  })
     .trigger('mousemove', { ...mouseParams, ...position, force: true });
 }
 
@@ -57,7 +59,7 @@ export function dragStartElement(
 export function dragElement(
   element: Cypress.Chainable,
   position: { pageX: number, pageY: number },
-  mouseParams: { button: number } = getLeftButtonMouseEventParams()
+  mouseParams: { button: number } = getLeftButtonMouseEventParams(),
 ) {
   element.trigger('mousemove', { ...mouseParams, ...position, force: true });
 }
@@ -71,7 +73,7 @@ export function dragElement(
 export function dropElement(
   element: Cypress.Chainable,
   position?: { pageX: number, pageY: number },
-  mouseParams: { button: number } = getLeftButtonMouseEventParams()
+  mouseParams: { button: number } = getLeftButtonMouseEventParams(),
 ) {
   element.trigger('mouseup', { ...mouseParams, ...position, force: true });
 }
@@ -88,7 +90,7 @@ export function dropElement(
 export function forceDragAndDropElement(
   element: Cypress.Chainable,
   position: { pageX: number, pageY: number },
-  mouseParams: { button: number } = getLeftButtonMouseEventParams()
+  mouseParams: { button: number } = getLeftButtonMouseEventParams(),
 ) {
   element.trigger('mousedown', { ...mouseParams, which: 1, force: true })
     .trigger('mousemove', { ...mouseParams, ...position, force: true })
@@ -104,7 +106,7 @@ export function forceDragAndDropElement(
 export function clickElement(
   element: Cypress.Chainable,
   position: Cypress.PositionType = 'center',
-  mouseParams: { button: number } = getLeftButtonMouseEventParams()
+  mouseParams: { button: number } = getLeftButtonMouseEventParams(),
 ) {
   element.trigger('mousedown', position, { ...mouseParams, force: true })
     .trigger('mouseup', { ...mouseParams, force: true });
@@ -119,7 +121,7 @@ export function clickElement(
 export function rightClickElement(
   element: Cypress.Chainable,
   position: Cypress.PositionType = 'center',
-  mouseParams: { button: number } = getRightButtonMouseEventParams()
+  mouseParams: { button: number } = getRightButtonMouseEventParams(),
 ) {
   element.trigger('contextmenu', position, { ...mouseParams, force: true });
 }
@@ -133,7 +135,7 @@ export function rightClickElement(
 export function triggerKeyboardEvent(
   element: Cypress.Chainable,
   key: string,
-  modKey = false
+  modKey = false,
 ) {
   let text = key;
   if (key === 'Delete') {

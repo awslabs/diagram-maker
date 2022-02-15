@@ -1,11 +1,12 @@
 import {
-  getAllEdges, getAllNodes, getDiagramMakerView, getEdgeById, getElementByDataIdAndType, getNodeById, getWorkspace
+  getAllEdges, getAllNodes, getDiagramMakerView, getEdgeById, getElementByDataIdAndType, getNodeById, getWorkspace,
 } from '../common/getters';
-import { clickElement, dragStartElement, dropElement, triggerKeyboardEvent } from '../common/interaction';
+import {
+  clickElement, dragStartElement, dropElement, triggerKeyboardEvent,
+} from '../common/interaction';
 import { convertScaleToMatrix, convertTranslate2dToMatrix } from '../common/utils';
 
 describe('DiagramMaker.Workspace', () => {
-
   const workspace = { width: 3200, height: 1600 };
   const viewport = { width: 1200, height: 900 };
 
@@ -54,14 +55,18 @@ describe('DiagramMaker.Workspace', () => {
     it('zooms in the workspace when user scrolls mouse wheel down on the workspace', () => {
       const expectedTransform = convertScaleToMatrix(1.3);
       getWorkspace()
-        .trigger('wheel', { deltaY: -50, pageX: 0, pageY: 0, force: true });
+        .trigger('wheel', {
+          deltaY: -50, pageX: 0, pageY: 0, force: true,
+        });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
 
     it('zooms out the workspace when user scrolls mouse wheel up on the workspace', () => {
       const expectedTransform = convertScaleToMatrix(0.7);
       getWorkspace()
-        .trigger('wheel', { deltaY: 50, pageX: 0, pageY: 0, force: true });
+        .trigger('wheel', {
+          deltaY: 50, pageX: 0, pageY: 0, force: true,
+        });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
 
@@ -69,7 +74,9 @@ describe('DiagramMaker.Workspace', () => {
       const maxScale = 3;
       const expectedTransform = convertScaleToMatrix(maxScale);
       getWorkspace()
-        .trigger('wheel', { deltaY: -500, pageX: 0, pageY: 0, force: true });
+        .trigger('wheel', {
+          deltaY: -500, pageX: 0, pageY: 0, force: true,
+        });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
 
@@ -79,7 +86,9 @@ describe('DiagramMaker.Workspace', () => {
       const excpectedScale = Math.max(scaleForHeight, scaleForWidth);
       const expectedTransform = convertScaleToMatrix(excpectedScale);
       getWorkspace()
-        .trigger('wheel', { deltaY: 500, pageX: 0, pageY: 0, force: true });
+        .trigger('wheel', {
+          deltaY: 500, pageX: 0, pageY: 0, force: true,
+        });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
 
@@ -90,7 +99,9 @@ describe('DiagramMaker.Workspace', () => {
       const minScale = 0.3;
       const expectedTransform = convertScaleToMatrix(minScale);
       getWorkspace()
-        .trigger('wheel', { deltaY: 500, pageX: 0, pageY: 0, force: true });
+        .trigger('wheel', {
+          deltaY: 500, pageX: 0, pageY: 0, force: true,
+        });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
   });

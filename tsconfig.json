@@ -9,7 +9,9 @@
     "moduleResolution": "node",
     "paths": {
       "*": ["./src/typings/*"],
-      "diagramMaker/*": ["./src/*"]
+      "diagramMaker/*": ["./src/*"],
+      "react": ["./node_modules/preact/compat"],
+      "react-dom": ["./node_modules/preact/compat"]
     },
     "skipLibCheck": true,
     "sourceMap": true,

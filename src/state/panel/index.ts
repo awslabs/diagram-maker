@@ -4,5 +4,5 @@ export {
   DragPanelAction,
   PanelAction,
   PanelActionsType,
-  ResizePanelAction
+  ResizePanelAction,
 } from './panelActions';

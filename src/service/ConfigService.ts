@@ -1,7 +1,7 @@
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import { ActionInterceptor } from 'diagramMaker/state/middleware';
 import {
-  DiagramMakerData, DiagramMakerEdge, DiagramMakerNode, DiagramMakerPanel, DiagramMakerPotentialNode, Size
+  DiagramMakerData, DiagramMakerEdge, DiagramMakerNode, DiagramMakerPanel, DiagramMakerPotentialNode, Size,
 } from 'diagramMaker/state/types';
 
 export enum ConnectorPlacementType {
@@ -25,11 +25,11 @@ export enum ConnectorPlacementType {
    * Edges start at the bottom edge & end at the top edge of node bounding box.
    * Does render connectors by default.
    */
-  TOP_BOTTOM = 'TopBottom'
+  TOP_BOTTOM = 'TopBottom',
 }
 
 export const ConnectorPlacement = {
-  ...ConnectorPlacementType
+  ...ConnectorPlacementType,
 };
 
 export type BoundRenderCallback = (
@@ -211,11 +211,11 @@ export enum TypeForVisibleConnectorTypes {
   /** Render only output connector. */
   OUTPUT_ONLY = 'Output',
   /** Render none of the connectors. */
-  NONE = 'None'
+  NONE = 'None',
 }
 
 export const VisibleConnectorTypes = {
-  ...TypeForVisibleConnectorTypes
+  ...TypeForVisibleConnectorTypes,
 };
 
 export enum ShapeType {
@@ -229,11 +229,11 @@ export enum ShapeType {
    * Denotes a rectangle shaped node.
    * Node width & height can be different, but all angles are right.
    */
-  RECTANGLE = 'Rectangle'
+  RECTANGLE = 'Rectangle',
 }
 
 export const Shape = {
-  ...ShapeType
+  ...ShapeType,
 };
 
 /** Interface for storing configuration for a given node type */
@@ -312,43 +312,33 @@ export default class ConfigService<NodeType, EdgeType> {
     node: DiagramMakerNode<NodeType>,
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
-  ) => (HTMLElement | undefined | void) => {
-    return this.getRenderCallbacks().node;
-  }
+  ) => (HTMLElement | undefined | void) => this.getRenderCallbacks().node;
 
   public getRenderEdge = (): ((
     edge: DiagramMakerEdge<EdgeType>,
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
-  ) => (HTMLElement | undefined | void)) | undefined => {
-    return this.getRenderCallbacks().edge;
-  }
+  ) => (HTMLElement | undefined | void)) | undefined => this.getRenderCallbacks().edge;
 
   public getRenderPanel = (name: string): (
     panel: DiagramMakerPanel,
     state: DiagramMakerData<NodeType, EdgeType>,
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
-  ) => (HTMLElement | undefined | void) => {
-    return this.getRenderCallbacks().panels[name];
-  }
+  ) => (HTMLElement | undefined | void) => this.getRenderCallbacks().panels[name];
 
   public getRenderPotentialNode = (): ((
     node: DiagramMakerPotentialNode,
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
-  ) => (HTMLElement | undefined | void)) | undefined => {
-    return this.getRenderCallbacks().potentialNode;
-  }
+  ) => (HTMLElement | undefined | void)) | undefined => this.getRenderCallbacks().potentialNode;
 
-  public getRenderDestroy = (): DestroyCallback => {
-    return this.getRenderCallbacks().destroy;
-  }
+  public getRenderDestroy = (): DestroyCallback => this.getRenderCallbacks().destroy;
 
   public getBoundRenderContextMenu = (type: string, id?: string): BoundRenderCallback | undefined => {
     const contextMenuCallbacks = this.getRenderContextMenu();
     if (!contextMenuCallbacks) {
-      return;
+      return undefined;
     }
 
     switch (type) {
@@ -360,50 +350,44 @@ export default class ConfigService<NodeType, EdgeType> {
         return contextMenuCallbacks.panel && contextMenuCallbacks.panel.bind(null, id);
       case DiagramMakerComponentsType.WORKSPACE:
         return contextMenuCallbacks.workspace;
+      default:
+        return undefined;
     }
-  }
+  };
 
-  public getConnectorPlacement = (): ConnectorPlacementType => {
-    return (this.config.options && this.config.options.connectorPlacement) || ConnectorPlacement.CENTERED;
-  }
+  public getConnectorPlacement = (): ConnectorPlacementType => (
+    this.config.options && this.config.options.connectorPlacement
+  ) || ConnectorPlacement.CENTERED;
 
-  public getShowArrowhead = (): boolean => {
-    return (this.config.options && this.config.options.showArrowhead) || false;
-  }
+  public getShowArrowhead = (): boolean => (this.config.options && this.config.options.showArrowhead) || false;
 
-  public getActionInterceptor = (): ActionInterceptor<NodeType, EdgeType> | undefined => {
-    return this.config.actionInterceptor;
-  }
+  public getActionInterceptor = (): ActionInterceptor<NodeType, EdgeType> | undefined => this.config.actionInterceptor;
 
   public getSizeForNodeType = (typeId: string): Size | undefined => {
     const typeConfig = this.getNodeTypeConfiguration(typeId);
     return typeConfig && typeConfig.size;
-  }
+  };
 
   public getConnectorPlacementForNodeType = (typeId: string): ConnectorPlacementType => {
     const typeConfig = this.getNodeTypeConfiguration(typeId);
     return (typeConfig && typeConfig.connectorPlacementOverride) || this.getConnectorPlacement();
-  }
+  };
 
   public getShapeForNodeType = (typeId: string): ShapeType | undefined => {
     const typeConfig = this.getNodeTypeConfiguration(typeId);
     return typeConfig && typeConfig.shape;
-  }
+  };
 
   public getVisibleConnectorTypesForNodeType = (typeId: string): TypeForVisibleConnectorTypes | undefined => {
     const typeConfig = this.getNodeTypeConfiguration(typeId);
     return typeConfig && typeConfig.visibleConnectorTypes;
-  }
+  };
 
-  private getNodeTypeConfiguration = (typeId: string): DiagramMakerNodeTypeConfiguration | undefined => {
-    return this.config.nodeTypeConfig && this.config.nodeTypeConfig[typeId];
-  }
+  private getNodeTypeConfiguration = (
+    typeId: string,
+  ): DiagramMakerNodeTypeConfiguration | undefined => this.config.nodeTypeConfig && this.config.nodeTypeConfig[typeId];
 
-  private getRenderContextMenu = (): ContextMenuRenderCallbacks | undefined => {
-    return this.getRenderCallbacks().contextMenu;
-  }
+  private getRenderContextMenu = (): ContextMenuRenderCallbacks | undefined => this.getRenderCallbacks().contextMenu;
 
-  private getRenderCallbacks = (): RenderCallbacks<NodeType, EdgeType> => {
-    return this.config.renderCallbacks;
-  }
+  private getRenderCallbacks = (): RenderCallbacks<NodeType, EdgeType> => this.config.renderCallbacks;
 }

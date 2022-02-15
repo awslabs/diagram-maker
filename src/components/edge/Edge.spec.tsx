@@ -1,21 +1,21 @@
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { Edge, EdgeStyle } from '.';
 
 describe('Edge', () => {
-
   it('renders the paths using props', () => {
     const edge = shallow(
       <Edge
         id="myEdge"
         edgeStyle={EdgeStyle.LEFT_RIGHT_BEZIER}
-        src={{ x:0, y:100 }}
-        dest={{ x:100, y:0 }}
-      />
+        src={{ x: 0, y: 100 }}
+        dest={{ x: 100, y: 0 }}
+      />,
     );
 
-    expect(edge).toMatchSnapshot();
+    expect(toJson(edge)).toMatchSnapshot();
   });
 
   it('passes show arrowhead', () => {
@@ -23,13 +23,13 @@ describe('Edge', () => {
       <Edge
         id="myEdge"
         edgeStyle={EdgeStyle.LEFT_RIGHT_BEZIER}
-        src={{ x:0, y:100 }}
-        dest={{ x:100, y:0 }}
-        showArrowhead={true}
-      />
+        src={{ x: 0, y: 100 }}
+        dest={{ x: 100, y: 0 }}
+        showArrowhead
+      />,
     );
 
-    expect(edge).toMatchSnapshot();
+    expect(toJson(edge)).toMatchSnapshot();
   });
 
   it('renders selected class', () => {
@@ -37,13 +37,13 @@ describe('Edge', () => {
       <Edge
         id="myEdge"
         edgeStyle={EdgeStyle.LEFT_RIGHT_BEZIER}
-        src={{ x:0, y:100 }}
-        dest={{ x:100, y:0 }}
-        selected={true}
-      />
+        src={{ x: 0, y: 100 }}
+        dest={{ x: 100, y: 0 }}
+        selected
+      />,
     );
 
-    expect(edge).toMatchSnapshot();
+    expect(toJson(edge)).toMatchSnapshot();
   });
 
   it('renders source & dest types', () => {
@@ -51,14 +51,13 @@ describe('Edge', () => {
       <Edge
         id="myEdge"
         edgeStyle={EdgeStyle.LEFT_RIGHT_BEZIER}
-        src={{ x:0, y:100 }}
-        dest={{ x:100, y:0 }}
+        src={{ x: 0, y: 100 }}
+        dest={{ x: 100, y: 0 }}
         srcTypeId="sourceType"
         destTypeId="destinationType"
-      />
+      />,
     );
 
-    expect(edge).toMatchSnapshot();
+    expect(toJson(edge)).toMatchSnapshot();
   });
-
 });

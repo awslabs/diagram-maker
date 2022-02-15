@@ -1,8 +1,8 @@
-jest.unmock('./sequenceReducers');
-
-import { AnyAction, Reducer } from 'redux';
+import { Reducer } from 'redux';
 
 import { sequenceReducers } from './sequenceReducers';
+
+jest.unmock('./sequenceReducers');
 
 interface State {
   num: number;
@@ -11,7 +11,7 @@ interface State {
 
 enum ActionType {
   NUM_ACTION = 'NUM_ACTION',
-  STR_ACTION = 'STR_ACTION'
+  STR_ACTION = 'STR_ACTION',
 }
 
 interface NumAction {
@@ -39,7 +39,7 @@ describe('sequenceReducers', () => {
       if (action.type === ActionType.NUM_ACTION) {
         return {
           num: state.num + action.payload,
-          str: state.str
+          str: state.str,
         };
       }
       return state;
@@ -54,7 +54,7 @@ describe('sequenceReducers', () => {
       if (action.type === ActionType.STR_ACTION) {
         return {
           num: state.num,
-          str: action.payload
+          str: action.payload,
         };
       }
       return state;
@@ -65,7 +65,7 @@ describe('sequenceReducers', () => {
     const reducer = sequenceReducers(
       createIncReducer(),
       createSetStrReducer(),
-      createIncReducer()
+      createIncReducer(),
     );
 
     // Increment by 0 should result in the same state
@@ -86,7 +86,7 @@ describe('sequenceReducers', () => {
       createSetStrReducer(),
       null,
       undefined,
-      null
+      null,
     );
 
     // SetStrReducer is there and should process STR_ACTION

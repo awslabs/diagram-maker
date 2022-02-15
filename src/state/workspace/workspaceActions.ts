@@ -13,14 +13,14 @@ export enum WorkspaceActionsType {
   WORKSPACE_ZOOM = 'WORKSPACE_ZOOM',
   /** Resize the container */
   WORKSPACE_RESIZE = 'WORKSPACE_RESIZE',
-   /** Resize the workspace canvas */
+  /** Resize the workspace canvas */
   WORKSPACE_CANVAS_RESIZE = 'WORKSPACE_CANVAS_RESIZE',
   /** Resets the zoom */
-  WORKSPACE_RESET_ZOOM = 'WORKSPACE_RESET_ZOOM'
+  WORKSPACE_RESET_ZOOM = 'WORKSPACE_RESET_ZOOM',
 }
 
 export const WorkspaceActions = {
-  ...WorkspaceActionsType
+  ...WorkspaceActionsType,
 };
 
 /** Action fired to deselect all items */
@@ -82,4 +82,4 @@ export interface WorkspaceResetZoomAction extends Action {
 }
 
 export type WorkspaceAction = DeselectAction | DragWorkspaceAction | ResizeWorkspaceCanvasAction |
-  ResizeWorkspaceAction | SelectAllAction | ZoomWorkspaceAction | WorkspaceResetZoomAction;
+ResizeWorkspaceAction | SelectAllAction | ZoomWorkspaceAction | WorkspaceResetZoomAction;

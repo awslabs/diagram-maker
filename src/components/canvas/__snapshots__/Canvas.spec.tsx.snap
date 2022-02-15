@@ -1,27 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Canvas renders canvas given dot pattern 1`] = `
-preact-render-spy (1 nodes)
--------
-<div class="dm-canvas">
+<div
+  className="dm-canvas"
+>
   <DotPattern
     cellSize={10}
     radius={1}
-  >
-  </DotPattern>
+  />
 </div>
-
 `;
 
 exports[`Canvas renders canvas given grid pattern 1`] = `
-preact-render-spy (1 nodes)
--------
-<div class="dm-canvas">
+<div
+  className="dm-canvas"
+>
   <GridPattern
     cellSize={10}
     patternSize={100}
-  >
-  </GridPattern>
+  />
 </div>
-
 `;

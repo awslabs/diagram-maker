@@ -1,172 +1,190 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Panel renders at the given position and size 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(400px, 600px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(400px, 600px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Panel renders panel docked at bottom left with correct size 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(0px, 200px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(0px, 200px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Panel renders panel docked at bottom left with correct size and relative position 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(100px, 100px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(100px, 100px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Panel renders panel docked at bottom right with correct size 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(900px, 200px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(900px, 200px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Panel renders panel docked at bottom right with correct size and relative position 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(800px, 100px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(800px, 100px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Panel renders panel docked at top left with correct size 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(0px, 0px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(0px, 0px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Panel renders panel docked at top left with correct size and relative position 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(100px, 100px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(100px, 100px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Panel renders panel docked at top right with correct size 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(900px, 0px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(900px, 0px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;
 
 exports[`Panel renders panel docked at top right with correct size and relative position 1`] = `
-preact-render-spy (1 nodes)
--------
 <div
+  className="dm-panel"
+  data-event-target={true}
   data-id="myPanel"
   data-type="DiagramMaker.Panel"
-  data-event-target={true}
-  class="dm-panel"
-  style="width: 300px; height: 600px; transform: translate3d(800px, 100px, 0);"
+  style={
+    Object {
+      "height": 600,
+      "transform": "translate3d(800px, 100px, 0)",
+      "width": 300,
+    }
+  }
 >
   <ComposeView
-    renderCallback={[Function mockConstructor]}
-    destroyCallback={[Function mockConstructor]}
-  >
-  </ComposeView>
+    destroyCallback={[MockFunction]}
+    renderCallback={[MockFunction]}
+  />
 </div>
-
 `;

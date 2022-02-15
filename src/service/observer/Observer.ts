@@ -2,6 +2,7 @@ export type ObserverCallback = (...args: any[]) => void;
 
 export default class Observer {
   private globalEventListeners: ObserverCallback[] = [];
+
   private events: {
     [key: string]: ObserverCallback[]
   } = {};
@@ -12,11 +13,11 @@ export default class Observer {
     }
 
     this.events[event].push(callback);
-  }
+  };
 
   public subscribeAll = (callback: ObserverCallback): void => {
     this.globalEventListeners.push(callback);
-  }
+  };
 
   public publish = (event: string, payload?: any): void => {
     this.globalEventListeners.forEach((callback) => {
@@ -30,9 +31,7 @@ export default class Observer {
     this.events[event].forEach((callback) => {
       callback(payload);
     });
-  }
+  };
 
-  private hasEvent = (event: string): boolean => {
-    return !!this.events[event];
-  }
+  private hasEvent = (event: string): boolean => !!this.events[event];
 }

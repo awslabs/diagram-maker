@@ -1,31 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DotPattern renders dot pattern 1`] = `
-preact-render-spy (1 nodes)
--------
 <svg
-  class="dm-dots"
+  className="dm-dots"
   xmlns="http://www.w3.org/2000/svg"
 >
   <defs>
     <pattern
-      id="dm-dot-pattern"
-      width={10}
       height={10}
+      id="dm-dot-pattern"
       patternUnits="userSpaceOnUse"
+      width={10}
     >
-      <path d="M0,0 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"></path>
-      <path d="M10,0 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"></path>
-      <path d="M10,10 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"></path>
-      <path d="M0,10 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"></path>
+      <path
+        d="M0,0 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+      />
+      <path
+        d="M10,0 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+      />
+      <path
+        d="M10,10 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+      />
+      <path
+        d="M0,10 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"
+      />
     </pattern>
   </defs>
   <rect
     fill="url(#dm-dot-pattern)"
-    width="100%"
     height="100%"
-  >
-  </rect>
+    width="100%"
+  />
 </svg>
-
 `;

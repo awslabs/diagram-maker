@@ -1,5 +1,5 @@
 import ConfigService, {
-  ConnectorPlacement, DiagramMakerConfig, Shape, VisibleConnectorTypes
+  ConnectorPlacement, DiagramMakerConfig, Shape, VisibleConnectorTypes,
 } from 'diagramMaker/service/ConfigService';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 
@@ -17,28 +17,28 @@ describe('ConfigService', () => {
   const size = { width: 100, height: 100 };
   const options = {
     connectorPlacement: ConnectorPlacement.LEFT_RIGHT,
-    showArrowhead: true
+    showArrowhead: true,
   };
   const renderCallbacks = {
     contextMenu: {
       edge: renderEdgeContextMenu,
       node: renderNodeContextMenu,
       panel: renderPanelContextMenu,
-      workspace: renderWorkspaceContextMenu
+      workspace: renderWorkspaceContextMenu,
     },
     destroy: renderDestroy,
     edge: renderEdge,
     node: renderNode,
     panels: {
-      test: renderTestPanel
+      test: renderTestPanel,
     },
-    potentialNode: renderPotentialNode
+    potentialNode: renderPotentialNode,
   };
 
   const config: DiagramMakerConfig<void, void> = {
     options,
     renderCallbacks,
-    actionInterceptor
+    actionInterceptor,
   };
   const configService = new ConfigService(config);
 
@@ -159,8 +159,8 @@ describe('ConfigService', () => {
       const configWithTypeConfig: DiagramMakerConfig<void, void> = {
         renderCallbacks,
         nodeTypeConfig: {
-          [type]: { size }
-        }
+          [type]: { size },
+        },
       };
       const configServiceWithTypeConfig = new ConfigService(configWithTypeConfig);
       expect(configServiceWithTypeConfig.getSizeForNodeType(type)).toBe(size);
@@ -179,8 +179,8 @@ describe('ConfigService', () => {
       const configWithTypeConfig: DiagramMakerConfig<void, void> = {
         renderCallbacks,
         nodeTypeConfig: {
-          [type]: { size, connectorPlacementOverride }
-        }
+          [type]: { size, connectorPlacementOverride },
+        },
       };
       const configServiceWithTypeConfig = new ConfigService(configWithTypeConfig);
       expect(configServiceWithTypeConfig.getConnectorPlacementForNodeType(type)).toBe(connectorPlacementOverride);
@@ -191,8 +191,8 @@ describe('ConfigService', () => {
       const configWithTypeConfig: DiagramMakerConfig<void, void> = {
         renderCallbacks,
         nodeTypeConfig: {
-          [type]: { size }
-        }
+          [type]: { size },
+        },
       };
       const configServiceWithTypeConfig = new ConfigService(configWithTypeConfig);
       expect(configServiceWithTypeConfig.getConnectorPlacementForNodeType(type))
@@ -212,8 +212,8 @@ describe('ConfigService', () => {
       const configWithTypeConfig: DiagramMakerConfig<void, void> = {
         renderCallbacks,
         nodeTypeConfig: {
-          [type]: { size, shape }
-        }
+          [type]: { size, shape },
+        },
       };
       const configServiceWithTypeConfig = new ConfigService(configWithTypeConfig);
       expect(configServiceWithTypeConfig.getShapeForNodeType(type)).toBe(shape);
@@ -224,8 +224,8 @@ describe('ConfigService', () => {
       const configWithTypeConfig: DiagramMakerConfig<void, void> = {
         renderCallbacks,
         nodeTypeConfig: {
-          [type]: { size }
-        }
+          [type]: { size },
+        },
       };
       const configServiceWithTypeConfig = new ConfigService(configWithTypeConfig);
       expect(configServiceWithTypeConfig.getShapeForNodeType(type)).toBeUndefined();
@@ -244,8 +244,8 @@ describe('ConfigService', () => {
       const configWithTypeConfig: DiagramMakerConfig<void, void> = {
         renderCallbacks,
         nodeTypeConfig: {
-          [type]: { size, visibleConnectorTypes }
-        }
+          [type]: { size, visibleConnectorTypes },
+        },
       };
       const configServiceWithTypeConfig = new ConfigService(configWithTypeConfig);
       expect(configServiceWithTypeConfig.getVisibleConnectorTypesForNodeType(type)).toBe(visibleConnectorTypes);
@@ -256,8 +256,8 @@ describe('ConfigService', () => {
       const configWithTypeConfig: DiagramMakerConfig<void, void> = {
         renderCallbacks,
         nodeTypeConfig: {
-          [type]: { size }
-        }
+          [type]: { size },
+        },
       };
       const configServiceWithTypeConfig = new ConfigService(configWithTypeConfig);
       expect(configServiceWithTypeConfig.getVisibleConnectorTypesForNodeType(type)).toBeUndefined();

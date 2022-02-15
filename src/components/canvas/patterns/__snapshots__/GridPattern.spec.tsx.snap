@@ -1,50 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GridPattern renders grid pattern 1`] = `
-preact-render-spy (1 nodes)
--------
 <svg
-  class="dm-grid"
+  className="dm-grid"
   xmlns="http://www.w3.org/2000/svg"
 >
   <defs>
     <pattern
-      id="dm-grid-smallpattern"
-      width={10}
       height={10}
+      id="dm-grid-smallpattern"
       patternUnits="userSpaceOnUse"
+      width={10}
     >
       <path
         d="M 10 0 L 0 0 0 10"
-        stroke-width="0.5"
-      >
-      </path>
+        strokeWidth="0.5"
+      />
     </pattern>
     <pattern
-      id="dm-grid-pattern"
-      width={100}
       height={100}
+      id="dm-grid-pattern"
       patternUnits="userSpaceOnUse"
+      width={100}
     >
       <rect
-        width={100}
-        height={100}
         fill="url(#dm-grid-smallpattern)"
-      >
-      </rect>
+        height={100}
+        width={100}
+      />
       <path
         d="M 100 0 L 0 0 0 100"
-        stroke-width="1"
-      >
-      </path>
+        strokeWidth="1"
+      />
     </pattern>
   </defs>
   <rect
     fill="url(#dm-grid-pattern)"
-    width="100%"
     height="100%"
-  >
-  </rect>
+    width="100%"
+  />
 </svg>
-
 `;

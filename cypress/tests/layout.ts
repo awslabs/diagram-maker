@@ -17,7 +17,7 @@ describe('DiagramMaker Layout', () => {
       const leftPadding = nodeRect.width / 2;
       const rightMost = leftPadding + nodeRect.width + 2 * (nodeRect.width + distanceMin);
       const expectedWidth = Math.max(rightMost, workspace.width);
-      getWorkspace().should('have.css', 'width', expectedWidth + 'px');
+      getWorkspace().should('have.css', 'width', `${expectedWidth}px`);
       const node1Pos = { x: 150, y: 350 };
       const node2Pos = { x: 650, y: 50 };
       const node3Pos = { x: 1150, y: 50 };
@@ -46,7 +46,7 @@ describe('DiagramMaker Layout', () => {
       const distance2 = 500;
       const distance3 = 380;
       const expectedHeight = 4 * nodeRect.height + distance1 + distance2 + distance3;
-      getWorkspace().should('have.css', 'height', expectedHeight + 'px');
+      getWorkspace().should('have.css', 'height', `${expectedHeight}px`);
 
       const node1Pos = { x: 519.615, y: 300 };
       const node2Pos = { x: 519.615, y: 900 };

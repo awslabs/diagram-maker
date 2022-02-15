@@ -1,5 +1,6 @@
 import * as Preact from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { PotentialNode } from 'diagramMaker/components/node';
 
@@ -15,12 +16,12 @@ describe('PotentialNode', () => {
   const typeId = 'mockPotentialNodeId';
   const position = {
     x: 400,
-    y: 600
+    y: 600,
   };
 
   const size = {
     height: 300,
-    width: 200
+    width: 200,
   };
 
   beforeEach(() => {
@@ -35,9 +36,9 @@ describe('PotentialNode', () => {
         size={size}
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
-      />
+      />,
     );
 
-    expect(node).toMatchSnapshot();
+    expect(toJson(node)).toMatchSnapshot();
   });
 });

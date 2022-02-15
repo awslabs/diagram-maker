@@ -6,33 +6,33 @@ import { CreateItemsAction, DeleteItemsAction, GlobalActionsType } from './globa
 
 export function createDeleteItemsAction(
   nodeIds: string[],
-  edgeIds: string[]
+  edgeIds: string[],
 ): DeleteItemsAction {
   return {
     type: GlobalActionsType.DELETE_ITEMS,
     payload: {
       nodeIds,
-      edgeIds
-    }
+      edgeIds,
+    },
   };
 }
 
 export function createNewItemsAction<NodeType, EdgeType>(
   nodes: DiagramMakerNode<NodeType>[],
-  edges: DiagramMakerEdge<EdgeType>[]
+  edges: DiagramMakerEdge<EdgeType>[],
 ): CreateItemsAction<NodeType, EdgeType> {
   return {
     type: GlobalActionsType.CREATE_ITEMS,
     payload: {
       nodes,
-      edges
-    }
+      edges,
+    },
   };
 }
 
 export function handleDeleteSelectedItems<NodeType, EdgeType>(store: Store<DiagramMakerData<NodeType, EdgeType>>) {
   const { edges, nodes } = store.getState();
-  const nodeIds: string[] = Object.keys(nodes).filter(id => nodes[id].diagramMakerData.selected);
+  const nodeIds: string[] = Object.keys(nodes).filter((id) => nodes[id].diagramMakerData.selected);
   const edgeIds: string[] = Object.keys(edges).filter((id) => {
     const edge = edges[id];
     const { src, dest } = edge;

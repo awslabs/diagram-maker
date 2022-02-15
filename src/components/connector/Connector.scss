@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $handleSize: 32px;
 $dotSize: 14px;
 
@@ -8,8 +10,8 @@ $dotSize: 14px;
   width: $handleSize;
   height: $handleSize;
   border-radius: 100%;
-  margin-top: -$handleSize/2;
-  margin-left: -$handleSize/2;
+  margin-top: math.div(-$handleSize, 2);
+  margin-left: math.div(-$handleSize, 2);
 
   &.dm-connector-output {
     cursor: pointer;
@@ -21,7 +23,7 @@ $dotSize: 14px;
     transition: background-color .4s ease, border .4s ease, transform .25s ease;
     width: $dotSize;
     height: $dotSize;
-    margin: ($handleSize - $dotSize) / 2;
+    margin: math.div($handleSize - $dotSize, 2);
     border-radius: 100%;
   }
 }
