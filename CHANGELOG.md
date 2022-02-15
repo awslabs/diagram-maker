@@ -1,5 +1,14 @@
 # Changelog for Diagram maker
 
+# 2.0.0
+* Upgrade all deps to latest & remove runtime deps from output bundle (#89)
+    * BREAKING CHANGE:
+        * Several runtime deps like Preact have been upgraded
+        * Made changes in source code to support newer lint rules, newer Preact changes, etc
+
+    * fix: Remove runtime dependencies from output bundle and update package.json accordingly
+* feature(edge): Add hover action to an edge
+
 ## 1.3.0
 * Feature: Added Boundary locator for Rectangular Shape (#39) 
 
