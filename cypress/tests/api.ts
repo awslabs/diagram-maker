@@ -9,7 +9,7 @@ import { convertScaleToMatrix, convertTranslate2dToMatrix } from '../common/util
 
 describe('DiagramMaker.API', () => {
   beforeEach(() => {
-    cy.visit('/LeftRightRectangular.html');
+    cy.visit('/iframe.html?id=demos-diagram-maker--left-right-rectangular&args=&viewMode=story');
   });
 
   const toolsType = 'DiagramMaker.Tools';

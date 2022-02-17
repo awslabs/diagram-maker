@@ -1,9 +1,16 @@
 @import '~diagramMaker/styles/mixins';
 
 html, body {
-  margin: 0;
+  .sb-show-main.sb-main-padded {
+    padding: 0;
+  }
   height: 100%;
-  widows: 100%;
+  width: 100%;
+}
+
+#root, #diagramMakerRoot {
+  height: 100%;
+  width: 100%;
 }
 
 #diagramMakerContainer {

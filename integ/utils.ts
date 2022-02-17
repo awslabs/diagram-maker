@@ -1,5 +1,5 @@
 import {
-  DiagramMaker, EditorMode, Event,  Layout, WorkflowLayoutDirection, WorkspaceActions
+  DiagramMaker, EditorMode, Event, Layout, WorkflowLayoutDirection, WorkspaceActions,
 } from 'diagramMaker/index';
 import { DiagramMakerNode, DiagramMakerPotentialNode, Size } from 'diagramMaker/state/types';
 import { Action, AnyAction } from 'redux';
@@ -69,7 +69,7 @@ export function createNodeWithInput(node: DiagramMakerNode<any>, container: HTML
     } else {
       childDiv.classList.remove('selected');
     }
-    return;
+    return undefined;
   }
   const newDiv = document.createElement('div');
   const input = document.createElement('input');
@@ -93,7 +93,7 @@ export function createNodeWithDropdown(node: DiagramMakerNode<any>, container: H
     } else {
       childDiv.classList.remove('selected');
     }
-    return;
+    return undefined;
   }
   const newDiv = document.createElement('div');
   const select = document.createElement('select');
@@ -185,7 +185,7 @@ export function createPanelNode(testId: string, text: string, size?: Size) {
 
 export function createLibraryPanel(container: HTMLElement) {
   if (container.innerHTML !== '') {
-    return;
+    return undefined;
   }
 
   const newDiv = document.createElement('div');
@@ -308,7 +308,7 @@ function createWorkflowLayoutButton(getDiagramMakerObj: () => DiagramMaker) {
     getDiagramMakerObj().api.layout({
       direction: WorkflowLayoutDirection.LEFT_RIGHT,
       distanceMin: 200,
-      layoutType: Layout.WORKFLOW
+      layoutType: Layout.WORKFLOW,
     });
   });
 }
@@ -318,7 +318,7 @@ function createHierarchicalLayoutButton(getDiagramMakerObj: () => DiagramMaker) 
     getDiagramMakerObj().api.layout({
       distanceMin: 200,
       fixedNodeIds: ['node1'],
-      layoutType: Layout.HIERARCHICAL
+      layoutType: Layout.HIERARCHICAL,
     });
   });
 }
@@ -360,12 +360,11 @@ export function createToolsPanel(container: HTMLElement, getDiagramMakerObj: () 
   newDiv.appendChild(createTestInput());
 
   container.appendChild(newDiv);
-  return;
 }
 
 export function createPluginPanel(container: HTMLElement, state: any) {
   if (container.innerHTML !== '') {
-    return;
+    return undefined;
   }
 
   const newDiv = document.createElement('div');
@@ -388,10 +387,10 @@ export function createPluginPanel(container: HTMLElement, state: any) {
   testPlugin.setAttribute('data-event-target', 'true');
   testPlugin.setAttribute('data-type', 'testPlugin');
   testPlugin.setAttribute('data-id', 'testPlugin');
-  const width = state.plugins.testPlugin.data.size.width;
-  const height = state.plugins.testPlugin.data.size.height;
-  testPlugin.style.width = width + 'px';
-  testPlugin.style.height = height + 'px';
+  const { width } = state.plugins.testPlugin.data.size;
+  const { height } = state.plugins.testPlugin.data.size;
+  testPlugin.style.width = `${width}px`;
+  testPlugin.style.height = `${height}px`;
   testPlugin.style.backgroundColor = 'orange';
   testPlugin.style.paddingTop = '15px';
   testPlugin.style.textAlign = 'center';
@@ -409,7 +408,7 @@ export function handleTestPluginEvent(event: any, diagramMaker: any) {
 
     diagramMaker.api.dispatch({
       payload: { position },
-      type: WorkspaceActions.WORKSPACE_DRAG
+      type: WorkspaceActions.WORKSPACE_DRAG,
     });
   }
 }
@@ -435,6 +434,7 @@ export function updateActionInLogger(action: Action) {
 export function addDevTools() {
   if (process.env.NODE_ENV === 'development') {
     const windowAsAny = window as any;
+    // eslint-disable-next-line no-underscore-dangle
     return windowAsAny.__REDUX_DEVTOOLS_EXTENSION__ && windowAsAny.__REDUX_DEVTOOLS_EXTENSION__();
   }
   return undefined;

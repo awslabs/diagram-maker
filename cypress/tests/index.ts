@@ -3,7 +3,7 @@ import { convertTranslate2dToMatrix } from '../common/utils';
 
 describe('DiagramMaker', () => {
   beforeEach(() => {
-    cy.visit('/LeftRightRectangular.html');
+    cy.visit('/iframe.html?id=demos-diagram-maker--left-right-rectangular&args=&viewMode=story');
   });
 
   it('successfully loads DiagramMaker', () => {

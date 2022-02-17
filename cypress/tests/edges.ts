@@ -8,7 +8,7 @@ import {
 describe('DiagramMaker.Edges', () => {
   describe('Edges with left right rectangular nodes', () => {
     beforeEach(() => {
-      cy.visit('/LeftRightRectangular.html');
+      cy.visit('/iframe.html?id=demos-diagram-maker--left-right-rectangular&args=&viewMode=story');
     });
 
     describe('edge rendering', () => {
@@ -95,7 +95,7 @@ describe('DiagramMaker.Edges', () => {
 
   describe('Edges with circular boundary nodes', () => {
     beforeEach(() => {
-      cy.visit('/BoundaryCircular.html');
+      cy.visit('/iframe.html?id=demos-diagram-maker--boundary-circular&args=&viewMode=story');
     });
 
     describe('edge rendering', () => {
@@ -195,7 +195,7 @@ describe('DiagramMaker.Edges', () => {
 
   describe('Edges with top bottom rectangular nodes', () => {
     beforeEach(() => {
-      cy.visit('/TopBottomRectangular.html');
+      cy.visit('/iframe.html?id=demos-diagram-maker--top-bottom-rectangular&args=&viewMode=story');
     });
 
     describe('edge rendering', () => {
