@@ -3,7 +3,7 @@ import { convertTranslate2dToMatrix } from '../common/utils';
 
 describe('DiagramMaker Layout', () => {
   beforeEach(() => {
-    cy.visit('/Layout.html');
+    cy.visit('/iframe.html?id=demos-diagram-maker--layout&args=&viewMode=story');
   });
   const toolsType = 'DiagramMaker.Tools';
   const workspace = { width: 1200, height: 800 };

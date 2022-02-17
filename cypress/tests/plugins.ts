@@ -7,7 +7,7 @@ import { convertTranslate2dToMatrix } from '../common/utils';
 
 describe('DiagramMakerPlugin', () => {
   beforeEach(() => {
-    cy.visit('/Plugins.html');
+    cy.visit('/iframe.html?id=demos-diagram-maker--plugins&args=&viewMode=story');
   });
 
   describe('render testPlugin', () => {

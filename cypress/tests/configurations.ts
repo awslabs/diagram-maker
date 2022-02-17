@@ -10,7 +10,7 @@ import { convertScaleToMatrix, convertTranslate2dToMatrix } from '../common/util
 describe('DiagramMaker.Configurations', () => {
   describe('nodeTypeConfiguration', () => {
     beforeEach(() => {
-      cy.visit('/LeftRightRectangular.html');
+      cy.visit('/iframe.html?id=demos-diagram-maker--left-right-rectangular&args=&viewMode=story');
     });
 
     describe('size', () => {
@@ -225,7 +225,7 @@ describe('DiagramMaker.Configurations', () => {
 
   describe('context menu', () => {
     beforeEach(() => {
-      cy.visit('/LeftRightRectangular.html');
+      cy.visit('/iframe.html?id=demos-diagram-maker--left-right-rectangular&args=&viewMode=story');
     });
 
     describe('workspace', () => {
@@ -409,7 +409,7 @@ describe('DiagramMaker.Configurations', () => {
 
   describe('action interceptor', () => {
     beforeEach(() => {
-      cy.visit('/ActionInterceptor.html');
+      cy.visit('/iframe.html?id=demos-diagram-maker--action-interceptor&args=&viewMode=story');
     });
 
     describe('logging an action', () => {

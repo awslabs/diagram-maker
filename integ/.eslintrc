@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json"
+  },
+  "rules": {
+    "max-len": ["error", { "code": 120 }],
+    // We set innerHTML on the container parameter we receive in render callbacks
+    "no-param-reassign": "off"
+  }
+}

@@ -10,7 +10,7 @@ describe('DiagramMaker.Panels', () => {
   const viewContainer = { width: 1200, height: 900 };
 
   beforeEach(() => {
-    cy.visit('/LeftRightRectangular.html');
+    cy.visit('/iframe.html?id=demos-diagram-maker--left-right-rectangular&args=&viewMode=story');
   });
 
   describe('panel rendering', () => {

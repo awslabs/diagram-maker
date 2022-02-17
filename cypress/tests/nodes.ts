@@ -10,7 +10,7 @@ describe('DiagramMaker.Nodes', () => {
   const nodeRect = { width: 100, height: 50 };
 
   beforeEach(() => {
-    cy.visit('/LeftRightRectangular.html');
+    cy.visit('/iframe.html?id=demos-diagram-maker--left-right-rectangular&args=&viewMode=story');
   });
 
   describe('node rendering', () => {
