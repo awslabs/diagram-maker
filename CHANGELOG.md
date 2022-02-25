@@ -1,6 +1,10 @@
 # Changelog for Diagram maker
 
-# 2.0.0
+## 2.0.1
+* fix: Revisit dependency bundling to be able to use in react projects
+* feature(docs): Use storybook for test environment & for documentation
+
+## 2.0.0
 * Upgrade all deps to latest & remove runtime deps from output bundle (#89)
     * BREAKING CHANGE:
         * Several runtime deps like Preact have been upgraded
