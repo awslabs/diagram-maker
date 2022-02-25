@@ -172,7 +172,7 @@ export function isPositionInRectangle(position: Position, rectange: Rectangle): 
   const bottom = top + rectange.size.height;
 
   return isBetween(x, left, right)
-      && isBetween(y, top, bottom);
+  && isBetween(y, top, bottom);
 }
 /**
  * Returns a position which is based off of innerRectangle's position but is modified so that

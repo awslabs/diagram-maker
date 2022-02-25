@@ -39,7 +39,7 @@ export function handleDeleteSelectedItems<NodeType, EdgeType>(store: Store<Diagr
 
     return edge.diagramMakerData.selected
            || nodeIds.indexOf(src) > -1
-           || nodeIds.indexOf(dest) > -1;
+    || nodeIds.indexOf(dest) > -1;
   });
   const action = createDeleteItemsAction(nodeIds, edgeIds);
 

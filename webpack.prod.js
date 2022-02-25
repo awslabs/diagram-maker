@@ -19,15 +19,7 @@ module.exports = merge(baseConfig, {
     umdNamedDefine: true
   },
   externals: {
-    'classnames': 'classnames',
-    'dagre': 'dagre',
-    'immer': 'immer',
-    'lodash-es': 'lodash-es',
-    'preact': 'preact',
-    'react-redux': 'react-redux',
-    'redux': 'redux',
-    'redux-undo-redo': 'redux-undo-redo',
-    'uuid': 'uuid'
+    'dagre': 'dagre'
   },
   optimization: {
     minimizer: [
@@ -43,6 +35,9 @@ module.exports = merge(baseConfig, {
     new BundleDeclarationsWebpackPlugin({
       entry: {
         filePath: 'src/index.ts',
+        libraries: {
+          inlinedLibraries: ['redux']
+        },
         output: {
           inlineDeclareGlobals: true
         }
