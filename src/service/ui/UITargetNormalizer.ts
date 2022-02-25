@@ -107,7 +107,8 @@ export default class UITargetNormalizer {
     }
 
     return (UITargetNormalizer
-      .checkAttributeValue(currentTarget, requiredAttribute, requiredAttributeValue) && currentTarget) || undefined;
+      .checkAttributeValue(currentTarget, requiredAttribute, requiredAttributeValue) && currentTarget)
+    || undefined;
   }
 
   // IE11 Fallback (msElementsFromPoint)

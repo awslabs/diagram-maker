@@ -9,10 +9,10 @@
 [Diagram Maker](https://awslabs.github.io/diagram-maker) is a library to display an interactive editor for any graph-like data.
 
 Following is a screenshot from one of the consumers of this library, [AWS IoT Events Console](https://console.aws.amazon.com/iotevents/home?region=us-east-1#/create/detectormodel) with Diagram Maker in action.
-![IoT Events Screenshot](docs/assets/IoTEventsScreenshot.png)
+![IoT Events Screenshot](storybook/assets/IoTEventsScreenshot.png)
 
 Following is a screenshot from another one of the consumers of this library, [AWS IoT Things Graph Console](https://console.aws.amazon.com/thingsgraph/home?region=us-east-1#/flows/create) with Diagram Maker in action.
-![IoT Things Graph Screenshot](docs/assets/IoTThingsGraphScreenshot.png)
+![IoT Things Graph Screenshot](storybook/assets/IoTThingsGraphScreenshot.png)
 
 ## Why Diagram Maker?
 Diagram Maker is a framework & data format agnostic library that is fully customizable in terms of look & feel as well as behavior. It also exposes a declarative interface to reduce the code required to integrate the library in any application and comes with many interactive features built in. Read more about the features of the library [here](https://awslabs.github.io/diagram-maker/?path=/story/docs-features--page).

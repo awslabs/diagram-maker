@@ -16,6 +16,8 @@
   "rules": {
     "max-len": ["error", { "code": 120 }],
     // We set innerHTML on the container parameter we receive in render callbacks
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    // TODO: Change when dependency bundling strategy is revisited
+    "import/no-extraneous-dependencies": "off"
   }
 }
