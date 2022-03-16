@@ -256,7 +256,6 @@ export default class ActionDispatcher<NodeType, EdgeType> {
     const { type, id } = target;
     const editorMode = this.store.getState().editor.mode;
     const workspaceState = this.store.getState().workspace;
-
     switch (type) {
       case DiagramMakerComponentsType.WORKSPACE:
         if (editorMode === EditorMode.SELECT) {
@@ -272,14 +271,26 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       case DiagramMakerComponentsType.NODE:
         handleNodeDragStart(this.store, id);
         break;
-      case (DiagramMakerComponentsType.NODE_CONNECTOR):
-        handleEdgeDragStart(
-          this.store,
-          id,
-          // No item offset, bc we want to draw dragged edges right at the tip of the pointer
-          ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
-        );
+      case (DiagramMakerComponentsType.NODE_CONNECTOR): {
+        const connectorType = target?.originalTarget?.getAttribute('data-connector-type') || undefined;
+        if (connectorType) {
+          handleEdgeDragStart(
+            this.store,
+            id,
+            // No item offset, bc we want to draw dragged edges right at the tip of the pointer
+            ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
+            connectorType,
+          );
+        } else {
+          handleEdgeDragStart(
+            this.store,
+            id,
+            // No item offset, bc we want to draw dragged edges right at the tip of the pointer
+            ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
+          );
+        }
         break;
+      }
       case (DiagramMakerComponentsType.POTENTIAL_NODE):
         handlePotentialNodeDragStart(
           this.store,
@@ -342,7 +353,13 @@ export default class ActionDispatcher<NodeType, EdgeType> {
     switch (dropzone.type) {
       case (DiagramMakerComponentsType.NODE_CONNECTOR):
         if (type === DiagramMakerComponentsType.NODE_CONNECTOR) {
-          handleEdgeCreate(this.store, id, dropzone.id);
+          const srcConnectorType = target?.originalTarget?.getAttribute('data-connector-type') || undefined;
+          const destConnectorType = dropzone?.originalTarget?.getAttribute('data-connector-type') || undefined;
+          if (srcConnectorType || destConnectorType) {
+            handleEdgeCreate(this.store, id, dropzone.id, srcConnectorType, destConnectorType);
+          } else {
+            handleEdgeCreate(this.store, id, dropzone.id);
+          }
         }
         break;
       case (DiagramMakerComponentsType.WORKSPACE):

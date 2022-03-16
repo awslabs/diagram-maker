@@ -166,10 +166,18 @@ export interface DiagramMakerEdge<EdgeType> {
    */
   readonly src: string;
   /**
+   * References the src connector type (optional)
+   */
+  readonly connectorSrcType?: string;
+  /**
    * References the id for the node where this edge ends.
    * Leads to inconsistencies if this refers to a node that doesnt exist.
    */
   readonly dest: string;
+  /**
+   * References the dest connector type (optional)
+   */
+  readonly connectorDestType?: string;
   /** Contains edge data managed by diagram maker */
   readonly diagramMakerData: {
     /** Denotes whether the edge is selected */
@@ -199,6 +207,10 @@ export interface DiagramMakerPotentialEdge {
    * Usually refers to the cursor position relative to the workspace scale & position.
    */
   readonly position: Position;
+  /**
+   * References the src connector type (optional)
+   */
+  readonly connectorSrcType?: string;
 }
 
 /** Interface for storing state of a diagram maker panel */

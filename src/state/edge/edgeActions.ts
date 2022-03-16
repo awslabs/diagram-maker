@@ -55,6 +55,14 @@ export interface CreateEdgeAction<EdgeType> extends Action {
     dest: string;
     /** Consumer data that needs to be added for this newly created edge. */
     consumerData?: EdgeType;
+    /** Type of the connector where this edge originates.
+     *  Only applicable if the source node is of a node type that has custom connecter placements.
+     */
+    connectorSrcType?: string;
+    /** Type of the connector where this edge ends.
+     *  Only applicable if the destination node is of a node type that has custom connecter placements.
+     */
+    connectorDestType?: string;
   };
 }
 
@@ -66,6 +74,10 @@ export interface DragStartEdgeAction extends Action {
     id: string;
     /** Position where this potential edge terminates. Usually the cursor position. */
     position: Position;
+    /** Type of the connector where this potential edge originates.
+     *  Only applicable for node types that have custom connecter placements.
+     */
+    connectorSrcType?: string;
   };
 }
 

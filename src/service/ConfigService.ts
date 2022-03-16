@@ -1,7 +1,7 @@
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import { ActionInterceptor } from 'diagramMaker/state/middleware';
 import {
-  DiagramMakerData, DiagramMakerEdge, DiagramMakerNode, DiagramMakerPanel, DiagramMakerPotentialNode, Size,
+  DiagramMakerData, DiagramMakerEdge, DiagramMakerNode, DiagramMakerPanel, DiagramMakerPotentialNode, Position, Size,
 } from 'diagramMaker/state/types';
 
 export enum ConnectorPlacementType {
@@ -26,6 +26,11 @@ export enum ConnectorPlacementType {
    * Does render connectors by default.
    */
   TOP_BOTTOM = 'TopBottom',
+  /**
+   * Edges start at positions that are configured by the node type.
+   * Doesn't render connectors by default.
+   */
+  CUSTOM = 'Custom',
 }
 
 export const ConnectorPlacement = {
@@ -236,6 +241,17 @@ export const Shape = {
   ...ShapeType,
 };
 
+export interface CustomConnectorType {
+  /**
+   * Position of the connector w.r.t to the parent node
+   */
+  readonly position: Position;
+  /**
+   * Unique identifier for the connector
+   */
+  readonly id: string;
+}
+
 /** Interface for storing configuration for a given node type */
 export interface DiagramMakerNodeTypeConfiguration {
   /**
@@ -256,6 +272,12 @@ export interface DiagramMakerNodeTypeConfiguration {
    * Used in conjunction with BOUNDARY connector placement.
    */
   shape?: ShapeType;
+  /**
+   * Used for specifying custom connector placements
+   */
+  customConnectorTypes?: {
+    [connectorTypeId: string]: CustomConnectorType;
+  }
 }
 
 export interface DiagramMakerConfig<NodeType, EdgeType> {
@@ -376,6 +398,11 @@ export default class ConfigService<NodeType, EdgeType> {
   public getShapeForNodeType = (typeId: string): ShapeType | undefined => {
     const typeConfig = this.getNodeTypeConfiguration(typeId);
     return typeConfig && typeConfig.shape;
+  };
+
+  public getCustomConnectorTypesForNodeType = (typeId: string): { [connectorId: string]: CustomConnectorType } => {
+    const typeConfig = this.getNodeTypeConfiguration(typeId);
+    return (typeConfig && typeConfig.customConnectorTypes) || {};
   };
 
   public getVisibleConnectorTypesForNodeType = (typeId: string): TypeForVisibleConnectorTypes | undefined => {

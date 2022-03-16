@@ -9,7 +9,7 @@ import { Panel } from 'diagramMaker/components/panel';
 import { SelectionMarquee } from 'diagramMaker/components/selectionMarquee';
 import { Workspace } from 'diagramMaker/components/workspace';
 import ConfigService, {
-  ConnectorPlacement, ConnectorPlacementType, Shape, ShapeType, TypeForVisibleConnectorTypes,
+  ConnectorPlacement, ConnectorPlacementType, CustomConnectorType, Shape, ShapeType, TypeForVisibleConnectorTypes,
 } from 'diagramMaker/service/ConfigService';
 import { getInflectionPoint } from 'diagramMaker/service/positionUtils';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
@@ -27,6 +27,7 @@ const CONNECTOR_PLACEMENT_TO_EDGE_TYPE = {
   [ConnectorPlacement.TOP_BOTTOM]: EdgeStyle.TOP_BOTTOM_BEZIER,
   [ConnectorPlacement.CENTERED]: EdgeStyle.STRAIGHT,
   [ConnectorPlacement.BOUNDARY]: EdgeStyle.STRAIGHT,
+  [ConnectorPlacement.CUSTOM]: EdgeStyle.STRAIGHT,
 };
 
 interface EdgeCoordinatePair {
@@ -51,12 +52,41 @@ const getConnectorPlacementForNode = <NodeType, EdgeType>(
   return configService.getConnectorPlacementForNodeType(typeId);
 };
 
+const getCustomConnectorsForNode = <NodeType, EdgeType>(
+  node: DiagramMakerNode<NodeType>,
+  configService: ConfigService<NodeType, EdgeType>,
+): { [connectorId: string]: CustomConnectorType } => {
+  const { typeId } = node;
+  if (!typeId) {
+    return {};
+  }
+
+  return configService.getCustomConnectorTypesForNodeType(typeId);
+};
+
 const getCenteredConnectorCoordinates = <NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
   const { position, size } = node.diagramMakerData;
   return {
     x: position.x + size.width / 2,
     y: position.y + size.height / 2,
   };
+};
+
+const getCustomConnectorCoordinates = <NodeType, EdgeType>(
+  node: DiagramMakerNode<NodeType>,
+  configService: ConfigService<NodeType, EdgeType>,
+  connectorType: string,
+): Position => {
+  const connectors = getCustomConnectorsForNode(node, configService);
+  const connector = connectors[connectorType];
+  if (connector && connector.position) {
+    const nodePosition = node.diagramMakerData.position;
+    return {
+      x: nodePosition.x + connector.position.x,
+      y: nodePosition.y + connector.position.y,
+    };
+  }
+  return getCenteredConnectorCoordinates(node);
 };
 
 const getLeftRightConnectorCoordinatesSource = <NodeType extends any>(node: DiagramMakerNode<NodeType>): Position => {
@@ -94,6 +124,7 @@ const getTopBottomConnectorCoordinatesSource = <NodeType extends any>(node: Diag
 const getEdgeCoordinateSource = <NodeType, EdgeType>(
   node: DiagramMakerNode<NodeType>,
   configService: ConfigService<NodeType, EdgeType>,
+  connectorSrcType?: string,
 ): Position => {
   let sourceCoordinates: Position;
   const connectorPlacement = getConnectorPlacementForNode(node, configService);
@@ -101,6 +132,12 @@ const getEdgeCoordinateSource = <NodeType, EdgeType>(
     sourceCoordinates = getLeftRightConnectorCoordinatesSource(node);
   } else if (connectorPlacement === ConnectorPlacement.TOP_BOTTOM) {
     sourceCoordinates = getTopBottomConnectorCoordinatesSource(node);
+  } else if (connectorPlacement === ConnectorPlacementType.CUSTOM) {
+    if (connectorSrcType) {
+      sourceCoordinates = getCustomConnectorCoordinates(node, configService, connectorSrcType);
+    } else {
+      return getCenteredConnectorCoordinates(node);
+    }
   } else {
     sourceCoordinates = getCenteredConnectorCoordinates(node);
   }
@@ -110,6 +147,7 @@ const getEdgeCoordinateSource = <NodeType, EdgeType>(
 const getEdgeCoordinateDestination = <NodeType, EdgeType>(
   node: DiagramMakerNode<NodeType>,
   configService: ConfigService<NodeType, EdgeType>,
+  connectorDestType?: string,
 ): Position => {
   let sourceCoordinates: Position;
   const connectorPlacement = getConnectorPlacementForNode(node, configService);
@@ -117,6 +155,12 @@ const getEdgeCoordinateDestination = <NodeType, EdgeType>(
     sourceCoordinates = getLeftRightConnectorCoordinatesDest(node);
   } else if (connectorPlacement === ConnectorPlacement.TOP_BOTTOM) {
     sourceCoordinates = getTopBottomConnectorCoordinatesDest(node);
+  } else if (connectorPlacement === ConnectorPlacementType.CUSTOM) {
+    if (connectorDestType) {
+      sourceCoordinates = getCustomConnectorCoordinates(node, configService, connectorDestType);
+    } else {
+      return getCenteredConnectorCoordinates(node);
+    }
   } else {
     sourceCoordinates = getCenteredConnectorCoordinates(node);
   }
@@ -254,10 +298,12 @@ const getEdgeCoordinatePair = <NodeType, EdgeType>(
   nodeDest: DiagramMakerNode<NodeType>,
   configService: ConfigService<NodeType, EdgeType>,
   overlappingEdge?: boolean,
+  connectorSrcType?: string,
+  connectorDestType?: string,
 ): EdgeCoordinatePair => {
   const coordinates: EdgeCoordinatePair = {
-    src: getEdgeCoordinateSource(nodeSrc, configService),
-    dest: getEdgeCoordinateDestination(nodeDest, configService),
+    src: getEdgeCoordinateSource(nodeSrc, configService, connectorSrcType),
+    dest: getEdgeCoordinateDestination(nodeDest, configService, connectorDestType),
   };
   let tempDest = coordinates.dest;
   let tempSrc = coordinates.src;
@@ -446,7 +492,10 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
       edgeDestination,
       this.props.configService,
       isEdgePair,
+      edges[edgeKey]?.connectorSrcType,
+      edges[edgeKey]?.connectorDestType,
     );
+
     const edgeStyle = isEdgePair ? EdgeStyle.QUADRATIC_BEZIER : getEdgeStyle(
       getConnectorPlacementForNode(edgeSource, this.props.configService),
       getConnectorPlacementForNode(edgeDestination, this.props.configService),
@@ -486,6 +535,8 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
           nodes[edges[edgeKey].dest],
           this.props.configService,
           true,
+          edges[edgeKey]?.connectorSrcType,
+          edges[edgeKey]?.connectorDestType,
         );
 
         return (
@@ -508,6 +559,9 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
           nodes[edges[edgeKey].src],
           nodes[edges[edgeKey].dest],
           this.props.configService,
+          false,
+          edges[edgeKey].connectorSrcType,
+          edges[edgeKey].connectorDestType,
         );
 
         return (
@@ -546,8 +600,10 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
       const currentEdge = edges[edgeKey];
       const edgeSource = nodes[currentEdge.src];
       const edgeDestination = nodes[currentEdge.dest];
-      const edgeMapId = `${edgeSource.id}__${edgeDestination.id}`;
-      const matchingEdgeId = `${edgeDestination.id}__${edgeSource.id}`;
+      const edgeSrcLabel = `${edgeSource.id}${currentEdge.connectorSrcType || ''}`;
+      const edgeDestLabel = `${edgeDestination.id}${currentEdge.connectorDestType || ''}`;
+      const edgeMapId = `${edgeSrcLabel}__${edgeDestLabel}`;
+      const matchingEdgeId = `${edgeDestLabel}__${edgeSrcLabel}`;
       let edgeOverlap;
       if (edgeMapping[matchingEdgeId]) {
         edgeOverlap = edgeMapping[matchingEdgeId];
@@ -593,10 +649,10 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     if (!edge) {
       return undefined;
     }
-
-    const sourceCoordinates = getEdgeCoordinateSource(nodes[edge.src], this.props.configService);
+    const nodeId = edge.src;
+    const sourceCoordinates = getEdgeCoordinateSource(nodes[nodeId], this.props.configService, edge.connectorSrcType);
     const edgeStyle = getEdgeStyle(
-      getConnectorPlacementForNode(nodes[edge.src], this.props.configService),
+      getConnectorPlacementForNode(nodes[nodeId], this.props.configService),
       this.props.configService.getConnectorPlacement(),
     );
     return (

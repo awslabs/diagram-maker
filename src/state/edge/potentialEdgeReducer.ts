@@ -17,6 +17,7 @@ export default function potentialEdgeReducer<NodeType, EdgeType>(
       return {
         position: action.payload.position,
         src: action.payload.id,
+        connectorSrcType: action.payload.connectorSrcType,
       };
     case (EdgeActionsType.EDGE_DRAG):
       return produce(state, (draftState) => {

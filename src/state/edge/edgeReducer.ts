@@ -29,7 +29,7 @@ export default function edgeReducer<NodeType, EdgeType>(
     case (EdgeActionsType.EDGE_CREATE):
       return produce(state, (draftState) => {
         const {
-          id, src, dest, consumerData: untypedConsumerData,
+          id, src, dest, consumerData: untypedConsumerData, connectorSrcType, connectorDestType,
         } = action.payload;
         const consumerData = untypedConsumerData as Draft<EdgeType>;
         const diagramMakerData = {};
@@ -39,6 +39,8 @@ export default function edgeReducer<NodeType, EdgeType>(
           diagramMakerData,
           id,
           src,
+          connectorSrcType,
+          connectorDestType,
         };
       });
     case (EdgeActionsType.EDGE_SELECT):
