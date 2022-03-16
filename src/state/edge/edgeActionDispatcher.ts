@@ -14,11 +14,15 @@ import {
   SelectEdgeAction,
 } from './edgeActions';
 
-function createDragStartEdgeAction(id: string, position: Position): DragStartEdgeAction {
-  return {
+function createDragStartEdgeAction(id: string, position: Position, connectorType?: string): DragStartEdgeAction {
+  const action: DragStartEdgeAction = {
     type: EdgeActionsType.EDGE_DRAG_START,
     payload: { id, position },
   };
+  if (connectorType) {
+    action.payload.connectorSrcType = connectorType;
+  }
+  return action;
 }
 
 function createDragEndEdgeAction(): DragEndEdgeAction {
@@ -34,10 +38,18 @@ function createDragEdgeAction(position: Position): DragEdgeAction {
   };
 }
 
-function createNewEdgeAction<EdgeType>(id: string, src: string, dest: string): CreateEdgeAction<EdgeType> {
+function createNewEdgeAction<EdgeType>(
+  id: string,
+  src: string,
+  dest: string,
+  connectorSrcType?: string,
+  connectorDestType?: string,
+): CreateEdgeAction<EdgeType> {
   return {
     type: EdgeActionsType.EDGE_CREATE,
-    payload: { id, src, dest },
+    payload: {
+      id, src, dest, connectorSrcType, connectorDestType,
+    },
   };
 }
 
@@ -66,9 +78,14 @@ export function handleEdgeDragStart<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   id: string | undefined,
   position: Position,
+  connectorType?: string | undefined,
 ) {
   if (id) {
-    store.dispatch(createDragStartEdgeAction(id, position));
+    if (connectorType) {
+      store.dispatch(createDragStartEdgeAction(id, position, connectorType));
+    } else {
+      store.dispatch(createDragStartEdgeAction(id, position));
+    }
   }
 }
 
@@ -92,14 +109,19 @@ export function handleEdgeCreate<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   src: string | undefined,
   dest: string | undefined,
+  connectorSrcType?: string | undefined,
+  connectorDestType?: string | undefined,
 ) {
   if (src && dest) {
     const state = store.getState();
     const edgeIds = Object.keys(state.edges);
-    const duplicate = edgeIds.filter((edgeId) => state.edges[edgeId].src === src && state.edges[edgeId].dest === dest);
+    const duplicate = edgeIds.filter((edgeId) => state.edges[edgeId].src === src
+      && state.edges[edgeId].dest === dest
+      && state.edges[edgeId].connectorSrcType === connectorSrcType
+      && state.edges[edgeId].connectorDestType === connectorDestType);
     if (!!state.nodes[src] && !!state.nodes[dest] && duplicate.length === 0) {
       const id = `dm-edge-${uuid()}`;
-      store.dispatch(createNewEdgeAction(id, src, dest));
+      store.dispatch(createNewEdgeAction(id, src, dest, connectorSrcType, connectorDestType));
     }
   }
 }

@@ -502,6 +502,29 @@ describe('ActionDispatcher', () => {
       expect(handleEdgeDragStartSpy).toHaveBeenCalledWith(store, id, position);
     });
 
+    it('calls handleEdgeDragStart if type is DiagramMakerComponents.NODE_CONNECTOR and is a custom connector', () => {
+      initialize({ x: 0, y: 0 }, 1); // No workspace offet, scale of 1
+
+      const handleEdgeDragStartSpy = jest.spyOn(EdgeActionHandlers, 'handleEdgeDragStart');
+      const originalTarget = document.createElement('div');
+      const CONNECTOR_TYPE = 'CONNECTORTYPE';
+      originalTarget.setAttribute('data-connector-type', CONNECTOR_TYPE);
+      const target = {
+        id,
+        type: NODE_CONNECTOR,
+        originalTarget,
+      };
+      const position = { x: 200, y: 200 };
+      const event = {
+        position,
+        target,
+      };
+
+      observer.publish(DRAG_START, event);
+      expect(handleEdgeDragStartSpy).toHaveBeenCalledTimes(1);
+      expect(handleEdgeDragStartSpy).toHaveBeenCalledWith(store, id, position, CONNECTOR_TYPE);
+    });
+
     it('calls handlePotentialNodeDragStart if type is DiagramMakerComponents.POTENTIAL_NODE', () => {
       const position: Position = { x: 200, y: 200 };
       const offset: Position = { x: 50, y: 50 };
