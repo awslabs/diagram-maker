@@ -12,7 +12,7 @@
     "Matthew Oakes <mattoa@amazon.com>"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   },
   "main": "dist/diagramMaker.js",
   "types": "dist/diagramMaker.d.ts",

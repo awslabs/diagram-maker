@@ -1,0 +1,38 @@
+name: Build and Deploy Documentation
+
+run-name: \"Build and Deploy Documentation\" action iniated by ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 19.x]
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build using Node.js ${{ matrix.node-version }} 🔧
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+        run: |
+          npm i
+          npm run build
+          npm run documentation
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          folder: docs
+          branch: master
